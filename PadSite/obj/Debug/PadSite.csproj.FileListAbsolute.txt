@@ -79,3 +79,4 @@ D:\GitProject\7980Site\PadSite\bin\zh-Hans\System.Web.WebPages.Razor.resources.d
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csprojResolveAssemblyReference.cache
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.dll
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.pdb
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csprojResolveAssemblyReference.cache

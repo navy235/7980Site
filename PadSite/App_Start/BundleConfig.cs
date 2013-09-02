@@ -26,6 +26,8 @@ namespace PadSite
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
+            bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include("~/Content/css/bootstrap.css"));
+
 
         }
     }

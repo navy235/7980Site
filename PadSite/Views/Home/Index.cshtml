@@ -4,16 +4,125 @@
 <div class="search-box">
     <form>
         <span class="input-wrapper">
-            <input type="text" id="search" name="search" />
+            <span class="deadline"><span class="deadlinetext">档期</span><span class="glyphicon glyphicon-chevron-down"></span>
+                <div class="deadline-list">
+                    <ul>
+                        <li data-value="0">档期</li>
+                        <li data-value="1">一月</li>
+                        <li data-value="2">二月</li>
+                        <li data-value="3">三月</li>
+                        <li data-value="4">四月</li>
+                        <li data-value="5">五月</li>
+                        <li data-value="6">六月</li>
+                        <li data-value="7">七月</li>
+                        <li data-value="8">八月</li>
+                        <li data-value="9">九月</li>
+                        <li data-value="10">十月</li>
+                        <li data-value="11">十一</li>
+                        <li data-value="12">十二</li>
+                    </ul>
+                </div>
+            </span>
+            <input type="text" id="search" name="search" x-webkit-speech />
+            <input type="hidden" id="deadtime" name="deadtime" value="0" />
         </span>
         <span class="button-wrapper">
             <input type="submit" value="搜索一下" id="btn-search" class="btn-search" onmousedown="this.className='btn-search btn-search-hover'" onmouseout="this.className='btn-search'"></span>
     </form>
 </div>
+@section scripts{
+    <script type="text/javascript">
+        $(function () {
+            var deadlinelist = $('.deadline-list');
+            $('.deadline').hover(function () {
+                deadlinelist.show()
+            }, function () {
+                deadlinelist.hide()
+            })
+            deadlinelist.find('li').click(function () {
+                $('#deadtime').val($(this).data('value'));
+                $('.deadlinetext').text($(this).text());
+                deadlinelist.hide();
+            })
+        })
 
+    </script>
+}
 <div class="nav-block">
-    <div class="nav-block-item">
-        <div class="brand"></div>
-        <div class="content"></div>
+    <div class="nav-block-item bg-color-pink">
+        <div class="brand">
+            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
+                <span class="glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+        <div class="content">用户登录</div>
+    </div>
+    <div class="nav-block-item bg-color-green">
+        <div class="brand">
+            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
+                <span class="glyphicon glyphicon-book"></span>
+            </a>
+        </div>
+        <div class="content">方案制作</div>
+    </div>
+    <div class="nav-block-item bg-color-blueDark">
+        <div class="brand">
+            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
+                <span class="glyphicon glyphicon-list-alt"></span>
+            </a>
+        </div>
+        <div class="content">公司简介</div>
+    </div>
+    <div class="nav-block-item bg-color-yellow">
+        <div class="brand">
+            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
+                <span class="glyphicon glyphicon-text-width"></span>
+            </a>
+        </div>
+        <div class="content">公路大牌</div>
+    </div>
+    <div class="nav-block-item bg-color-red">
+        <div class="brand">
+            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
+                <span class="glyphicon glyphicon-stats"></span>
+            </a>
+        </div>
+        <div class="content">市内大牌</div>
+    </div>
+    <div class="nav-block-item bg-color-orange">
+        <div class="brand">
+            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
+                <span class="glyphicon glyphicon-road"></span>
+            </a>
+
+        </div>
+        <div class="content">公共交通媒体</div>
+    </div>
+    <div class="nav-block-item bg-color-blue">
+        <div class="brand">
+            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
+                <span class="glyphicon glyphicon-film"></span>
+            </a>
+
+        </div>
+        <div class="content">公共场所媒体</div>
+    </div>
+    <div class="nav-block-item bg-color-purple">
+        <div class="brand">
+            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
+                <span class="glyphicon glyphicon-hd-video"></span>
+            </a>
+
+        </div>
+        <div class="content">LED大屏</div>
+    </div>
+    <div class="nav-block-item bg-color-darken">
+        <div class="brand">
+            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
+                <span class="glyphicon glyphicon-th-large"></span>
+            </a>
+        </div>
+        <div class="content">其他</div>
     </div>
 </div>
+
