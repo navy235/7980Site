@@ -1,9 +1,14 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<div class="search">
-    <input type="text" id="search" name="search" />
-    <button>搜索</button>
+<div class="search-box">
+    <form>
+        <span class="input-wrapper">
+            <input type="text" id="search" name="search" />
+        </span>
+        <span class="button-wrapper">
+            <input type="submit" value="搜索一下" id="btn-search" class="btn-search" onmousedown="this.className='btn-search btn-search-hover'" onmouseout="this.className='btn-search'"></span>
+    </form>
 </div>
 
 <div class="nav-block">
