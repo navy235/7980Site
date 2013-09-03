@@ -21,173 +21,21 @@ audio, canvas, video {
 }
 
 
-.container {
-    width: 990px;
-    margin: 0 auto;
+body {
+    font: 12px/1.5 tahoma,arial,\5b8b\4f53;
 }
 
-.header {
-    background-color: #fff;
-    width: 990px;
-    margin: 0 auto;
-    overflow: hidden;
-    margin-bottom: 15px;
+html, body {
+    _height: 100%;
+    height: 100%;
+    min-height: 100%;
 }
 
-.header-logo {
-    width: 720px;
-    margin: 0 auto;
-    text-align: center;
-    padding: 80px 30px;
+
+textarea {
+    min-height: 75px;
 }
 
-.search-box {
-    width: 720px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-    .search-box #search {
-        width: 405px;
-        height: 22px;
-        font: 16px/22px arial;
-        margin: 5px 0 0 7px;
-        background: #fff;
-        outline: 0;
-        -webkit-appearance: none;
-        border: 0;
-        padding-left: 60px;
-    }
-
-    .search-box .input-wrapper {
-        width: 418px;
-        height: 33px;
-        display: inline-block;
-        margin-right: 5px;
-        background: url(images/search-bg.png) no-repeat -304px 0;
-        border: 1px solid #b6b6b6;
-        border-color: #9a9a9a #cdcdcd #cdcdcd #9a9a9a;
-        vertical-align: top;
-        position: relative;
-    }
-
-    .search-box .deadline {
-        display: block;
-        width: 60px;
-        height: 32px;
-        line-height: 32px;
-        position: absolute;
-        left: 0;
-        top: 0;
-        padding: 0 5px;
-        border-right: 1px solid #ccc;
-        cursor: pointer;
-    }
-
-
-        .search-box .deadline .glyphicon {
-            margin-left: 5px;
-            font-size: 9px;
-            color: #ccc;
-        }
-
-.deadline-list {
-    display: none;
-    position: absolute;
-    left: -1px;
-    top: 31px;
-    width: 61px;
-    z-index: 100;
-    border: 1px solid #ccc;
-    background: #FFF;
-}
-
-    .deadline-list ul {
-        list-style: none;
-    }
-
-        .deadline-list ul li {
-        }
-
-            .deadline-list ul li:hover {
-                background: #ccc;
-            }
-
-.button-wrapper {
-    width: 97px;
-    height: 34px;
-    display: inline-block;
-    background: url(images/search-bg.png) no-repeat -202px 0;
-    z-index: 0;
-    vertical-align: top;
-}
-
-.btn-search {
-    width: 95px;
-    height: 32px;
-    padding-top: 2px\9;
-    font-size: 14px;
-    background: #ddd url(images/search-bg.png);
-    cursor: pointer;
-    border: 0;
-}
-
-.btn-search-hover {
-    background-position: -100px 0;
-}
-
-.nav-block {
-    width: 570px;
-    margin: 0 auto;
-    text-align: center;
-    margin-top: 40px;
-}
-
-.nav-block-item {
-    text-align: center;
-    overflow: hidden;
-    float: left;
-    cursor: pointer;
-    color: #fff;
-    border: 1px solid #e3e6eb;
-    margin-left: 20px;
-    margin-bottom: 20px;
-    width: 160px;
-    height: 160px;
-    position: relative;
-    font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimHei", Arial, Helvetica, sans-serif;
-}
-
-    .nav-block-item:hover {
-        outline: 1px solid #FFF;
-        -moz-box-shadow: 0 0 15px #CCC;
-        -webkit-box-shadow: 0 0 15px #CCC;
-        box-shadow: 0 0 15px #CCC;
-    }
-
-    .nav-block-item .content {
-        position: absolute;
-        bottom: 10px;
-        left: 0;
-        right: 0;
-        line-height: 24px;
-    }
-
-    .nav-block-item a.full-block {
-        display: block;
-        width: 160px;
-        height: 160px;
-        text-align: center;
-        overflow: hidden;
-        color: #80D6EF;
-        text-decoration: none;
-    }
-
-    .nav-block-item .glyphicon {
-        font-size: 80px;
-        margin-top: 30px;
-        color: #fff;
-    }
 
 .fg-color-blue {
     color: #2d89ef !important;
@@ -468,3 +316,289 @@ audio, canvas, video {
 .outline-color-grayDark {
     outline-color: #525252 !important;
 }
+
+
+
+
+.form-field {
+    padding: 0px 0 10px 120px;
+    line-height: 26px;
+    overflow: hidden;
+    -webkit-tap-highlight-color: rgba(255,0,0,0);
+    position: relative;
+}
+
+    .form-field .k-numerictextbox {
+        width: 60px;
+    }
+
+.field-label {
+    float: left;
+    width: 100px;
+    margin-left: -100px;
+    display: block;
+    overflow: hidden;
+    line-height: 26px;
+}
+
+.form-submit {
+    padding: 0px 0 10px 120px;
+    line-height: 26px;
+    overflow: hidden;
+    -webkit-tap-highlight-color: rgba(255,0,0,0);
+    position: relative;
+}
+
+.field-valid-text {
+    visibility: hidden;
+    position: absolute;
+    width: 0;
+    height: 0;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+
+.field-hint-message,
+.field-validation-error {
+    left: 460px;
+    line-height: 26px;
+    padding: 0 10px 0 22px;
+    position: absolute;
+    top: 0px;
+    z-index: 550;
+}
+
+.field-hint-message {
+    background-color: #eff7fa;
+    border: solid 1px #52a4ca;
+    display: none;
+    background: url(images/information_16X16.png) 3px 4px no-repeat;
+    z-index: 551;
+}
+
+.field-prompt-message {
+    display: block;
+    color: gray;
+}
+
+.field-validation-error {
+    color: #f00;
+    background-color: #fbe3e4;
+    border: solid 1px #c13a3f;
+    display: block;
+    background: url(images/warning_16X16.png) 3px 4px no-repeat;
+}
+
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+select {
+    height: 26px;
+    padding: 0px 0px 0px 0px;
+    line-height: 26px;
+    text-align: left;
+    border: 1px solid #D5D5D5;
+    display: inline;
+    outline: 0;
+    min-width: 120px;
+}
+
+
+.container {
+    width: 990px;
+    margin: 0 auto;
+}
+
+.header {
+    background-color: #fff;
+    width: 990px;
+    margin: 0 auto;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.header-logo {
+    width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 80px 30px;
+}
+
+.search-box {
+    width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+    .search-box #search {
+        width: 405px;
+        height: 22px;
+        font: 16px/22px arial;
+        margin: 5px 0 0 7px;
+        background: #fff;
+        outline: 0;
+        -webkit-appearance: none;
+        border: 0;
+        padding-left: 60px;
+    }
+
+    .search-box .input-wrapper {
+        width: 418px;
+        height: 33px;
+        display: inline-block;
+        margin-right: 5px;
+        background: url(images/search-bg.png) no-repeat -304px 0;
+        border: 1px solid #b6b6b6;
+        border-color: #9a9a9a #cdcdcd #cdcdcd #9a9a9a;
+        vertical-align: top;
+        position: relative;
+    }
+
+    .search-box .deadline {
+        display: block;
+        width: 60px;
+        height: 32px;
+        line-height: 32px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        padding: 0 5px;
+        border-right: 1px solid #ccc;
+        cursor: pointer;
+    }
+
+
+        .search-box .deadline .glyphicon {
+            margin-left: 5px;
+            font-size: 9px;
+            color: #ccc;
+        }
+
+.deadline-list {
+    display: none;
+    position: absolute;
+    left: -1px;
+    top: 31px;
+    width: 61px;
+    z-index: 100;
+    border: 1px solid #ccc;
+    background: #FFF;
+}
+
+    .deadline-list ul {
+        list-style: none;
+    }
+
+        .deadline-list ul li {
+        }
+
+            .deadline-list ul li:hover {
+                background: #ccc;
+            }
+
+.button-wrapper {
+    width: 97px;
+    height: 34px;
+    display: inline-block;
+    background: url(images/search-bg.png) no-repeat -202px 0;
+    z-index: 0;
+    vertical-align: top;
+}
+
+.btn-search {
+    width: 95px;
+    height: 32px;
+    padding-top: 2px\9;
+    font-size: 14px;
+    background: #ddd url(images/search-bg.png);
+    cursor: pointer;
+    border: 0;
+}
+
+.btn-search-hover {
+    background-position: -100px 0;
+}
+
+.nav-block {
+    width: 570px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.nav-block-item {
+    text-align: center;
+    overflow: hidden;
+    float: left;
+    cursor: pointer;
+    color: #fff;
+    border: 1px solid #e3e6eb;
+    margin-left: 20px;
+    margin-bottom: 20px;
+    width: 160px;
+    height: 160px;
+    position: relative;
+    font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimHei", Arial, Helvetica, sans-serif;
+}
+
+    .nav-block-item:hover {
+        outline: 1px solid #FFF;
+        -moz-box-shadow: 0 0 15px #CCC;
+        -webkit-box-shadow: 0 0 15px #CCC;
+        box-shadow: 0 0 15px #CCC;
+    }
+
+
+
+    .nav-block-item a.full-block {
+        width: 160px;
+        height: 160px;
+        text-align: center;
+        overflow: hidden;
+        color: #FFF;
+        text-decoration: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
+    .nav-block-item a .content {
+        position: absolute;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        line-height: 24px;
+    }
+
+    .nav-block-item a h4 {
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 50%;
+        margin-top: -10px;
+        line-height: 20px;
+        padding: 0 10px;
+    }
+
+    .nav-block-item .glyphicon {
+        font-size: 80px;
+        margin-top: 30px;
+        color: #fff;
+    }

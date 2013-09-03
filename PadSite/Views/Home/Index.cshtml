@@ -1,5 +1,6 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "湖南户外广告交易平台-7980.com";
+    Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 <div class="search-box">
     <form>
@@ -44,85 +45,104 @@
                 $('.deadlinetext').text($(this).text());
                 deadlinelist.hide();
             })
+
+            $('.nav-block-item').hover(function () {
+                var first = $(this).find('a.full-block:first');
+                first.removeClass('in').addClass('out');
+                first.siblings().addClass('in').removeClass('out');
+            }, function () {
+                var first = $(this).find('a.full-block:first');
+                first.addClass('in').removeClass('out');
+                first.siblings().removeClass('in').addClass('out');
+            })
         })
 
     </script>
 }
 <div class="nav-block">
-    <div class="nav-block-item bg-color-pink">
-        <div class="brand">
-            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
-                <span class="glyphicon glyphicon-user"></span>
-            </a>
-        </div>
-        <div class="content">用户登录</div>
+    <div class="nav-block-item viewport-flip ">
+        <a href="#" class="full-block bg-color-pink flip in ">
+            <span class="glyphicon glyphicon-user"></span>
+            <div class="content">注册/登录</div>
+        </a>
+        <a href="#" class="full-block bg-color-pink flip out">
+            <h4>十秒轻松注册</h4>
+        </a>
     </div>
-    <div class="nav-block-item bg-color-green">
-        <div class="brand">
-            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
-                <span class="glyphicon glyphicon-book"></span>
-            </a>
-        </div>
-        <div class="content">方案制作</div>
+    <div class="nav-block-item viewport-flip ">
+        <a href="#" class="full-block bg-color-green flip in">
+            <span class="glyphicon glyphicon-book"></span>
+            <div class="content">方案制作</div>
+        </a>
+        <a href="#" class="full-block  bg-color-green flip out">
+            <h4>智能方案生成</h4>
+        </a>
     </div>
-    <div class="nav-block-item bg-color-blueDark">
-        <div class="brand">
-            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
-                <span class="glyphicon glyphicon-list-alt"></span>
-            </a>
-        </div>
-        <div class="content">公司简介</div>
+    <div class="nav-block-item viewport-flip ">
+        <a href="#" class="full-block bg-color-blueDark flip in">
+            <span class="glyphicon glyphicon-list-alt"></span>
+            <div class="content">公司简介</div>
+        </a>
+        <a href="#" class="full-block bg-color-blueDark flip out">
+            <h4>关于我们，了解我们</h4>
+        </a>
     </div>
-    <div class="nav-block-item bg-color-yellow">
-        <div class="brand">
-            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
-                <span class="glyphicon glyphicon-text-width"></span>
-            </a>
-        </div>
-        <div class="content">公路大牌</div>
+    <div class="nav-block-item viewport-flip ">
+        <a href="#" class="full-block bg-color-yellow flip in">
+            <span class="glyphicon glyphicon-text-width"></span>
+            <div class="content">公路大牌</div>
+        </a>
+        <a href="#" class="full-block bg-color-yellow flip out">
+            <h4>公路户外，紧随你我</h4>
+        </a>
     </div>
-    <div class="nav-block-item bg-color-red">
-        <div class="brand">
-            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
-                <span class="glyphicon glyphicon-stats"></span>
-            </a>
-        </div>
-        <div class="content">市内大牌</div>
-    </div>
-    <div class="nav-block-item bg-color-orange">
-        <div class="brand">
-            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
-                <span class="glyphicon glyphicon-road"></span>
-            </a>
+    <div class="nav-block-item viewport-flip ">
 
-        </div>
-        <div class="content">公共交通媒体</div>
+        <a href="#" class="full-block bg-color-red flip in">
+            <span class="glyphicon glyphicon-stats"></span>
+            <div class="content">市内大牌</div>
+        </a>
+        <a href="#" class="full-block bg-color-red flip out">
+            <h4>市内大牌，至尊体现</h4>
+        </a>
     </div>
-    <div class="nav-block-item bg-color-blue">
-        <div class="brand">
-            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
-                <span class="glyphicon glyphicon-film"></span>
-            </a>
+    <div class="nav-block-item viewport-flip ">
+        <a href="#" class="full-block  bg-color-orange flip in">
+            <span class="glyphicon  glyphicon-road"></span>
+            <div class="content">公共交通媒体</div>
+        </a>
+        <a href="#" class="full-block bg-color-orange flip out">
+            <h4>公共交通，移动视野</h4>
+        </a>
+    </div>
+    <div class="nav-block-item viewport-flip ">
+        <a href="#" class="full-block bg-color-blue flip in">
+            <span class="glyphicon glyphicon-film"></span>
+            <div class="content">公共场所媒体</div>
+        </a>
+        <a href="#" class="full-block  bg-color-blue flip out">
+            <h4>公共场所，覆盖大众</h4>
+        </a>
+    </div>
+    <div class="nav-block-item viewport-flip ">
+        <a href="#" class="full-block  bg-color-purple flip in">
+            <span class="glyphicon glyphicon-hd-video"></span>
+            <div class="content">LED大屏</div>
+        </a>
+        <a href="#" class="full-block bg-color-purple flip out">
+            <h4>LED，生活无处不在</h4>
+        </a>
 
-        </div>
-        <div class="content">公共场所媒体</div>
     </div>
-    <div class="nav-block-item bg-color-purple">
-        <div class="brand">
-            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
-                <span class="glyphicon glyphicon-hd-video"></span>
-            </a>
+    <div class="nav-block-item viewport-flip ">
+        <a href="#" class="full-block bg-color-darken flip in">
+            <span class="glyphicon glyphicon-th-large"></span>
+            <div class="content">其他</div>
+        </a>
+        <a href="#" class="full-block bg-color-darken flip out">
+            <h4>更多媒体，尽在7980</h4>
+        </a>
 
-        </div>
-        <div class="content">LED大屏</div>
-    </div>
-    <div class="nav-block-item bg-color-darken">
-        <div class="brand">
-            <a href="http://iwan.baidu.com/?from=ibaidu" target="_blank" class="full-block">
-                <span class="glyphicon glyphicon-th-large"></span>
-            </a>
-        </div>
-        <div class="content">其他</div>
     </div>
 </div>
 

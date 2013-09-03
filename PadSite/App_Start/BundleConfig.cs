@@ -12,23 +12,43 @@ namespace PadSite
                         "~/Scripts/jquery-{version}.js"
                     ));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
-                        "~/Scripts/jquery-ui-{version}.js"));
-
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 
-            // 使用 Modernizr 的开发版本进行开发和了解信息。然后，当你做好
-            // 生产准备时，请使用 http://modernizr.com 上的生成工具来仅选择所需的测试。
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
+            bundles.Add(new ScriptBundle("~/bundles/jquerycontrol").Include(
+               "~/Scripts/formcontrol/control-*"
+               ));
+
+            bundles.Add(new ScriptBundle("~/bundles/modernizr")
+                .Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css")
+                .Include("~/Content/animate.css",
+                         "~/Content/site.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css/bootstrap").Include("~/Content/css/bootstrap.css"));
+
+            bundles.Add(new StyleBundle("~/Content/admin")
+              .Include("~/Content/animate.css",
+                       "~/Content/site.css",
+                       "~/Content/admin.css"));
+
+            bundles.Add(new StyleBundle("~/Content/css/bootstrap")
+                .Include("~/Content/css/bootstrap.css"));
 
 
+            bundles.Add(new StyleBundle("~/Content/kendo/2012.3.1114/css")
+                .Include(
+                   "~/Content/kendo/2012.3.1114/kendo.common.min.css",
+                   "~/Content/kendo/2012.3.1114/kendo.dataviz.min.css",
+                   "~/Content/kendo/2012.3.1114/kendo.default.min.css"
+                ));
+
+            bundles.IgnoreList.Clear();
+            bundles.IgnoreList.Ignore("*.intellisense.js");
+            bundles.IgnoreList.Ignore("*-vsdoc.js");
+            bundles.IgnoreList.Ignore("*.debug.js", OptimizationMode.WhenEnabled);
         }
     }
 }
