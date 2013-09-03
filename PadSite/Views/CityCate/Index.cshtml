@@ -7,6 +7,7 @@
     .Name("CityCateList")
     .Columns(columns =>
     {
+        columns.Bound(c => c.ID).Hidden();
         columns.Bound(c => c.CateName);
         columns.Bound(c => c.Code);
         columns.Bound(c => c.OrderIndex);
@@ -24,38 +25,15 @@
     .Groupable()
     .Scrollable()
     .Filterable()
-    .Events(ev => ev.Edit("onEdit"))
+
     .DataSource(dataSource => dataSource
         .Ajax()
         .Batch(true)
-        .PageSize(20)
+        .PageSize(30)
         .Model(model => model.Id(c => c.ID))
         .Create("Editing_Create", "CityCate")
         .Read("Editing_Read", "CityCate")
         .Update("Editing_Update", "CityCate")
         .Destroy("Editing_Destroy", "CityCate")
-    )
+        )
 )
-
-@section scripts{
-
-    <script type="text/javascript">
-        function onEdit(e) {
-            if (e.model.isNew()) {
-                //e.container.addClass('k-dirty-cell');
-                if (!e.container.isInited) {
-
-                    e.container.addClass('k-dirty-cell');
-                    e.container.append('<span class="k-dirty"></span>请选择');
-                }
-
-                //var combobox = e.container.find('[data-role=combobox]').data('kendoComboBox');
-                //if (combobox && !combobox.isSelect) {
-                //    combobox.isSelect = true;
-                //    combobox.element.val(0);
-                //    combobox.close();
-                //};
-            }
-        }
-    </script>
-}

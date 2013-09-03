@@ -418,6 +418,7 @@ select {
     display: inline;
     outline: 0;
     min-width: 120px;
+    margin-right: 5px;
 }
 
 
@@ -447,20 +448,9 @@ select {
     text-align: center;
 }
 
-    .search-box #search {
-        width: 405px;
-        height: 22px;
-        font: 16px/22px arial;
-        margin: 5px 0 0 7px;
-        background: #fff;
-        outline: 0;
-        -webkit-appearance: none;
-        border: 0;
-        padding-left: 60px;
-    }
 
     .search-box .input-wrapper {
-        width: 418px;
+        width: 518px;
         height: 33px;
         display: inline-block;
         margin-right: 5px;
@@ -471,9 +461,21 @@ select {
         position: relative;
     }
 
+    .search-box #search {
+        width: 440px;
+        height: 22px;
+        font: 16px/22px arial;
+        margin: 5px 0 0 7px;
+        background: #fff;
+        outline: 0;
+        -webkit-appearance: none;
+        border: 0;
+        margin-left: 67px;
+    }
+
     .search-box .deadline {
         display: block;
-        width: 60px;
+        width: 50px;
         height: 32px;
         line-height: 32px;
         position: absolute;
@@ -496,7 +498,7 @@ select {
     position: absolute;
     left: -1px;
     top: 31px;
-    width: 61px;
+    width: 60px;
     z-index: 100;
     border: 1px solid #ccc;
     background: #FFF;
@@ -549,7 +551,6 @@ select {
     float: left;
     cursor: pointer;
     color: #fff;
-    border: 1px solid #e3e6eb;
     margin-left: 20px;
     margin-bottom: 20px;
     width: 160px;
@@ -557,14 +558,6 @@ select {
     position: relative;
     font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimHei", Arial, Helvetica, sans-serif;
 }
-
-    .nav-block-item:hover {
-        outline: 1px solid #FFF;
-        -moz-box-shadow: 0 0 15px #CCC;
-        -webkit-box-shadow: 0 0 15px #CCC;
-        box-shadow: 0 0 15px #CCC;
-    }
-
 
 
     .nav-block-item a.full-block {

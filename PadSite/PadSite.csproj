@@ -145,7 +145,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Admin\CityCateController.cs" />
     <Compile Include="Controllers\Admin\DashboardController.cs" />
+    <Compile Include="Controllers\Ajax\AjaxServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Ajax\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -167,6 +169,7 @@
     <Compile Include="Service\Interface\ICityCateService.cs" />
     <Compile Include="Utils\ServiceResult.cs" />
     <Compile Include="Utils\Utilities.cs" />
+    <Compile Include="ViewModels\FormModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Binaries\Kendo.Mvc.dll" />
@@ -178,10 +181,22 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\formloading.gif" />
+    <Content Include="Content\images\glyphicons-halflings-white.png" />
+    <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\ical_16X16.png" />
     <Content Include="Content\images\index-footer.gif" />
     <Content Include="Content\images\index-header.gif" />
+    <Content Include="Content\images\information_16X16.png" />
     <Content Include="Content\images\loading-image.gif" />
     <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\mapicon.gif" />
+    <Content Include="Content\images\noimages.gif" />
+    <Content Include="Content\images\uploadbtn.png" />
+    <Content Include="Content\images\warning_16X16.png" />
+    <Content Include="Content\jcrop\Jcrop.gif" />
+    <Content Include="Content\jcrop\jquery.Jcrop.css" />
+    <Content Include="Content\jcrop\jquery.Jcrop.min.css" />
+    <Content Include="Content\kendohelper.css" />
     <Content Include="Content\kendo\2012.3.1114\Black\editor.png" />
     <Content Include="Content\kendo\2012.3.1114\Black\imagebrowser.png" />
     <Content Include="Content\kendo\2012.3.1114\Black\loading-image.gif" />
@@ -790,6 +805,7 @@
     <Content Include="Views\Shared\EditorTemplates\UploadImgEdit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\UploadImgList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\GridForeignKey.cshtml" />
+    <Content Include="Views\Home\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

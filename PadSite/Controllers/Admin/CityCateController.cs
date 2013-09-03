@@ -52,6 +52,10 @@ namespace PadSite.Controllers
             {
                 foreach (var city in citys)
                 {
+                    if (city.PID.Value == 0)
+                    {
+                        city.PID = null;
+                    }
                     cityService.Create(city);
                 }
             }
