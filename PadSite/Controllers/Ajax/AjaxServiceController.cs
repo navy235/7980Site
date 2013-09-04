@@ -14,17 +14,20 @@ namespace PadSite.Controllers
     {
 
         // GET: /Area/
-        private ICityCateService cityService;
+        private ICityCateService cityCateService;
+        private IArticleCateService articleCateService;
         public AjaxServiceController(
-             ICityCateService _cityService
+             ICityCateService _cityCateService,
+             IArticleCateService _articleCateService
           )
         {
-            cityService = _cityService;
+            cityCateService = _cityCateService;
+            articleCateService = _articleCateService;
         }
 
         public ActionResult CityCode(int pid = 0)
         {
-            var query = cityService.GetALL();
+            var query = cityCateService.GetALL();
 
             if (pid == 0)
             {
@@ -43,94 +46,25 @@ namespace PadSite.Controllers
             return Json(selectlist, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Get_CityCode(int value)
+        public ActionResult ArticleCode(int pid = 0)
         {
-            var selectValues = new List<int>();
-            selectValues.Add(value);
-            selectValues.Add(4);
-            selectValues.Reverse();
-            return Json(selectValues, JsonRequestBehavior.AllowGet);
-        }
+            var query = articleCateService.GetALL();
 
-
-        public ActionResult CategoryCode(int pid = 0)
-        {
-            var selects = GetSelectList();
-
-            var list = selects.Where(x => x.PID == pid).Select(x => new SelectListItem()
+            if (pid == 0)
             {
-                Value = x.ID.ToString(),
-                Text = x.Name
-            });
-            return Json(list, JsonRequestBehavior.AllowGet);
-        }
-
-        public List<ListCategory> GetSelectList()
-        {
-            List<ListCategory> selects = new List<ListCategory>();
-
-            for (var i = 1; i <= 10; i++)
+                query = query.Where(x => x.PID.Equals(null));
+            }
+            else
             {
-                ListCategory list = new ListCategory();
-
-                list.ID = i;
-                list.Level = 1;
-                list.Name = "Category" + i;
-                list.PID = 0;
-                for (var j = 1; j <= 10; j++)
-                {
-                    ListCategory clist = new ListCategory();
-                    clist.ID = 10 * i + j;
-                    clist.Name = "Category" + (10 * i + j);
-                    clist.Level = 2;
-                    clist.PID = list.ID;
-                    for (var k = 1; k <= 10; k++)
-                    {
-                        ListCategory cclist = new ListCategory();
-                        cclist.ID = 100 * i + 10 * j + k;
-                        cclist.Name = "Category" + (100 * i + 10 * j + k);
-                        cclist.Level = 3;
-                        cclist.PID = clist.ID;
-
-                        for (var m = 1; m < 10; m++)
-                        {
-                            ListCategory ccclist = new ListCategory();
-                            ccclist.ID = 1000 * i + 100 * j + 10 * k + m;
-                            ccclist.Name = "Category" + (1000 * i + 100 * j + 10 * k + m);
-                            ccclist.Level = 4;
-                            ccclist.PID = cclist.ID;
-                            selects.Add(ccclist);
-                        }
-
-                        selects.Add(cclist);
-                    }
-
-                    selects.Add(clist);
-                }
-                selects.Add(list);
+                query = query.Where(x => x.PID == pid);
             }
 
-            return selects;
-        }
+            var selectlist = Utilities.CreateSelectList(
+               query.ToList()
+                , item => item.ID
+                , item => item.CateName, false);
 
-        public class ListCategory
-        {
-            public ListCategory()
-            {
-                this.ChildCategoies = new List<ListCategory>();
-            }
-
-            public int ID { get; set; }
-
-            public string Name { get; set; }
-
-            public int Level { get; set; }
-
-            public int PID { get; set; }
-
-            public ListCategory PCategory { get; set; }
-
-            public List<ListCategory> ChildCategoies { get; set; }
+            return Json(selectlist, JsonRequestBehavior.AllowGet);
         }
 
     }

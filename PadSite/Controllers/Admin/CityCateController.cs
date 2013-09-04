@@ -39,8 +39,8 @@ namespace PadSite.Controllers
         public ActionResult Editing_Read([DataSourceRequest] DataSourceRequest request)
         {
 
-            var Areas = cityService.GetKendoALL().OrderBy(x => x.ID);
-            return Json(Areas.ToDataSourceResult(request));
+            var citys = cityService.GetKendoALL().OrderBy(x => x.ID);
+            return Json(citys.ToDataSourceResult(request));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]

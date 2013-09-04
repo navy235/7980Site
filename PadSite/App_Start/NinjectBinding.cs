@@ -58,6 +58,8 @@ namespace PadSite
         {
             kernel.Bind<IUnitOfWork>().To<EntitiesContext>().InRequestScope();
             kernel.Bind<ICityCateService>().To<CityCateService>().InRequestScope();
+            kernel.Bind<IMediaCateService>().To<MediaCateService>().InRequestScope();
+            kernel.Bind<IArticleCateService>().To<ArticleCateService>().InRequestScope();
         }
     }
 }

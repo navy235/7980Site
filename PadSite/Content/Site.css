@@ -329,7 +329,7 @@ textarea {
 }
 
     .form-field .k-numerictextbox {
-        width: 60px;
+        width: 100px;
     }
 
 .field-label {
@@ -475,19 +475,19 @@ select {
 
     .search-box .deadline {
         display: block;
-        width: 50px;
+        width: 60px;
         height: 32px;
+        text-align: center;
         line-height: 32px;
         position: absolute;
         left: 0;
         top: 0;
-        padding: 0 5px;
         border-right: 1px solid #ccc;
         cursor: pointer;
     }
 
 
-        .search-box .deadline .glyphicon {
+        .search-box .deadline .icon-maitonn {
             margin-left: 5px;
             font-size: 9px;
             color: #ccc;
@@ -590,8 +590,9 @@ select {
         padding: 0 10px;
     }
 
-    .nav-block-item .glyphicon {
+    .nav-block-item .icon-maitonn {
         font-size: 80px;
         margin-top: 30px;
         color: #fff;
+        display: block;
     }

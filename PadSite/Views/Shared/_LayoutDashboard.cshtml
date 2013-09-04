@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     @Styles.Render("~/Content/kendo/2012.3.1114/css")
     @Styles.Render("~/Content/admin")
     @Scripts.Render("~/bundles/modernizr")
@@ -44,9 +44,22 @@
                     @<text>
             <div></div>
             <ul id="leftmenu">
-                <li><span class="glyphicon glyphicon-cog"></span>系统设置
+                <li><span class="icon-maitonn icon-cog"></span>系统设置
                     <ul>
-                        <li><a href="@Url.Action("index", "citycate")" target="content"><span class="glyphicon glyphicon-stats"></span>城市设置</a></li>
+                        <li><a href="@Url.Action("index", "citycate")" target="content"><span class="icon-maitonn icon-signal"></span>城市信息</a></li>
+
+                        <li><a href="@Url.Action("index", "mediacate")" target="content"><span class="icon-maitonn icon-desktop"></span>媒体类别</a></li>
+
+                        <li><a href="@Url.Action("index", "articlecate")" target="content"><span class="icon-maitonn icon-building"></span>文章类别</a></li>
+                    </ul>
+                </li>
+
+                <li><span class="glyphicon glyphicon-user"></span>权限设置
+                    <ul>
+                        <li><a href="@Url.Action("index", "citycate")" target="content"><span class="glyphicon glyphicon-stats"></span>城市信息</a></li>
+
+
+                        <li><a href="@Url.Action("index", "mediacate")" target="content"><span class="glyphicon glyphicon-asterisk"></span>媒体类别</a></li>
                     </ul>
                 </li>
             </ul>
