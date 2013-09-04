@@ -596,3 +596,36 @@ select {
         color: #fff;
         display: block;
     }
+
+
+.action-info {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    padding: 10px 10px 10px 40px;
+}
+
+    .action-info .icon-maitonn {
+        display: block;
+        font-size: 18px;
+        margin-left: -25px;
+        float: left;
+    }
+
+.success-info {
+    background: #00a300;
+    color: #fff;
+}
+
+.error-info {
+    background: #b91d47;
+    color: #fff;
+}
+
+.jsmessage {
+    display: none;
+}
+
+.jserrmessage {
+    display: none;
+}

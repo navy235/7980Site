@@ -20,7 +20,7 @@ namespace PadSite.Utils
                    }).ToList();
 
             if (addDefaultSelectItem)
-                eList.Insert(0, new SelectListItem { Selected = true, Text = "请选择", Value = null });
+                eList.Insert(0, new SelectListItem { Selected = true, Text = "请选择", Value = "0" });
 
             return eList;
         }

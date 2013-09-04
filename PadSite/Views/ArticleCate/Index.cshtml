@@ -18,11 +18,11 @@
         columns.Bound(c => c.CateName);
         columns.Bound(c => c.Code);
         columns.Bound(c => c.OrderIndex);
-        columns.ForeignKey(c => c.PID, (SelectList)ViewBag.PID);
+        columns.ForeignKey(c => c.PID, (List<SelectListItem>)ViewBag.PID, "Value", "Text");
 
         columns.Template(@<text></text>)
          .ClientTemplate(@"<a class='k-button k-button-icontext ' href='"
-         + Url.Action("edit", "outdoor") + "/#=ID#'><span class='k-icon k-edit'></span>编辑</a>"
+         + Url.Action("edit", "articlecate") + "/#=ID#'><span class='k-icon k-edit'></span>编辑</a>"
          + "<a class='k-button k-button-icontext ' href='javascript:void(0);' onclick='Grid.deleteSingle(this,\"#=ID#\");' ><span class='k-icon k-i-close'></span>删除</a>")
          .Title("操作")
          .Width(160);
@@ -70,25 +70,31 @@
             deleteAll: function (element) {
                 var self = Grid;
                 var Ids = self.getCheckIds();
-                self.excute(element, Grid.deleteUrl, Ids);
+                self.excute(element, Grid.deleteUrl, Ids, true);
             },
             deleteSingle: function (element, id) {
                 var self = Grid;
                 var Ids = id;
-                self.excute(element, Grid.deleteUrl, Ids);
+                self.excute(element, Grid.deleteUrl, Ids, true);
             },
-            excute: function (element, url, Ids) {
+            excute: function (element, url, Ids, showAlert) {
                 if ($(element).hasClass('disabled'))
                     return false;
                 var self = Grid;
                 if (Ids) {
+                    if (showAlert) {
+                        if (!confirm("确认删除?")) {
+                            return false;
+                        }
+                    }
                     self.addSpinner(element);
                     $.ajax({
                         type: 'POST',
                         url: url,
                         data: { ids: Ids },
                         success: function (res) {
-                            if (res) {
+                            Maitonn.JHelper.showMessage(res);
+                            if (res.Success) {
                                 var grid = $("#" + self.id).data("kendoGrid");
                                 grid.dataSource.read();
                                 grid.refresh();

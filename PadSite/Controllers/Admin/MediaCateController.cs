@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Maitonn.Core;
 using PadSite.Service.Interface;
 using PadSite.Models;
+using PadSite.ViewModels;
 using PadSite.Utils;
 
 namespace PadSite.Controllers
@@ -17,80 +19,149 @@ namespace PadSite.Controllers
     {
         //
         // GET: /Area/
-        private IMediaCateService mediaService;
+        private IMediaCateService MediaCateService;
         public MediaCateController(
-             IMediaCateService _mediaService
+             IMediaCateService _MediaCateService
           )
         {
-            mediaService = _mediaService;
+            MediaCateService = _MediaCateService;
         }
 
-        #region KendoGrid Action
 
         public ActionResult Index()
         {
-            ViewBag.PID = Utilities.CreateSelectList(
-                mediaService.GetALL().ToList()
-                , item => item.ID
-                , item => item.CateName, true);
+            ViewBag.PID = GetSelectList();
             return View();
         }
 
         public ActionResult Editing_Read([DataSourceRequest] DataSourceRequest request)
         {
-
-            var medias = mediaService.GetKendoALL().OrderBy(x => x.ID);
-            return Json(medias.ToDataSourceResult(request));
+            var articles = MediaCateService.GetKendoALL().OrderBy(x => x.ID);
+            return Json(articles.ToDataSourceResult(request));
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Editing_Create([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<MediaCate> medias)
+        public ActionResult Create()
         {
-            var results = new List<MediaCate>();
+            ViewBag.Data_PID = GetSelectList();
+            return View(new MediaCateViewModel());
+        }
 
-            if (medias != null && ModelState.IsValid)
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(MediaCateViewModel model)
+        {
+            ViewBag.Data_PID = GetSelectList();
+            ServiceResult result = new ServiceResult();
+            TempData["Service_Result"] = result;
+            if (ModelState.IsValid)
             {
-                foreach (var media in medias)
+                try
                 {
-                    if (media.PID.Value == 0)
-                    {
-                        media.PID = null;
-                    }
-                    mediaService.Create(media);
+                    MediaCate entity = new MediaCate();
+                    entity.CateName = model.CateName;
+                    entity.PID = model.PID == 0 ? null : model.PID;
+                    entity.Level = model.Level;
+                    entity.OrderIndex = model.OrderIndex;
+              
+                    entity.Code = model.Code;
+                    MediaCateService.Create(entity);
+                    result.Message = "添加媒体分类成功！";
+                    LogHelper.WriteLog("添加媒体分类成功");
+                    return RedirectToAction("index");
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    result.Message = Utilities.GetInnerMostException(ex);
+                    result.AddServiceError(result.Message);
+                    LogHelper.WriteLog("添加媒体分类错误", ex);
+                    return View(model);
                 }
             }
-            return Json(results.ToDataSourceResult(request, ModelState));
+            else
+            {
+                result.Message = "请检查表单是否填写完整！";
+                result.AddServiceError("请检查表单是否填写完整！");
+                return View(model);
+            }
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Editing_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<MediaCate> medias)
+
+
+        public ActionResult Edit(int ID)
         {
-            if (medias != null && ModelState.IsValid)
+
+            MediaCateViewModel model = new MediaCateViewModel();
+            var entity = MediaCateService.Find(ID);
+            model.CateName = entity.CateName;
+            model.ID = entity.ID;
+            model.Code = entity.Code;
+        
+            model.Level = entity.Level;
+            model.OrderIndex = entity.OrderIndex;
+            model.PID = entity.PID;
+            ViewBag.Data_PID = GetSelectList(entity.PID.HasValue ? entity.PID.Value : 0);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(MediaCateViewModel model)
+        {
+
+            ViewBag.Data_PID = GetSelectList(model.PID.HasValue ? model.PID.Value : 0);
+            ServiceResult result = new ServiceResult();
+            TempData["Service_Result"] = result;
+            if (ModelState.IsValid)
             {
-                foreach (var media in medias)
+                try
                 {
-                    mediaService.Update(media);
+                    MediaCate entity = MediaCateService.Find(model.ID);
+                    entity.CateName = model.CateName;
+                    entity.PID = model.PID == 0 ? null : model.PID;
+                    entity.Level = model.Level;
+                    entity.OrderIndex = model.OrderIndex;
+               
+                    entity.Code = model.Code;
+                    MediaCateService.Update(entity);
+                    result.Message = "编辑媒体分类成功！";
+                    LogHelper.WriteLog("编辑媒体分类成功");
+                    return RedirectToAction("index");
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    result.Message = Utilities.GetInnerMostException(ex);
+                    result.AddServiceError(result.Message);
+                    LogHelper.WriteLog("添加媒体分类错误", ex);
+                    return View(model);
                 }
             }
-
-            return Json(ModelState.ToDataSourceResult());
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Editing_Destroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<MediaCate> medias)
-        {
-            if (medias.Any())
+            else
             {
-                foreach (var media in medias)
-                {
-                    mediaService.Delete(media);
-                }
+                result.Message = "请检查表单是否填写完整！";
+                result.AddServiceError("请检查表单是否填写完整！");
+                return View(model);
             }
-            return Json(ModelState.ToDataSourceResult());
+
         }
 
+
+        #region private Method
+
+        private List<SelectListItem> GetSelectList(int value = 0)
+        {
+            var query = MediaCateService.GetALL().ToList();
+
+            var list = Utilities.GetSelectListData(
+                    MediaCateService.GetALL().ToList()
+                    , item => item.ID
+                    , item => item.CateName, true).ToList();
+
+            list.Single(x => x.Value == value.ToString()).Selected = true;
+
+            return list;
+        }
         #endregion
-
     }
 }
 

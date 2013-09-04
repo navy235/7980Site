@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
 using Maitonn.Core;
 using PadSite.Service.Interface;
 using PadSite.Models;
+using PadSite.ViewModels;
 using PadSite.Utils;
 
 namespace PadSite.Controllers
@@ -29,10 +31,7 @@ namespace PadSite.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.PID = Utilities.CreateSelectList(
-                cityService.GetALL().ToList()
-                , item => item.ID
-                , item => item.CateName, true);
+            ViewBag.PID = GetSelectList();
             return View();
         }
 
@@ -42,53 +41,129 @@ namespace PadSite.Controllers
             var citys = cityService.GetKendoALL().OrderBy(x => x.ID);
             return Json(citys.ToDataSourceResult(request));
         }
+        #endregion
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Editing_Create([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CityCate> citys)
+
+        public ActionResult Create()
         {
-            var results = new List<CityCate>();
-
-            if (citys != null && ModelState.IsValid)
-            {
-                foreach (var city in citys)
-                {
-                    if (city.PID.Value == 0)
-                    {
-                        city.PID = null;
-                    }
-                    cityService.Create(city);
-                }
-            }
-            return Json(results.ToDataSourceResult(request, ModelState));
+            ViewBag.Data_PID = GetSelectList();
+            return View(new CityCateViewModel());
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Editing_Update([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CityCate> citys)
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(CityCateViewModel model)
         {
-            if (citys != null && ModelState.IsValid)
+            ViewBag.Data_PID = GetSelectList();
+            ServiceResult result = new ServiceResult();
+            TempData["Service_Result"] = result;
+            if (ModelState.IsValid)
             {
-                foreach (var city in citys)
+                try
                 {
-                    cityService.Update(city);
+                    CityCate entity = new CityCate();
+                    entity.CateName = model.CateName;
+                    entity.PID = model.PID == 0 ? null : model.PID;
+                    entity.Level = model.Level;
+                    entity.OrderIndex = model.OrderIndex;
+                    entity.Code = model.Code;
+                    cityService.Create(entity);
+                    result.Message = "添加城市信息成功！";
+                    LogHelper.WriteLog("添加城市信息成功");
+                    return RedirectToAction("index");
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    result.Message = Utilities.GetInnerMostException(ex);
+                    result.AddServiceError(result.Message);
+                    LogHelper.WriteLog("添加城市信息错误", ex);
+                    return View(model);
                 }
             }
-
-            return Json(ModelState.ToDataSourceResult());
+            else
+            {
+                result.Message = "请检查表单是否填写完整！";
+                result.AddServiceError("请检查表单是否填写完整！");
+                return View(model);
+            }
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Editing_Destroy([DataSourceRequest] DataSourceRequest request, [Bind(Prefix = "models")]IEnumerable<CityCate> citys)
+
+
+        public ActionResult Edit(int ID)
         {
-            if (citys.Any())
+
+            CityCateViewModel model = new CityCateViewModel();
+            var entity = cityService.Find(ID);
+            model.CateName = entity.CateName;
+            model.ID = entity.ID;
+            model.Code = entity.Code;
+
+            model.Level = entity.Level;
+            model.OrderIndex = entity.OrderIndex;
+            model.PID = entity.PID;
+            ViewBag.Data_PID = GetSelectList(entity.PID.HasValue ? entity.PID.Value : 0);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(CityCateViewModel model)
+        {
+
+            ViewBag.Data_PID = GetSelectList(model.PID.HasValue ? model.PID.Value : 0);
+            ServiceResult result = new ServiceResult();
+            TempData["Service_Result"] = result;
+            if (ModelState.IsValid)
             {
-                foreach (var city in citys)
+                try
                 {
-                    cityService.Delete(city);
+                    CityCate entity = cityService.Find(model.ID);
+                    entity.CateName = model.CateName;
+                    entity.PID = model.PID == 0 ? null : model.PID;
+                    entity.Level = model.Level;
+                    entity.OrderIndex = model.OrderIndex;
+
+                    entity.Code = model.Code;
+                    cityService.Update(entity);
+                    result.Message = "编辑城市信息成功！";
+                    LogHelper.WriteLog("编辑城市信息成功");
+                    return RedirectToAction("index");
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    result.Message = Utilities.GetInnerMostException(ex);
+                    result.AddServiceError(result.Message);
+                    LogHelper.WriteLog("添加城市信息错误", ex);
+                    return View(model);
                 }
             }
-            return Json(ModelState.ToDataSourceResult());
+            else
+            {
+                result.Message = "请检查表单是否填写完整！";
+                result.AddServiceError("请检查表单是否填写完整！");
+                return View(model);
+            }
+
         }
 
+
+        #region private Method
+
+        private List<SelectListItem> GetSelectList(int value = 0)
+        {
+            var query = cityService.GetALL().ToList();
+
+            var list = Utilities.GetSelectListData(
+                    cityService.GetALL().ToList()
+                    , item => item.ID
+                    , item => item.CateName, true).ToList();
+
+            list.Single(x => x.Value == value.ToString()).Selected = true;
+
+            return list;
+        }
         #endregion
 
     }

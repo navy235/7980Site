@@ -189,6 +189,8 @@
     <Compile Include="Utils\Utilities.cs" />
     <Compile Include="ViewModels\ArticleCateViewModel.cs" />
     <Compile Include="ViewModels\FormModel.cs" />
+    <Compile Include="ViewModels\CityCateViewModel.cs" />
+    <Compile Include="ViewModels\MediaCateViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Binaries\Kendo.Mvc.dll" />
@@ -349,6 +351,7 @@
     <Content Include="Scripts\formcontrol\control-foreignkeyforcheck.js" />
     <Content Include="Scripts\formcontrol\control-foreignkeyforradio.js" />
     <Content Include="Scripts\formcontrol\control-mapmaker.js" />
+    <Content Include="Scripts\formcontrol\control-helper.js" />
     <Content Include="Scripts\formcontrol\control-radio.js" />
     <Content Include="Scripts\formcontrol\control-uploadimg.js" />
     <Content Include="Scripts\formcontrol\control-uploadimgedit.js" />
@@ -825,6 +828,12 @@
     <Content Include="Views\Shared\EditorTemplates\Integer.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDownList.cshtml" />
     <Content Include="Views\ArticleCate\Create.cshtml" />
+    <Content Include="Views\ArticleCate\Edit.cshtml" />
+    <Content Include="Views\Shared\_DisplayMessage.cshtml" />
+    <Content Include="Views\CityCate\Edit.cshtml" />
+    <Content Include="Views\CityCate\Create.cshtml" />
+    <Content Include="Views\MediaCate\Edit.cshtml" />
+    <Content Include="Views\MediaCate\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

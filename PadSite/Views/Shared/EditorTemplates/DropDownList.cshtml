@@ -2,7 +2,7 @@
 
 @{
     var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
-    var selectList = (SelectList)ViewData["Data_" + name];
+    var selectList = (List<SelectListItem>)ViewData["Data_" + name];
 }
 @Html.DropDownListFor(m => m, selectList)
 

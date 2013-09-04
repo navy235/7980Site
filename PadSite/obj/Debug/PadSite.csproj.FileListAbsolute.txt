@@ -109,3 +109,6 @@ D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddIsSingleToArticleCate.resources
 D:\GitProject\7980Site\PadSite\bin\log4net.dll
 D:\GitProject\7980Site\PadSite\bin\log4net.xml
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.InitialCreate.resources
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddIsSingleToArticleCate.resources
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
