@@ -23,6 +23,11 @@
     height: 90px;
 }
 
+.k-vcode {
+    width: 42px;
+    font: bold 14px Verdana;
+}
+
 
 
 .k-window {
@@ -116,7 +121,36 @@
         margin-right: 10px;
     }
 
+.k-checklist-group {
+    overflow: hidden;
+    border: 1px solid #00a300;
+    margin-bottom: 10px;
+}
 
+.k-checklist-group-title {
+    background: #00a300;
+    color: #fff;
+    padding: 5px 10px;
+    line-height: 26px;
+    position: relative;
+}
+
+.k-checklist-group-tool {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    color: #fff;
+}
+
+.k-checklist-group-container {
+    overflow: hidden;
+    padding: 0 10px;
+}
+
+.k-checklist-group-tool a {
+    color: #fff;
+    margin-right: 5px;
+}
 
 
 

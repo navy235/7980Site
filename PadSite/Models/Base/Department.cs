@@ -23,15 +23,18 @@ namespace PadSite.Models
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int DepartmentID { get; set; }
+        public int ID { get; set; }
 
         [MaxLength(50)]
+        [Display(Name = "部门名称")]
         public string Name { get; set; }
 
         [MaxLength(150)]
+        [Display(Name = "部门描述")]
         public string Description { get; set; }
 
         [MaxLength(50)]
+        [Display(Name = "部门领导")]
         public string Leader { get; set; }
 
         public virtual ICollection<Permissions> Permissions { get; set; }

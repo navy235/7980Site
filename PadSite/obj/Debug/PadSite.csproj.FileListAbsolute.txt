@@ -104,9 +104,6 @@ E:\GitProject\7980Site\PadSite\bin\Ninject.Web.Common.pdb
 E:\GitProject\7980Site\PadSite\bin\Ninject.Web.Common.xml
 E:\GitProject\7980Site\PadSite\bin\Ninject.Web.Mvc.pdb
 E:\GitProject\7980Site\PadSite\bin\Ninject.Web.Mvc.xml
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.InitialCreate.resources
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddIsSingleToArticleCate.resources
 D:\GitProject\7980Site\PadSite\bin\log4net.dll
 D:\GitProject\7980Site\PadSite\bin\log4net.xml
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.InitialCreate.resources

@@ -70,25 +70,31 @@
             deleteAll: function (element) {
                 var self = Grid;
                 var Ids = self.getCheckIds();
-                self.excute(element, Grid.deleteUrl, Ids);
+                self.excute(element, Grid.deleteUrl, Ids, true);
             },
             deleteSingle: function (element, id) {
                 var self = Grid;
                 var Ids = id;
-                self.excute(element, Grid.deleteUrl, Ids);
+                self.excute(element, Grid.deleteUrl, Ids, true);
             },
-            excute: function (element, url, Ids) {
+            excute: function (element, url, Ids, isDelete) {
                 if ($(element).hasClass('disabled'))
                     return false;
                 var self = Grid;
                 if (Ids) {
+                    if (isDelete) {
+                        if (!confirm("确认删除?")) {
+                            return false;
+                        }
+                    }
                     self.addSpinner(element);
                     $.ajax({
                         type: 'POST',
                         url: url,
                         data: { ids: Ids },
                         success: function (res) {
-                            if (res) {
+                            Maitonn.JHelper.showMessage(res);
+                            if (res.Success) {
                                 var grid = $("#" + self.id).data("kendoGrid");
                                 grid.dataSource.read();
                                 grid.refresh();

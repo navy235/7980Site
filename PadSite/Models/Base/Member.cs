@@ -10,7 +10,7 @@ namespace PadSite.Models
         public Member()
         {
             this.Member_Action = new HashSet<Member_Action>();
-            this.MemberID = 200000;
+            this.MemberID = 100000;
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -63,16 +63,9 @@ namespace PadSite.Models
 
         public virtual Group Group { get; set; }
 
-
         public virtual ICollection<Member_Action> Member_Action { get; set; }
 
-     
-
         public virtual Member_Profile Member_Profile { get; set; }
-
-     
-
-
 
     }
 }

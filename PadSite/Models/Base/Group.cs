@@ -23,12 +23,14 @@ namespace PadSite.Models
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int GroupID { get; set; }
+        public int ID { get; set; }
 
         [MaxLength(50)]
+        [Display(Name = "群组名称")]
         public string Name { get; set; }
 
         [MaxLength(150)]
+        [Display(Name = "群组描述")]
         public string Description { get; set; }
 
         public virtual ICollection<Member> Member { get; set; }

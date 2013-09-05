@@ -31,6 +31,9 @@ html, body {
     min-height: 100%;
 }
 
+ol, ul {
+    list-style: none;
+}
 
 textarea {
     min-height: 75px;
@@ -356,6 +359,18 @@ textarea {
     height: 0;
 }
 
+.form-field .vcode {
+    outline: 0;
+    cursor: pointer;
+}
+
+    .form-field .vcode img {
+        width: 52px;
+        height: 28px;
+        margin: 0 10px;
+        vertical-align: middle;
+        display: inline-block;
+    }
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 
@@ -387,7 +402,7 @@ textarea {
     background-color: #fbe3e4;
     border: solid 1px #c13a3f;
     display: block;
-    background: url(images/warning_16X16.png) 3px 4px no-repeat;
+    background: url(images/warning_16X16.png) 3px 6px no-repeat;
 }
 
 

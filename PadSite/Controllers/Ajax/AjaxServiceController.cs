@@ -67,5 +67,20 @@ namespace PadSite.Controllers
             return Json(selectlist, JsonRequestBehavior.AllowGet);
         }
 
+
+        public void GetValidateCode()
+        {
+            ValidateCode VCode = new ValidateCode("VCode", 100, 40);
+        }
+
+        public JsonResult ValidateVCode(string vcode)
+        {
+            bool status = false;
+            if (Session["VCode"] != null)
+            {
+                status = Session["VCode"].ToString().Equals(vcode, StringComparison.OrdinalIgnoreCase);
+            }
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
     }
 }

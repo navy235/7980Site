@@ -57,9 +57,21 @@ namespace PadSite
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Bind<IUnitOfWork>().To<EntitiesContext>().InRequestScope();
+
+            #region category
             kernel.Bind<ICityCateService>().To<CityCateService>().InRequestScope();
             kernel.Bind<IMediaCateService>().To<MediaCateService>().InRequestScope();
             kernel.Bind<IArticleCateService>().To<ArticleCateService>().InRequestScope();
+            kernel.Bind<IFormatCateService>().To<FormatCateService>().InRequestScope();
+            kernel.Bind<IPeriodCateService>().To<PeriodCateService>().InRequestScope();
+            #endregion
+
+            #region permission
+            kernel.Bind<IDepartmentService>().To<DepartmentService>().InRequestScope();
+            kernel.Bind<IPermissionsService>().To<PermissionsService>().InRequestScope();
+            kernel.Bind<IRolesService>().To<RolesService>().InRequestScope();
+            kernel.Bind<IGroupService>().To<GroupService>().InRequestScope();
+            #endregion
         }
     }
 }

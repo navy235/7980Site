@@ -26,9 +26,11 @@ namespace PadSite.Models
         public int ID { get; set; }
 
         [MaxLength(50)]
+        [Display(Name = "角色名称")]
         public string Name { get; set; }
 
         [MaxLength(150)]
+        [Display(Name = "角色描述")]
         public string Description { get; set; }
 
 

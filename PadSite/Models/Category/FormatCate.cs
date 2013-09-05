@@ -13,14 +13,19 @@ namespace PadSite.Models
         public int ID { get; set; }
 
         [MaxLength(50)]
+        [Display(Name = "分类名称")]
         public string CateName { get; set; }
 
+        [Display(Name = "父级分类")]
         public int? PID { get; set; }
 
+        [Display(Name = "分类代码")]
         public int Code { get; set; }
 
+        [Display(Name = "分类级别")]
         public int Level { get; set; }
 
+        [Display(Name = "排序代码")]
         public int OrderIndex { get; set; }
 
         [ScriptIgnore]

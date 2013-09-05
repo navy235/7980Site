@@ -146,23 +146,23 @@
     <Compile Include="App_Start\NinjectBinding.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Admin\CityCateController.cs" />
-    <Compile Include="Controllers\Admin\DashboardController.cs" />
-    <Compile Include="Controllers\Admin\MediaCateController.cs" />
-    <Compile Include="Controllers\Admin\ArticleCateController.cs" />
+    <Compile Include="Controllers\Category\CityCateController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\Category\MediaCateController.cs" />
+    <Compile Include="Controllers\Category\ArticleCateController.cs" />
+    <Compile Include="Controllers\Category\FormatCateController.cs" />
+    <Compile Include="Controllers\Category\PeriodCateController.cs" />
     <Compile Include="Controllers\Ajax\AjaxServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Ajax\UploadController.cs" />
+    <Compile Include="Controllers\Member\LoginController.cs" />
+    <Compile Include="Controllers\Member\RegController.cs" />
+    <Compile Include="Controllers\Permission\DepartmentController.cs" />
+    <Compile Include="Controllers\Permission\PermissionsController.cs" />
+    <Compile Include="Controllers\Permission\RolesController.cs" />
+    <Compile Include="Controllers\Permission\GroupController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309040314181_InitialCreate.cs" />
-    <Compile Include="Migrations\201309040314181_InitialCreate.Designer.cs">
-      <DependentUpon>201309040314181_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309040749083_AddIsSingleToArticleCate.cs" />
-    <Compile Include="Migrations\201309040749083_AddIsSingleToArticleCate.Designer.cs">
-      <DependentUpon>201309040749083_AddIsSingleToArticleCate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Base\Article.cs" />
@@ -176,21 +176,47 @@
     <Compile Include="Models\Category\ArticleCate.cs" />
     <Compile Include="Models\Category\CityCate.cs" />
     <Compile Include="Models\Category\FormatCate.cs" />
+    <Compile Include="Models\Category\PeriodCate.cs" />
     <Compile Include="Models\Context\EntitiesContext.cs" />
     <Compile Include="Models\Category\MediaCate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\CityCateService.cs" />
-    <Compile Include="Service\Interface\ICityCateService.cs" />
-    <Compile Include="Service\Interface\IMediaCateService.cs" />
-    <Compile Include="Service\Interface\IArticleService.cs" />
-    <Compile Include="Service\MediaCateService.cs" />
-    <Compile Include="Service\ArticleCateService.cs" />
+    <Compile Include="Service\Category\CityCateService.cs" />
+    <Compile Include="Service\Interface\Email\IEmailService.cs" />
+    <Compile Include="Service\Interface\Category\ICityCateService.cs" />
+    <Compile Include="Service\Interface\Category\IMediaCateService.cs" />
+    <Compile Include="Service\Interface\Category\IArticleService.cs" />
+    <Compile Include="Service\Interface\Category\IFormatCateService.cs" />
+    <Compile Include="Service\Interface\Category\IPeriodCateService.cs" />
+    <Compile Include="Service\Interface\Member\IMemberService.cs" />
+    <Compile Include="Service\Interface\Permission\IDepartmentService.cs" />
+    <Compile Include="Service\Category\MediaCateService.cs" />
+    <Compile Include="Service\Category\ArticleCateService.cs" />
+    <Compile Include="Service\Category\FormatCateService.cs" />
+    <Compile Include="Service\Category\PeriodCateService.cs" />
+    <Compile Include="Service\Interface\Permission\IPermissionsService.cs" />
+    <Compile Include="Service\Interface\Permission\IRolesService.cs" />
+    <Compile Include="Service\Interface\Permission\IGroupService.cs" />
+    <Compile Include="Service\Member\MemberService.cs" />
+    <Compile Include="Service\Permission\DepartmentService.cs" />
+    <Compile Include="Service\Permission\PermissionsService.cs" />
+    <Compile Include="Service\Permission\RolesService.cs" />
+    <Compile Include="Service\Permission\GroupService.cs" />
     <Compile Include="Utils\ServiceResult.cs" />
     <Compile Include="Utils\Utilities.cs" />
-    <Compile Include="ViewModels\ArticleCateViewModel.cs" />
+    <Compile Include="ViewModels\Account\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Account\OpenLoginViewModel.cs" />
+    <Compile Include="ViewModels\Account\RegViewModel.cs" />
+    <Compile Include="ViewModels\Category\ArticleCateViewModel.cs" />
+    <Compile Include="ViewModels\Category\PeriodCateViewModel.cs" />
+    <Compile Include="ViewModels\Email\EmailModel.cs" />
     <Compile Include="ViewModels\FormModel.cs" />
-    <Compile Include="ViewModels\CityCateViewModel.cs" />
-    <Compile Include="ViewModels\MediaCateViewModel.cs" />
+    <Compile Include="ViewModels\Category\CityCateViewModel.cs" />
+    <Compile Include="ViewModels\Category\MediaCateViewModel.cs" />
+    <Compile Include="ViewModels\Category\FormatCateViewModel.cs" />
+    <Compile Include="ViewModels\Permission\DepartmentViewModel.cs" />
+    <Compile Include="ViewModels\Permission\PermissionsViewModel.cs" />
+    <Compile Include="ViewModels\Permission\RolesViewModel.cs" />
+    <Compile Include="ViewModels\Permission\GroupViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Binaries\Kendo.Mvc.dll" />
@@ -205,6 +231,7 @@
     <Content Include="Content\images\index-header.gif" />
     <Content Include="Content\images\information_16X16.png" />
     <Content Include="Content\images\loading-image.gif" />
+    <Content Include="Content\images\login-img.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\mapicon.gif" />
     <Content Include="Content\images\min-loading.gif" />
@@ -341,6 +368,7 @@
     <Content Include="Content\kendo\2012.3.1114\Uniform\slider-v.gif" />
     <Content Include="Content\kendo\2012.3.1114\Uniform\sprite.png" />
     <Content Include="Content\admin.css" />
+    <Content Include="Content\login.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\site.css" />
     <Content Include="Content\kendo\2012.3.1114\images\KendoUI.ttf" />
@@ -356,6 +384,8 @@
     <Content Include="Scripts\formcontrol\control-uploadimg.js" />
     <Content Include="Scripts\formcontrol\control-uploadimgedit.js" />
     <Content Include="Scripts\formcontrol\control-uploadimglist.js" />
+    <Content Include="Scripts\formcontrol\control-groupforeignkeyforcheck.js" />
+    <Content Include="Scripts\formcontrol\control-validatevcode.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery.Jcrop.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -834,21 +864,38 @@
     <Content Include="Views\CityCate\Create.cshtml" />
     <Content Include="Views\MediaCate\Edit.cshtml" />
     <Content Include="Views\MediaCate\Create.cshtml" />
+    <Content Include="Views\FormatCate\Create.cshtml" />
+    <Content Include="Views\FormatCate\Edit.cshtml" />
+    <Content Include="Views\FormatCate\Index.cshtml" />
+    <Content Include="Views\PeriodCate\Create.cshtml" />
+    <Content Include="Views\PeriodCate\Edit.cshtml" />
+    <Content Include="Views\PeriodCate\Index.cshtml" />
+    <Content Include="Views\Department\Create.cshtml" />
+    <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Permissions\Create.cshtml" />
+    <Content Include="Views\Permissions\Edit.cshtml" />
+    <Content Include="Views\Permissions\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\GroupForeignKeyForCheckBox.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Group\Create.cshtml" />
+    <Content Include="Views\Group\Edit.cshtml" />
+    <Content Include="Views\Group\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutLogin.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ValidateVCode.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
+    <Content Include="Views\Reg\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
+    <Folder Include="Service\Email\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201309040314181_InitialCreate.resx">
-      <DependentUpon>201309040314181_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201309040749083_AddIsSingleToArticleCate.resx">
-      <DependentUpon>201309040749083_AddIsSingleToArticleCate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

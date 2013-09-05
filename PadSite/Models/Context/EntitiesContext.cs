@@ -28,10 +28,28 @@ namespace PadSite.Models
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<MediaCate>()
-             .HasOptional(c => c.PCate)
-             .WithMany(pc => pc.ChildCates)
-             .HasForeignKey(c => c.PID)
-             .WillCascadeOnDelete(false);
+                .HasOptional(c => c.PCate)
+                .WithMany(pc => pc.ChildCates)
+                .HasForeignKey(c => c.PID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ArticleCate>()
+                .HasOptional(c => c.PCate)
+                .WithMany(pc => pc.ChildCates)
+                .HasForeignKey(c => c.PID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<FormatCate>()
+                .HasOptional(c => c.PCate)
+                .WithMany(pc => pc.ChildCates)
+                .HasForeignKey(c => c.PID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PeriodCate>()
+                .HasOptional(c => c.PCate)
+                .WithMany(pc => pc.ChildCates)
+                .HasForeignKey(c => c.PID)
+                .WillCascadeOnDelete(false);
 
             #endregion
 
@@ -53,8 +71,10 @@ namespace PadSite.Models
             #endregion
 
             modelBuilder.Entity<Permissions>()
-                .HasRequired(p => p.Department).WithMany(d => d.Permissions).HasForeignKey(p => p.DepartmentID);
-            //多对多关系
+                .HasRequired(p => p.Department)
+                .WithMany(d => d.Permissions)
+                .HasForeignKey(p => p.DepartmentID);
+
             modelBuilder.Entity<Roles>()
                 .HasMany(b => b.Permissions)
                 .WithMany(c => c.Roles)
@@ -80,12 +100,12 @@ namespace PadSite.Models
                    }
                );
 
-
             modelBuilder.Entity<Article>()
                 .HasRequired(m => m.ArticleCate)
                 .WithMany(c => c.Article)
                 .HasForeignKey(o => o.ArticleCode)
                 .WillCascadeOnDelete(false);
+
 
             base.OnModelCreating(modelBuilder);
         }
