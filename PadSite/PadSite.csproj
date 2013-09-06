@@ -142,7 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\ConfigSetting.cs" />
+    <Compile Include="Config\ConfigSetting.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectBinding.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -196,7 +196,9 @@
     <Compile Include="Models\Category\MediaCate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Category\CityCateService.cs" />
-    <Compile Include="Service\Email\ArticleCateService.cs" />
+    <Compile Include="Service\Company\CompanyService.cs" />
+    <Compile Include="Service\Email\EmailService.cs" />
+    <Compile Include="Service\Interface\Company\ICompanyService.cs" />
     <Compile Include="Service\Interface\Email\IEmailService.cs" />
     <Compile Include="Service\Interface\Category\ICityCateService.cs" />
     <Compile Include="Service\Interface\Category\IMediaCateService.cs" />
@@ -204,6 +206,7 @@
     <Compile Include="Service\Interface\Category\IFormatCateService.cs" />
     <Compile Include="Service\Interface\Category\IPeriodCateService.cs" />
     <Compile Include="Service\Interface\Member\IMemberService.cs" />
+    <Compile Include="Service\Interface\Member\IMember_ActionService.cs" />
     <Compile Include="Service\Interface\Permission\IDepartmentService.cs" />
     <Compile Include="Service\Category\MediaCateService.cs" />
     <Compile Include="Service\Category\ArticleCateService.cs" />
@@ -213,17 +216,24 @@
     <Compile Include="Service\Interface\Permission\IRolesService.cs" />
     <Compile Include="Service\Interface\Permission\IGroupService.cs" />
     <Compile Include="Service\Member\MemberService.cs" />
+    <Compile Include="Service\Member\Member_ActionService.cs" />
     <Compile Include="Service\Permission\DepartmentService.cs" />
     <Compile Include="Service\Permission\PermissionsService.cs" />
     <Compile Include="Service\Permission\RolesService.cs" />
     <Compile Include="Service\Permission\GroupService.cs" />
     <Compile Include="Utils\ServiceResult.cs" />
     <Compile Include="Utils\Utilities.cs" />
+    <Compile Include="ViewModels\Account\BizAuthViewModel.cs" />
+    <Compile Include="ViewModels\Account\CompanyRegViewModel.cs" />
+    <Compile Include="ViewModels\Account\ContactViewModel.cs" />
+    <Compile Include="ViewModels\Account\GetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Account\OpenBizViewModel.cs" />
     <Compile Include="ViewModels\Account\OpenLoginViewModel.cs" />
     <Compile Include="ViewModels\Account\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Account\RegViewModel.cs" />
     <Compile Include="ViewModels\Account\RegBizViewModel.cs" />
+    <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Category\ArticleCateViewModel.cs" />
     <Compile Include="ViewModels\Category\PeriodCateViewModel.cs" />
     <Compile Include="ViewModels\Email\EmailModel.cs" />
@@ -394,6 +404,9 @@
     <Content Include="Content\kendo\2012.3.1114\Uniform\sprite.png" />
     <Content Include="Content\admin.css" />
     <Content Include="Content\login.css" />
+    <Content Include="EmailTemplate\active.htm" />
+    <Content Include="EmailTemplate\bizactive.htm" />
+    <Content Include="EmailTemplate\getpwd.htm" />
     <Content Include="Global.asax" />
     <Content Include="Content\site.css" />
     <Content Include="Content\kendo\2012.3.1114\images\KendoUI.ttf" />

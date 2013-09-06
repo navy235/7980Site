@@ -264,5 +264,45 @@ namespace PadSite.Service
             member.Member_Profile = mp;
             db.Commit();
         }
+
+
+        public Member FindDescriptionMemberInLimitTime(string description, int limitHours)
+        {
+
+            DateTime LimitDate = DateTime.Now.AddHours(-limitHours);
+            var query = db.Set<Member>()
+                .Include(x => x.Member_Action)
+                .Where(x =>
+                    (x.Member_Action
+                        .Any(ma => ma.Description.Equals(description, StringComparison.OrdinalIgnoreCase)
+                            && ma.AddTime > LimitDate
+                            )
+                     ));
+            if (query.Count() > 0)
+            {
+                return query.Single();
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
+
+        public bool HasGetPasswordActionInLimitTime(string email, int limitMin, int memberAction)
+        {
+            DateTime LimitDate = DateTime.Now.AddMinutes(-(limitMin));
+            string IP = HttpHelper.IP;
+            var query = db.Set<Member>()
+                .Include(x => x.Member_Action)
+                .Where(x =>
+                    (x.Member_Action.Any(ma =>
+                        ma.ActionType == memberAction
+                        && ma.AddTime > LimitDate
+                        && ma.IP == IP
+                        )) && x.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
+            return query.Count() > 0;
+        }
     }
 }

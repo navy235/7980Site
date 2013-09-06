@@ -124,5 +124,39 @@ namespace PadSite.Service
             company.Status = (int)CompanyStatus.CompanyApply;
             db.Commit();
         }
+
+
+        public Company Update(CompanyRegViewModel model)
+        {
+            var MemberID = CookieHelper.MemberID;
+
+            Company company = Find(MemberID);
+
+            db.Attach<Company>(company);
+            company.LastIP = HttpHelper.IP;
+            company.Address = model.Address;
+            company.LastTime = DateTime.Now;
+            company.Description = model.Description;
+            company.Fax = model.Fax;
+            company.Lat = Convert.ToSingle(model.Position.Split('|')[0]);
+            company.Lng = Convert.ToSingle(model.Position.Split('|')[1]);
+            company.LinkMan = model.LinkMan;
+            company.MemberID = MemberID;
+            company.Mobile = model.Mobile;
+            company.MSN = model.MSN;
+            company.Name = model.Name;
+            company.Phone = model.Phone;
+            company.QQ = model.QQ;
+            company.Sex = model.Sex;
+            company.IdentityCard = model.IdentityCard;
+            company.LinkManImg = model.LinkManImg;
+            company.LogoImg = model.LogoImg;
+            company.CredentialsImg = model.CredentialsImg;
+            company.Status = (int)CompanyStatus.CompanyApply;
+            db.Commit();
+
+            return company;
+
+        }
     }
 }

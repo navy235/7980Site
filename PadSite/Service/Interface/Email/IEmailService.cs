@@ -7,6 +7,6 @@ namespace PadSite.Service.Interface
     {
         bool SendMail(EmailModel model);
 
-        EmailModel GetMail(int MemberID, string Email, string NickName, string Key);
+        EmailModel GetMail(string TempleteUrl, string EmailTitle, int MemberID, string Email, string NickName, string Key);
     }
 }

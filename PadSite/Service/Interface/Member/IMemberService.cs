@@ -47,5 +47,9 @@ namespace PadSite.Service.Interface
         void SaveMemberProfile(int MemberID, ProfileViewModel model);
 
         void SaveMemberContact(int MemberID, ContactViewModel model);
+
+        Member FindDescriptionMemberInLimitTime(string description, int limitHours);
+
+        bool HasGetPasswordActionInLimitTime(string email, int limitMin, int memberAction);
     }
 }

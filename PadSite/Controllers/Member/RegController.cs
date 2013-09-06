@@ -10,6 +10,7 @@ using PadSite.Models;
 using PadSite.Filters;
 using PadSite.Utils;
 using PadSite.Service.Interface;
+using PadSite.Setting;
 namespace PadSite.Controllers
 {
     public class RegController : Controller
@@ -17,17 +18,22 @@ namespace PadSite.Controllers
         private IMemberService MemberService;
         private IEmailService EmailService;
         private ICompanyService CompanyService;
+        private IMember_ActionService Member_ActionService;
         public RegController(
             IMemberService MemberService,
             IEmailService EmailService,
-            ICompanyService CompanyService
+            ICompanyService CompanyService,
+            IMember_ActionService Member_ActionService
             )
         {
             this.MemberService = MemberService;
             this.EmailService = EmailService;
             this.CompanyService = CompanyService;
+            this.Member_ActionService = Member_ActionService;
         }
 
+
+        #region 普通注册
         public ActionResult Index()
         {
             var model = new RegViewModel();
@@ -113,6 +119,11 @@ namespace PadSite.Controllers
                 return View(model);
             }
         }
+
+        #endregion
+
+
+        #region 企业用户注册
 
         public ActionResult RegBiz()
         {
@@ -276,6 +287,10 @@ namespace PadSite.Controllers
         }
 
 
+        #endregion
+
+
+        #region 开通企业商铺
 
         [LoginAuthorize]
         public ActionResult OpenBiz()
@@ -313,12 +328,12 @@ namespace PadSite.Controllers
                             Phone = company.Phone,
                             Position = company.Lat + "|" + company.Lng,
                             Sex = company.Sex,
-                             CredentialsImg=company.CredentialsImg,
-                              IdentityCard=company.IdentityCard
-               
+                            CredentialsImg = company.CredentialsImg,
+                            IdentityCard = company.IdentityCard
+
 
                         };
-                        
+
                         return View(model);
                     }
                 }
@@ -328,15 +343,15 @@ namespace PadSite.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [LoginAuthorize]
-        public ActionResult OpenBiz(OpenBizModel model)
+        public ActionResult OpenBiz(OpenBizViewModel model)
         {
+
+            Member member = MemberService.Find(CookieHelper.MemberID);
             if (ModelState.IsValid)
             {
                 #region 企业入驻
                 try
                 {
-                    Member member = memberService.Find(CookieHelper.MemberID);
-
                     if (member.Status < (int)MemberStatus.EmailActived)
                     {
                         return Content("<script>alert('您的邮箱还未绑定，请先绑定邮箱再进行企业认证!');window.top.location='" + Url.Action("activeemail") + "';</script>");
@@ -349,74 +364,278 @@ namespace PadSite.Controllers
                         }
                         else
                         {
-                            var company = companyService.IncludeFind(member.MemberID);
+                            var company = CompanyService.Find(member.MemberID);
 
                             if (company == null)
                             {
-                                CompanyReg reg = new CompanyReg()
+                                CompanyRegViewModel reg = new CompanyRegViewModel()
                                 {
                                     Address = model.Address,
-                                    BussinessCode = model.BussinessCode,
                                     CityCode = model.CityCode,
                                     Description = model.Description,
-                                    FundCode = model.FundCode,
                                     LinkMan = model.LinkMan,
                                     Mobile = model.Mobile,
                                     Name = model.Name,
                                     Phone = model.Phone,
                                     Position = model.Position,
-                                    ScaleCode = model.ScaleCode,
                                     Sex = model.Sex,
-                                    CompanyImg = model.CompanyImg,
-                                    LinManImg = model.LinManImg,
-                                    Logo = model.Logo
+                                    LinkManImg = model.LinkManImg,
+                                    CredentialsImg = model.CredentialsImg,
+                                    LogoImg = model.LogoImg,
+                                    IdentityCard = model.IdentityCard
                                 };
-                                companyService.Create(reg);
+                                CompanyService.Create(reg);
                             }
                             else
                             {
-                                CompanyReg reg = new CompanyReg()
+                                CompanyRegViewModel reg = new CompanyRegViewModel()
                                 {
                                     Address = model.Address,
-                                    BussinessCode = model.BussinessCode,
                                     CityCode = model.CityCode,
                                     Description = model.Description,
-                                    FundCode = model.FundCode,
                                     LinkMan = model.LinkMan,
                                     Mobile = model.Mobile,
                                     Name = model.Name,
                                     Phone = model.Phone,
                                     Position = model.Position,
-                                    ScaleCode = model.ScaleCode,
                                     Sex = model.Sex,
-                                    CompanyImg = model.CompanyImg,
-                                    LinManImg = model.LinManImg,
-                                    Logo = model.Logo,
+                                    LinkManImg = model.LinkManImg,
+                                    CredentialsImg = model.CredentialsImg,
+                                    LogoImg = model.LogoImg,
+                                    IdentityCard = model.IdentityCard,
                                     Fax = company.Fax,
                                     MSN = company.MSN,
                                     QQ = company.QQ
                                 };
-
-                                companyService.Update(reg);
+                                CompanyService.Update(reg);
                             }
                         }
                     }
-
-                    //memberService.SetLoginCookie(mb);
                     return Redirect(Url.Action("bizOk"));
 
                 }
                 catch (Exception ex)
                 {
-                    throw ex;
+                    LogHelper.WriteLog("用户:" + member.MemberID + "开通企业注册失败!", ex);
+                    TempData["FormError"] = true;
+                    return View(model);
                 }
 
                 #endregion
             }
             else
             {
+                TempData["FormError"] = true;
                 return View(model);
             }
         }
+
+        #endregion
+
+
+        #region 邮件激活
+
+        [LoginAuthorize]
+        public ActionResult ActiveEmail()
+        {
+
+            Member member = MemberService.Find(CookieHelper.MemberID);
+            ViewBag.Email = member.Email;
+            if (member.Status <= (int)MemberStatus.Registered)
+            {
+                int actionEmailActive = (int)MemberActionType.EmailActvie;
+                int limitMins = ConfigSetting.GetBindEmailTimeDiffMin;
+                if (!Member_ActionService.HasActionByActionTypeInLimiteTime(CookieHelper.MemberID, actionEmailActive, limitMins))
+                {
+                    string emailKey = Guid.NewGuid().ToString();
+                    string emailTitle = member.NickName + string.Format(" 您好！绑定www.{0}{1}登录邮箱!", ConfigSetting.DomainUrl, ConfigSetting.SiteName);
+                    EmailModel em = EmailService.GetMail(Url.Content("~/EmailTemplate/active.htm/"), emailTitle, member.MemberID, member.Email,
+                        member.NickName,
+                        emailKey);
+                    EmailService.SendMail(em);
+
+                    Member_ActionService.Create(member, actionEmailActive, emailKey);
+                }
+            }
+            else
+            {
+                return Content("<script>alert('您的邮箱已经绑定，请勿重复绑定!');window.top.location='" + Url.Action("index", "home") + "';</script>");
+            }
+            return View();
+        }
+
+
+        public ActionResult EmailActive(string email, string emailKey)
+        {
+            if (string.IsNullOrEmpty(emailKey) || !MemberService.ExistsEmail(email))
+            {
+                return Content("<script>alert('非法提交!');window.top.location='/" + Url.Action("index", "home") + "';</script>");
+            }
+            else
+            {
+                int limitHours = ConfigSetting.ActiveEmailTimeDiffHour;
+                int emailActived = (int)MemberStatus.EmailActived;
+                Member member = MemberService.FindDescriptionMemberInLimitTime(emailKey, limitHours);
+                if (member != null)
+                {
+                    if (member.Status >= emailActived)
+                    {
+                        return Content("<script>alert('您的邮箱已经绑定，请勿重复绑定!');window.top.location='" + Url.Action("index", "home") + "';</script>");
+                    }
+                    else
+                    {
+                        if (member.Status < (int)MemberStatus.Registered)
+                        {
+                            return Content("<script>alert('您的帐号由于非法操作已经被锁定!');window.top.location='" + Url.Action("index", "home") + "';</script>");
+                        }
+                        else
+                        {
+                            var company = CompanyService.Find(member.MemberID);
+
+                            if (company != null && company.Status > (int)CompanyStatus.Default)
+                            {
+                                emailActived = (int)MemberStatus.CompanyApply;
+                            }
+
+                            MemberService.changeStatus(member, emailActived);
+
+                            return Redirect(Url.Action("ActiveOk"));
+                        }
+                    }
+                }
+                else
+                {
+                    return Content("<script>alert('您的验证已过期或非法提交，请重新获取绑定邮件!');window.location='" + Url.Action("activeemail") + "';</script>");
+                }
+
+            }
+        }
+
+        [LoginAuthorize]
+        public ActionResult GetActiveEmail()
+        {
+
+            Member member = MemberService.Find(CookieHelper.MemberID);
+            if (member.Status <= (int)MemberStatus.Registered)
+            {
+                int actionEmailActive = (int)MemberActionType.EmailActvie;
+                int limitMins = ConfigSetting.GetBindEmailTimeDiffMin;
+                if (Member_ActionService.HasActionByActionTypeInLimiteTime(CookieHelper.MemberID, actionEmailActive, limitMins))
+                {
+                    return Content("<script>alert('您所使用的邮箱刚获取过绑定邮件，请到您的邮箱收取邮件!');window.top.location='" + Url.Action("activeemail") + "';</script>");
+                }
+                else
+                {
+                    string emailKey = Guid.NewGuid().ToString();
+                    string emailTitle = member.NickName + string.Format(" 您好！绑定www.{0}{1}登录邮箱!", ConfigSetting.DomainUrl, ConfigSetting.SiteName);
+                    EmailModel em = EmailService.GetMail(Url.Content("~/EmailTemplate/active.htm/"), emailTitle, member.MemberID, member.Email,
+                        member.NickName,
+                        emailKey);
+                    EmailService.SendMail(em);
+                    Member_ActionService.Create(member, actionEmailActive, emailKey);
+                    return Content("<script>alert('绑定邮件已经发送到您的邮箱，请在" + ConfigSetting.ActiveEmailTimeDiffHour + "小时内进行绑定');window.top.location='" + Url.Action("bindemail", "personal") + "';</script>");
+                }
+            }
+            else
+            {
+                return Content("<script>alert('您的邮箱已经绑定，请勿重复绑定!');window.top.location='" + Url.Action("bindemail", "personal") + "';</script>");
+            }
+        }
+
+        #endregion
+
+
+        #region 重置密码
+
+        public ActionResult GetPassword()
+        {
+            ViewBag.SendMail = false;
+            return View(new GetPasswordViewModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetPassword(GetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                int memberAction = (int)MemberActionType.GetPassword;
+                int limitMin = ConfigSetting.GetPasswordEmailTimeDiffMin;
+                if (MemberService.HasGetPasswordActionInLimitTime(model.Email, limitMin, memberAction))
+                {
+                    ViewBag.SendMail = true;
+                    ViewBag.HasSendMail = true;
+                    ViewBag.Message = limitMin;
+                }
+                else
+                {
+                    Member member = MemberService.GetALL().Single(x => x.Email.Equals(model.Email, StringComparison.CurrentCultureIgnoreCase));
+                    string userKey = Guid.NewGuid().ToString();
+                    string emailTitle = member.NickName + string.Format(" 您好！找回www.{0}{1密码!", ConfigSetting.DomainUrl, ConfigSetting.SiteName);
+                    EmailModel em = EmailService.GetMail(Url.Content("~/EmailTemplate/getpwd.htm/"), emailTitle, member.MemberID, member.Email, member.NickName, userKey);
+                    EmailService.SendMail(em);
+                    Member_ActionService.Create(member, memberAction, userKey);
+                    ViewBag.HasSendMail = false;
+                    ViewBag.SendMail = true;
+                    ViewBag.Title = "";
+                }
+                return View(model);
+
+            }
+            return View(model);
+        }
+
+
+        public ActionResult ResetPassword(string userKey)
+        {
+            if (string.IsNullOrEmpty(userKey))
+            {
+                return Content("<script>alert('非法提交!');window.top.location='/" + Url.Action("GetPassword") + "';</script>");
+            }
+            else
+            {
+                int limitHours = ConfigSetting.ResetPasswordTimeDiffHour;
+                if (Member_ActionService.HasDescriptionActionInLimiteTime(userKey, limitHours))
+                {
+                    ViewBag.haveChangePwd = false;
+                    return View(new ResetPasswordViewModel());
+                }
+                else
+                {
+                    return Content("<script>alert('您的验证已过期或非法提交，请重新获取密码!');window.location='/" + Url.Action("GetPassword") + "';</script>");
+                }
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(string userKey, ResetPasswordViewModel model)
+        {
+
+            if (string.IsNullOrEmpty(userKey))
+            {
+                return Content("<script>alert('非法提交!');window.top.location='/" + Url.Action("GetPassword") + "';</script>");
+            }
+            else
+            {
+                Member member = MemberService.FindDescriptionMemberInLimitTime(userKey, 12);
+                if (member != null)
+                {
+                    if (model.NewPassword.Equals(model.ConfirmPassword, StringComparison.OrdinalIgnoreCase))
+                    {
+                        MemberService.ResetPassword(member, model.NewPassword);
+                    }
+                    ViewBag.haveChangePwd = true;
+                    ViewBag.Email = member.Email;
+                    return View(model);
+                }
+                else
+                {
+                    return Content("<script>alert('您的验证已过期或非法提交，请重新获取密码!');window.location='/" + Url.Action("GetPassword") + "';</script>");
+                }
+            }
+        }
+
+        #endregion
     }
 }

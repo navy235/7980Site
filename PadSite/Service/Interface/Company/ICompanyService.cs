@@ -16,6 +16,8 @@ namespace PadSite.Service.Interface
 
         Company Create(CompanyRegViewModel model);
 
+        Company Update(CompanyRegViewModel model);
+
         void Delete(Company model);
 
         Company Find(int MemberID);
