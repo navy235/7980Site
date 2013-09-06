@@ -1,0 +1,42 @@
+﻿@model PadSite.ViewModels.ProfileViewModel
+@{
+    ViewBag.Title = "注册成功";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+@section topscripts{
+    @Styles.Render("~/Content/kendo/2012.3.1114/css")
+    <script src="@Url.Content("~/Scripts/kendo/2012.3.1114/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2012.3.1114/kendo.aspnetmvc.min.js")"></script>
+    <script src="~/Scripts/kendo/2012.3.1114/cultures/kendo.culture.zh-CHS.min.js"></script>
+    <script type="text/javascript">
+        kendo.culture("zh-CHS");
+    </script>
+}
+
+<div class="reg-content">
+    <div class="main">
+        <div class="main-title">
+            <h6>
+                <i class="icon-maitonn icon-caret-right"></i>完善基本信息</h6>
+        </div>
+
+        <div class="main-success mb20 mt20 ml60">
+            <i class="icon-maitonn icon-ok-circle"></i>
+            <p>
+                <strong>恭喜</strong> ，您已成功注册成为XX网会员。完善以下信息方便大家了解您
+            </p>
+        </div>
+
+        <div class="main-form mt40">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.EditorForModel()
+                <div class="form-field form-field-submit fg-color-gray">
+                    <button type="submit" class="btn btn-success mr20">
+                        填好了，提交注册</button><a href="@Url.Action("ActiveEmail")">跳过此步，需要的时候再填</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -72,6 +72,16 @@ namespace PadSite
             kernel.Bind<IRolesService>().To<RolesService>().InRequestScope();
             kernel.Bind<IGroupService>().To<GroupService>().InRequestScope();
             #endregion
+
+
+            #region member
+            kernel.Bind<IMemberService>().To<MemberService>().InRequestScope();
+            kernel.Bind<ICompanyService>().To<CompanyService>().InRequestScope();
+            #endregion
+
+            #region email
+            kernel.Bind<IEmailService>().To<EmailService>().InRequestScope();
+            #endregion
         }
     }
 }

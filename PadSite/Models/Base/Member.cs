@@ -10,6 +10,9 @@ namespace PadSite.Models
         public Member()
         {
             this.Member_Action = new HashSet<Member_Action>();
+            this.CompanyCredentialsImg = new HashSet<CompanyCredentialsImg>();
+            this.CompanyMessage = new HashSet<CompanyMessage>();
+            this.CompanyNotice = new HashSet<CompanyNotice>();
             this.MemberID = 100000;
         }
         [Key]
@@ -66,6 +69,14 @@ namespace PadSite.Models
         public virtual ICollection<Member_Action> Member_Action { get; set; }
 
         public virtual Member_Profile Member_Profile { get; set; }
+
+        public virtual Company Company { get; set; }
+
+        public virtual ICollection<CompanyCredentialsImg> CompanyCredentialsImg { get; set; }
+
+        public virtual ICollection<CompanyMessage> CompanyMessage { get; set; }
+
+        public virtual ICollection<CompanyNotice> CompanyNotice { get; set; }
 
     }
 }

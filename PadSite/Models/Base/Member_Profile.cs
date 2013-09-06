@@ -32,6 +32,8 @@ namespace PadSite.Models
 
         public int CityCode { get; set; }
 
+        public string CityCodeValue { get; set; }
+
         [MaxLength(20)]
         public string RealName { get; set; }
 
@@ -56,8 +58,6 @@ namespace PadSite.Models
 
         [MaxLength(150)]
         public string Description { get; set; }
-
-        public virtual CityCate CityCate { get; set; }
 
         public virtual Member Member { get; set; }
     }

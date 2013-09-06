@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var FormError = TempData["FormError"] ?? null;
+}
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -7,11 +10,11 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     @Styles.Render("~/Content/login")
     @Scripts.Render("~/bundles/modernizr")
-
     <script src="~/Scripts/kendo/2012.3.1114/jquery.min.js"></script>
+    @RenderSection("topscripts", required: false)
     @Scripts.Render("~/bundles/jquerycontrol")
     @Scripts.Render("~/bundles/jqueryval")
-    @RenderSection("topscripts", required: false)
+
 </head>
 <body>
     <div class="container">
@@ -19,9 +22,9 @@
         <div class="auth-header">
             <div class="auth-header-logo">
                 <a href="@Url.Action("index", "home")" title="首页" class="auth-header-logo-img" >
-                    <h1>支付宝</h1>
+                    <h1>XX网</h1>
                 </a>
-                <span class="auth-header-title">| 登录</span>
+                <span class="auth-header-title">| @ViewBag.Title</span>
             </div>
 
             <div class="auth-header-link">
@@ -30,6 +33,19 @@
                 <a href="@Url.Action("index", "feedback")"  target="_blank">提点建议</a>
             </div>
         </div>
+
+        @if (FormError != null)
+        {
+            <div class="auth-error">
+                <i class="icon-maitonn icon-exclamation-sign auth-error-type"></i>
+                <h6 class="auth-error-title">@(ViewBag.Title)发生错误</h6>
+                <span class="auth-error-tips fg-color-gray">请尝试以下步骤如果还有问题请联系客户 <strong>0731-12312323</strong></span>
+                <ul class="auth-error-list">
+                    <li>点击<a href="@(Request.Url.ToString())">该链接</a>重新尝试表单填写！</li>
+                    <li>复制网页地址，重新打开浏览器，输入地址</li>
+                </ul>
+            </div>
+        }
 
         @RenderBody()
 

@@ -17,7 +17,7 @@ namespace PadSite.ViewModels
         [Display(Name = "电子邮箱")]
         [Remote("EmailExists", "AjaxService", ErrorMessage = "该电子邮箱已经注册")]
         [RegularExpression(@"^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "输入的电子邮箱格式不正确.")]
-        [Hint("此电子邮箱将作为广知网登陆帐号,并作为密码找回邮箱，请认真填写。")]
+        [Hint("此电子邮箱将作为登陆帐号,并作为密码找回邮箱，请认真填写。")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "请输入昵称")]

@@ -56,19 +56,35 @@ namespace PadSite.Models
 
             #region Member
 
-
             modelBuilder.Entity<Member>()
                 .HasOptional(m => m.Member_Profile)
                 .WithRequired(x => x.Member);
 
+            modelBuilder.Entity<Member>()
+                .HasOptional(m => m.Company)
+                .WithRequired(c => c.Member);
 
+            modelBuilder.Entity<Member>()
+                .HasMany(x => x.CompanyCredentialsImg)
+                .WithRequired(x => x.Member)
+                .HasForeignKey(x => x.MemberID);
 
-            modelBuilder.Entity<Member_Profile>()
-                 .HasRequired(m => m.CityCate)
-                 .WithMany(a => a.Member_Profile)
-                 .HasForeignKey(m => m.CityCode);
+            modelBuilder.Entity<Member>()
+                .HasMany(x => x.CompanyMessage)
+                .WithRequired(x => x.Member)
+                .HasForeignKey(x => x.MemberID);
+
+            modelBuilder.Entity<Member>()
+                .HasMany(x => x.CompanyNotice)
+                .WithRequired(x => x.Member)
+                .HasForeignKey(x => x.MemberID);
 
             #endregion
+
+
+
+
+            #region permission
 
             modelBuilder.Entity<Permissions>()
                 .HasRequired(p => p.Department)
@@ -99,6 +115,8 @@ namespace PadSite.Models
                        m.ToTable("Group_Roles");
                    }
                );
+
+            #endregion
 
             modelBuilder.Entity<Article>()
                 .HasRequired(m => m.ArticleCate)

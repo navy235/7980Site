@@ -18,8 +18,6 @@ namespace PadSite.Service.Interface
 
         Member Create(RegViewModel model);
 
-        void Update(Member model);
-
         void Delete(Member model);
 
         Member Find(int ID);
@@ -45,5 +43,9 @@ namespace PadSite.Service.Interface
         bool ChangePassword(int MemberID, string oldpassword, string newpassword);
 
         void changeStatus(Member member, int Status);
+
+        void SaveMemberProfile(int MemberID, ProfileViewModel model);
+
+        void SaveMemberContact(int MemberID, ContactViewModel model);
     }
 }

@@ -8,137 +8,6 @@
         text-decoration: underline;
     }
 
-
-
-.mr5 {
-    margin-right: 5px;
-}
-
-.mr10 {
-    margin-right: 10px;
-}
-
-.mr15 {
-    margin-right: 15px;
-}
-
-.mr20 {
-    margin-right: 20px;
-}
-
-.mt5 {
-    margin-top: 5px;
-}
-
-.mt10 {
-    margin-top: 10px;
-}
-
-.mt15 {
-    margin-top: 15px;
-}
-
-.mt20 {
-    margin-top: 20px;
-}
-
-.mt40 {
-    margin-top: 40px;
-}
-
-.mb5 {
-    margin-bottom: 5px;
-}
-
-.mb10 {
-    margin-bottom: 10px;
-}
-
-.mb15 {
-    margin-bottom: 15px;
-}
-
-.mb20 {
-    margin-bottom: 20px;
-}
-
-.ml5 {
-    margin-left: 5px;
-}
-
-.ml10 {
-    margin-left: 10px;
-}
-
-.ml15 {
-    margin-left: 15px;
-}
-
-.ml20 {
-    margin-left: 20px;
-}
-
-.ml60 {
-    margin-left: 60px;
-}
-
-
-.ml130 {
-    margin-left: 130px;
-}
-
-input.single-line {
-    border: 1px solid #c6c6c6;
-    height: 18px;
-    line-height: 18px;
-    padding: 4px;
-    outline: none;
-    width: 198px;
-    vertical-align: middle;
-}
-
-input.text-box-password {
-    width: 132px;
-    margin-right: 10px;
-}
-
-input.input-validation-error, textarea.input-validation-error {
-    border: 1px solid #ff8700;
-    background: #FFFCEF;
-    color: #333;
-}
-
-input.k-vcode {
-    width: 42px;
-    font: bold 14px Verdana;
-}
-
-.form-field {
-    padding: 0px 0 10px 70px;
-}
-
-
-
-.field-label {
-    width: 70px;
-    margin-left: -70px;
-    text-align: right;
-}
-
-.field-validation-error {
-    color: #ff6600;
-    display: inline-block;
-    display: -moz-inline-block;
-    vertical-align: middle;
-    zoom: 1;
-    padding-left: 26px;
-    position: initial;
-    left: initial;
-    top: initial;
-    border: none;
-}
-
-
 .btn {
     display: inline-block;
     *display: inline;
@@ -565,6 +434,141 @@ input[type="submit"].btn {
     }
 
 
+
+
+.mr5 {
+    margin-right: 5px;
+}
+
+.mr10 {
+    margin-right: 10px;
+}
+
+.mr15 {
+    margin-right: 15px;
+}
+
+.mr20 {
+    margin-right: 20px;
+}
+
+.mt5 {
+    margin-top: 5px;
+}
+
+.mt10 {
+    margin-top: 10px;
+}
+
+.mt15 {
+    margin-top: 15px;
+}
+
+.mt20 {
+    margin-top: 20px;
+}
+
+.mt40 {
+    margin-top: 40px;
+}
+
+.mb5 {
+    margin-bottom: 5px;
+}
+
+.mb10 {
+    margin-bottom: 10px;
+}
+
+.mb15 {
+    margin-bottom: 15px;
+}
+
+.mb20 {
+    margin-bottom: 20px;
+}
+
+.ml5 {
+    margin-left: 5px;
+}
+
+.ml10 {
+    margin-left: 10px;
+}
+
+.ml15 {
+    margin-left: 15px;
+}
+
+.ml20 {
+    margin-left: 20px;
+}
+
+.ml60 {
+    margin-left: 60px;
+}
+
+
+.ml130 {
+    margin-left: 130px;
+}
+
+input.single-line {
+    border: 1px solid #c6c6c6;
+    height: 18px;
+    line-height: 18px;
+    padding: 4px;
+    outline: none;
+    width: 198px;
+    vertical-align: middle;
+}
+
+input.text-box-password {
+    width: 132px;
+    margin-right: 10px;
+}
+
+input.input-validation-error, textarea.input-validation-error {
+    border: 1px solid #ff8700;
+    background: #FFFCEF;
+    color: #333;
+}
+
+input.k-vcode {
+    width: 42px;
+    font: bold 14px Verdana;
+}
+
+.container {
+    width: 900px;
+    margin: 0 auto;
+}
+
+
+.form-field {
+    padding: 0px 0 10px 70px;
+}
+
+
+.field-label {
+    width: 70px;
+    margin-left: -70px;
+    text-align: right;
+}
+
+.field-validation-error {
+    color: #ff6600;
+    display: inline-block;
+    vertical-align: top;
+    zoom: 1;
+    padding-left: 26px;
+    position: initial;
+    left: initial;
+    top: initial;
+    border: none;
+}
+
+
 .auth-header {
     position: relative;
     height: 60px;
@@ -572,7 +576,7 @@ input[type="submit"].btn {
 }
 
 .auth-header-logo {
-    left: 65px;
+    left: 15px;
     top: 19px;
     line-height: 37px;
     position: absolute;
@@ -626,10 +630,117 @@ input[type="submit"].btn {
     padding: 5px 0;
 }
 
+.auth-error {
+    margin: 0 5px;
+    background: #fff;
+    border: 1px solid #E70F0F;
+    overflow: hidden;
+    position: relative;
+    padding: 10px;
+    line-height: 26px;
+    padding-left: 140px;
+}
+
+    .auth-error a {
+        color: #003593;
+    }
+
+        .auth-error a:hover {
+            color: #cc0000;
+        }
+
+    .auth-error .auth-error-type.icon-maitonn {
+        font-size: 120px;
+        color: #b91d47;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 120px;
+        text-align: center;
+    }
+
+.reg-content {
+    background: #f3f3f3;
+    padding: 5px 0;
+    overflow: hidden;
+}
+
+    .reg-content a {
+        color: #003593;
+    }
+
+        .reg-content a:hover {
+            color: #cc0000;
+        }
+
+    .reg-content .main-content {
+        padding-top: 15px;
+        padding-bottom: 50px;
+        width: 600px;
+        float: left;
+    }
+
+    .reg-content .main-content-right {
+        width: 250px;
+        float: right;
+        border-left: 1px solid #e1e1e1;
+        padding-left: 30px;
+        margin-top: 15px;
+        overflow: hidden;
+    }
+
+        .reg-content .main-content-right h4 {
+            font-size: 18px;
+            font-weight: normal;
+            margin-bottom: 20px;
+            line-height: 25px;
+            font-family: "微软雅黑";
+        }
+
+        .reg-content .main-content-right .sign-item li {
+            margin-top: 8px;
+        }
+
+        .reg-content .main-content-right .in-login {
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+    .reg-content .form-field {
+        padding: 0px 0 10px 130px;
+    }
+
+    .reg-content .field-label {
+        width: 130px;
+        margin-left: -130px;
+        text-align: right;
+    }
+
+    .reg-content .form-contact label:after,
+    .reg-content .form-field label.field-required:after {
+        content: "*";
+        width: 5px;
+        padding: 0 5px;
+        font: 12px simsun;
+        color: #ff6600;
+        display: inline-block;
+        margin: 0px;
+    }
+
+    .reg-content .field-hint-message {
+        display: block;
+        color: #b7b7b7;
+    }
+
+
+
 .main {
     margin: 0 5px;
     background: #fff;
     border: 1px solid #d4d4d4;
+    overflow: hidden;
+    position: relative;
 }
 
 .main-title {
@@ -677,6 +788,72 @@ input[type="submit"].btn {
     border: 1px solid #d90000;
     color: #d90000;
 }
+
+.main-form-notice-tips {
+    border: 1px solid #FCDFA9;
+    background: #fffeee;
+    padding: 5px 8px 8px 8px;
+    display: inline-block;
+}
+
+    .main-form-notice-tips .icon-maitonn {
+        font-size: 16px;
+        color: #ff6600;
+    }
+
+.main-form-info {
+    position: absolute;
+    zoom: 1;
+    width: 250px;
+    top: 170px;
+    right: 30px;
+    border: 1px solid #FCDFA9;
+    background: #fff;
+    padding: 5px 8px 8px 8px;
+    line-height: 18px;
+    display: inline-block;
+}
+
+    .main-form-info h3 {
+        font-size: 12px;
+        margin: 10px 5px;
+        border-bottom: 1px dashed #FCDFA9;
+        padding-bottom: 10px;
+        display: inline-block;
+    }
+
+    .main-form-info ul {
+    }
+
+        .main-form-info ul li {
+            line-height: 24px;
+        }
+
+            .main-form-info ul li .icon-maitonn {
+                margin-right: 5px;
+            }
+
+
+.main-success {
+    position: relative;
+    height: 50px;
+    padding-left: 60px;
+}
+
+    .main-success .icon-maitonn {
+        font-size: 50px;
+        color: #00a300;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 50px;
+        height: 50px;
+        text-align: center;
+    }
+
+    .main-success p {
+        padding-top: 15px;
+    }
 
 .other-login li {
     float: left;

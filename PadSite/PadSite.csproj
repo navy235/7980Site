@@ -142,6 +142,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\ConfigSetting.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectBinding.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -161,8 +162,18 @@
     <Compile Include="Controllers\Permission\PermissionsController.cs" />
     <Compile Include="Controllers\Permission\RolesController.cs" />
     <Compile Include="Controllers\Permission\GroupController.cs" />
+    <Compile Include="Filters\LoginAuthorizeAttribute.cs" />
+    <Compile Include="Filters\PermissionAuthorizeAttributes.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309060532305_AddCityCodeValue.cs" />
+    <Compile Include="Migrations\201309060532305_AddCityCodeValue.Designer.cs">
+      <DependentUpon>201309060532305_AddCityCodeValue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309060700012_AddCompany.cs" />
+    <Compile Include="Migrations\201309060700012_AddCompany.Designer.cs">
+      <DependentUpon>201309060700012_AddCompany.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Base\Article.cs" />
@@ -177,10 +188,15 @@
     <Compile Include="Models\Category\CityCate.cs" />
     <Compile Include="Models\Category\FormatCate.cs" />
     <Compile Include="Models\Category\PeriodCate.cs" />
+    <Compile Include="Models\Company\Company.cs" />
+    <Compile Include="Models\Company\CompanyCredentialsImg.cs" />
+    <Compile Include="Models\Company\CompanyMessage.cs" />
+    <Compile Include="Models\Company\CompanyNotice.cs" />
     <Compile Include="Models\Context\EntitiesContext.cs" />
     <Compile Include="Models\Category\MediaCate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Category\CityCateService.cs" />
+    <Compile Include="Service\Email\ArticleCateService.cs" />
     <Compile Include="Service\Interface\Email\IEmailService.cs" />
     <Compile Include="Service\Interface\Category\ICityCateService.cs" />
     <Compile Include="Service\Interface\Category\IMediaCateService.cs" />
@@ -205,7 +221,9 @@
     <Compile Include="Utils\Utilities.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Account\OpenLoginViewModel.cs" />
+    <Compile Include="ViewModels\Account\ProfileViewModel.cs" />
     <Compile Include="ViewModels\Account\RegViewModel.cs" />
+    <Compile Include="ViewModels\Account\RegBizViewModel.cs" />
     <Compile Include="ViewModels\Category\ArticleCateViewModel.cs" />
     <Compile Include="ViewModels\Category\PeriodCateViewModel.cs" />
     <Compile Include="ViewModels\Email\EmailModel.cs" />
@@ -223,9 +241,11 @@
     <Content Include="Binaries\Kendo.Mvc.xml" />
     <Content Include="Binaries\Maitonn.Core.dll" />
     <Content Include="Content\animate.css" />
+    <Content Include="Content\avtar\avtar_default.jpg" />
     <Content Include="Content\images\formloading.gif" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\h6sub.gif" />
     <Content Include="Content\images\ical_16X16.png" />
     <Content Include="Content\images\index-footer.gif" />
     <Content Include="Content\images\index-header.gif" />
@@ -238,6 +258,11 @@
     <Content Include="Content\images\noimages.gif" />
     <Content Include="Content\images\uploadbtn.png" />
     <Content Include="Content\images\warning_16X16.png" />
+    <Content Include="Content\images\zh-db.jpg" />
+    <Content Include="Content\images\zh-qq.jpg" />
+    <Content Include="Content\images\zh-rr.jpg" />
+    <Content Include="Content\images\zh-sina.jpg" />
+    <Content Include="Content\images\zh-tb.jpg" />
     <Content Include="Content\jcrop\Jcrop.gif" />
     <Content Include="Content\jcrop\jquery.Jcrop.css" />
     <Content Include="Content\jcrop\jquery.Jcrop.min.css" />
@@ -888,14 +913,23 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Password.cshtml" />
     <Content Include="Views\Reg\Index.cshtml" />
+    <Content Include="Views\Reg\RegBiz.cshtml" />
+    <Content Include="Views\Reg\RegOk.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
-    <Folder Include="Service\Email\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201309060532305_AddCityCodeValue.resx">
+      <DependentUpon>201309060532305_AddCityCodeValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309060700012_AddCompany.resx">
+      <DependentUpon>201309060700012_AddCompany.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -911,15 +945,14 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>3712</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:36711/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://www.7980mt.com</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

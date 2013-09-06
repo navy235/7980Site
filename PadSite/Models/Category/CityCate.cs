@@ -8,10 +8,6 @@ namespace PadSite.Models
 {
     public class CityCate
     {
-        public CityCate()
-        {
-            this.Member_Profile = new HashSet<Member_Profile>();
-        }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -39,6 +35,6 @@ namespace PadSite.Models
         [ScriptIgnore]
         public virtual ICollection<CityCate> ChildCates { get; set; }
 
-        public virtual ICollection<Member_Profile> Member_Profile { get; set; }
+
     }
 }

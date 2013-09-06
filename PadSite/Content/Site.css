@@ -108,6 +108,10 @@ textarea {
     color: #525252 !important;
 }
 
+.fg-color-gray {
+    color: #b7b7b7 !important;
+}
+
 .bg-color-blue {
     background-color: #2d89ef !important;
 }
@@ -321,7 +325,84 @@ textarea {
 }
 
 
+.form-title {
+    background: url(/content/images/h6sub.gif) 23px 27px no-repeat;
+    margin: 25px 0 10px 0;
+    padding-left: 37px;
+    height: 30px;
+    font-size: 14px;
+    width: 600px;
+    font-size: 14px;
+    font-weight: bold;
+}
 
+    .form-title span {
+        color: #999;
+        font-weight: normal;
+        font-size: 12px;
+    }
+
+.form-step {
+    background: #eee;
+    height: 32px;
+    overflow: hidden;
+    line-height: 32px;
+    position: relative;
+    margin: 10px 35px;
+}
+
+    .form-step li {
+        float: left;
+        width: 200px;
+        text-align: center;
+        position: relative;
+        z-index: 2;
+        font-size: 12px;
+        color: #b7b7b7;
+    }
+
+        .form-step li em {
+            position: absolute;
+            right: -24px;
+            top: -8px;
+            width: 0;
+            height: 0;
+            line-height: 0;
+            border-width: 24px 0 24px 24px;
+            border-color: transparent transparent transparent #fff;
+            border-style: dashed dashed dashed solid;
+        }
+
+        .form-step li i {
+            position: absolute;
+            right: -16px;
+            top: 0;
+            width: 0;
+            height: 0;
+            line-height: 0;
+            border-width: 16px 0 16px 16px;
+            border-color: transparent transparent transparent #f0f0f0;
+            border-style: dashed dashed dashed solid;
+        }
+
+        .form-step li.current {
+            background: #f60;
+            font-weight: bold;
+            color: #fff;
+            z-index: 1;
+        }
+
+        .form-step li.pass i {
+            border-color: transparent transparent transparent #eee;
+        }
+
+        .form-step li.current i {
+            border-color: transparent transparent transparent #f60;
+        }
+
+        .form-step li.end i {
+            border-color: transparent transparent transparent transparent;
+        }
 
 .form-field {
     padding: 0px 0 10px 120px;
@@ -371,10 +452,20 @@ textarea {
         vertical-align: middle;
         display: inline-block;
     }
+
+.form-cascading {
+    display: inline-block;
+}
+
+.form-textarea textarea {
+    width: 205px;
+    height: 150px;
+}
+
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 
-.field-hint-message,
+
 .field-validation-error {
     left: 460px;
     line-height: 26px;
@@ -384,13 +475,6 @@ textarea {
     z-index: 550;
 }
 
-.field-hint-message {
-    background-color: #eff7fa;
-    border: solid 1px #52a4ca;
-    display: none;
-    background: url(images/information_16X16.png) 3px 4px no-repeat;
-    z-index: 551;
-}
 
 .field-prompt-message {
     display: block;
@@ -432,7 +516,6 @@ select {
     border: 1px solid #D5D5D5;
     display: inline;
     outline: 0;
-    min-width: 120px;
     margin-right: 5px;
 }
 
