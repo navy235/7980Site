@@ -76,6 +76,7 @@ namespace PadSite
 
             #region member
             kernel.Bind<IMemberService>().To<MemberService>().InRequestScope();
+            kernel.Bind<IMember_ActionService>().To<Member_ActionService>().InRequestScope();
             kernel.Bind<ICompanyService>().To<CompanyService>().InRequestScope();
             #endregion
 

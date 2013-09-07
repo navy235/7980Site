@@ -14,7 +14,7 @@ namespace PadSite.Service
 
         public bool SendMail(ViewModels.EmailModel model)
         {
-            return MailHelper.SendMail(model.Email, model.Title, model.Content);
+            return MailHelper.SendMail(model.Email, model.Title, model.Content, ConfigSetting.SiteName);
         }
 
         public ViewModels.EmailModel GetMail(string TempleteUrl, string EmailTitle, int MemberID, string Email, string NickName, string Key)
@@ -28,6 +28,7 @@ namespace PadSite.Service
                 .Replace("{uid}", MemberID.ToString())
                 .Replace("{time}", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
                 .Replace("{email}", Email)
+                .Replace("{domain}", ConfigSetting.DomainUrl)
                 .Replace("{sitename}", ConfigSetting.SiteName);
             return em;
         }

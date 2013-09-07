@@ -46,7 +46,7 @@ namespace PadSite.Service
             entity.OpenType = model.OpenType;
             entity.Status = (int)MemberStatus.Registered;//注册未激活，0为禁用
             entity.Password = CheckHelper.StrToMd5(model.Password);
-            entity.GroupID = 2;
+            entity.GroupID = 1;
             entity.AddTime = DateTime.Now;
             entity.LastTime = DateTime.Now;
             entity.AddIP = HttpHelper.IP;

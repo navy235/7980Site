@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "权限列表";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@(Html.Kendo().Grid<Permissions>()
+    .Name("Grid")
+    .Columns(columns =>
+    {
+
+        columns.Bound(c => c.ID)
+                        .Sortable(false)
+                        .Filterable(false)
+                        .ClientTemplate("<input type='checkbox' name='ID_check' id='#=ID#_check'  class='chkbx' value='#=ID#' />")
+                        .HeaderTemplate("<div style='text-align:center'><input type='checkbox' id='checkAll' onclick='Grid.checkAll(this)' title='全选'/></div>")
+                        .Width(40).HtmlAttributes(new { style = "text-align:center" });
+
+        columns.Bound(c => c.Name);
+        columns.Bound(c => c.Controller);
+        columns.Bound(c => c.Action);
+        columns.Bound(c => c.Namespace);
+        columns.ForeignKey(c => c.DepartmentID, (List<SelectListItem>)ViewBag.DepartmentID, "Value", "Text");
+
+        columns.Template(@<text></text>)
+         .ClientTemplate(@"<a class='k-button k-button-icontext ' href='"
+         + Url.Action("edit", "Permissions") + "/#=ID#'><span class='k-icon k-edit'></span>编辑</a>"
+         + "<a class='k-button k-button-icontext ' href='javascript:void(0);' onclick='Grid.deleteSingle(this,\"#=ID#\");' ><span class='k-icon k-i-close'></span>删除</a>")
+         .Title("操作")
+         .Width(160);
+    })
+        .ToolBar(toolbar =>
+        {
+            toolbar.Custom().Text("添加").Action("Create", "Permissions");
+            toolbar.Custom().Text("批量删除").HtmlAttributes(new { onclick = "Grid.deleteAll(this);", href = "javascript:void(0);" });
+        })
+        .Pageable()
+        .Sortable()
+        .Groupable()
+        .Scrollable()
+        .Filterable()
+        .HtmlAttributes(new { style = "height:500px;" })
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .PageSize(30)
+            .Read("Editing_Read", "Permissions")
+         )
+    )
+
+@section scripts{
+    <script type="text/javascript">
+        var Grid = {
+            id: 'Grid',
+            editUrl: '@Url.Action("edit", "Permissions")',
+            deleteUrl: '@Url.Action("delete", "Permissions")',
+            addSpinner: function (element) {
+                var $spinner = $('<img class="ajax-working" src="@Url.Content("~/Content/images/min-loading.gif")" title="work...." />').appendTo($(element));
+                $(element).addClass('disabled');
+            },
+            removeSpinner: function (element) {
+                $(element).find('.ajax-working').remove();
+                $(element).removeClass('disabled');
+            },
+            checkAll: function (ele) {
+                var self = Grid;
+                var state = $(ele).is(':checked');
+                $('[name="ID_check"]').attr('checked', state);
+            },
+            getCheckIds: function () {
+                return $.map($('[name="ID_check"]:checked'), function (item) { return $(item).val(); }).join(',');
+            },
+            deleteAll: function (element) {
+                var self = Grid;
+                var Ids = self.getCheckIds();
+                self.excute(element, Grid.deleteUrl, Ids, true);
+            },
+            deleteSingle: function (element, id) {
+                var self = Grid;
+                var Ids = id;
+                self.excute(element, Grid.deleteUrl, Ids, true);
+            },
+            excute: function (element, url, Ids, isDelete) {
+                if ($(element).hasClass('disabled'))
+                    return false;
+                var self = Grid;
+                if (Ids) {
+                    if (isDelete) {
+                        if (!confirm("确认删除?")) {
+                            return false;
+                        }
+                    }
+                    self.addSpinner(element);
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: { ids: Ids },
+                        success: function (res) {
+                            Maitonn.JHelper.showMessage(res);
+                            if (res.Success) {
+                                var grid = $("#" + self.id).data("kendoGrid");
+                                grid.dataSource.read();
+                                grid.refresh();
+                            }
+                        },
+                        complete: function () {
+                            self.removeSpinner(element);
+                        }
+                    })
+                } else {
+                    alert('请选择要处理的信息');
+                    return false;
+                }
+            }
+        }
+    </script>
+}

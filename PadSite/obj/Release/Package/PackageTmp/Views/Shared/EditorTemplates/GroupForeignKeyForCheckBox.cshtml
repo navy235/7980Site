@@ -1,0 +1,53 @@
+﻿@model  string
+@{
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var displayname = ViewData.ModelMetadata.DisplayName;
+    Dictionary<string, List<SelectListItem>> renderList = new Dictionary<string, List<SelectListItem>>();
+    renderList = (Dictionary<string, List<SelectListItem>>)ViewData["Data_" + name];
+}
+
+
+@Html.Kendo().Window().Name(name + "_window").Title("请选择" + displayname).Content(
+    @<text>
+<div class="k-checklist  k-window-checklist clearfix">
+    @{
+        int i = 0;
+        foreach (KeyValuePair<string, List<SelectListItem>> kvp in renderList)
+        {
+        <div class="k-checklist-group">
+            <div class="k-checklist-group-title">@kvp.Key
+                <div class="k-checklist-group-tool">
+                    <a class="k-checklist-group-checkall @(name + "_checkall")" href="javascript:void(0);">全选</a>/ <a class="k-checklist-group-reset @(name + "_reset")" href="javascript:void(0);">重置</a>
+                </div>
+            </div>
+            <div class="k-checklist-group-container">
+                @foreach (SelectListItem sli in kvp.Value)
+                {
+                    <span class="k-checklist-item">
+                        <input type="checkbox" id="@(name + "_check" + i.ToString())" name="@(name + "_check")" value="@sli.Value" data-text="@sli.Text" checked="@sli.Selected" />
+                        <label for="@(name + "_check" + i.ToString())" data-for="@name" >
+                            @sli.Text</label>
+                    </span>
+                    i++;
+                }
+            </div>
+        </div>
+        }
+    }
+</div>
+<div class="k-window-footer">
+    <button type="button" id="@(name + "_save")" class="k-button" ><span class="k-icon k-i-tick"></span>确认</button>
+</div>
+</text>
+).Draggable(true).Width(600).Modal(true).Visible(false)
+
+<input type="text" disabled="disabled"  class="k-textbox single-line text-box" id="@(name + "_text")" title="" />
+
+@Html.TextBoxFor(m => m, new { tabindex = -1, @class = "field-valid-text" })
+<button type="button" id="@(name + "_select")" class="k-button" ><span class="k-icon k-add"></span>选择</button>
+
+<script type="text/javascript">
+    $(function () {
+        $('#@name').groupForeignKeyForCheck({});
+    });
+</script>

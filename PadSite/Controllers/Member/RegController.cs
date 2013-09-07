@@ -66,6 +66,59 @@ namespace PadSite.Controllers
             }
         }
 
+
+
+        public ActionResult RegAuto()
+        {
+            if (null == Session["registerAuto"])
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                OpenLoginViewModel OpenUser = (OpenLoginViewModel)Session["registerAuto"];
+                Session["registerAuto"] = null;
+                return View(new RegViewModel()
+                {
+                    OpenType = OpenUser.OpenType,
+                    OpenID = OpenUser.OpenId,
+                    NickName = OpenUser.NickName
+                });
+            }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult RegAuto(RegViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                #region 注册用户并登录
+                try
+                {
+                    Member mb = MemberService.Create(model);
+
+                    MemberService.SetLoginCookie(mb);
+
+                    return Redirect(Url.Action("regok"));
+
+                }
+                catch (Exception ex)
+                {
+                    LogHelper.WriteLog("用户:" + model.Email + "注册失败!", ex);
+                    TempData["FormError"] = true;
+                    return View(model);
+                }
+                #endregion
+            }
+            else
+            {
+                TempData["FormError"] = true;
+                return View(model);
+            }
+        }
+
+
         [LoginAuthorize]
         public ActionResult RegOk()
         {
@@ -349,7 +402,7 @@ namespace PadSite.Controllers
             Member member = MemberService.Find(CookieHelper.MemberID);
             if (ModelState.IsValid)
             {
-                #region 企业入驻
+
                 try
                 {
                     if (member.Status < (int)MemberStatus.EmailActived)
@@ -420,8 +473,6 @@ namespace PadSite.Controllers
                     TempData["FormError"] = true;
                     return View(model);
                 }
-
-                #endregion
             }
             else
             {
@@ -430,10 +481,93 @@ namespace PadSite.Controllers
             }
         }
 
+
+        [LoginAuthorize]
+        public ActionResult BizOk()
+        {
+            Member member = MemberService.Find(CookieHelper.MemberID);
+
+            if (member.Status < (int)MemberStatus.EmailActived)
+            {
+                return Content("<script>alert('您的邮箱还未绑定，请先绑定邮箱再进行企业认证!');window.top.location='" + Url.Action("activeemail") + "';</script>");
+            }
+            else
+            {
+                if (member.Status >= (int)MemberStatus.CompanyAuth)
+                {
+                    return Content("<script>alert('您的企业已经认证通过了!');window.top.location='" + Url.Action("index", "personal") + "';</script>");
+                }
+                else
+                {
+                    var company = CompanyService.Find(member.MemberID);
+                    if (company == null)
+                    {
+                        return Redirect(Url.Action("OpenBiz"));
+                    }
+                    else
+                    {
+                        return View();
+                    }
+                }
+
+            }
+        }
         #endregion
 
 
         #region 邮件激活
+
+
+        [LoginAuthorize]
+        public ActionResult ActiveOk()
+        {
+            Member member = MemberService.Find(CookieHelper.MemberID);
+
+            if (member.Status < (int)MemberStatus.EmailActived)
+            {
+                return Content("<script>alert('您的邮箱还未绑定，请先绑定邮箱再进行企业认证!');window.top.location='" + Url.Action("activeemail") + "';</script>");
+            }
+
+            return View();
+        }
+
+
+        [LoginAuthorize]
+        public ActionResult BizActiveEmail()
+        {
+
+            Member member = MemberService.Find(CookieHelper.MemberID);
+
+            ViewBag.Email = member.Email;
+
+            if (member.Status <= (int)MemberStatus.Registered)
+            {
+                int actionEmailActive = (int)MemberActionType.EmailActvie;
+
+                int limitMins = ConfigSetting.GetBindEmailTimeDiffMin;
+
+                if (!Member_ActionService.HasActionByActionTypeInLimiteTime(member.MemberID, actionEmailActive, limitMins))
+                {
+                    string emailKey = Guid.NewGuid().ToString();
+                    string emailTitle = member.NickName + string.Format(" 您好！绑定{0}登录邮箱!", ConfigSetting.SiteName);
+                    EmailModel em = EmailService.GetMail(Server.MapPath("~/EmailTemplate/bizactive.htm"), emailTitle, member.MemberID, member.Email,
+                        member.NickName,
+                        emailKey);
+                    EmailService.SendMail(em);
+                    Member_ActionService.Create(member, actionEmailActive, emailKey);
+                }
+            }
+            else
+            {
+                return Content("<script>alert('您的邮箱已经绑定，请勿重复绑定!');window.top.location='" + Url.Action("activeok") + "';</script>");
+            }
+
+            return View();
+        }
+
+
+
+
 
         [LoginAuthorize]
         public ActionResult ActiveEmail()
@@ -448,8 +582,8 @@ namespace PadSite.Controllers
                 if (!Member_ActionService.HasActionByActionTypeInLimiteTime(CookieHelper.MemberID, actionEmailActive, limitMins))
                 {
                     string emailKey = Guid.NewGuid().ToString();
-                    string emailTitle = member.NickName + string.Format(" 您好！绑定www.{0}{1}登录邮箱!", ConfigSetting.DomainUrl, ConfigSetting.SiteName);
-                    EmailModel em = EmailService.GetMail(Url.Content("~/EmailTemplate/active.htm/"), emailTitle, member.MemberID, member.Email,
+                    string emailTitle = member.NickName + string.Format(" 您好！绑定{0}登录邮箱!", ConfigSetting.SiteName);
+                    EmailModel em = EmailService.GetMail(Server.MapPath("~/EmailTemplate/active.htm"), emailTitle, member.MemberID, member.Email,
                         member.NickName,
                         emailKey);
                     EmailService.SendMail(em);
@@ -527,8 +661,8 @@ namespace PadSite.Controllers
                 else
                 {
                     string emailKey = Guid.NewGuid().ToString();
-                    string emailTitle = member.NickName + string.Format(" 您好！绑定www.{0}{1}登录邮箱!", ConfigSetting.DomainUrl, ConfigSetting.SiteName);
-                    EmailModel em = EmailService.GetMail(Url.Content("~/EmailTemplate/active.htm/"), emailTitle, member.MemberID, member.Email,
+                    string emailTitle = member.NickName + string.Format(" 您好！绑定{0}登录邮箱!", ConfigSetting.SiteName);
+                    EmailModel em = EmailService.GetMail(Server.MapPath("~/EmailTemplate/active.htm"), emailTitle, member.MemberID, member.Email,
                         member.NickName,
                         emailKey);
                     EmailService.SendMail(em);
@@ -571,8 +705,8 @@ namespace PadSite.Controllers
                 {
                     Member member = MemberService.GetALL().Single(x => x.Email.Equals(model.Email, StringComparison.CurrentCultureIgnoreCase));
                     string userKey = Guid.NewGuid().ToString();
-                    string emailTitle = member.NickName + string.Format(" 您好！找回www.{0}{1密码!", ConfigSetting.DomainUrl, ConfigSetting.SiteName);
-                    EmailModel em = EmailService.GetMail(Url.Content("~/EmailTemplate/getpwd.htm/"), emailTitle, member.MemberID, member.Email, member.NickName, userKey);
+                    string emailTitle = member.NickName + string.Format(" 您好！找回{0}密码!", ConfigSetting.SiteName);
+                    EmailModel em = EmailService.GetMail(Server.MapPath("~/EmailTemplate/getpwd.htm"), emailTitle, member.MemberID, member.Email, member.NickName, userKey);
                     EmailService.SendMail(em);
                     Member_ActionService.Create(member, memberAction, userKey);
                     ViewBag.HasSendMail = false;
