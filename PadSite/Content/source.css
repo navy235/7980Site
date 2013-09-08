@@ -1,0 +1,531 @@
+﻿.clearfix {
+    *zoom: 1;
+}
+
+    .clearfix:before,
+    .clearfix:after {
+        display: table;
+        content: "";
+        line-height: 0;
+    }
+
+    .clearfix:after {
+        clear: both;
+    }
+
+.top-nav {
+    border-bottom: 1px solid #f0f0f0;
+    background: #f5f5f5;
+    color: #333;
+    position: relative;
+    z-index: 90;
+}
+
+    .top-nav a:link, .top-nav a:visited {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .top-nav a:hover {
+        text-decoration: underline;
+        color: #333;
+    }
+
+.top-nav-wrap {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    font-size: 12px;
+    color: #5d5d5d;
+    margin: 0 auto;
+    font-family: Arial,"宋体";
+    width: 990px;
+    position: relative;
+}
+
+.top-nav-left {
+    float: left;
+}
+
+    .top-nav-left a, .top-nav-left a:link, .top-nav-left a:visited {
+        color: #1e50a2;
+    }
+
+        .top-nav-left a:hover {
+            color: #ba2636;
+        }
+
+.top-nav-right {
+    float: right;
+    color: #333;
+    position: relative;
+}
+
+    .top-nav-right li {
+        float: left;
+        margin-left: 5px;
+        color: #9f9f9f;
+    }
+
+    .top-nav-right .ml0 {
+        margin-left: 0;
+    }
+
+    .top-nav-right .spcart {
+        background: url(images/indexIcon.png) 0 -197px no-repeat;
+        padding: 0 0 0 35px;
+        color: #ba2636;
+    }
+
+.top-nav-holder {
+    padding: 0 16px 0 6px;
+    position: relative;
+    z-index: 202;
+    word-wrap: normal;
+    color: #ba2636;
+}
+
+    .top-nav-holder i {
+        position: absolute;
+        top: 6px;
+        right: 7px;
+        z-index: 203;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+        margin: 0;
+        border-width: 4px 4px 0;
+        border-color: #626262 transparent transparent;
+        border-style: solid;
+        _border-style: solid dotted;
+        -webkit-transition: -webkit-transform .2s ease-in;
+        -moz-transition: -moz-transform .2s ease-in;
+        -ms-transition: -ms-transform .2s ease-in;
+        -o-transition: -o-transform .2s ease-in;
+        transition: transform .2s ease-in;
+        zoom: 1;
+    }
+
+.dropdown-box:hover .top-nav-holder i, .dropdown-box-active .top-nav-holder i {
+    right: 6px;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+    -ms-filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+}
+
+.dropdown-box {
+    position: relative;
+    top: 3px;
+    left: -3px;
+    *left: auto;
+    line-height: 22px;
+    z-index: 202;
+    padding: 1px 0;
+    zoom: 1;
+    _float: left;
+}
+
+    .dropdown-box:hover, .dropdown-box-active, .dropdown-menu {
+        padding: 0;
+        border: 1px solid #dcdddd;
+        border-bottom-width: 0;
+        background-color: #fff;
+    }
+
+        .dropdown-box:hover .dropdown-menu,
+        .dropdown-box-active .dropdown-menu,
+        .dropdown-box:hover .dropdown-menu-server,
+        .dropdown-box-active .dropdown-menu-server {
+            display: block;
+        }
+
+        .dropdown-box:hover .holderline, .dropdown-box-active .holderline {
+            display: none;
+        }
+
+        .dropdown-box:hover .top-nav-holder, .dropdown-box-active .top-nav-holder {
+            background-color: #fff;
+            padding: 0 15px 5px 5px;
+        }
+
+        .dropdown-box:hover .line, .dropdown-box-active .line {
+            display: block;
+        }
+
+.holderline {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 22px;
+    z-index: 201;
+    border-bottom-width: 1px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: none;
+    border-top-width: 0;
+}
+
+    .dropdown-menu a {
+        display: block;
+        word-wrap: normal;
+        vertical-align: middle;
+        white-space: nowrap;
+        padding: 0 5px;
+    }
+
+        .dropdown-menu a:hover {
+            background-color: #ededed;
+        }
+
+.top-nav-dropdown-menu .dropdown-menu a span {
+    float: left;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    padding-left: 24px;
+}
+
+    .top-nav-dropdown-menu .dropdown-menu a span .icon-maitonn {
+        font-size: 16px;
+        color: rgb(233, 57, 128);
+        position: absolute;
+        left: 0;
+        top: 3px;
+    }
+
+.top-nav-dropdown-menu .dropdown-menu a {
+    padding: 3px 10px;
+    overflow: hidden;
+}
+
+.top-nav-dropdown-menu .dropdown-menu {
+    width: 113px;
+    right: -1px;
+    z-index: 13;
+}
+
+.top-nav-dropdown-menu .dropdown-menu-personal {
+    width: 108px;
+}
+
+.top-nav-dropdown-menu .line {
+    position: absolute;
+    border-bottom: 1px solid #dcdddd;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    display: none;
+    width: 45px;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+/*************************
+ *
+ *      top-head
+ *
+ ************************/
+
+
+.top-head {
+    position: relative;
+    z-index: 79;
+    background-color: #fff;
+}
+
+.top-head-wrap {
+    width: 990px;
+    height: 100px;
+    margin: auto;
+    background: #fff;
+    position: relative;
+    z-index: 80;
+}
+
+.top-head a, .top-head a:hover {
+    text-decoration: none;
+}
+
+.top-head-logo {
+    padding-left: 210px;
+    padding-top: 20px;
+}
+
+    .top-head-logo h5 {
+        width: 270px;
+        overflow: hidden;
+        height: 24px;
+        padding-top: 16px;
+        font: normal 12px/18px '宋体B8B\4f53';
+        font-size: 22px;
+        font-weight: 700;
+        line-height: 1;
+        font-family: "微软雅黑";
+        color: #666666;
+    }
+
+        .top-head-logo h5 span {
+            display: none;
+        }
+
+
+.top-head .top-head-link, .top-head .top-head-link:hover {
+    width: 195px;
+    height: 65px;
+    background: url(images/logo.png) 0 0 no-repeat;
+    outline: 0;
+    position: absolute;
+    top: 15px;
+    margin-left: -210px;
+    overflow: hidden;
+}
+
+.top-head-city {
+    display: none;
+}
+
+a.top-head-changcity {
+    color: #1e50a2;
+}
+
+    a.top-head-changcity:hover {
+        color: #1e50a2;
+        text-decoration: underline;
+    }
+/*.top-head-wrap h1 {
+  display: none;
+}*/
+
+.top-head-wrap .top-head-feature {
+    position: absolute;
+    top: 17px;
+    right: 0;
+    background: url(images/feature.png) 0 0 no-repeat;
+    width: 200px;
+    height: 65px;
+}
+
+    .top-head-wrap .top-head-feature span {
+        display: none;
+    }
+
+
+.top-head-search {
+    color: #333;
+    padding: 4px 0 0 45px;
+    background: url(images/indexSprite.png) 0 -45px no-repeat;
+    width: 407px;
+    height: 44px;
+}
+
+.top-head-search {
+    position: absolute;
+    top: 17px;
+    z-index: 83;
+    right: 10px;
+}
+
+    .top-head-search form {
+        margin-bottom: 0;
+    }
+
+    .top-head-search input {
+        border: 0;
+    }
+
+    .top-head-search .search-text {
+        background-image: none;
+        width: 335px;
+        height: 36px;
+        line-height: 38px\9;
+        outline: 0;
+        color: #999;
+        position: absolute;
+        left: 45px;
+        top: 6px;
+        font-family: "微软雅黑";
+    }
+
+    .top-head-search .search-button {
+        width: 61px;
+        height: 40px;
+        cursor: pointer;
+        position: absolute;
+        right: 0px;
+        color: #fff;
+        background: transparent;
+        font-family: "微软雅黑";
+    }
+
+.top-head-hot-keys {
+    height: 22px;
+    color: #888;
+    position: absolute;
+    top: 50px;
+    left: 4px;
+}
+
+    .top-head-hot-keys label {
+        display: inline;
+    }
+
+    .top-head-hot-keys a,
+    .top-head-hot-keys a:hover {
+        position: static;
+        display: inline;
+        color: #888;
+        margin-right: 1em;
+    }
+
+        .top-head-hot-keys a:hover {
+            text-decoration: underline;
+            color: #000;
+        }
+
+
+/*************************
+ *
+ *      top-menu
+ *
+ ************************/
+
+.top-menu {
+    background-color: #ee2a2a;
+    height: 39px;
+    border-bottom: #ee2a2a 1px solid;
+    position: relative;
+    z-index: 70;
+    -webkit-box-shadow: 0 1px 2px 0 #999;
+    box-shadow: 0 1px 2px 0 #999;
+}
+
+.top-menu-tab {
+    width: 720px;
+    margin: auto;
+    position: relative;
+    padding: 0 0 0 270px;
+    height: 40px;
+    z-index: 71;
+}
+
+.top-menu-category {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 270px;
+    z-index: 75;
+}
+
+
+.top-menu-arrow {
+    position: absolute;
+    background: url(images/icons.png) 0 -297px no-repeat;
+    width: 23px;
+    height: 23px;
+    top: 10px;
+    right: 7px;
+    cursor: pointer;
+    line-height: 0;
+    font-size: 0;
+    zoom: 1;
+    -webkit-transition: -webkit-transform .2s ease-in;
+    -moz-transition: -moz-transform .2s ease-in;
+    -ms-transition: -ms-transform .2s ease-in;
+    -o-transition: -o-transform .2s ease-in;
+    transition: transform .2s ease-in;
+}
+
+.top-menu-arrow-hover {
+    background-position: 0 -330px;
+}
+
+.top-menu-category h2 {
+    color: #fff;
+    width: 270px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+    .top-menu-category h2 strong {
+        color: #fff;
+        text-decoration: none;
+        display: block;
+        padding: 0 0 0 20px;
+        -webkit-box-shadow: 0 -4px 10px 0 #222;
+        box-shadow: 0 -4px 10px 0 #222;
+    }
+
+.top-menu-frame {
+    position: absolute;
+    width: 270px;
+    color: #fff;
+    top: 40px;
+    left: 0;
+    z-index: 73;
+    display: none;
+}
+
+.top-menu-list {
+    z-index: 72;
+}
+
+    .top-menu-list li {
+        position: relative;
+        font-size: 14px;
+        font-weight: bold;
+        float: left;
+        width: 120px;
+        line-height: 40px;
+        height: 40px;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .top-menu-list .active, .top-menu-list .active a:hover {
+        background: #d90000;
+    }
+
+    .top-menu-list a,
+    .top-menu-list a:link,
+    .top-menu-list a:visited,
+    .top-menu-list a:hover,
+    .top-menu-list a:active {
+        display: block;
+        text-decoration: none;
+        color: #fff;
+    }
+
+        .top-menu-list a:hover {
+            background-color: #ee4a4a;
+        }
+
+
+    .top-menu-list .active a:link,
+    .top-menu-list .active a:visited,
+    .top-menu-list .active a:hover,
+    .top-menu-list .active a:active {
+        color: #fff;
+    }
+
+.top-menu-tips-hot {
+    position: absolute;
+    background: url(images/icons.png) 0 -238px no-repeat;
+    width: 35px;
+    height: 22px;
+    line-height: 0;
+    font-size: 0;
+    bottom: -8px;
+    left: 592px;
+    z-index: 81;
+}

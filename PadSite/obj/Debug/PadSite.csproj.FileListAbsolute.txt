@@ -1,6 +1,3 @@
-E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddCityCodeValue.resources
-E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddCompany.resources
-E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
 E:\GitProject\7980Site\PadSite\bin\PadSite.dll
 E:\GitProject\7980Site\PadSite\bin\PadSite.pdb
 E:\GitProject\7980Site\PadSite\bin\Antlr3.Runtime.dll
@@ -56,7 +53,6 @@ E:\GitProject\7980Site\PadSite\bin\zh-Hans\System.Web.WebPages.Deployment.resour
 E:\GitProject\7980Site\PadSite\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.dll
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.pdb
-E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csprojResolveAssemblyReference.cache
 D:\GitProject\7980Site\PadSite\bin\PadSite.dll
 D:\GitProject\7980Site\PadSite\bin\PadSite.pdb
 D:\GitProject\7980Site\PadSite\bin\Antlr3.Runtime.dll

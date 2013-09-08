@@ -251,6 +251,7 @@
     <Content Include="Content\images\ical_16X16.png" />
     <Content Include="Content\images\index-footer.gif" />
     <Content Include="Content\images\index-header.gif" />
+    <Content Include="Content\images\indexSprite.png" />
     <Content Include="Content\images\information_16X16.png" />
     <Content Include="Content\images\loading-image.gif" />
     <Content Include="Content\images\login-img.jpg" />
@@ -336,6 +337,7 @@
     <Content Include="Content\kendo\2012.3.1114\textures\stripe6.png" />
     <Content Include="Content\admin.css" />
     <Content Include="Content\login.css" />
+    <Content Include="Content\source.css" />
     <Content Include="EmailTemplate\active.htm" />
     <Content Include="EmailTemplate\bizactive.htm" />
     <Content Include="EmailTemplate\getpwd.htm" />
@@ -530,6 +532,8 @@
     <Content Include="Views\Login\PopLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutPopLogin.cshtml" />
     <Content Include="Views\Reg\RegAuto.cshtml" />
+    <Content Include="Views\Home\Source.cshtml" />
+    <Content Include="Views\Shared\_LayoutSource.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
