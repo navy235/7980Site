@@ -108,3 +108,4 @@ D:\GitProject\7980Site\PadSite\bin\zh-Hans\System.Web.WebPages.Deployment.resour
 D:\GitProject\7980Site\PadSite\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.dll
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.pdb
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csprojResolveAssemblyReference.cache

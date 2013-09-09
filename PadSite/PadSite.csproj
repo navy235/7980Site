@@ -262,6 +262,9 @@
     <Content Include="Content\images\min-loading.gif" />
     <Content Include="Content\images\noimages.gif" />
     <Content Include="Content\images\search-bg.png" />
+    <Content Include="Content\images\slider\1.jpg" />
+    <Content Include="Content\images\slider\2.jpg" />
+    <Content Include="Content\images\slider\3.jpg" />
     <Content Include="Content\images\uploadbtn.png" />
     <Content Include="Content\images\warning_16X16.png" />
     <Content Include="Content\images\zh-db.jpg" />
@@ -345,6 +348,8 @@
     <Content Include="Content\site.css" />
     <Content Include="Content\kendo\2012.3.1114\images\KendoUI.ttf" />
     <Content Include="Content\kendo\2012.3.1114\images\KendoUI.woff" />
+    <Content Include="Scripts\effectcontrol\control-sliderbox.js" />
+    <Content Include="Scripts\effectcontrol\control-tab.js" />
     <Content Include="Scripts\formcontrol\control-cascading.js" />
     <Content Include="Scripts\formcontrol\control-cascadingselect.js" />
     <Content Include="Scripts\formcontrol\control-checklist.js" />
@@ -358,6 +363,7 @@
     <Content Include="Scripts\formcontrol\control-uploadimglist.js" />
     <Content Include="Scripts\formcontrol\control-groupforeignkeyforcheck.js" />
     <Content Include="Scripts\formcontrol\control-validatevcode.js" />
+    <Content Include="Scripts\effectcontrol\control-slider.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery.Jcrop.min.js" />
     <Content Include="Scripts\jquery.validate.js" />

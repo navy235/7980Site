@@ -10,9 +10,10 @@
     <script src="~/Scripts/kendo/2012.3.1114/jquery.min.js"></script>
     <script src="~/Scripts/kendo/2012.3.1114/kendo.all.min.js"></script>
     <script src="~/Scripts/kendo/2012.3.1114/kendo.aspnetmvc.min.js"></script>
+    @Scripts.Render("~/bundles/effectcontrol")
 </head>
 <body>
-    <nav class="top-nav">
+    <div class="top-nav">
         <div class="top-nav-wrap">
             <div class="top-nav-left">
                 欢迎来到@(ConfigSetting.SiteName)！
@@ -38,8 +39,8 @@
                 <li><a target="_blank" href="/help-5">用户帮助</a>&nbsp;&nbsp;</li>
             </ul>
         </div>
-    </nav>
-    <header class="top-head">
+    </div>
+    <div class="top-head">
         <div class="top-head-wrap">
             <div class="top-head-logo">
                 <h5>
@@ -64,8 +65,8 @@
                 </div>
             </div>
         </div>
-    </header>
-    <nav class="top-menu">
+    </div>
+    <div class="top-menu">
         <div class="top-menu-tab">
             <div class="top-menu-category">
                 <h2>
@@ -77,7 +78,7 @@
                 <li><a href="/list-0-0-0-0-0-0-0-0-0-p_1">户外资源</a></li>
             </ul>
         </div>
-    </nav>
+    </div>
     @RenderBody()
     @RenderSection("scripts", required: false)
 </body>
