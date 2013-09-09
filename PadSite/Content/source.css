@@ -225,6 +225,7 @@ a {
 
 .top-nav-dropdown-menu .dropdown-menu-personal {
     width: 108px;
+    width: 107px\9;
 }
 
 .top-nav-dropdown-menu .line {
@@ -715,16 +716,6 @@ a.top-head-changcity {
     }
 
     .slider-page .slider-page-list {
-        background: rgba(110,110,110,0.3);
-        *background: transparent;
-        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#36000000,endColorstr=#36000000);
-        *zoom: 1;
-        float: left;
-        width: auto;
-        height: 24px;
-        padding-left: 3px;
-        border-radius: 10px;
-        display: block;
     }
 
         .slider-page .slider-page-list a {
