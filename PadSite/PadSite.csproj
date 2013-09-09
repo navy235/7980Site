@@ -244,6 +244,7 @@
     <Content Include="Binaries\Maitonn.Core.dll" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\avtar\avtar_default.jpg" />
+    <Content Include="Content\images\cusp.png" />
     <Content Include="Content\images\formloading.gif" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
@@ -252,6 +253,8 @@
     <Content Include="Content\images\index-footer.gif" />
     <Content Include="Content\images\index-header.gif" />
     <Content Include="Content\images\indexSprite.png" />
+    <Content Include="Content\images\indexSprite2.png" />
+    <Content Include="Content\images\indexTxt2.png" />
     <Content Include="Content\images\information_16X16.png" />
     <Content Include="Content\images\loading-image.gif" />
     <Content Include="Content\images\login-img.jpg" />
@@ -348,6 +351,7 @@
     <Content Include="Content\site.css" />
     <Content Include="Content\kendo\2012.3.1114\images\KendoUI.ttf" />
     <Content Include="Content\kendo\2012.3.1114\images\KendoUI.woff" />
+    <Content Include="Scripts\effectcontrol\control-hoverlist.js" />
     <Content Include="Scripts\effectcontrol\control-sliderbox.js" />
     <Content Include="Scripts\effectcontrol\control-tab.js" />
     <Content Include="Scripts\formcontrol\control-cascading.js" />
