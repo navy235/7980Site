@@ -156,6 +156,7 @@
     <Compile Include="Controllers\Ajax\AjaxServiceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Ajax\UploadController.cs" />
+    <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\Member\LoginController.cs" />
     <Compile Include="Controllers\Member\RegController.cs" />
     <Compile Include="Controllers\Permission\DepartmentController.cs" />
@@ -544,6 +545,8 @@
     <Content Include="Views\Reg\RegAuto.cshtml" />
     <Content Include="Views\Home\Source.cshtml" />
     <Content Include="Views\Shared\_LayoutSource.cshtml" />
+    <Content Include="Views\List\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
