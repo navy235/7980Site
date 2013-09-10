@@ -27,10 +27,10 @@
             @* <div class="admin-top-logo">
                 <img src="~/Content/images/logo.gif" alt="logo" width="59" height="64" border="0">
             </div>*@
-            <div class="admin-top-title">7980户外平台运营管理系统</div>
+            <div class="admin-top-title">@(ConfigSetting.SiteName)运营管理系统</div>
             <div class="admin-top-info">
-                <span class="admin-top-group" style="margin-right: 50px; color: #fff;">：<b></b> 您好，欢迎登陆使用！</span>
-                <span class="admin-top-version" style="margin-right: 50px; color: #fff;">当前版本：</span>
+                <span class="admin-top-group" style="margin-right: 50px; color: #fff;">@CookieHelper.NickName：<b></b> 您好，欢迎登陆使用！</span>
+                <span class="admin-top-version" style="margin-right: 50px; color: #fff;">当前版本：1.0.0.1</span>
                 <a class="admin-top-link" href="@Url.Action("Index", "dashboard")">后台首页</a>
                 <a class="admin-top-link"  href="@Url.Action("logout", "login")">安全退出</a>
             </div>
@@ -74,6 +74,13 @@
                     <ul>
                         <li><a href="@Url.Action("index", "member")" target="content"><span class="icon-maitonn icon-user"></span>会员管理</a></li>
                         <li><a href="@Url.Action("create", "member")" target="content"><span class="icon-maitonn icon-plus-sign"></span>添加会员</a></li>
+                    </ul>
+                </li>
+
+                <li><span class="icon-maitonn icon-credit-card"></span>企业审核
+                    <ul>
+                        <li><a href="@Url.Action("index", "bizverify")" target="content"><span class="icon-maitonn icon-question-sign"></span>待审核列表</a></li>
+                        <li><a href="@Url.Action("Authed", "bizverify")" target="content"><span class="icon-maitonn icon-ok-sign"></span>已通过列表</a></li>
                     </ul>
                 </li>
             </ul>

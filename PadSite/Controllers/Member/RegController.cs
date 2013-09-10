@@ -632,7 +632,7 @@ namespace PadSite.Controllers
                                 emailActived = (int)MemberStatus.CompanyApply;
                             }
 
-                            MemberService.changeStatus(member, emailActived);
+                            MemberService.ChangeStatus(member, emailActived);
 
                             return Redirect(Url.Action("ActiveOk"));
                         }

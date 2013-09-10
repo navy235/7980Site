@@ -1,15 +1,15 @@
-﻿@model  IEnumerable<CompanyVerifyViewModel>
+﻿@model IEnumerable<CompanyVerifyViewModel>
+
 @{
-    ViewBag.Title = "企业信息审核列表";
+    ViewBag.Title = "企业信息已审核列表";
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
-    
 }
 
 @(Html.Kendo().Grid(Model)
     .Name("Grid")
     .Columns(columns =>
     {
-        columns.Bound(p => p.MemberID).Title("媒体ID")
+        columns.Bound(p => p.MemberID).Title("ID")
                          .Sortable(false)
                          .Filterable(false)
                          .ClientTemplate("<input type='checkbox' name='ID_check' id='#=MemberID#_check'  class='chkbx' value='#=MemberID#' />")
@@ -26,13 +26,6 @@
         columns.Command(command => command.Custom("查看详情").Click("Grid.showDetails")).Title("操作");
 
     })
-        .ToolBar(config =>
-        {
-            config.Custom().Text("批量通过").HtmlAttributes(new { onclick = "Grid.verifyPassAll(this);", href = "javascript:void(0);" });
-
-            config.Custom().Text("批量不通过").HtmlAttributes(new { onclick = "Grid.verifyFailedAll(this);", href = "javascript:void(0);" });
-
-        })
     .Pageable()
     .Sortable()
     .Scrollable()
@@ -40,7 +33,7 @@
     .HtmlAttributes(new { style = "height:500px;" })
     .DataSource(dataSource => dataSource
         .Ajax()
-        .Read(read => read.Action("company_read", "bizverify"))
+        .Read(read => read.Action("Company_ReadAuthed", "bizverify"))
     )
 )
 
@@ -49,7 +42,7 @@
     .Visible(false)
     .Modal(true)
     .Draggable(true)
-    .Width(800)
+    .Width(700)
     .Height(500)
     .Scrollable(true)
     .Content(@<text>
@@ -68,63 +61,14 @@
             var state = $(ele).is(':checked');
             $('[name="ID_check"]').attr('checked', state);
         },
-        getCheckIds: function () {
-            return $.map($('[name="ID_check"]:checked'), function (item) { return $(item).val() }).join(',');
-        },
         showDetails: function (e) {
             e.preventDefault();
             $('#verifyContent').hide();
             $('#verifyLoading').show();
             var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
-            var url = '@Url.Action("details", "bizverify")';
+            var url = '@Url.Action("Details", "bizverify")';
             $('#verifyContent').attr('src', url + '/' + dataItem.MemberID);
             var wnd = $("#Details").data("kendoWindow").center().open();
-        },
-        addSpinner: function (element) {
-            var $spinner = $('<img class="ajax-working" src="@Url.Content("~/Content/images/min-loading.gif")" title="work...." />').appendTo($(element));
-            $(element).addClass('disabled');
-        },
-        removeSpinner: function (element) {
-            $(element).find('.ajax-working').remove();
-            $(element).removeClass('disabled');
-        },
-        verify: function (element, url, Ids) {
-            if ($(element).hasClass('disabled'))
-                return false;
-            var self = Grid;
-            if (Ids) {
-                self.addSpinner(element);
-                $.ajax({
-                    type: 'POST',
-                    url: url,
-                    data: { ids: Ids },
-                    success: function (res) {
-                        if (res) {
-                            var grid = $("#Grid").data("kendoGrid");
-                            grid.dataSource.read();
-                            grid.refresh();
-                        }
-                    },
-                    complete: function () {
-                        self.removeSpinner(element);
-                    }
-                })
-            } else {
-                alert('请选择要审核的公司');
-                return false;
-            }
-        },
-        verifyFailedAll: function (element) {
-            var self = Grid;
-            var url = '@Url.Action("verifyfailed", "bizverify")';
-            var Ids = self.getCheckIds();
-            self.verify(element, url, Ids);
-        },
-        verifyPassAll: function (element) {
-            var self = Grid;
-            var url = '@Url.Action("verifypass", "bizverify")';
-            var Ids = self.getCheckIds();
-            self.verify(element, url, Ids);
         }
     };
     $(function () {

@@ -733,3 +733,73 @@ select {
     display: block;
     color: gray;
 }
+
+
+
+/* Display */
+.display-container {
+}
+
+.display-item {
+    margin: 10px 0 0 0;
+    line-height: 20px;
+    position: relative;
+    padding: 0 0 0 120px;
+    overflow: hidden;
+}
+
+
+.display-label {
+    display: block;
+    vertical-align: middle;
+    font-size: 12px;
+    width: 105px;
+    text-align: right;
+    float: left;
+    margin-left: -105px;
+}
+
+.display-field {
+    margin-left: 5px;
+    vertical-align: middle;
+}
+
+.display-item-textarea .display-field {
+    width: 650px;
+}
+
+.display-item-uploadlogo .display-field .img-box img {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #dddddd;
+}
+
+.display-title {
+    color: #333;
+    border-bottom: 1px solid #dfdfdf;
+    font-size: 14px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    margin: 15px 0 20px 0;
+}
+
+
+
+.display-item-hide .display-label {
+    display: none;
+}
+
+.display-label:after {
+    content: " : ";
+    margin: 0px 5px;
+    font-weight: bold;
+}
+
+.display-item .img-box-list {
+    margin-left: 0px;
+}
+
+.display-item .map-container {
+    width: 450px;
+    height: 350px;
+}

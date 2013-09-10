@@ -13,3 +13,13 @@
  ExLogLevel :INFO  
  ExLogClass :loginfo [(null)] 
 添加会员信息成功 
+
+ ExLogTime :2013-09-10 20:44:12,886 [7] 
+ ExLogLevel :INFO  
+ ExLogClass :loginfo [(null)] 
+添加会员信息成功 
+
+ ExLogTime :2013-09-10 22:09:52,480 [44] 
+ ExLogLevel :INFO  
+ ExLogClass :loginfo [(null)] 
+信息审核通过成功 

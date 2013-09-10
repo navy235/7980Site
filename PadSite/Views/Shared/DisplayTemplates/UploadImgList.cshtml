@@ -10,8 +10,10 @@
 <div class="field-uploadimg-list" id="@Html.Raw(name + "_imgbox")">
     @foreach (var img in imgList)
     {
-        <div class="img-item">
-            <img  src="@UIHelper.GetImgUrl(img, ImgUrlType.Img120)"  />
+        <div class="img-item" style="display: block">
+            <a href="@img" target="_blank" title="点击查看大图">
+                <img  src="@UIHelper.GetImgUrl(img, ImgUrlType.Img120)"  />
+            </a>
         </div>
     }
 </div>

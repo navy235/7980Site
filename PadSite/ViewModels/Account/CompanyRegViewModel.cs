@@ -59,8 +59,8 @@ namespace PadSite.ViewModels
 
         [Required(ErrorMessage = "请选择联系人性别")]
         [Display(Name = "性别")]
-        [AdditionalMetadata("Radio", "男,女")]
-        [UIHint("Radio")]
+        [AdditionalMetadata("RadioList", "男,女")]
+        [UIHint("RadioList")]
         public bool Sex { get; set; }
 
 
