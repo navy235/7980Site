@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "我的帐号";
+    Layout = "~/Views/Shared/_LayoutPersonal.cshtml";
+}
+<div class="personal clearfix">
+    @Html.Partial("_LeftMenu")
+
+    <div class="personal-right">
+        <div class="personal-right-body">
+            <div class="personal-body-title clearfix">
+                <h5>我的帐号</h5>
+            </div>
+            <ul class="personal-body-list">
+                <li>登录名：shenhaijunmail@163.com</li>
+                <li>昵称：阿白</li>
+
+            </ul>
+
+            <div class="personal-body-bind">
+
+                <dl class="clearfix">
+                    <dt class="bind-email"></dt>
+                    <dd class="bind-desc"><span class="ok">邮箱绑定</span>已绑定邮箱：shenhaijunmail@163.com</dd>
+                </dl>
+            </div>
+        </div>
+
+    </div>
+</div>

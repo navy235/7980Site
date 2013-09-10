@@ -176,12 +176,18 @@ namespace PadSite.Service
 
         #region change
 
-        public void changeStatus(Member member, int Status)
+        public void ChangeStatus(Member member, int Status)
         {
             db.Attach<Member>(member);
             member.Status = Status;
             db.Commit();
             SetLoginCookie(member);
+        }
+
+        public void ChangeStatus(IEnumerable<int> Ids, int Status)
+        {
+            db.Set<Member>().Where(x => Ids.Contains(x.MemberID)).ToList().ForEach(x => x.Status = Status);
+            db.Commit();
         }
 
         public void ResetPassword(Member member, string newpassword)
@@ -304,5 +310,69 @@ namespace PadSite.Service
                         )) && x.Email.Equals(email, StringComparison.OrdinalIgnoreCase));
             return query.Count() > 0;
         }
+
+
+        public void SaveMemberAvtar(int MemberID, ViewModels.AvtarViewModel model)
+        {
+            Member member = Find(MemberID);
+            db.Attach<Member>(member);
+            member.AvtarUrl = model.AvtarUrl;
+            db.Commit();
+            SetLoginCookie(member);
+        }
+
+
+        public Member Create(ViewModels.DetailsViewModel model)
+        {
+            Member member = new Member();
+            member.Email = model.Email;
+            member.NickName = model.NickName;
+            member.AvtarUrl = model.AvtarUrl;
+            member.GroupID = model.GroupID;
+            member.Password = CheckHelper.StrToMd5(model.Password);
+            member.Status = 1;//注册未激活，0为禁用
+            member.AddTime = DateTime.Now;
+            member.LastTime = DateTime.Now;
+            member.AddIP = HttpHelper.IP;
+            member.LastIP = HttpHelper.IP;
+            member.Member_Profile = new Member_Profile();
+            member.Member_Profile.Borthday = model.Borthday;
+            var cityCode = 0;
+            if (!string.IsNullOrEmpty(model.CityCode))
+            {
+                cityCode = Convert.ToInt32(model.CityCode.Split(',').Last());
+            }
+            member.Member_Profile.CityCode = cityCode;
+            member.Member_Profile.CityCodeValue = model.CityCode;
+            member.Member_Profile.Description = model.Description;
+            member.Member_Profile.Sex = model.Sex;
+            db.Add<Member>(member);
+            db.Commit();
+            return member;
+        }
+
+
+        public Member Update(ViewModels.EditViewModel model)
+        {
+            Member member = GetALL().Include(x => x.Member_Profile).Single(x => x.MemberID == model.MemberID);
+            db.Attach<Member>(member);
+            member.GroupID = model.GroupID;
+            member.AvtarUrl = model.AvtarUrl;
+            var cityCode = 0;
+            if (!string.IsNullOrEmpty(model.CityCode))
+            {
+                cityCode = Convert.ToInt32(model.CityCode.Split(',').Last());
+            }
+            member.Member_Profile.CityCode = cityCode;
+            member.Member_Profile.CityCodeValue = model.CityCode;
+            member.Member_Profile.Sex = model.Sex;
+            member.Member_Profile.Borthday = model.Borthday;
+            member.Member_Profile.Description = model.Description;
+            db.Commit();
+            return member;
+        }
+
+
+
     }
 }

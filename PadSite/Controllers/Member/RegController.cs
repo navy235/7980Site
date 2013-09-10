@@ -11,6 +11,7 @@ using PadSite.Filters;
 using PadSite.Utils;
 using PadSite.Service.Interface;
 using PadSite.Setting;
+
 namespace PadSite.Controllers
 {
     public class RegController : Controller
@@ -382,9 +383,9 @@ namespace PadSite.Controllers
                             Position = company.Lat + "|" + company.Lng,
                             Sex = company.Sex,
                             CredentialsImg = company.CredentialsImg,
-                            IdentityCard = company.IdentityCard
-
-
+                            IdentityCard = company.IdentityCard,
+                            LogoImg = company.LogoImg,
+                            LinkManImg = company.LinkManImg
                         };
 
                         return View(model);

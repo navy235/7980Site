@@ -1,0 +1,36 @@
+﻿@model ContactViewModel
+@{
+    ViewBag.Title = "联系方式";
+    Layout = "~/Views/Shared/_LayoutPersonal.cshtml";
+}
+<div class="personal clearfix">
+    @Html.Partial("_LeftMenu")
+    <div class="personal-right">
+        <div class="personal-right-body">
+            <div class="personal-body-title clearfix">
+                <ul class="personal-tab clearfix">
+                    <li><a href="@Url.Action("baseinfo")"><span>基本信息</span></a></li>
+                    <li><a href="@Url.Action("avtar")"><span>个人头像</span></a></li>
+                    <li class="selected"><a href="@Url.Action("contact")"><span>联系方式</span></a></li>
+                </ul>
+            </div>
+            <div class="personal-form-tips">
+                <i class="icon-maitonn icon-exclamation-sign"></i><strong>友情提醒:</strong>
+                @CookieHelper.NickName ,请填写真实的联系方式，方便大家联系您。
+            </div>
+            <div class="personal-form personal-form-contact mt40">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.EditorForModel()
+                    <div class="form-field form-field-submit ">
+                        <button type="submit" class="k-button ">
+                            <i class="icon-maitonn icon-save"></i>
+                            &nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

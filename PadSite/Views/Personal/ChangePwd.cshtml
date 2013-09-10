@@ -1,0 +1,35 @@
+﻿@model ChangePasswordViewModel
+@{
+    ViewBag.Title = "修改密码";
+    Layout = "~/Views/Shared/_LayoutPersonal.cshtml";
+}
+<div class="personal clearfix">
+    @Html.Partial("_LeftMenu")
+    <div class="personal-right">
+        <div class="personal-right-body">
+            <div class="personal-body-title clearfix">
+                <ul class="personal-tab clearfix">
+                    <li><a href="@Url.Action("bindemail")"><span>邮箱绑定</span></a></li>
+                    <li class="selected"><a href="@Url.Action("changepwd")"><span>修改密码</span></a></li>
+                </ul>
+            </div>
+            <div class="personal-form-tips">
+                <i class="icon-maitonn icon-exclamation-sign"></i><strong>安全提醒:</strong>
+                @CookieHelper.NickName ,请妥善保管密码！@(ConfigSetting.SiteName)的工作人员不会以任何理由向您索取密码。。
+            </div>
+            <div class="personal-form personal-form-contact mt40">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.EditorForModel()
+                    <div class="form-field form-field-submit ">
+                        <button type="submit" class="k-button ">
+                            <i class="icon-maitonn icon-save"></i>
+                            &nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>

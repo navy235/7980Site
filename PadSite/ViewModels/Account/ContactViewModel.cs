@@ -44,7 +44,7 @@ namespace PadSite.ViewModels
         [StringCheckLength(10, 60)]
         public string Address { get; set; }
 
-        [Display(Name = "地图上标注")]
+        [Display(Name = "标记坐标")]
         [UIHint("MapMarker")]
         [Hint("您还可以在地图上标注您的位置，更方便大家找到您")]
         public string Position { get; set; }

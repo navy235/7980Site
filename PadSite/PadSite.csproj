@@ -147,13 +147,17 @@
     <Compile Include="App_Start\NinjectBinding.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Category\CityCateController.cs" />
-    <Compile Include="Controllers\DashboardController.cs" />
-    <Compile Include="Controllers\Category\MediaCateController.cs" />
-    <Compile Include="Controllers\Category\ArticleCateController.cs" />
-    <Compile Include="Controllers\Category\FormatCateController.cs" />
-    <Compile Include="Controllers\Category\PeriodCateController.cs" />
+    <Compile Include="Controllers\Admin\Member\BizVerifyController.cs" />
+    <Compile Include="Controllers\Admin\Member\MemberController.cs" />
+    <Compile Include="Controllers\Personal\BizController.cs" />
+    <Compile Include="Controllers\Admin\Category\CityCateController.cs" />
+    <Compile Include="Controllers\Admin\DashboardController.cs" />
+    <Compile Include="Controllers\Admin\Category\MediaCateController.cs" />
+    <Compile Include="Controllers\Admin\Category\ArticleCateController.cs" />
+    <Compile Include="Controllers\Admin\Category\FormatCateController.cs" />
+    <Compile Include="Controllers\Admin\Category\PeriodCateController.cs" />
     <Compile Include="Controllers\Ajax\AjaxServiceController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Ajax\UploadController.cs" />
     <Compile Include="Controllers\ListController.cs" />
@@ -163,8 +167,9 @@
     <Compile Include="Controllers\Permission\PermissionsController.cs" />
     <Compile Include="Controllers\Permission\RolesController.cs" />
     <Compile Include="Controllers\Permission\GroupController.cs" />
+    <Compile Include="Controllers\Personal\PersonalController.cs" />
     <Compile Include="Filters\LoginAuthorizeAttribute.cs" />
-    <Compile Include="Filters\PermissionAuthorizeAttributes.cs" />
+    <Compile Include="Filters\PermissionAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -218,7 +223,10 @@
     <Compile Include="Utils\Utilities.cs" />
     <Compile Include="ViewModels\Account\BizAuthViewModel.cs" />
     <Compile Include="ViewModels\Account\CompanyRegViewModel.cs" />
+    <Compile Include="ViewModels\Account\CompanyVerifyViewModel.cs" />
     <Compile Include="ViewModels\Account\ContactViewModel.cs" />
+    <Compile Include="ViewModels\Account\DetailsViewModel.cs" />
+    <Compile Include="ViewModels\Account\EditViewModel.cs" />
     <Compile Include="ViewModels\Account\GetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Account\LoginViewModel.cs" />
     <Compile Include="ViewModels\Account\OpenBizViewModel.cs" />
@@ -238,6 +246,9 @@
     <Compile Include="ViewModels\Permission\PermissionsViewModel.cs" />
     <Compile Include="ViewModels\Permission\RolesViewModel.cs" />
     <Compile Include="ViewModels\Permission\GroupViewModel.cs" />
+    <Compile Include="ViewModels\Personal\AvtarViewModel.cs" />
+    <Compile Include="ViewModels\Personal\ChangePasswordViewModel.cs" />
+    <Compile Include="ViewModels\Personal\CompanyBaseInfoViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Binaries\Kendo.Mvc.dll" />
@@ -547,6 +558,30 @@
     <Content Include="Views\Shared\_LayoutSource.cshtml" />
     <Content Include="Views\List\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutList.cshtml" />
+    <Content Include="Views\Help\Index.cshtml" />
+    <Content Include="Views\Personal\Index.cshtml" />
+    <Content Include="Views\Shared\_LeftMenu.cshtml" />
+    <Content Include="Views\Personal\BaseInfo.cshtml" />
+    <Content Include="Views\Shared\_LayoutPersonal.cshtml" />
+    <Content Include="Views\Shared\_TopNav.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Personal\Avtar.cshtml" />
+    <Content Include="Views\Personal\Contact.cshtml" />
+    <Content Include="Views\Personal\BindEmail.cshtml" />
+    <Content Include="Views\Personal\ChangePwd.cshtml" />
+    <Content Include="Views\Biz\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Cascading.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CheckList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Object.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\RadioList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DropdownList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\UploadImgEdit.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\UploadImgList.cshtml" />
+    <Content Include="Views\Member\Index.cshtml" />
+    <Content Include="Views\Member\Create.cshtml" />
+    <Content Include="Views\Member\Edit.cshtml" />
+    <Content Include="Views\BizVerify\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

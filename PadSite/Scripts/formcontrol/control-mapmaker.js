@@ -15,7 +15,8 @@
         markerId: '_marker',
         iconUrl: '',
         lat: 0,
-        lng: 0
+        lng: 0,
+        city: '北京'
       }, setting);
 
       var that = this,
@@ -50,18 +51,9 @@
           infoWinContent = "请移动此图标到您需要标记的位置<br/>点击图标即可标记!",
           id = that.attr('id');
 
-
-      //function load() {
-      //  var script = document.createElement("script");
-      //  script.src = "http://api.map.baidu.com/api?v=2.0&ak=B838095fbcc8a5a3f49d7a215d31ea36&callback=binding";
-      //  document.body.appendChild(script);
-      //}
-
       function binding() {
         var point = new BMap.Point(116.404, 39.915);
-        if (ps.lng != 0 && ps.lng != 0) {
-          point = new BMap.Point(new Number(ps.lng), new Number(ps.lat));
-        }
+
         map = new BMap.Map(id + ps.containerId);
         map.centerAndZoom(point, 12);
         map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
@@ -85,16 +77,28 @@
         var myCity = new BMap.LocalCity();
         myCity.get(function (result) {
           var cityName = result.name;
+          if (cityName == '全国') {
+            cityName = ps.city;
+          }
           $('#' + id + ps.keywordsId).val(cityName);
-
         })
       }
 
       function mapShow() {
         $("#" + id + ps.windowId).data("kendoWindow").center().open();
-        if (ps.lng == 0 && ps.lng == 0) {
+        if (ps.lng == 0 && ps.lat == 0) {
           seach();
+        } else {
+          setTimeout(function () {
+            setPoint();
+          }, 100)
         }
+      }
+
+      function setPoint() {
+        var point = new BMap.Point(new Number(ps.lng), new Number(ps.lat));
+        map.setCenter(point);
+        addMarker(point);
       }
 
       function seachkeydown(e) {

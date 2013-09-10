@@ -14,7 +14,8 @@
 }
 <div class="form-cascading">
     @Html.TextBoxFor(m => m, new { tabindex = -1, @class = "field-valid-text" })
-    @Html.Hidden(name + "_values")
+
+    <input type="hidden" id="@(name + "_values")" name="@(name + "_values")" />
 </div>
 <script type="text/javascript">
     $(function () {
@@ -22,8 +23,8 @@
             read_url: '@Url.Action(name, "ajaxservice")',
             get_url: '@Url.Action("get_" + name, "ajaxservice")',
             paramId: 'pid',
-            values: '@values',
-            value: '@Model'
+            values: '@Model',
+            value: '@value'
         });
     })
 </script>

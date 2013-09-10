@@ -11,10 +11,12 @@ namespace PadSite.Service
     public class CompanyService : ICompanyService
     {
         private readonly IUnitOfWork db;
-
-        public CompanyService(IUnitOfWork db)
+        private readonly IMemberService MemberService;
+        public CompanyService(IUnitOfWork db,
+            IMemberService MemberService)
         {
             this.db = db;
+            this.MemberService = MemberService;
         }
 
         public IQueryable<Company> GetALL()
@@ -157,6 +159,41 @@ namespace PadSite.Service
 
             return company;
 
+        }
+
+
+        public IQueryable<CompanyVerifyViewModel> GetVerifyList(CompanyStatus CompanyStatus)
+        {
+            int CompanyStatusValue = (int)CompanyStatus;
+            return db.Set<Company>().Select(x => new CompanyVerifyViewModel()
+            {
+                MemberID = x.MemberID,
+                Name = x.Name,
+                Description = x.Description,
+                LinkMan = x.LinkMan,
+                Contact = (string.IsNullOrEmpty(x.Mobile) ? "" : "手机:" + x.Mobile) + (string.IsNullOrEmpty(x.Phone) ? "" : "电话:" + x.Phone),
+                Status = x.Status,
+                AddTime = x.AddTime,
+                LastTime = x.LastTime
+
+            }).Where(x => x.Status == CompanyStatusValue);
+        }
+
+
+        public void ChangeStatus(string CompangIds, CompanyStatus CompanyStatus)
+        {
+            var IdsArray = CompangIds.Split(',').Select(x => Convert.ToInt32(x));
+            var CompanyStatusValue = (int)CompanyStatus;
+            db.Set<Company>().Where(x => IdsArray.Contains(x.MemberID)).ToList().ForEach(x => x.Status = CompanyStatusValue);
+            db.Commit();
+            if (CompanyStatus == CompanyStatus.CompanyFailed)
+            {
+                MemberService.ChangeStatus(IdsArray, (int)MemberStatus.CompanyFailed);
+            }
+            else if (CompanyStatus == CompanyStatus.CompanyAuth)
+            {
+                MemberService.ChangeStatus(IdsArray, (int)MemberStatus.CompanyAuth);
+            }
         }
     }
 }

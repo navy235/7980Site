@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css">
+    <![endif]-->
     @Styles.Render("~/Content/source")
     @Scripts.Render("~/bundles/modernizr")
     <script src="~/Scripts/kendo/2012.3.1114/jquery.min.js"></script>
@@ -13,33 +16,7 @@
     @Scripts.Render("~/bundles/effectcontrol")
 </head>
 <body>
-    <div class="top-nav">
-        <div class="top-nav-wrap">
-            <div class="top-nav-left">
-                欢迎来到@(ConfigSetting.SiteName)！
-                <a href="/login">请登录</a> <a href="/register">免费注册</a>
-            </div>
-            <ul class="top-nav-right">
-                <li><a href="/">@(ConfigSetting.SiteName)首页</a>&nbsp;&nbsp;|</li>
-                <li>
-                    <div class="dropdown-box top-nav-dropdown-menu ">
-                        <a class="top-nav-holder" target="_blank" href="/personal" rel="nofollow">我的@(ConfigSetting.SiteName)<i></i></a><b class="holderline">|</b>
-                        <div class="dropdown-menu dropdown-menu-personal">
-                            <i class="line"></i>
-                            <a class="clearfix" target="_blank" href="/outdoor/add" rel="nofollow">
-                                <span><i class="icon-maitonn icon-edit-sign"></i>发布信息</span></a>
-                            <a class="clearfix" target="_blank" href="/personal" rel="nofollow">
-                                <span><i class="icon-maitonn icon-cogs"></i>管理中心</span></a>
-                            <a class="clearfix" target="_blank" href="/company" rel="nofollow">
-                                <span><i class="icon-maitonn icon-credit-card"></i>企业入驻</span></a>
-                        </div>
-                    </div>
-                </li>
-                <li><a target="_blank" href="/register/openbiz">企业入驻</a>&nbsp;&nbsp;|</li>
-                <li><a target="_blank" href="/help-5">用户帮助</a>&nbsp;&nbsp;</li>
-            </ul>
-        </div>
-    </div>
+    @Html.Partial("_TopNav")
     <div class="top-head">
         <div class="top-head-wrap">
             <div class="top-head-logo">
@@ -80,6 +57,7 @@
         </div>
     </div>
     @RenderBody()
+    @Html.Partial("_Footer")
     @RenderSection("scripts", required: false)
 </body>
 </html>

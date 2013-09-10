@@ -1,0 +1,55 @@
+﻿@model AvtarViewModel
+@{
+    ViewBag.Title = "设置头像";
+    Layout = "~/Views/Shared/_LayoutPersonal.cshtml";
+}
+
+<div class="personal clearfix">
+
+    @Html.Partial("_LeftMenu")
+
+    <div class="personal-right">
+        <div class="personal-right-body">
+            <div class="personal-body-title clearfix">
+                <ul class="personal-tab clearfix">
+                    <li><a href="@Url.Action("baseinfo")"><span>基本信息</span></a></li>
+                    <li class="selected"><a href="@Url.Action("avtar")"><span>设置头像</span></a></li>
+                    <li><a href="@Url.Action("contact")"><span>联系方式</span></a></li>
+                </ul>
+            </div>
+
+            <div class="personal-form-tips">
+                <i class="icon-maitonn icon-exclamation-sign"></i><strong>友情提醒:</strong>
+                @CookieHelper.NickName ,选择真实头像更方便大家了解你。
+            </div>
+
+            <div class="personal-form personal-form-avtar">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-field">
+                        @Html.LabelFor(x => x.AvtarUrl, new { @class = "form-field-lable-required" })
+                        @Html.EditorFor(x => x.AvtarUrl)
+                        @Html.ValidationMessageFor(x => x.AvtarUrl)
+                    </div>
+
+                    <div class="form-field form-field-submit">
+                        <button type="submit" class="k-button ">
+                            <i class="icon-maitonn icon-save"></i>
+                            &nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button>
+                    </div>
+                }
+            </div>
+            <div class="personal-avtar-tips mt10">
+                <ul>
+                    <li>· 请上传您的品牌Logo或者个人真实头像</li>
+                    <li>· 请勿在形象标示上留有任何联系方式的信息</li>
+                    <li>· 支持JPG格式，图片大小不超过5MB</li>
+                    <li>· 请保证图片质量，分辨率至少为200*200</li>
+                    <li class="personal-avtar-tips-desc mt15">· 上传遇到问题，请联系客服：400-188-6666</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

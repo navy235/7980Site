@@ -1,0 +1,22 @@
+﻿@model  CompanyBaseInfoViewModel
+@{
+    ViewBag.Title = "企业基本信息";
+    Layout = "~/Views/Shared/_LayoutPersonal.cshtml";
+}
+<div class="personal clearfix">
+    @Html.Partial("_LeftMenu")
+    <div class="personal-right">
+        <div class="personal-right-body">
+            <div class="personal-body-title clearfix">
+                <ul class="personal-tab clearfix">
+                    <li class="selected"><a href="@Url.Action("index")"><span>企业基本信息</span></a></li>
+                    <li><a href="@Url.Action("contact")"><span>联系方式</span></a></li>
+                    <li><a href="@Url.Action("credentials")"><span>资质证书</span></a></li>
+                </ul>
+            </div>
+            <div class="dispaly-container">
+                @Html.DisplayForModel()
+            </div>
+        </div>
+    </div>
+</div>

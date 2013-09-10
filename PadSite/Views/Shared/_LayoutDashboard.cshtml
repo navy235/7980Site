@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css">
+    <![endif]-->
     @Styles.Render("~/Content/kendo/2012.3.1114/css")
     @Styles.Render("~/Content/admin")
     @Scripts.Render("~/bundles/modernizr")
@@ -64,6 +67,13 @@
                         <li><a href="@Url.Action("index", "roles")" target="content"><span class="icon-maitonn icon-user"></span>角色管理</a></li>
                         <li><a href="@Url.Action("index", "group")" target="content"><span class="icon-maitonn icon-group"></span>群组管理</a></li>
                         <li><a href="@Url.Action("index", "department")" target="content"><span class="icon-maitonn icon-sitemap"></span>部门管理</a></li>
+                    </ul>
+                </li>
+
+                <li><span class="icon-maitonn icon-user"></span>会员管理
+                    <ul>
+                        <li><a href="@Url.Action("index", "member")" target="content"><span class="icon-maitonn icon-user"></span>会员管理</a></li>
+                        <li><a href="@Url.Action("create", "member")" target="content"><span class="icon-maitonn icon-plus-sign"></span>添加会员</a></li>
                     </ul>
                 </li>
             </ul>

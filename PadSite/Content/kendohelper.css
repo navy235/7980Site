@@ -228,9 +228,10 @@
 
 
 .map-container {
-    width: 670px;
-    height: 450px;
     border: 1px solid gray;
+    width: 100%;
+    height: 98%;
+    overflow: hidden;
 }
 
 .map-control {
@@ -254,14 +255,19 @@
     width: 250px;
 }
 
-.map-marker-btn {
-    height: 30px;
+.btn-map-marker {
+    height: 31px;
+    line-height: 31px;
 }
 
-.map-marker-icon {
-    background-position: -46px 0;
-    background-image: url('images/mapicon.gif');
-}
+    .btn-map-marker .icon-maitonn {
+        font-size: 26px;
+        color: rgb(28, 17, 105);
+        opacity: 1;
+        text-decoration: none;
+    }
+
+
 
 *, *:before, *:after {
     -webkit-box-sizing: initial;

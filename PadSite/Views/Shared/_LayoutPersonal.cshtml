@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    @Styles.Render("~/Content/kendo/2012.3.1114/css")
+    @Styles.Render("~/Content/source")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/kendo/2012.3.1114/jquery.min.js"></script>
+    <script src="~/Scripts/kendo/2012.3.1114/kendo.all.min.js"></script>
+    <script src="~/Scripts/kendo/2012.3.1114/kendo.aspnetmvc.min.js"></script>
+    @Scripts.Render("~/bundles/jquerycontrol")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/effectcontrol")
+</head>
+<body>
+    @Html.Partial("_TopNav")
+    <div class="top-head">
+        <div class="top-head-wrap">
+            <div class="top-head-logo">
+                <h5>
+                    <a hidefocus="true" title="@(ConfigSetting.SiteName)" class="top-head-link" href="/"></a>
+                    <span>全国</span>
+                </h5>
+                <div class="top-head-city">
+                    <a href="javascript:;" class="top-head-changcity">[切换省份]</a>
+                </div>
+            </div>
+            <div class="top-head-search ">
+                <input class="search-text" id="search-text" type="text" value="三面翻" x-webkit-speech>
+                <input class="search-button" id="search-button" type="button" value="搜索">
+                <ul class="top-head-suggest" style="display: none;"></ul>
+                <div class="top-head-hot-keys">
+                    <label>热门搜索：</label>
+                    <a target="_blank" href="/list-0-0-0-0-0-0-0-0-0-p_1?query=高速立柱">高速立柱</a>
+                    <a target="_blank" href="/list-0-0-0-0-0-0-0-0-0-p_1?query=市内巴士">市内巴士</a>
+                    <a target="_blank" href="/list-0-0-0-0-0-0-0-0-0-p_1?query=机场广告">机场广告</a>
+                    <a target="_blank" href="/list-0-0-0-0-0-0-0-0-0-p_1?query=商场">商场</a>
+                    <a target="_blank" href="/list-0-0-0-0-0-0-0-0-0-p_1?query=别墅住宅">别墅住宅</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="top-menu">
+        <div class="top-menu-tab">
+            <div class="top-menu-category">
+                <h2>
+                    <strong>全部户外分类</strong>
+                    <i class="icon-maitonn icon-category-arrow icon-chevron-sign-down"></i>
+                </h2>
+                <ul class="top-left-nav" style="display: none;">
+                    <li class="clearfix">
+                        <h3>
+                            <a href="#" class="a_type"><i class="icon-maitonn icon-road"></i>公路大牌</a>
+                            <em style="display: none;">公路大牌</em>
+                        </h3>
+                        <div class="top-left-nav-sub clearfix">
+                            <span><a href="#">高速公路</a></span>
+                            <span><a href="#">国道公路</a></span>
+                            <span><a href="#">省道公路</a></span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <h3>
+                            <a href="#" class="a_type"><i class="icon-maitonn icon-signal"></i>市内大牌</a>
+                            <em style="display: none;">市内大牌</em>
+                        </h3>
+                        <div class="top-left-nav-sub clearfix">
+                            <span><a href="#">长沙市内</a></span>
+                            <span><a href="#">株洲市内</a></span>
+                            <span><a href="#">湘潭市内</a></span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <h3>
+                            <a href="#" class="a_type"><i class="icon-maitonn icon-truck"></i>公共交通</a>
+                            <em style="display: none;">公共交通</em>
+                        </h3>
+                        <div class="top-left-nav-sub clearfix">
+                            <span><a href="#">高铁</a></span>
+                            <span><a href="#">火车站</a></span>
+                            <span><a href="#">机场</a></span>
+                            <span><a href="#">地铁</a></span>
+                            <span><a href="#">公交车</a></span>
+                            <span><a href="#">城际大巴</a></span>
+                            <span><a href="#">出租车</a></span>
+                            <span><a href="#">候车亭</a></span>
+                            <span><a href="#">加油站</a></span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <h3>
+                            <a href="#" class="a_type"><i class="icon-maitonn icon-sitemap"></i>公共场所</a>
+                            <em style="display: none;">公共场所</em>
+                        </h3>
+                        <div class="top-left-nav-sub clearfix">
+                            <span><a href="#">写字楼</a></span>
+                            <span><a href="#">停车场</a></span>
+                            <span><a href="#">酒店</a></span>
+                            <span><a href="#">商业广场</a></span>
+                            <span><a href="#">超市</a></span>
+                            <span><a href="#">学校</a></span>
+                            <span><a href="#">医院</a></span>
+                            <span><a href="#">公园景点</a></span>
+                            <span><a href="#">娱乐场所</a></span>
+                            <span><a href="#">社区</a></span>
+                            <span><a href="#">停车场</a></span>
+                            <span><a href="#">运动场所</a></span>
+                        </div>
+                    </li>
+                    <li class="clearfix">
+                        <h3>
+                            <a href="#" class="a_type"><i class="icon-maitonn icon-desktop"></i>LED大屏</a>
+                            <em style="display: none;">LED大屏</em>
+                        </h3>
+
+                    </li>
+                    <li class="clearfix">
+                        <h3>
+                            <a href="#" class="a_type"><i class="icon-maitonn icon-th-large"></i>其他</a>
+                            <em style="display: none;">其他</em>
+                        </h3>
+
+                    </li>
+
+                </ul>
+            </div>
+            <iframe frameborder="0" class="top-menu-frame" scrolling="no" style="height: 420px; display: none;"></iframe>
+            <ul class="top-menu-list">
+                <li class="active"><a href="/">首页</a></li>
+                <li><a href="/list-0-0-0-0-0-0-0-0-0-p_1">户外资源</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="nav-bread">
+        <a class="nav-bread-home" href="@Url.Action("index", "home")"><i class="icon-maitonn icon-home"></i></a>&gt;
+        <a href="@Url.Action("index", "personal")"></a>个人中心 &gt;
+        <strong>@ViewBag.Title</strong>
+    </div>
+    @RenderBody()
+    @Html.Partial("_Footer")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(function () {
+            $('.top-menu-category').hover(function () {
+                $(this).find('.icon-category-arrow')
+                    .addClass('icon-chevron-sign-down').removeClass('icon-chevron-sign-up')
+                    .end()
+                    .find('.top-left-nav')
+                    .show()
+                    .end()
+                    .next('.top-menu-frame').show();
+            }, function () {
+                $(this).find('.icon-category-arrow')
+                   .removeClass('icon-chevron-sign-down').addClass('icon-chevron-sign-up')
+                   .end()
+                   .find('.top-left-nav')
+                   .hide()
+                   .end()
+                   .next('.top-menu-frame').hide();
+            })
+        })
+    </script>
+</body>
+</html>

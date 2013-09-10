@@ -1,0 +1,17 @@
+@model  string
+@{
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var imgList = new List<string>();
+    if (!string.IsNullOrEmpty(Model))
+    {
+        imgList = Model.Split(',').ToList();
+    }
+}
+<div class="field-uploadimg-list" id="@Html.Raw(name + "_imgbox")">
+    @foreach (var img in imgList)
+    {
+        <div class="img-item">
+            <img  src="@UIHelper.GetImgUrl(img, ImgUrlType.Img120)"  />
+        </div>
+    }
+</div>

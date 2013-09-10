@@ -701,6 +701,7 @@ select {
     right: 10px;
     top: 10px;
     padding: 10px 10px 10px 40px;
+    z-index: 9999;
 }
 
     .action-info .icon-maitonn {
@@ -726,4 +727,9 @@ select {
 
 .jserrmessage {
     display: none;
+}
+
+.field-hint-message {
+    display: block;
+    color: gray;
 }

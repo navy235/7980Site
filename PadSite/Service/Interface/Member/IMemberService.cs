@@ -18,6 +18,10 @@ namespace PadSite.Service.Interface
 
         Member Create(RegViewModel model);
 
+        Member Create(DetailsViewModel model);
+
+        Member Update(EditViewModel model);
+
         void Delete(Member model);
 
         Member Find(int ID);
@@ -42,11 +46,15 @@ namespace PadSite.Service.Interface
 
         bool ChangePassword(int MemberID, string oldpassword, string newpassword);
 
-        void changeStatus(Member member, int Status);
+        void ChangeStatus(Member member, int Status);
+
+        void ChangeStatus(IEnumerable<int> Ids, int Status);
 
         void SaveMemberProfile(int MemberID, ProfileViewModel model);
 
         void SaveMemberContact(int MemberID, ContactViewModel model);
+
+        void SaveMemberAvtar(int MemberID, AvtarViewModel model);
 
         Member FindDescriptionMemberInLimitTime(string description, int limitHours);
 

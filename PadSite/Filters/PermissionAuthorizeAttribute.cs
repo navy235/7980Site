@@ -10,11 +10,11 @@ using PadSite.Models;
 
 namespace PadSite.Filters
 {
-    public class PermissionAuthorizeAttributes : LoginAuthorizeAttribute
+    public class PermissionAuthorizeAttribute : LoginAuthorizeAttribute
     {
         private IUnitOfWork db;
 
-        public PermissionAuthorizeAttributes()
+        public PermissionAuthorizeAttribute()
             : base()
         {
             db = new EntitiesContext();

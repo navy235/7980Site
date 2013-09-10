@@ -1,0 +1,8 @@
+@model  string
+@{
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+ 
+}
+<div class="field-uploadimg-box">
+    <img src="@Model" id="@(name + "_img")" />
+</div>

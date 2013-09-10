@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using PadSite.Models;
 using PadSite.ViewModels;
+using Maitonn.Core;
 namespace PadSite.Service.Interface
 {
     public interface ICompanyService
@@ -25,6 +26,10 @@ namespace PadSite.Service.Interface
         Company SaveBasInfo(int MemberID, CompanyRegViewModel model);
 
         void UpdateAuthInfo(int MemberID, BizAuthViewModel model);
+
+        IQueryable<CompanyVerifyViewModel> GetVerifyList(CompanyStatus CompanyStatus);
+
+        void ChangeStatus(string CompangIds, CompanyStatus CompanyStatus);
 
     }
 }
