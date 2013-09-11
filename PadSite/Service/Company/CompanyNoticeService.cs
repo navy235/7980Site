@@ -40,7 +40,6 @@ namespace PadSite.Service
             db.Attach<CompanyNotice>(target);
             target.Content = model.Content;
             target.Title = model.Title;
-            target.Status = model.Status;
             db.Commit();
         }
 

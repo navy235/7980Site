@@ -116,6 +116,7 @@ namespace PadSite.Controllers
                 {
                     CompanyService.UpdateContactInfo(CookieHelper.MemberID, model);
                     result.Message = "联系信息保存成功！";
+                    return RedirectToAction("Contact");
                 }
                 catch (Exception ex)
                 {
@@ -142,7 +143,7 @@ namespace PadSite.Controllers
             var member = MemberService.Find(CookieHelper.MemberID);
             if (member.Status < (int)MemberStatus.CompanyAuth)
             {
-                return Redirect(Url.Action("openbiz", "register"));
+                return Redirect(Url.Action("openbiz", "reg"));
             }
             else
             {
@@ -165,7 +166,7 @@ namespace PadSite.Controllers
             var member = MemberService.Find(CookieHelper.MemberID);
             if (member.Status < (int)MemberStatus.CompanyAuth)
             {
-                return Redirect(Url.Action("openbiz", "register"));
+                return Redirect(Url.Action("openbiz", "reg"));
             }
             if (ModelState.IsValid)
             {
@@ -173,6 +174,7 @@ namespace PadSite.Controllers
                 {
                     CompanyService.SaveLogo(CookieHelper.MemberID, model);
                     result.Message = "企业标志保存成功！";
+                    return RedirectToAction("Logo");
                 }
                 catch (Exception ex)
                 {
@@ -196,7 +198,7 @@ namespace PadSite.Controllers
             var member = MemberService.Find(CookieHelper.MemberID);
             if (member.Status < (int)MemberStatus.CompanyAuth)
             {
-                return Redirect(Url.Action("openbiz", "register"));
+                return Redirect(Url.Action("openbiz", "reg"));
             }
             else
             {
@@ -215,10 +217,11 @@ namespace PadSite.Controllers
         {
             ViewBag.MenuItem = "shop-banner";
             ServiceResult result = new ServiceResult();
+            TempData["Service_Result"] = result;
             var member = MemberService.Find(CookieHelper.MemberID);
             if (member.Status < (int)MemberStatus.CompanyAuth)
             {
-                return Redirect(Url.Action("openbiz", "register"));
+                return Redirect(Url.Action("openbiz", "reg"));
             }
             if (ModelState.IsValid)
             {
@@ -226,6 +229,7 @@ namespace PadSite.Controllers
                 {
                     CompanyService.SaveBanner(CookieHelper.MemberID, model);
                     result.Message = "企业横幅保存成功！";
+                    return RedirectToAction("Banner");
                 }
                 catch (Exception ex)
                 {
@@ -460,6 +464,8 @@ namespace PadSite.Controllers
                     CompanyNoticeService.Create(entity);
                     result.Message = "添加企业公告成功！";
 
+                    return RedirectToAction("Notice");
+
                 }
                 catch (Exception ex)
                 {
@@ -510,6 +516,7 @@ namespace PadSite.Controllers
                 return Redirect(Url.Action("openbiz", "reg"));
             }
             ServiceResult result = new ServiceResult();
+            TempData["Service_Result"] = result;
             if (ModelState.IsValid)
             {
                 try
@@ -518,11 +525,12 @@ namespace PadSite.Controllers
                     {
                         MemberID = CookieHelper.MemberID,
                         Title = model.Name,
-                        Content = model.Content
+                        Content = model.Content,
+                        ID = model.ID
                     };
                     CompanyNoticeService.Update(entity);
                     result.Message = "编辑企业公告成功！";
-
+                    return RedirectToAction("Notice");
                 }
                 catch (Exception ex)
                 {
@@ -542,8 +550,15 @@ namespace PadSite.Controllers
 
         public ActionResult Notice_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var statusValue = (int)CompanyNoticeStatus.NotShow;
-            var model = CompanyNoticeService.GetKendoALL().Where(x => x.MemberID == CookieHelper.MemberID && x.Status >= statusValue);
+            var statusValue = (int)CompanyNoticeStatus.Delete;
+            var model = CompanyNoticeService.GetKendoALL().Where(x => x.MemberID == CookieHelper.MemberID && x.Status >= statusValue).Select(x => new CompanyNoticeListViewModel()
+            {
+                AddTime = x.AddTime,
+                Content = x.Content,
+                Name = x.Title,
+                ID = x.ID,
+                Status = x.Status
+            });
             return Json(model.ToDataSourceResult(request));
         }
 
@@ -574,13 +589,13 @@ namespace PadSite.Controllers
             {
                 var status = (int)CompanyNoticeStatus.ShowOnLine;
                 CompanyNoticeService.ChangeStatus(ids, status);
-                result.Message = "设置未显示成功！";
+                result.Message = "设置显示成功！";
             }
             catch (Exception ex)
             {
-                result.Message = "设置未显示失败!";
+                result.Message = "设置显示失败!";
                 result.AddServiceError(Utilities.GetInnerMostException(ex));
-                LogHelper.WriteLog("用户:" + CookieHelper.MemberID + "设置未显示失败!", ex);
+                LogHelper.WriteLog("用户:" + CookieHelper.MemberID + "设置显示失败!", ex);
             }
             return Json(result);
 
@@ -620,7 +635,7 @@ namespace PadSite.Controllers
             var member = MemberService.Find(CookieHelper.MemberID);
             if (member.Status < (int)MemberStatus.CompanyAuth)
             {
-                return Redirect(Url.Action("openbiz", "register"));
+                return Redirect(Url.Action("openbiz", "reg"));
             }
             return View();
         }
@@ -628,7 +643,17 @@ namespace PadSite.Controllers
         public ActionResult Message_Read([DataSourceRequest] DataSourceRequest request)
         {
             var statusValue = (int)CompanyMessageStatus.NotShow;
-            var model = CompanyMessageService.GetKendoALL().Where(x => x.MemberID == CookieHelper.MemberID && x.Status >= statusValue);
+            var model = CompanyMessageService.GetKendoALL()
+                .Where(x => x.MemberID == CookieHelper.MemberID
+                    && x.Status >= statusValue)
+                    .Select(x => new CompanyMessageViewModel()
+                    {
+                        AddTime = x.AddTime,
+                        Content = x.Content,
+                        ID = x.ID,
+                        Name = x.Title,
+                        Status = x.Status
+                    });
             return Json(model.ToDataSourceResult(request));
         }
 

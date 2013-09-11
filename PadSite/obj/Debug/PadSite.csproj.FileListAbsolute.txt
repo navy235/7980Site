@@ -110,3 +110,5 @@ D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.dll
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.pdb
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddSenderIDForMessage.resources
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddSenderIDForMessage.resources
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache

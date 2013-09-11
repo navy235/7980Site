@@ -380,3 +380,288 @@
    在 System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.BeginProcessRequest(HttpContext context, AsyncCallback cb, Object extraData)
    在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
    在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-11 19:54:56,266 [14] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/biz/notice
+ ErrMessage:尝试创建“PadSite.Controllers.BizController”类型的控制器时出错。请确保控制器具有无参数公共构造函数。 
+ System.InvalidOperationException: 尝试创建“PadSite.Controllers.BizController”类型的控制器时出错。请确保控制器具有无参数公共构造函数。 ---> Ninject.ActivationException: Error activating ICompanyNoticeService
+No matching bindings are available, and the type is not self-bindable.
+Activation path:
+  2) Injection of dependency ICompanyNoticeService into parameter CompanyNoticeService of constructor of type BizController
+  1) Request for BizController
+
+Suggestions:
+  1) Ensure that you have defined a binding for ICompanyNoticeService.
+  2) If the binding was defined in a module, ensure that the module has been loaded into the kernel.
+  3) Ensure you have not accidentally created more than one kernel.
+  4) If you are using constructor arguments, ensure that the parameter name matches the constructors parameter name.
+  5) If you are using automatic module loading, ensure the search path and filters are correct.
+
+   在 Ninject.KernelBase.Resolve(IRequest request) 位置 c:\Projects\Ninject\ninject\src\Ninject\KernelBase.cs:行号 376
+   在 Ninject.Planning.Targets.Target`1.GetValue(Type service, IContext parent) 位置 c:\Projects\Ninject\ninject\src\Ninject\Planning\Targets\Target.cs:行号 197
+   在 System.Linq.Enumerable.WhereSelectArrayIterator`2.MoveNext()
+   在 System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   在 System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   在 Ninject.Activation.Providers.StandardProvider.Create(IContext context) 位置 c:\Projects\Ninject\ninject\src\Ninject\Activation\Providers\StandardProvider.cs:行号 96
+   在 Ninject.Activation.Context.Resolve() 位置 c:\Projects\Ninject\ninject\src\Ninject\Activation\Context.cs:行号 157
+   在 System.Linq.Enumerable.WhereSelectEnumerableIterator`2.MoveNext()
+   在 System.Linq.Enumerable.SingleOrDefault[TSource](IEnumerable`1 source)
+   在 System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType)
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.Web.Mvc.DefaultControllerFactory.DefaultControllerActivator.Create(RequestContext requestContext, Type controllerType)
+   在 System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   在 System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   在 System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-11 19:55:51,731 [5] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/biz/notice
+ ErrMessage:支持“EntitiesContext”上下文的模型已在数据库创建后发生更改。请考虑使用 Code First 迁移更新数据库(http://go.microsoft.com/fwlink/?LinkId=238269)。 
+ System.InvalidOperationException: 支持“EntitiesContext”上下文的模型已在数据库创建后发生更改。请考虑使用 Code First 迁移更新数据库(http://go.microsoft.com/fwlink/?LinkId=238269)。
+   在 System.Data.Entity.CreateDatabaseIfNotExists`1.InitializeDatabase(TContext context)
+   在 System.Data.Entity.Internal.InternalContext.PerformInitializationAction(Action action)
+   在 System.Data.Entity.Internal.InternalContext.PerformDatabaseInitialization()
+   在 System.Data.Entity.Internal.RetryAction`1.PerformAction(TInput input)
+   在 System.Data.Entity.Internal.LazyInternalContext.InitializeDatabaseAction(Action`1 action)
+   在 System.Data.Entity.Internal.InternalContext.GetEntitySetAndBaseTypeForType(Type entityType)
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.Initialize()
+   在 System.Data.Entity.Internal.Linq.InternalSet`1.get_InternalContext()
+   在 System.Data.Entity.Infrastructure.DbQuery`1.System.Linq.IQueryable.get_Provider()
+   在 System.Linq.Queryable.Single[TSource](IQueryable`1 source, Expression`1 predicate)
+   在 PadSite.Service.MemberService.Find(Int32 ID) 位置 e:\GitProject\7980Site\PadSite\Service\Member\MemberService.cs:行号 70
+   在 PadSite.Controllers.BizController.Notice() 位置 e:\GitProject\7980Site\PadSite\Controllers\Personal\BizController.cs:行号 416
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-11 20:01:57,035 [20] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1编辑企业公告成功! 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   在 System.Linq.Queryable.Single[TSource](IQueryable`1 source, Expression`1 predicate)
+   在 PadSite.Service.CompanyNoticeService.Find(Int32 ID) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 56
+   在 PadSite.Service.CompanyNoticeService.Update(CompanyNotice model) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 39
+   在 PadSite.Controllers.BizController.EditNotice(CompanyNoticeViewModel model) 位置 e:\GitProject\7980Site\PadSite\Controllers\Personal\BizController.cs:行号 523
+
+ ExTime :2013-09-11 20:01:59,919 [8] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1编辑企业公告成功! 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   在 System.Linq.Queryable.Single[TSource](IQueryable`1 source, Expression`1 predicate)
+   在 PadSite.Service.CompanyNoticeService.Find(Int32 ID) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 56
+   在 PadSite.Service.CompanyNoticeService.Update(CompanyNotice model) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 39
+   在 PadSite.Controllers.BizController.EditNotice(CompanyNoticeViewModel model) 位置 e:\GitProject\7980Site\PadSite\Controllers\Personal\BizController.cs:行号 523
+
+ ExTime :2013-09-11 20:04:07,909 [20] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1编辑企业公告成功! 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   在 System.Linq.Queryable.Single[TSource](IQueryable`1 source, Expression`1 predicate)
+   在 PadSite.Service.CompanyNoticeService.Find(Int32 ID) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 56
+   在 PadSite.Service.CompanyNoticeService.Update(CompanyNotice model) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 39
+   在 PadSite.Controllers.BizController.EditNotice(CompanyNoticeViewModel model) 位置 e:\GitProject\7980Site\PadSite\Controllers\Personal\BizController.cs:行号 528
+
+ ExTime :2013-09-11 20:05:13,907 [21] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1编辑企业公告成功! 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   在 System.Linq.Queryable.Single[TSource](IQueryable`1 source, Expression`1 predicate)
+   在 PadSite.Service.CompanyNoticeService.Find(Int32 ID) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 56
+   在 PadSite.Service.CompanyNoticeService.Update(CompanyNotice model) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 39
+   在 PadSite.Controllers.BizController.EditNotice(CompanyNoticeViewModel model) 位置 e:\GitProject\7980Site\PadSite\Controllers\Personal\BizController.cs:行号 528
+
+ ExTime :2013-09-11 20:05:15,492 [8] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1编辑企业公告成功! 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   在 System.Linq.Queryable.Single[TSource](IQueryable`1 source, Expression`1 predicate)
+   在 PadSite.Service.CompanyNoticeService.Find(Int32 ID) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 56
+   在 PadSite.Service.CompanyNoticeService.Update(CompanyNotice model) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 39
+   在 PadSite.Controllers.BizController.EditNotice(CompanyNoticeViewModel model) 位置 e:\GitProject\7980Site\PadSite\Controllers\Personal\BizController.cs:行号 528
+
+ ExTime :2013-09-11 20:06:58,836 [20] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/biz/message
+ ErrMessage:未找到视图“message”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/biz/message.aspx
+~/Views/biz/message.ascx
+~/Views/Shared/message.aspx
+~/Views/Shared/message.ascx
+~/Views/biz/message.cshtml
+~/Views/biz/message.vbhtml
+~/Views/Shared/message.cshtml
+~/Views/Shared/message.vbhtml 
+ System.InvalidOperationException: 未找到视图“message”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/biz/message.aspx
+~/Views/biz/message.ascx
+~/Views/Shared/message.aspx
+~/Views/Shared/message.ascx
+~/Views/biz/message.cshtml
+~/Views/biz/message.vbhtml
+~/Views/Shared/message.cshtml
+~/Views/Shared/message.vbhtml
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-11 20:08:43,183 [16] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1编辑企业公告成功! 
+ System.InvalidOperationException: 序列不包含任何元素
+   在 System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   在 System.Linq.Queryable.Single[TSource](IQueryable`1 source, Expression`1 predicate)
+   在 PadSite.Service.CompanyNoticeService.Find(Int32 ID) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 56
+   在 PadSite.Service.CompanyNoticeService.Update(CompanyNotice model) 位置 e:\GitProject\7980Site\PadSite\Service\Company\CompanyNoticeService.cs:行号 39
+   在 PadSite.Controllers.BizController.EditNotice(CompanyNoticeViewModel model) 位置 e:\GitProject\7980Site\PadSite\Controllers\Personal\BizController.cs:行号 528
+
+ ExTime :2013-09-11 20:23:43,401 [11] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/company/message_read
+ ErrMessage:未找到路径“/company/message_read”的控制器或该控制器未实现 IController。 
+ System.Web.HttpException (0x80004005): 未找到路径“/company/message_read”的控制器或该控制器未实现 IController。
+   在 System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   在 System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   在 System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   在 System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-11 20:23:52,254 [24] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/company/message_read
+ ErrMessage:未找到路径“/company/message_read”的控制器或该控制器未实现 IController。 
+ System.Web.HttpException (0x80004005): 未找到路径“/company/message_read”的控制器或该控制器未实现 IController。
+   在 System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   在 System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   在 System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   在 System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-11 20:23:54,920 [25] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/company/message_read
+ ErrMessage:未找到路径“/company/message_read”的控制器或该控制器未实现 IController。 
+ System.Web.HttpException (0x80004005): 未找到路径“/company/message_read”的控制器或该控制器未实现 IController。
+   在 System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   在 System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   在 System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   在 System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-11 20:23:57,217 [17] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/company/message_read
+ ErrMessage:未找到路径“/company/message_read”的控制器或该控制器未实现 IController。 
+ System.Web.HttpException (0x80004005): 未找到路径“/company/message_read”的控制器或该控制器未实现 IController。
+   在 System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   在 System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   在 System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   在 System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-11 20:28:39,972 [11] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/company/message_read
+ ErrMessage:未找到路径“/company/message_read”的控制器或该控制器未实现 IController。 
+ System.Web.HttpException (0x80004005): 未找到路径“/company/message_read”的控制器或该控制器未实现 IController。
+   在 System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   在 System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   在 System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   在 System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-11 20:28:42,797 [33] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/company/message_read
+ ErrMessage:未找到路径“/company/message_read”的控制器或该控制器未实现 IController。 
+ System.Web.HttpException (0x80004005): 未找到路径“/company/message_read”的控制器或该控制器未实现 IController。
+   在 System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   在 System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   在 System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   在 System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-11 20:28:43,961 [7] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/company/message_read
+ ErrMessage:未找到路径“/company/message_read”的控制器或该控制器未实现 IController。 
+ System.Web.HttpException (0x80004005): 未找到路径“/company/message_read”的控制器或该控制器未实现 IController。
+   在 System.Web.Mvc.DefaultControllerFactory.GetControllerInstance(RequestContext requestContext, Type controllerType)
+   在 System.Web.Mvc.DefaultControllerFactory.CreateController(RequestContext requestContext, String controllerName)
+   在 System.Web.Mvc.MvcHandler.ProcessRequestInit(HttpContextBase httpContext, IController& controller, IControllerFactory& factory)
+   在 System.Web.Mvc.MvcHandler.BeginProcessRequest(HttpContextBase httpContext, AsyncCallback callback, Object state)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)

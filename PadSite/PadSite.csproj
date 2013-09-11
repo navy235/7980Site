@@ -237,6 +237,7 @@
     <Compile Include="ViewModels\Company\CompanyCredentialsViewModel.cs" />
     <Compile Include="ViewModels\Company\CompanyLogoViewModel.cs" />
     <Compile Include="ViewModels\Company\CompanyMessageDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Company\CompanyMessageViewModel.cs" />
     <Compile Include="ViewModels\Company\CompanyNoticeViewModel.cs" />
     <Compile Include="ViewModels\Company\CompanyRegViewModel.cs" />
     <Compile Include="ViewModels\Company\CompanyVerifyViewModel.cs" />
@@ -611,6 +612,7 @@
     <Content Include="Views\Biz\Notice.cshtml" />
     <Content Include="Views\Biz\AddNotice.cshtml" />
     <Content Include="Views\Biz\EditNotice.cshtml" />
+    <Content Include="Views\Biz\Message.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
