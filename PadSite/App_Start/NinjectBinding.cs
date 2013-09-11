@@ -78,6 +78,7 @@ namespace PadSite
             kernel.Bind<IMemberService>().To<MemberService>().InRequestScope();
             kernel.Bind<IMember_ActionService>().To<Member_ActionService>().InRequestScope();
             kernel.Bind<ICompanyService>().To<CompanyService>().InRequestScope();
+            kernel.Bind<ICompanyCredentialsImgService>().To<CompanyCredentialsImgService>().InRequestScope();
             #endregion
 
             #region email

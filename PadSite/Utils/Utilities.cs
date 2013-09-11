@@ -35,5 +35,25 @@ namespace PadSite.Utils
         {
             return ex.GetBaseException().Message;
         }
+
+        public static List<int> GetIdList(string Ids)
+        {
+            var list = new List<int>();
+            if (!string.IsNullOrEmpty(Ids))
+            {
+                list = Ids.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            }
+            return list;
+        }
+
+        public static int GetCascadingId(string Ids)
+        {
+            int id = 0;
+            if (!string.IsNullOrEmpty(Ids))
+            {
+                id = Convert.ToInt32(Ids.Split(',').Last());
+            }
+            return id;
+        }
     }
 }

@@ -25,7 +25,13 @@ namespace PadSite.Service.Interface
 
         Company SaveBasInfo(int MemberID, CompanyRegViewModel model);
 
+        Company SaveLogo(int MemberID, CompanyLogoViewModel model);
+
+        Company SaveBanner(int MemberID, CompanyBannerViewModel model);
+
         void UpdateAuthInfo(int MemberID, BizAuthViewModel model);
+
+        void UpdateContactInfo(int MemberID, CompanyContactInfoViewModel model);
 
         IQueryable<CompanyVerifyViewModel> GetVerifyList(CompanyStatus CompanyStatus);
 

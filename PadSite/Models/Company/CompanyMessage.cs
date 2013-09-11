@@ -14,6 +14,8 @@ namespace PadSite.Models
 
         public int MemberID { get; set; }
 
+        public int SenderID { get; set; }
+
         public int Status { get; set; }
 
         [MaxLength(2000)]

@@ -5,6 +5,7 @@ using System.Web;
 using PadSite.Models;
 using PadSite.ViewModels;
 using PadSite.Service.Interface;
+using PadSite.Utils;
 using Maitonn.Core;
 namespace PadSite.Service
 {
@@ -58,12 +59,7 @@ namespace PadSite.Service
             company.Address = model.Address;
             company.AddTime = DateTime.Now;
             company.CityCodeValue = model.CityCode;
-            var cityCode = 0;
-            if (!string.IsNullOrEmpty(model.CityCode))
-            {
-                cityCode = Convert.ToInt32(model.CityCode.Split(',').Last());
-            }
-            company.CityCode = cityCode;
+            company.CityCode = Utilities.GetCascadingId(model.CityCode);
             company.Description = model.Description;
             company.Fax = model.Fax;
             company.LastIP = HttpHelper.IP;
@@ -109,6 +105,8 @@ namespace PadSite.Service
             company.Phone = model.Phone;
             company.QQ = model.QQ;
             company.Sex = model.Sex;
+            company.CityCodeValue = model.CityCode;
+            company.CityCode = Utilities.GetCascadingId(model.CityCode);
             db.Add<Company>(company);
             db.Commit();
             return company;
@@ -154,6 +152,8 @@ namespace PadSite.Service
             company.LinkManImg = model.LinkManImg;
             company.LogoImg = model.LogoImg;
             company.CredentialsImg = model.CredentialsImg;
+            company.CityCodeValue = model.CityCode;
+            company.CityCode = Utilities.GetCascadingId(model.CityCode);
             company.Status = (int)CompanyStatus.CompanyApply;
             db.Commit();
 
@@ -194,6 +194,40 @@ namespace PadSite.Service
             {
                 MemberService.ChangeStatus(IdsArray, (int)MemberStatus.CompanyAuth);
             }
+        }
+
+
+        public void UpdateContactInfo(int MemberID, CompanyContactInfoViewModel model)
+        {
+            var company = Find(MemberID);
+            db.Attach<Company>(company);
+            company.LinkMan = model.LinkMan;
+            company.Fax = model.Fax;
+            company.Mobile = model.Mobile;
+            company.MSN = model.MSN;
+            company.Phone = model.Phone;
+            company.QQ = model.QQ;
+            company.Sex = model.Sex;
+            db.Commit();
+        }
+
+
+        public Company SaveLogo(int MemberID, CompanyLogoViewModel model)
+        {
+            var company = Find(MemberID);
+            db.Attach<Company>(company);
+            company.LogoImg = model.LogoImg;
+            db.Commit();
+            return company;
+        }
+
+        public Company SaveBanner(int MemberID, CompanyBannerViewModel model)
+        {
+            var company = Find(MemberID);
+            db.Attach<Company>(company);
+            company.BannerImg = model.BannerImg;
+            db.Commit();
+            return company;
         }
     }
 }

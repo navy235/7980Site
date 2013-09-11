@@ -14,6 +14,13 @@
                     <li><a href="@Url.Action("credentials")"><span>资质证书</span></a></li>
                 </ul>
             </div>
+            @if (!ViewBag.Authed)
+            {
+                <div class="personal-form-tips">
+                    <i class="icon-maitonn icon-exclamation-sign"></i><strong>友情提醒:</strong>
+                    @CookieHelper.NickName ,您好,您的企业信息当前正在审核中,如果需要修改请点击 <a href="@Url.Action("openbiz", "reg")">修改企业信息</a>。
+                </div>
+            }
             <div class="dispaly-container">
                 @Html.DisplayForModel()
             </div>

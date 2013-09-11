@@ -36,6 +36,7 @@
     border: 1px solid #ccc;
     width: 90px;
     height: 90px;
+    padding: 5px;
 }
 
 .k-vcode {
@@ -181,10 +182,8 @@
 
 .img-item {
     float: left;
-    padding: 5px;
     position: relative;
-    border: 1px solid #bbb;
-    margin: 10px 10px 0 0;
+    margin: 0px 10px 0 0;
     display: none;
 }
 
@@ -195,6 +194,8 @@
     .img-item img {
         width: 120px;
         height: 100px;
+        padding: 5px;
+        border: 1px solid #bbb;
     }
 
     .img-item .img-item-close {

@@ -53,6 +53,12 @@ namespace PadSite.ViewModels
         [HintLabel("请上传1-6张不小于800X600像素的图片,图片文件大小不超过5M")]
         public string CredentialsImg { get; set; }
 
+
+        [Required(ErrorMessage = "请输入身份证号码")]
+        [Display(Name = "身份证号码")]
+        public string IdentityCard { get; set; }
+
+
         [Required(ErrorMessage = "请上传联系人身份证照片.")]
         [Display(Name = "身份证照片")]
         [UIHint("UploadImgList")]

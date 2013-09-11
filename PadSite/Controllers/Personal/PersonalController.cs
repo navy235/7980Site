@@ -36,6 +36,7 @@ namespace PadSite.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.MenuItem = "account";
             return View();
         }
 

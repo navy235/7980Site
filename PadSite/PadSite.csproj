@@ -174,6 +174,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309110549509_AddSenderIDForMessage.cs" />
+    <Compile Include="Migrations\201309110549509_AddSenderIDForMessage.Designer.cs">
+      <DependentUpon>201309110549509_AddSenderIDForMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Base\Article.cs" />
     <Compile Include="Models\Base\Department.cs" />
@@ -195,9 +199,15 @@
     <Compile Include="Models\Category\MediaCate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Category\CityCateService.cs" />
+    <Compile Include="Service\Company\CompanyCredentialsImgService.cs" />
     <Compile Include="Service\Company\CompanyService.cs" />
+    <Compile Include="Service\Company\CompanyNoticeService.cs" />
+    <Compile Include="Service\Company\CompanyMessageService.cs" />
     <Compile Include="Service\Email\EmailService.cs" />
+    <Compile Include="Service\Interface\Company\ICompanyCredentialsImgService.cs" />
     <Compile Include="Service\Interface\Company\ICompanyService.cs" />
+    <Compile Include="Service\Interface\Company\ICompanyNoticeService.cs" />
+    <Compile Include="Service\Interface\Company\ICompanyMessageService.cs" />
     <Compile Include="Service\Interface\Email\IEmailService.cs" />
     <Compile Include="Service\Interface\Category\ICityCateService.cs" />
     <Compile Include="Service\Interface\Category\IMediaCateService.cs" />
@@ -223,8 +233,13 @@
     <Compile Include="Utils\ServiceResult.cs" />
     <Compile Include="Utils\Utilities.cs" />
     <Compile Include="ViewModels\Account\BizAuthViewModel.cs" />
-    <Compile Include="ViewModels\Account\CompanyRegViewModel.cs" />
-    <Compile Include="ViewModels\Account\CompanyVerifyViewModel.cs" />
+    <Compile Include="ViewModels\Company\CompanyContactInfoViewModel.cs" />
+    <Compile Include="ViewModels\Company\CompanyCredentialsViewModel.cs" />
+    <Compile Include="ViewModels\Company\CompanyLogoViewModel.cs" />
+    <Compile Include="ViewModels\Company\CompanyMessageDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Company\CompanyNoticeViewModel.cs" />
+    <Compile Include="ViewModels\Company\CompanyRegViewModel.cs" />
+    <Compile Include="ViewModels\Company\CompanyVerifyViewModel.cs" />
     <Compile Include="ViewModels\Account\ContactViewModel.cs" />
     <Compile Include="ViewModels\Account\DetailsViewModel.cs" />
     <Compile Include="ViewModels\Account\EditViewModel.cs" />
@@ -238,6 +253,7 @@
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Category\ArticleCateViewModel.cs" />
     <Compile Include="ViewModels\Category\PeriodCateViewModel.cs" />
+    <Compile Include="ViewModels\Company\CompanyBannerViewModel.cs" />
     <Compile Include="ViewModels\Email\EmailModel.cs" />
     <Compile Include="ViewModels\FormModel.cs" />
     <Compile Include="ViewModels\Category\CityCateViewModel.cs" />
@@ -586,6 +602,15 @@
     <Content Include="Views\BizVerify\Authed.cshtml" />
     <Content Include="Views\BizVerify\Details.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\MapMarker.cshtml" />
+    <Content Include="Views\Biz\Credentials.cshtml" />
+    <Content Include="Views\Biz\AddCredentials.cshtml" />
+    <Content Include="Views\Biz\EditCredentials.cshtml" />
+    <Content Include="Views\Biz\Contact.cshtml" />
+    <Content Include="Views\Biz\Logo.cshtml" />
+    <Content Include="Views\Biz\Banner.cshtml" />
+    <Content Include="Views\Biz\Notice.cshtml" />
+    <Content Include="Views\Biz\AddNotice.cshtml" />
+    <Content Include="Views\Biz\EditNotice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -593,6 +618,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201309110549509_AddSenderIDForMessage.resx">
+      <DependentUpon>201309110549509_AddSenderIDForMessage.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
