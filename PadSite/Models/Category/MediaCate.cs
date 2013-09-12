@@ -33,5 +33,8 @@ namespace PadSite.Models
 
         [ScriptIgnore]
         public virtual ICollection<MediaCate> ChildCates { get; set; }
+
+        public virtual ICollection<OutDoor> OutDoor { get; set; }
+    
     }
 }

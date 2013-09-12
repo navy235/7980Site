@@ -148,6 +148,11 @@
     <Compile Include="App_Start\NinjectBinding.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Admin\Category\OwnerCateController.cs" />
+    <Compile Include="Controllers\Admin\Category\CrowdCateController.cs" />
+    <Compile Include="Controllers\Admin\Category\AreaCateController.cs" />
+    <Compile Include="Controllers\Admin\Category\IndustryCateController.cs" />
+    <Compile Include="Controllers\Admin\Category\PurposeCateController.cs" />
     <Compile Include="Controllers\Admin\Member\BizVerifyController.cs" />
     <Compile Include="Controllers\Admin\Member\MemberController.cs" />
     <Compile Include="Controllers\Personal\BizController.cs" />
@@ -168,6 +173,8 @@
     <Compile Include="Controllers\Permission\PermissionsController.cs" />
     <Compile Include="Controllers\Permission\RolesController.cs" />
     <Compile Include="Controllers\Permission\GroupController.cs" />
+    <Compile Include="Controllers\Personal\MessageController.cs" />
+    <Compile Include="Controllers\Personal\OutDoorController.cs" />
     <Compile Include="Controllers\Personal\PersonalController.cs" />
     <Compile Include="Filters\LoginAuthorizeAttribute.cs" />
     <Compile Include="Filters\PermissionAuthorizeAttribute.cs" />
@@ -178,6 +185,18 @@
     <Compile Include="Migrations\201309110549509_AddSenderIDForMessage.Designer.cs">
       <DependentUpon>201309110549509_AddSenderIDForMessage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309120642012_AddMessage.cs" />
+    <Compile Include="Migrations\201309120642012_AddMessage.Designer.cs">
+      <DependentUpon>201309120642012_AddMessage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309120844180_AddOutDoor.cs" />
+    <Compile Include="Migrations\201309120844180_AddOutDoor.Designer.cs">
+      <DependentUpon>201309120844180_AddOutDoor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309120924578_AddPurpose.cs" />
+    <Compile Include="Migrations\201309120924578_AddPurpose.Designer.cs">
+      <DependentUpon>201309120924578_AddPurpose.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Base\Article.cs" />
     <Compile Include="Models\Base\Department.cs" />
@@ -187,23 +206,40 @@
     <Compile Include="Models\Base\Member_Profile.cs" />
     <Compile Include="Models\Base\Permissions.cs" />
     <Compile Include="Models\Base\Roles.cs" />
+    <Compile Include="Models\Category\AreaCate.cs" />
     <Compile Include="Models\Category\ArticleCate.cs" />
     <Compile Include="Models\Category\CityCate.cs" />
     <Compile Include="Models\Category\FormatCate.cs" />
+    <Compile Include="Models\Category\IndustryCate.cs" />
+    <Compile Include="Models\Category\OwnerCate.cs" />
     <Compile Include="Models\Category\PeriodCate.cs" />
+    <Compile Include="Models\Category\CrowdCate.cs" />
+    <Compile Include="Models\Category\PurposeCate.cs" />
     <Compile Include="Models\Company\Company.cs" />
     <Compile Include="Models\Company\CompanyCredentialsImg.cs" />
     <Compile Include="Models\Company\CompanyMessage.cs" />
     <Compile Include="Models\Company\CompanyNotice.cs" />
     <Compile Include="Models\Context\EntitiesContext.cs" />
     <Compile Include="Models\Category\MediaCate.cs" />
+    <Compile Include="Models\Media\OutDoor.cs" />
+    <Compile Include="Models\Message\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Category\CityCateService.cs" />
+    <Compile Include="Service\Category\OwnerCateService.cs" />
+    <Compile Include="Service\Category\AreaCateService.cs" />
+    <Compile Include="Service\Category\CrowdCateService.cs" />
+    <Compile Include="Service\Category\IndustryCateService.cs" />
+    <Compile Include="Service\Category\PurposeCateService.cs" />
     <Compile Include="Service\Company\CompanyCredentialsImgService.cs" />
     <Compile Include="Service\Company\CompanyService.cs" />
     <Compile Include="Service\Company\CompanyNoticeService.cs" />
     <Compile Include="Service\Company\CompanyMessageService.cs" />
     <Compile Include="Service\Email\EmailService.cs" />
+    <Compile Include="Service\Interface\Category\IOwnerCateService.cs" />
+    <Compile Include="Service\Interface\Category\IAreaCateService.cs" />
+    <Compile Include="Service\Interface\Category\ICrowdCateService.cs" />
+    <Compile Include="Service\Interface\Category\IIndustryCateService.cs" />
+    <Compile Include="Service\Interface\Category\IPurposeCateService.cs" />
     <Compile Include="Service\Interface\Company\ICompanyCredentialsImgService.cs" />
     <Compile Include="Service\Interface\Company\ICompanyService.cs" />
     <Compile Include="Service\Interface\Company\ICompanyNoticeService.cs" />
@@ -211,11 +247,13 @@
     <Compile Include="Service\Interface\Email\IEmailService.cs" />
     <Compile Include="Service\Interface\Category\ICityCateService.cs" />
     <Compile Include="Service\Interface\Category\IMediaCateService.cs" />
-    <Compile Include="Service\Interface\Category\IArticleService.cs" />
+    <Compile Include="Service\Interface\Category\IArticleCateService.cs" />
     <Compile Include="Service\Interface\Category\IFormatCateService.cs" />
     <Compile Include="Service\Interface\Category\IPeriodCateService.cs" />
+    <Compile Include="Service\Interface\Media\IOutDoorService.cs" />
     <Compile Include="Service\Interface\Member\IMemberService.cs" />
     <Compile Include="Service\Interface\Member\IMember_ActionService.cs" />
+    <Compile Include="Service\Interface\Message\IMessageService.cs" />
     <Compile Include="Service\Interface\Permission\IDepartmentService.cs" />
     <Compile Include="Service\Category\MediaCateService.cs" />
     <Compile Include="Service\Category\ArticleCateService.cs" />
@@ -224,8 +262,10 @@
     <Compile Include="Service\Interface\Permission\IPermissionsService.cs" />
     <Compile Include="Service\Interface\Permission\IRolesService.cs" />
     <Compile Include="Service\Interface\Permission\IGroupService.cs" />
+    <Compile Include="Service\Media\OutDoorService.cs" />
     <Compile Include="Service\Member\MemberService.cs" />
     <Compile Include="Service\Member\Member_ActionService.cs" />
+    <Compile Include="Service\Message\MessageService.cs" />
     <Compile Include="Service\Permission\DepartmentService.cs" />
     <Compile Include="Service\Permission\PermissionsService.cs" />
     <Compile Include="Service\Permission\RolesService.cs" />
@@ -233,6 +273,11 @@
     <Compile Include="Utils\ServiceResult.cs" />
     <Compile Include="Utils\Utilities.cs" />
     <Compile Include="ViewModels\Account\BizAuthViewModel.cs" />
+    <Compile Include="ViewModels\Category\CrowdCateViewModel.cs" />
+    <Compile Include="ViewModels\Category\OwnerCateViewModel.cs" />
+    <Compile Include="ViewModels\Category\AreaCateViewModel.cs" />
+    <Compile Include="ViewModels\Category\IndustryCateViewModel.cs" />
+    <Compile Include="ViewModels\Category\PurposeCateViewModel.cs" />
     <Compile Include="ViewModels\Company\CompanyContactInfoViewModel.cs" />
     <Compile Include="ViewModels\Company\CompanyCredentialsViewModel.cs" />
     <Compile Include="ViewModels\Company\CompanyLogoViewModel.cs" />
@@ -260,6 +305,8 @@
     <Compile Include="ViewModels\Category\CityCateViewModel.cs" />
     <Compile Include="ViewModels\Category\MediaCateViewModel.cs" />
     <Compile Include="ViewModels\Category\FormatCateViewModel.cs" />
+    <Compile Include="ViewModels\Message\MessageViewModel.cs" />
+    <Compile Include="ViewModels\Message\SystemMessageViewModel.cs" />
     <Compile Include="ViewModels\Permission\DepartmentViewModel.cs" />
     <Compile Include="ViewModels\Permission\PermissionsViewModel.cs" />
     <Compile Include="ViewModels\Permission\RolesViewModel.cs" />
@@ -613,6 +660,27 @@
     <Content Include="Views\Biz\AddNotice.cshtml" />
     <Content Include="Views\Biz\EditNotice.cshtml" />
     <Content Include="Views\Biz\Message.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Message\Send.cshtml" />
+    <Content Include="Views\Message\SysDetails.cshtml" />
+    <Content Include="Views\Message\Details.cshtml" />
+    <Content Include="Views\Message\SendMessageDetails.cshtml" />
+    <Content Include="Views\OwnerCate\Create.cshtml" />
+    <Content Include="Views\OwnerCate\Edit.cshtml" />
+    <Content Include="Views\OwnerCate\Index.cshtml" />
+    <Content Include="Views\AreaCate\Create.cshtml" />
+    <Content Include="Views\AreaCate\Edit.cshtml" />
+    <Content Include="Views\AreaCate\Index.cshtml" />
+    <Content Include="Views\CrowdCate\Create.cshtml" />
+    <Content Include="Views\CrowdCate\Edit.cshtml" />
+    <Content Include="Views\CrowdCate\Index.cshtml" />
+    <Content Include="Views\IndustryCate\Create.cshtml" />
+    <Content Include="Views\IndustryCate\Edit.cshtml" />
+    <Content Include="Views\IndustryCate\Index.cshtml" />
+    <Content Include="Views\PurposeCate\Create.cshtml" />
+    <Content Include="Views\PurposeCate\Edit.cshtml" />
+    <Content Include="Views\PurposeCate\Index.cshtml" />
+    <Content Include="Views\Outdoor\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -624,6 +692,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201309110549509_AddSenderIDForMessage.resx">
       <DependentUpon>201309110549509_AddSenderIDForMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309120642012_AddMessage.resx">
+      <DependentUpon>201309120642012_AddMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309120844180_AddOutDoor.resx">
+      <DependentUpon>201309120844180_AddOutDoor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309120924578_AddPurpose.resx">
+      <DependentUpon>201309120924578_AddPurpose.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

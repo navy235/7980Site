@@ -112,3 +112,6 @@ D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddSenderIDForMessag
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddSenderIDForMessage.resources
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddMessage.resources
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddOutDoor.resources
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddPurpose.resources

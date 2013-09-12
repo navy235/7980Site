@@ -15,6 +15,7 @@ namespace PadSite.Controllers
         public ActionResult Index()
         {
 
+            string city = "招商 渠道扩张 品牌建设 促销活动";
             //string province = "湖南";
             //string city = "长沙,株洲,湘潭,衡阳,邵阳,岳阳,常德,张家界,益阳,郴州,永州,怀化,娄底,湘西";
             //var xian = new string[]{
@@ -36,37 +37,37 @@ namespace PadSite.Controllers
 
             //StringBuilder printer = new StringBuilder();
             //printer.AppendLine("USE [pad_db]");
-            //printer.AppendLine("SET IDENTITY_INSERT [dbo].[CityCate] ON ");
+            //printer.AppendLine("SET IDENTITY_INSERT [dbo].[PurposeCate] ON ");
             //printer.AppendLine("GO");
 
 
-            //printer.AppendLine("INSERT [dbo].[CityCate] ([ID], [CateName], [PID], [Code], [Level], [OrderIndex]) VALUES (1, N'湖南省', NULL, 100000, 0, 0)");
-            //printer.AppendLine("GO");
 
-            //var cityArr = city.Split(',').ToList();
+            //var cityArr = city.Split(' ').ToList();
 
-            //var id = 1;
+            //var id = 0;
 
             //for (var i = 0; i < cityArr.Count; i++)
             //{
             //    id++;
-            //    printer.AppendLine("INSERT [dbo].[CityCate] ([ID], [CateName], [PID], [Code], [Level], [OrderIndex]) VALUES (" + id + ", N'" + cityArr[i] + "', 1, 10" + GetString(i + 1) + "00, 1, " + (id - 1) + ")");
+            //    //printer.AppendLine("INSERT [dbo].[OwnerCate] ([ID], [CateName], [PID], [Code], [Level], [OrderIndex]) VALUES (" + id + ", N'" + cityArr[i] + "', 1, 10" + GetString(i + 1) + ", 0, " + (id - 1) + ")");
+
+            //    printer.AppendLine("INSERT [dbo].[PurposeCate] ([ID], [CateName]) VALUES (" + id + ", N'" + cityArr[i] + "'" + ")");
             //    printer.AppendLine("GO");
             //}
 
-            //var cityCount = cityArr.Count;
+            ////var cityCount = cityArr.Count;
 
-            //for (var i = 0; i < cityArr.Count; i++)
-            //{
-            //    var xianArr = xian[i].Split('、').ToList();
-            //    for (var j = 0; j < xianArr.Count; j++)
-            //    {
-            //        id++;
-            //        printer.AppendLine("INSERT [dbo].[CityCate] ([ID], [CateName], [PID], [Code], [Level], [OrderIndex]) VALUES (" + id + ", N'" + xianArr[j] + "', " + (i + 2) + ", 10" + GetString(i + 1) + GetString(j + 1) + ", 2, " + (id - 1) + ")");
-            //        printer.AppendLine("GO");
-            //    }
+            ////for (var i = 0; i < cityArr.Count; i++)
+            ////{
+            ////    var xianArr = xian[i].Split('、').ToList();
+            ////    for (var j = 0; j < xianArr.Count; j++)
+            ////    {
+            ////        id++;
+            ////        printer.AppendLine("INSERT [dbo].[CityCate] ([ID], [CateName], [PID], [Code], [Level], [OrderIndex]) VALUES (" + id + ", N'" + xianArr[j] + "', " + (i + 2) + ", 10" + GetString(i + 1) + GetString(j + 1) + ", 2, " + (id - 1) + ")");
+            ////        printer.AppendLine("GO");
+            ////    }
 
-            //}
+            ////}
 
             //ViewBag.Str = printer.ToString();
 
@@ -78,5 +79,16 @@ namespace PadSite.Controllers
             return View();
         }
 
+        public string GetString(int number)
+        {
+            if (number > 9)
+            {
+                return number.ToString();
+            }
+            else
+            {
+                return "0" + number.ToString();
+            }
+        }
     }
 }

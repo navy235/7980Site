@@ -53,7 +53,12 @@ namespace PadSite.Controllers
         public ActionResult Index()
         {
             ViewBag.MenuItem = "company-baseinfo";
+
             var member = MemberService.Find(CookieHelper.MemberID);
+            if (member.Status < (int)MemberStatus.CompanyAuth)
+            {
+                return Redirect(Url.Action("openbiz", "reg"));
+            }
             var company = CompanyService.Find(CookieHelper.MemberID);
             if (company == null)
             {
@@ -89,18 +94,26 @@ namespace PadSite.Controllers
         public ActionResult Contact()
         {
             ViewBag.MenuItem = "company-contact";
-            var company = CompanyService.Find(CookieHelper.MemberID);
-            var model = new CompanyContactInfoViewModel()
+            var member = MemberService.Find(CookieHelper.MemberID);
+            if (member.Status < (int)MemberStatus.CompanyAuth)
             {
-                Fax = company.Fax,
-                LinkMan = company.LinkMan,
-                Mobile = company.Mobile,
-                MSN = company.MSN,
-                Phone = company.Phone,
-                QQ = company.QQ,
-                Sex = company.Sex
-            };
-            return View(model);
+                return Redirect(Url.Action("openbiz", "reg"));
+            }
+            else
+            {
+                var company = CompanyService.Find(CookieHelper.MemberID);
+                var model = new CompanyContactInfoViewModel()
+                {
+                    Fax = company.Fax,
+                    LinkMan = company.LinkMan,
+                    Mobile = company.Mobile,
+                    MSN = company.MSN,
+                    Phone = company.Phone,
+                    QQ = company.QQ,
+                    Sex = company.Sex
+                };
+                return View(model);
+            }
 
         }
         [HttpPost]
@@ -108,6 +121,11 @@ namespace PadSite.Controllers
         public ActionResult Contact(CompanyContactInfoViewModel model)
         {
             ViewBag.MenuItem = "company-contact";
+            var member = MemberService.Find(CookieHelper.MemberID);
+            if (member.Status < (int)MemberStatus.CompanyAuth)
+            {
+                return Redirect(Url.Action("openbiz", "reg"));
+            }
             ServiceResult result = new ServiceResult();
             TempData["Service_Result"] = result;
             if (ModelState.IsValid)
@@ -534,9 +552,9 @@ namespace PadSite.Controllers
                 }
                 catch (Exception ex)
                 {
-                    result.Message = "编辑企业公告成功!";
+                    result.Message = "编辑企业公告失败!";
                     result.AddServiceError(Utilities.GetInnerMostException(ex));
-                    LogHelper.WriteLog("用户:" + CookieHelper.MemberID + "编辑企业公告成功!", ex);
+                    LogHelper.WriteLog("用户:" + CookieHelper.MemberID + "编辑企业公告失败!", ex);
                     return View(model);
                 }
             }

@@ -43,5 +43,6 @@ namespace PadSite.ViewModels
         [UIHint("RadioList")]
         [AdditionalMetadata("RadioList", "否,是")]
         public bool IsSingle { get; set; }
+
     }
 }

@@ -15,10 +15,12 @@ namespace PadSite.Models
 
         }
 
+        public IDbSet<Message> Message { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+
             #region Category
 
             modelBuilder.Entity<CityCate>()
@@ -82,8 +84,6 @@ namespace PadSite.Models
             #endregion
 
 
-
-
             #region permission
 
             modelBuilder.Entity<Permissions>()
@@ -123,6 +123,98 @@ namespace PadSite.Models
                 .WithMany(c => c.Article)
                 .HasForeignKey(o => o.ArticleCode)
                 .WillCascadeOnDelete(false);
+
+            #region media
+
+            modelBuilder.Entity<OutDoor>()
+                .HasRequired(m => m.Member)
+                .WithMany(c => c.OutDoor)
+                .HasForeignKey(o => o.MemberID)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<OutDoor>()
+               .HasRequired(m => m.CityCate)
+               .WithMany(c => c.OutDoor)
+               .HasForeignKey(o => o.CityCode)
+               .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<OutDoor>()
+                .HasRequired(m => m.PeriodCate)
+                .WithMany(c => c.OutDoor)
+                .HasForeignKey(o => o.PeriodCode)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<OutDoor>()
+                .HasRequired(m => m.FormatCate)
+                .WithMany(c => c.OutDoor)
+                .HasForeignKey(o => o.FormatCode)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<OutDoor>()
+                 .HasRequired(o => o.OwnerCate)
+                 .WithMany(oc => oc.OutDoor)
+                 .HasForeignKey(o => o.OwnerCode)
+                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<OutDoor>()
+                .HasRequired(m => m.MediaCate)
+                .WithMany(c => c.OutDoor)
+                .HasForeignKey(o => o.MeidaCode)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<OutDoor>()
+              .HasMany(b => b.AreaCate)
+              .WithMany(c => c.OutDoor)
+              .Map
+              (
+                  m =>
+                  {
+                      m.MapLeftKey("OutDoorID");
+                      m.MapRightKey("AreaCateID");
+                      m.ToTable("OutDoor_AreaCate");
+                  }
+              );
+
+            modelBuilder.Entity<OutDoor>()
+              .HasMany(b => b.CrowdCate)
+              .WithMany(c => c.OutDoor)
+              .Map
+              (
+                  m =>
+                  {
+                      m.MapLeftKey("OutDoorID");
+                      m.MapRightKey("CrowdCateID");
+                      m.ToTable("OutDoor_CrowdCate");
+                  }
+              );
+
+
+            modelBuilder.Entity<OutDoor>()
+           .HasMany(b => b.IndustryCate)
+           .WithMany(c => c.OutDoor)
+           .Map
+           (
+               m =>
+               {
+                   m.MapLeftKey("OutDoorID");
+                   m.MapRightKey("IndustryCateID");
+                   m.ToTable("OutDoor_IndustryCate");
+               }
+           );
+
+            modelBuilder.Entity<OutDoor>()
+            .HasMany(b => b.PurposeCate)
+            .WithMany(c => c.OutDoor)
+            .Map
+            (
+                m =>
+                {
+                    m.MapLeftKey("OutDoorID");
+                    m.MapRightKey("PurposeCateID");
+                    m.ToTable("OutDoor_PurposeCate");
+                }
+            );
+            #endregion
 
 
             base.OnModelCreating(modelBuilder);

@@ -39,6 +39,9 @@ textarea {
     min-height: 75px;
 }
 
+    textarea.multi-line {
+        width: 260px;
+    }
 
 .fg-color-blue {
     color: #2d89ef !important;
@@ -802,4 +805,8 @@ select {
 .display-item .map-container {
     width: 450px;
     height: 350px;
+}
+
+#verifyLoading {
+    margin: 100px auto; width: 100px;
 }

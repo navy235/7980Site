@@ -64,6 +64,12 @@ namespace PadSite
             kernel.Bind<IArticleCateService>().To<ArticleCateService>().InRequestScope();
             kernel.Bind<IFormatCateService>().To<FormatCateService>().InRequestScope();
             kernel.Bind<IPeriodCateService>().To<PeriodCateService>().InRequestScope();
+
+            kernel.Bind<IIndustryCateService>().To<IndustryCateService>().InRequestScope();
+            kernel.Bind<ICrowdCateService>().To<CrowdCateService>().InRequestScope();
+            kernel.Bind<IOwnerCateService>().To<OwnerCateService>().InRequestScope();
+            kernel.Bind<IAreaCateService>().To<AreaCateService>().InRequestScope();
+            kernel.Bind<IPurposeCateService>().To<PurposeCateService>().InRequestScope();
             #endregion
 
             #region permission
@@ -81,6 +87,10 @@ namespace PadSite
             kernel.Bind<ICompanyCredentialsImgService>().To<CompanyCredentialsImgService>().InRequestScope();
             kernel.Bind<ICompanyNoticeService>().To<CompanyNoticeService>().InRequestScope();
             kernel.Bind<ICompanyMessageService>().To<CompanyMessageService>().InRequestScope();
+            #endregion
+
+            #region Message
+            kernel.Bind<IMessageService>().To<MessageService>().InRequestScope();
             #endregion
 
             #region email

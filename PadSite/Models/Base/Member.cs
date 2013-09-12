@@ -78,5 +78,7 @@ namespace PadSite.Models
 
         public virtual ICollection<CompanyNotice> CompanyNotice { get; set; }
 
+        public virtual ICollection<OutDoor> OutDoor { get; set; }
+
     }
 }
