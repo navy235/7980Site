@@ -197,6 +197,18 @@
     <Compile Include="Migrations\201309120924578_AddPurpose.Designer.cs">
       <DependentUpon>201309120924578_AddPurpose.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201309130222406_OutDoorField.cs" />
+    <Compile Include="Migrations\201309130222406_OutDoorField.Designer.cs">
+      <DependentUpon>201309130222406_OutDoorField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309130741239_OutDoorMediaCode.cs" />
+    <Compile Include="Migrations\201309130741239_OutDoorMediaCode.Designer.cs">
+      <DependentUpon>201309130741239_OutDoorMediaCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309130742542_OutDoorMediaCodeValue.cs" />
+    <Compile Include="Migrations\201309130742542_OutDoorMediaCodeValue.Designer.cs">
+      <DependentUpon>201309130742542_OutDoorMediaCodeValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Base\Article.cs" />
     <Compile Include="Models\Base\Department.cs" />
@@ -305,6 +317,8 @@
     <Compile Include="ViewModels\Category\CityCateViewModel.cs" />
     <Compile Include="ViewModels\Category\MediaCateViewModel.cs" />
     <Compile Include="ViewModels\Category\FormatCateViewModel.cs" />
+    <Compile Include="ViewModels\Media\OutDoorItemViewModel.cs" />
+    <Compile Include="ViewModels\Media\OutDoorViewModel.cs" />
     <Compile Include="ViewModels\Message\MessageViewModel.cs" />
     <Compile Include="ViewModels\Message\SystemMessageViewModel.cs" />
     <Compile Include="ViewModels\Permission\DepartmentViewModel.cs" />
@@ -431,6 +445,7 @@
     <Content Include="Scripts\effectcontrol\control-hoverlist.js" />
     <Content Include="Scripts\effectcontrol\control-sliderbox.js" />
     <Content Include="Scripts\effectcontrol\control-tab.js" />
+    <Content Include="Scripts\formcontrol\control-areaselect.js" />
     <Content Include="Scripts\formcontrol\control-cascading.js" />
     <Content Include="Scripts\formcontrol\control-cascadingselect.js" />
     <Content Include="Scripts\formcontrol\control-checklist.js" />
@@ -681,6 +696,14 @@
     <Content Include="Views\PurposeCate\Edit.cshtml" />
     <Content Include="Views\PurposeCate\Index.cshtml" />
     <Content Include="Views\Outdoor\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Price.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Area.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TimeQuantum.cshtml" />
+    <Content Include="Views\Outdoor\Add.cshtml" />
+    <Content Include="Views\Outdoor\Preverify.cshtml" />
+    <Content Include="Views\Outdoor\VerifyFailed.cshtml" />
+    <Content Include="Views\Outdoor\Delete.cshtml" />
+    <Content Include="Views\Outdoor\NotShow.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -701,6 +724,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201309120924578_AddPurpose.resx">
       <DependentUpon>201309120924578_AddPurpose.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309130222406_OutDoorField.resx">
+      <DependentUpon>201309130222406_OutDoorField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309130741239_OutDoorMediaCode.resx">
+      <DependentUpon>201309130741239_OutDoorMediaCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309130742542_OutDoorMediaCodeValue.resx">
+      <DependentUpon>201309130742542_OutDoorMediaCodeValue.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

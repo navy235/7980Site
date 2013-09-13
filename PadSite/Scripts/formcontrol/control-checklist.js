@@ -17,7 +17,7 @@
         inited = true;
       }
       function setValue() {
-        var selectValus = $('[name="' + id + ps.checkid + '"]:checked').val();
+        var selectValus = $.map($('[name="' + id + ps.checkid + '"]:checked'), function (item) { return $(item).val() }).join(',');
         that.val(selectValus);
         if (inited) {
           that.parents('form:first').validate().element('#' + id);

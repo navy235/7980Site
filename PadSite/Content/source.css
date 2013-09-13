@@ -2642,7 +2642,6 @@ a.top-head-changcity {
         font-size: 16px;
         color: #333;
         font-weight: bold;
-        float: left;
         font-family: "微软雅黑",Microsoft YaHei;
     }
 
@@ -2940,3 +2939,26 @@ a.top-head-changcity {
 .personal .action-info {
     top: -40px;
 }
+
+
+.personal-form-media .form-title {
+    margin-bottom: 20px;
+    padding-left: 20px;
+}
+
+.personal-form-media .k-checklist-item {
+    min-width: 60px;
+    margin-right: 10px;
+}
+
+    .personal-form-media .k-checklist-item label {
+        min-width: 60px;
+    }
+
+.personal .form-step {
+    margin: 10px 0px;
+}
+
+    .personal .form-step li {
+        width: 190px;
+    }

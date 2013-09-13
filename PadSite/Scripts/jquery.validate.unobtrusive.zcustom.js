@@ -1,5 +1,5 @@
 ﻿jQuery.validator.unobtrusive.adapters.add("dategreaterthan", ['compareto'],
-    function(options) {
+    function (options) {
       options.rules['dategreaterthan'] = {
         compareto: options.params.compareto
       };
@@ -7,7 +7,7 @@
     }
 );
 
-jQuery.validator.addMethod("dategreaterthan", function(value, element, params) {
+jQuery.validator.addMethod("dategreaterthan", function (value, element, params) {
   var selfDate, compareToData;
   if ($(element)) {
     selfDate = new Date($(element).val());
@@ -25,7 +25,7 @@ jQuery.validator.addMethod("dategreaterthan", function(value, element, params) {
 ***********/
 
 jQuery.validator.unobtrusive.adapters.add("requirewith", ['requireto'],
-    function(options) {
+    function (options) {
       options.rules['requirewith'] = {
         requireto: options.params.requireto
       };
@@ -33,7 +33,7 @@ jQuery.validator.unobtrusive.adapters.add("requirewith", ['requireto'],
     }
 );
 
-jQuery.validator.addMethod("requirewith", function(value, element, params) {
+jQuery.validator.addMethod("requirewith", function (value, element, params) {
   var thisValue, targetValue;
   if ($(element)) {
     thisValue = $(element).val();
@@ -51,7 +51,7 @@ jQuery.validator.addMethod("requirewith", function(value, element, params) {
 ***********/
 
 jQuery.validator.unobtrusive.adapters.add("cascaderequire", ['cascadeto', 'cascadeclass'],
-    function(options) {
+    function (options) {
       options.rules['cascaderequire'] = {
         cascadeto: options.params.cascadeto,
         cascadeclass: options.params.cascadeclass
@@ -60,7 +60,7 @@ jQuery.validator.unobtrusive.adapters.add("cascaderequire", ['cascadeto', 'casca
     }
 );
 
-jQuery.validator.addMethod("cascaderequire", function(value, element, params) {
+jQuery.validator.addMethod("cascaderequire", function (value, element, params) {
   var thisValue, targetValue;
   if ($(element)) {
     thisValue = $(element).val() === 'true';
@@ -83,21 +83,21 @@ jQuery.validator.addMethod("cascaderequire", function(value, element, params) {
 ***********/
 
 jQuery.validator.unobtrusive.adapters.add("timequantum", [],
-    function(options) {
+    function (options) {
       options.rules['timequantum'] = {
       };
       options.messages['timequantum'] = options.message;
     }
 );
 
-jQuery.validator.addMethod("timequantum", function(value, element, params) {
+jQuery.validator.addMethod("timequantum", function (value, element, params) {
   var thisValue;
   if ($(element)) {
     thisValue = $(element).val();
   }
   var values = thisValue.split('|');
   var isCheck = true;
-  $.each(values, function(index, item) {
+  $.each(values, function (index, item) {
     if (item === '') {
       isCheck = false;
     }
@@ -115,16 +115,16 @@ jQuery.validator.addMethod("timequantum", function(value, element, params) {
 ***********/
 
 jQuery.validator.unobtrusive.adapters.add("checkmaxlength", ['maxlength'],
-    function(options) {
+    function (options) {
       options.rules['checkmaxlength'] = {
         maxlength: options.params.maxlength
       };
       options.messages['checkmaxlength'] = options.message;
     }
 );
-jQuery.validator.addMethod("checkmaxlength", function(value, element, params) {
+jQuery.validator.addMethod("checkmaxlength", function (value, element, params) {
   var checkvalues = [];
-  checkvalues = $.map($('[name="' + element.id + '_check"]:checked'), function(item) { return $(item).val() });
+  checkvalues = $.map($('[name="' + element.id + '_check"]:checked'), function (item) { return $(item).val() });
   return params.maxlength >= checkvalues.length;
 });
 
@@ -139,7 +139,7 @@ jQuery.validator.addMethod("checkmaxlength", function(value, element, params) {
 
 
 jQuery.validator.unobtrusive.adapters.add("stringchecklength", ['minlength', 'maxlength'],
-    function(options) {
+    function (options) {
       options.rules['stringchecklength'] = {
         minlength: options.params.minlength,
         maxlength: options.params.maxlength
@@ -148,7 +148,7 @@ jQuery.validator.unobtrusive.adapters.add("stringchecklength", ['minlength', 'ma
     }
 );
 
-jQuery.validator.addMethod('stringchecklength', function(value, element, params) {
+jQuery.validator.addMethod('stringchecklength', function (value, element, params) {
   var stringlength = 0;
   var strArray = value.split('');
   for (var i = 0; i < strArray.length; i++) {
@@ -163,7 +163,7 @@ jQuery.validator.addMethod('stringchecklength', function(value, element, params)
 
 
 jQuery.validator.unobtrusive.adapters.add("checkarea", [],
-    function(options) {
+    function (options) {
       options.rules['checkarea'] = {
       };
       options.messages['checkarea'] = options.message;
@@ -172,35 +172,51 @@ jQuery.validator.unobtrusive.adapters.add("checkarea", [],
 
 
 
-jQuery.validator.addMethod("checkarea", function(value, element, params) {
+jQuery.validator.addMethod("checkarea", function (value, element, params) {
   var thisValue;
   if ($(element)) {
     thisValue = $(element).val();
   }
   var values = thisValue.split('|');
-  if (values.length < 3) {
-    return false;
-  } else {
-    var isCheck = true;
-    $.each(values, function(index, item) {
-      if (parseFloat(item) <= 0) {
-        isCheck = false;
+  var isRegular = values[0] == "true";
+  if (isRegular) {
+    if (values.length < 4) {
+      return false;
+    } else {
+      var isCheck = true;
+      for (var i = 1; i < values.length; i++) {
+        if (parseFloat(values[i]) <= 0 || isNaN(parseFloat(values[i]))) {
+          isCheck = false;
+        }
       }
-    })
-    return isCheck;
+      return isCheck;
+    }
+  } else {
+    if (values.length < 2 || values.length % 2 == 0) {
+      return false;
+    } else {
+      var isCheck = true;
+      for (var i = 1; i < values.length; i++) {
+        if (parseFloat(values[i]) <= 0 || isNaN(parseFloat(values[i]))) {
+          isCheck = false;
+        }
+      }
+      return isCheck;
+    }
   }
+
 });
 
 
 jQuery.validator.unobtrusive.adapters.add("checkcontact", [],
-    function(options) {
+    function (options) {
       options.rules['checkcontact'] = {
       };
       options.messages['checkcontact'] = options.message;
     }
 );
 
-jQuery.validator.addMethod("checkcontact", function(value, element, params) {
+jQuery.validator.addMethod("checkcontact", function (value, element, params) {
   var regText = /[\u4e00-\u9fa5]/
   reg = new RegExp(regText),
   result = false;

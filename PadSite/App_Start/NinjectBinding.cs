@@ -93,6 +93,11 @@ namespace PadSite
             kernel.Bind<IMessageService>().To<MessageService>().InRequestScope();
             #endregion
 
+
+            #region Media
+            kernel.Bind<IOutDoorService>().To<OutDoorService>().InRequestScope();
+            #endregion
+
             #region email
             kernel.Bind<IEmailService>().To<EmailService>().InRequestScope();
             #endregion

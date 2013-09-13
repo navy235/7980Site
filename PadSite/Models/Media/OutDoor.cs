@@ -7,6 +7,14 @@
 
     public class OutDoor
     {
+
+        public OutDoor()
+        {
+            this.AreaCate = new HashSet<AreaCate>();
+            this.CrowdCate = new HashSet<CrowdCate>();
+            this.IndustryCate = new HashSet<IndustryCate>();
+            this.PurposeCate = new HashSet<PurposeCate>();
+        }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
@@ -74,11 +82,19 @@
         [MaxLength(250)]
         public string VideoUrl { get; set; }
 
+
+        public bool IsRegular { get; set; }
+
         public decimal Wdith { get; set; }
 
         public decimal Height { get; set; }
 
         public int TotalFaces { get; set; }
+
+        public decimal TotalArea { get; set; }
+
+        public string IrRegularArea { get; set; }
+
 
         public int TrafficAuto { get; set; }
 
@@ -90,7 +106,9 @@
 
         public int FormatCode { get; set; }
 
-        public int MeidaCode { get; set; }
+        public int MediaCode { get; set; }
+
+        public string MediaCodeValue { get; set; }
 
         public int PeriodCode { get; set; }
 

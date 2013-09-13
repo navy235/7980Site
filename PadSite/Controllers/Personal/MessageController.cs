@@ -45,8 +45,9 @@ namespace PadSite.Controllers
 
         public ActionResult RecipienterMessage_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var stateValue = (int)MessageStatus.Show;
-            var model = MessageService.GetALL().Where(x => x.RecipientID == CookieHelper.MemberID && x.RecipienterStatus >= stateValue);
+            var model = MessageService.GetALL()
+                .Where(x => x.RecipientID == CookieHelper.MemberID
+                    && x.RecipienterStatus >= (int)MessageStatus.Show);
             return Json(model.ToDataSourceResult(request));
         }
 
@@ -60,8 +61,7 @@ namespace PadSite.Controllers
 
         public ActionResult SenderMessage_Read([DataSourceRequest] DataSourceRequest request)
         {
-            var stateValue = (int)MessageStatus.Show;
-            var model = MessageService.GetALL().Where(x => x.SenderID == CookieHelper.MemberID && x.RecipienterStatus >= stateValue);
+            var model = MessageService.GetALL().Where(x => x.SenderID == CookieHelper.MemberID && x.RecipienterStatus >= (int)MessageStatus.Show);
             return Json(model.ToDataSourceResult(request));
         }
 

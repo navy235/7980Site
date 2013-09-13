@@ -14,6 +14,10 @@
         clear: both;
     }
 
+.table-list-img {
+    width: 60px;
+}
+
 .k-textbox-date {
     background: url(images/ical_16X16.png) no-repeat right;
 }

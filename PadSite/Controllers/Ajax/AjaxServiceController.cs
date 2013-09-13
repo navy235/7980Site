@@ -14,23 +14,57 @@ namespace PadSite.Controllers
     {
 
         // GET: /Area/
-        private ICityCateService cityCateService;
-        private IArticleCateService articleCateService;
+        private ICityCateService CityCateService;
+        private IArticleCateService ArticleCateService;
         private IMemberService MemberService;
+        private IMediaCateService MediaCateService;
+        private IFormatCateService FormatCateService;
+        private IPeriodCateService PeriodCateService;
+        private IOwnerCateService OwnerCateService;
         public AjaxServiceController(
-             ICityCateService _cityCateService,
-             IArticleCateService _articleCateService,
-             IMemberService MemberService
+             ICityCateService CityCateService,
+             IArticleCateService ArticleCateService,
+             IMemberService MemberService,
+             IMediaCateService MediaCateService,
+             IFormatCateService FormatCateService,
+             IPeriodCateService PeriodCateService,
+             IOwnerCateService OwnerCateService
           )
         {
-            cityCateService = _cityCateService;
-            articleCateService = _articleCateService;
+            this.CityCateService = CityCateService;
+            this.ArticleCateService = ArticleCateService;
             this.MemberService = MemberService;
+            this.MediaCateService = MediaCateService;
+            this.FormatCateService = FormatCateService;
+            this.PeriodCateService = PeriodCateService;
+            this.OwnerCateService = OwnerCateService;
         }
 
         public ActionResult CityCode(int pid = 0)
         {
-            var query = cityCateService.GetALL();
+            var query = CityCateService.GetALL();
+
+            if (pid == 0)
+            {
+                query = query.Where(x => x.PID.Equals(null));
+            }
+            else
+            {
+                query = query.Where(x => x.PID == pid);
+            }
+
+            var selectlist = Utilities.CreateSelectList(
+               query.ToList()
+                , item => item.ID
+                , item => item.CateName, false);
+
+            return Json(selectlist, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult MediaCode(int pid = 0)
+        {
+            var query = MediaCateService.GetALL();
 
             if (pid == 0)
             {
@@ -51,7 +85,7 @@ namespace PadSite.Controllers
 
         public ActionResult ArticleCode(int pid = 0)
         {
-            var query = articleCateService.GetALL();
+            var query = ArticleCateService.GetALL();
 
             if (pid == 0)
             {

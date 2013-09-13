@@ -55,6 +55,7 @@
           } else {
             setValue();
             validate();
+            clearLevel(level + 1);
           }
         })
       }
@@ -88,6 +89,8 @@
           selector.val(defaultvalue);
         }
         sortSelect();
+
+        clearLevel(level + 1);
       }
 
       function sortSelect() {
@@ -101,8 +104,6 @@
           }
         })
       }
-
-
       function checkLevel(level) {
         if ($('#' + id + level)[0]) {
           return true;
@@ -130,10 +131,20 @@
         if (checkLevel(level)) {
           var selector = $('#' + id + level);
           selector.empty().removeAttr('disabled');
+          //selector.show();
           addOptionLabel(selector);
-          enableLevel(level + 1);
+          //enableLevel(level + 1);
         }
       }
+
+      function clearLevel(level) {
+        if (checkLevel(level)) {
+          var selector = $('#' + id + level);
+          selector.remove();
+          clearLevel(level + 1);
+        }
+      }
+
 
       function setValue(value) {
         if (value) {

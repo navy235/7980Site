@@ -20,9 +20,23 @@ namespace PadSite.Utils
                    }).ToList();
 
             if (addDefaultSelectItem)
-                eList.Insert(0, new SelectListItem { Selected = true, Text = "请选择", Value = "0" });
+                eList.Insert(0, new SelectListItem { Selected = true, Text = "请选择", Value = "" });
 
             return eList;
+        }
+
+        public static IList<SelectListItem> GetSelectListData<T>(IEnumerable<T> entities, Func<T, object> funcToGetValue, Func<T, object> funcToGetText, List<int> SeletdValues, bool addDefaultSelectItem = true)
+        {
+            var list = GetSelectListData(entities, funcToGetValue, funcToGetText, addDefaultSelectItem);
+
+            foreach (var item in list)
+            {
+                if (SeletdValues.Contains(Convert.ToInt32(item.Value)))
+                {
+                    item.Selected = true;
+                }
+            }
+            return list;
         }
 
         public static SelectList CreateSelectList<T>(IEnumerable<T> entities, Func<T, object> funcToGetValue, Func<T, object> funcToGetText, bool addDefaultSelectItem = true)

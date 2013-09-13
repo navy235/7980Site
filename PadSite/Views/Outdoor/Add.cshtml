@@ -1,0 +1,42 @@
+﻿@model OutDoorViewModel
+@{
+    ViewBag.Title = "发布户外信息";
+    Layout = "~/Views/Shared/_LayoutPersonal.cshtml";
+}
+<div class="personal clearfix">
+    @Html.Partial("_leftmenu")
+    <div class="personal-right">
+        <div class="personal-right-body">
+            <div class="personal-body-title clearfix">
+
+                <div class="form-step">
+                    <ul class="form-step-list">
+                        <li class="current">第一步：填写户外信息<em></em><i></i></li>
+                        <li>第二步：提交后台审核<em></em><i></i></li>
+                        <li>第三步：审核通过<em></em><i></i></li>
+                        <li>第四步：前台显示</li>
+                    </ul>
+                </div>
+
+                <div class="personal-form-tips">
+                    <i class="icon-maitonn icon-exclamation-sign"></i><strong>友情提醒:</strong>
+                    @CookieHelper.NickName ,请填写真实的资料,我们将在1小时候内审核您发的信息。
+                </div>
+
+                <div class="personal-form personal-form-media mt20">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.EditorForModel()
+                        <div class="form-field form-field-submit">
+                            <button type="submit" class="k-button ">
+                                <i class="icon-maitonn icon-save"></i>
+                                &nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

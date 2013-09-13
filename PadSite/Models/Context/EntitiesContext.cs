@@ -159,7 +159,7 @@ namespace PadSite.Models
             modelBuilder.Entity<OutDoor>()
                 .HasRequired(m => m.MediaCate)
                 .WithMany(c => c.OutDoor)
-                .HasForeignKey(o => o.MeidaCode)
+                .HasForeignKey(o => o.MediaCode)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<OutDoor>()
