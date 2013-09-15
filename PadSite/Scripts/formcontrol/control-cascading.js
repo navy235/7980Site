@@ -42,16 +42,16 @@
             } else {
               data[ps.paramId] = ps.result[i - 1];
             }
-            getResponse(i, 0, ps.result[i]);
+            getResponse(i, 0, ps.result[i], true);
           }
           setValue(ps.values);
         }
       }
 
-      function getResponse(level, value, defaultvalue) {
+      function getResponse(level, value, defaultvalue, isInit) {
         $.get(ps.read_url, data, function (res) {
           if (res.length > 0) {
-            createSelect(level + 1, res, defaultvalue);
+            createSelect(level + 1, res, defaultvalue, isInit);
           } else {
             setValue();
             validate();
@@ -60,7 +60,7 @@
         })
       }
 
-      function createSelect(level, listdata, defaultvalue) {
+      function createSelect(level, listdata, defaultvalue, isInit) {
         var selector;
         if (checkLevel(level)) {
           selector = $('#' + id + level);
@@ -90,7 +90,9 @@
         }
         sortSelect();
 
-        clearLevel(level + 1);
+        if (!isInit) {
+          clearLevel(level + 1);
+        }
       }
 
       function sortSelect() {

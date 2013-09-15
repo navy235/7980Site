@@ -155,7 +155,8 @@ namespace PadSite.Controllers
                       ID = x.ID,
                       MediaFocusImg = x.MediaFoucsImg,
                       Name = x.Name,
-                      Status = x.Status
+                      Status = x.Status,
+                      Unapprovedlog = x.Unapprovedlog
                   });
             return Json(model.ToDataSourceResult(request));
         }
@@ -279,7 +280,7 @@ namespace PadSite.Controllers
                 {
                     OutDoorService.Create(model);
                     result.Message = "添加户外成功！";
-                    return RedirectToAction("index");
+                    return RedirectToAction("Preverify");
                 }
                 catch (Exception ex)
                 {
@@ -383,9 +384,9 @@ namespace PadSite.Controllers
                 ViewBag.Data_IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, IndustryCateArray, false);
                 ViewBag.Data_PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, PurposeCateArray, false);
                 ViewBag.Data_AreaCate = Utilities.GetSelectListData(AreaCateService.GetALL(), x => x.ID, x => x.CateName, AreaCateArray, false);
-                ViewBag.Data_FormatCode = Utilities.GetSelectListData(FormatCateService.GetALL(), x => x.ID, x => x.CateName, true);
-                ViewBag.Data_PeriodCode = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.ID, x => x.CateName, true);
-                ViewBag.Data_OwnerCode = Utilities.GetSelectListData(OwnerCateService.GetALL(), x => x.ID, x => x.CateName, false);
+                ViewBag.Data_FormatCode = Utilities.GetSelectListData(FormatCateService.GetALL(), x => x.ID, x => x.CateName, model.FormatCode, true);
+                ViewBag.Data_PeriodCode = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.ID, x => x.CateName, model.PeriodCode, true);
+                ViewBag.Data_OwnerCode = Utilities.GetSelectListData(OwnerCateService.GetALL(), x => x.ID, x => x.CateName, model.OwnerCode, false);
                 return View(model);
             }
             else
@@ -403,7 +404,7 @@ namespace PadSite.Controllers
             {
                 return Redirect(Url.Action("openbiz", "register"));
             }
-            
+
             ServiceResult result = new ServiceResult();
             TempData["Service_Result"] = result;
             var AreaCateArray = new List<int>();
@@ -436,7 +437,7 @@ namespace PadSite.Controllers
             {
                 try
                 {
-                 
+
                     OutDoorService.Update(model);
                     result.Message = "编辑户外成功！";
                     return RedirectToAction("preverify");

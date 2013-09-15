@@ -275,7 +275,8 @@ INSERT [dbo].[CityCate] ([ID], [CateName], [PID], [Code], [Level], [OrderIndex])
 GO
 INSERT [dbo].[CityCate] ([ID], [CateName], [PID], [Code], [Level], [OrderIndex]) VALUES (137, N'»¨Ô«ÏØ', 15, 101408, 2, 136)
 GO
-
+
+
 
 SET IDENTITY_INSERT [dbo].[CityCate] OFF
 

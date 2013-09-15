@@ -53,6 +53,14 @@ namespace PadSite.Models
                 .HasForeignKey(c => c.PID)
                 .WillCascadeOnDelete(false);
 
+
+            modelBuilder.Entity<OwnerCate>()
+                .HasOptional(c => c.PCate)
+                .WithMany(pc => pc.ChildCates)
+                .HasForeignKey(c => c.PID)
+                .WillCascadeOnDelete(false);
+
+
             #endregion
 
 

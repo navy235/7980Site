@@ -128,4 +128,4 @@ GO
 INSERT [dbo].[MediaCate] ([ID], [CateName], [PID], [Code], [Level], [OrderIndex]) VALUES (63, N'LED¥Û≈∆', NULL, 14000000, 0, 62)
 GO
 INSERT [dbo].[MediaCate] ([ID], [CateName], [PID], [Code], [Level], [OrderIndex]) VALUES (64, N'∆‰À˚', NULL, 15000000, 0, 63)
-GO
+GO

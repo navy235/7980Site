@@ -118,3 +118,9 @@ D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddPurpose.resources
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorField.resources
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorMediaCode.resources
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorMediaCodeValue.resources
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddMessage.resources
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddOutDoor.resources
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddPurpose.resources
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorField.resources
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorMediaCode.resources
+E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorMediaCodeValue.resources

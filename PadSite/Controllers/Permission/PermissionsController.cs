@@ -182,7 +182,10 @@ namespace PadSite.Controllers
                     , item => item.ID
                     , item => item.Name, true).ToList();
 
-            list.Single(x => x.Value == value.ToString()).Selected = true;
+            if (value != 0)
+            {
+                list.Single(x => x.Value == value.ToString()).Selected = true;
+            }
 
             return list;
         }

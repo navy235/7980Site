@@ -43,12 +43,18 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Kendo.Mvc, Version=2012.3.1114.340, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Binaries\Kendo.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net">
+      <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Maitonn.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -63,6 +69,15 @@
     </Reference>
     <Reference Include="Ninject.Web.Mvc">
       <HintPath>..\packages\Ninject.MVC3.3.0.0.6\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu">
+      <HintPath>..\packages\Lucene.Net.Analysis.PanGu.2.4.1\lib\PanGu.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu.HighLight">
+      <HintPath>..\packages\Lucene.Net.Analysis.PanGu.2.4.1\lib\PanGu.HighLight.dll</HintPath>
+    </Reference>
+    <Reference Include="PanGu.Lucene.Analyzer">
+      <HintPath>..\packages\Lucene.Net.Analysis.PanGu.2.4.1\lib\PanGu.Lucene.Analyzer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -154,6 +169,7 @@
     <Compile Include="Controllers\Admin\Category\IndustryCateController.cs" />
     <Compile Include="Controllers\Admin\Category\PurposeCateController.cs" />
     <Compile Include="Controllers\Admin\Member\BizVerifyController.cs" />
+    <Compile Include="Controllers\Admin\Member\MediaVerifyController.cs" />
     <Compile Include="Controllers\Admin\Member\MemberController.cs" />
     <Compile Include="Controllers\Personal\BizController.cs" />
     <Compile Include="Controllers\Admin\Category\CityCateController.cs" />
@@ -262,6 +278,7 @@
     <Compile Include="Service\Interface\Category\IArticleCateService.cs" />
     <Compile Include="Service\Interface\Category\IFormatCateService.cs" />
     <Compile Include="Service\Interface\Category\IPeriodCateService.cs" />
+    <Compile Include="Service\Interface\Lucene\IOutDoorLuceneService.cs" />
     <Compile Include="Service\Interface\Media\IOutDoorService.cs" />
     <Compile Include="Service\Interface\Member\IMemberService.cs" />
     <Compile Include="Service\Interface\Member\IMember_ActionService.cs" />
@@ -317,6 +334,7 @@
     <Compile Include="ViewModels\Category\CityCateViewModel.cs" />
     <Compile Include="ViewModels\Category\MediaCateViewModel.cs" />
     <Compile Include="ViewModels\Category\FormatCateViewModel.cs" />
+    <Compile Include="ViewModels\Lucene\OutDoorIndexFields.cs" />
     <Compile Include="ViewModels\Media\OutDoorItemViewModel.cs" />
     <Compile Include="ViewModels\Media\OutDoorViewModel.cs" />
     <Compile Include="ViewModels\Message\MessageViewModel.cs" />
@@ -704,6 +722,14 @@
     <Content Include="Views\Outdoor\VerifyFailed.cshtml" />
     <Content Include="Views\Outdoor\Delete.cshtml" />
     <Content Include="Views\Outdoor\NotShow.cshtml" />
+    <Content Include="Views\Outdoor\Edit.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Area.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\TimeQuantum.cshtml" />
+    <Content Include="Views\MediaVerify\Index.cshtml" />
+    <Content Include="Views\MediaVerify\Details.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\IntegerExtension.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Price.cshtml" />
+    <Content Include="Views\MediaVerify\Authed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

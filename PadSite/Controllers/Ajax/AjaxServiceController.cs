@@ -105,6 +105,21 @@ namespace PadSite.Controllers
         }
 
 
+        public ActionResult FormatCodeName(int key)
+        {
+            return Content(FormatCateService.Find(key).CateName);
+        }
+
+        public ActionResult PeriodCodeName(int key)
+        {
+            return Content(PeriodCateService.Find(key).CateName);
+        }
+
+        public ActionResult OwnerCodeName(int key)
+        {
+            return Content(OwnerCateService.Find(key).CateName);
+        }
+
         #region Validate
 
         public void GetValidateCode()

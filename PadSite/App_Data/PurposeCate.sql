@@ -8,4 +8,4 @@ GO
 INSERT [dbo].[PurposeCate] ([ID], [CateName]) VALUES (3, N'品牌建设')
 GO
 INSERT [dbo].[PurposeCate] ([ID], [CateName]) VALUES (4, N'促销活动')
-GO
+GO

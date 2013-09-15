@@ -25,6 +25,9 @@ a {
         text-decoration: underline;
     }
 
+input.single-line {
+    width: 198px;
+}
 
 .top-nav {
     border-bottom: 1px solid #f0f0f0;

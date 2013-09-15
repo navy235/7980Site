@@ -24,5 +24,8 @@ namespace PadSite.ViewModels
         [Display(Name = "添加时间")]
         public DateTime AddTime { get; set; }
 
+        [Display(Name = "失败原因")]
+        public string Unapprovedlog { get; set; }
+
     }
 }

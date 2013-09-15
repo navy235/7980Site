@@ -18,4 +18,4 @@ GO
 INSERT [dbo].[IndustryCate] ([ID], [CateName]) VALUES (8, N'金融保险')
 GO
 INSERT [dbo].[IndustryCate] ([ID], [CateName]) VALUES (9, N'城市形象')
-GO
+GO

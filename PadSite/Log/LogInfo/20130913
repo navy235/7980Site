@@ -3,3 +3,13 @@
  ExLogLevel :INFO  
  ExLogClass :loginfo [(null)] 
 信息审核通过成功 
+
+ ExLogTime :2013-09-13 21:03:13,755 [6] 
+ ExLogLevel :INFO  
+ ExLogClass :loginfo [(null)] 
+编辑城市信息成功 
+
+ ExLogTime :2013-09-13 21:33:35,791 [34] 
+ ExLogLevel :INFO  
+ ExLogClass :loginfo [(null)] 
+信息审核通过成功 

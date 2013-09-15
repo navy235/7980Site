@@ -39,6 +39,25 @@ namespace PadSite.Utils
             return list;
         }
 
+        public static IList<SelectListItem> GetSelectListData<T>(IEnumerable<T> entities, Func<T, object> funcToGetValue, Func<T, object> funcToGetText, int value, bool addDefaultSelectItem = true)
+        {
+            var list = GetSelectListData(entities, funcToGetValue, funcToGetText, addDefaultSelectItem);
+
+            foreach (var item in list)
+            {
+                if (item.Value != "")
+                {
+
+                    if (value == Convert.ToInt32(item.Value))
+                    {
+                        item.Selected = true;
+                    }
+                }
+            }
+            return list;
+        }
+
+
         public static SelectList CreateSelectList<T>(IEnumerable<T> entities, Func<T, object> funcToGetValue, Func<T, object> funcToGetText, bool addDefaultSelectItem = true)
         {
             return new SelectList(GetSelectListData(entities, funcToGetValue, funcToGetText, addDefaultSelectItem), "Value", "Text");

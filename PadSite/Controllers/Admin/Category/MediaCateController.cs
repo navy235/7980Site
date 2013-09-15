@@ -174,13 +174,16 @@ namespace PadSite.Controllers
 
         private List<SelectListItem> GetSelectList(int value = 0)
         {
-         
+
             var list = Utilities.GetSelectListData(
                     MediaCateService.GetALL().ToList()
                     , item => item.ID
                     , item => item.CateName, true).ToList();
 
-            list.Single(x => x.Value == value.ToString()).Selected = true;
+            if (value != 0)
+            {
+                list.Single(x => x.Value == value.ToString()).Selected = true;
+            }
 
             return list;
         }

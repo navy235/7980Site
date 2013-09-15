@@ -52,4 +52,4 @@ GO
 INSERT [dbo].[CrowdCate] ([ID], [CateName]) VALUES (25, N'有车一族')
 GO
 INSERT [dbo].[CrowdCate] ([ID], [CateName]) VALUES (26, N'无车族')
-GO
+GO
