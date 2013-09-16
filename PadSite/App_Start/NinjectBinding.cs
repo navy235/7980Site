@@ -93,6 +93,9 @@ namespace PadSite
             kernel.Bind<IMessageService>().To<MessageService>().InRequestScope();
             #endregion
 
+            #region Lucene
+            kernel.Bind<IOutDoorLuceneService>().To<OutDoorLuceneService>().InRequestScope();
+            #endregion
 
             #region Media
             kernel.Bind<IOutDoorService>().To<OutDoorService>().InRequestScope();
@@ -101,6 +104,8 @@ namespace PadSite
             #region email
             kernel.Bind<IEmailService>().To<EmailService>().InRequestScope();
             #endregion
+
+
         }
     }
 }

@@ -11,11 +11,10 @@ namespace PadSite.Controllers
     {
         //
         // GET: /Home/
-
         public ActionResult Index()
         {
-
-            string city = "招商 渠道扩张 品牌建设 促销活动";
+            #region sql
+            //string city = "招商 渠道扩张 品牌建设 促销活动";
             //string province = "湖南";
             //string city = "长沙,株洲,湘潭,衡阳,邵阳,岳阳,常德,张家界,益阳,郴州,永州,怀化,娄底,湘西";
             //var xian = new string[]{
@@ -70,6 +69,9 @@ namespace PadSite.Controllers
             ////}
 
             //ViewBag.Str = printer.ToString();
+            #endregion
+
+
 
             return View();
         }
@@ -90,6 +92,6 @@ namespace PadSite.Controllers
                 return "0" + number.ToString();
             }
         }
-      
+
     }
 }

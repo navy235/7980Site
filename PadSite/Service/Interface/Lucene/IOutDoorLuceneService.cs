@@ -8,12 +8,9 @@ namespace PadSite.Service.Interface
 {
     public interface IOutDoorLuceneService
     {
-        bool CreateIndex(string ids);
+        void CreateIndex(string ids);
 
-        bool ChangeStatus(string ids, OutDoorStatus Status);
-
-        bool RefrshIndex(string ids);
-
+        void ChangeStatus(string ids, OutDoorStatus Status);
 
     }
 }

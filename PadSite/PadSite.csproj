@@ -291,6 +291,11 @@
     <Compile Include="Service\Interface\Permission\IPermissionsService.cs" />
     <Compile Include="Service\Interface\Permission\IRolesService.cs" />
     <Compile Include="Service\Interface\Permission\IGroupService.cs" />
+    <Compile Include="Service\Lucene\LuceneCommon.cs" />
+    <Compile Include="Service\Lucene\OutDoorIndexEntity.cs" />
+    <Compile Include="Service\Lucene\OutDoorLuceneService.cs" />
+    <Compile Include="Service\Lucene\QueryTerm.cs" />
+    <Compile Include="Service\Lucene\SearchFilter.cs" />
     <Compile Include="Service\Media\OutDoorService.cs" />
     <Compile Include="Service\Member\MemberService.cs" />
     <Compile Include="Service\Member\Member_ActionService.cs" />
@@ -334,7 +339,8 @@
     <Compile Include="ViewModels\Category\CityCateViewModel.cs" />
     <Compile Include="ViewModels\Category\MediaCateViewModel.cs" />
     <Compile Include="ViewModels\Category\FormatCateViewModel.cs" />
-    <Compile Include="ViewModels\Lucene\OutDoorIndexFields.cs" />
+    <Compile Include="Service\Lucene\OutDoorIndexFields.cs" />
+    <Compile Include="ViewModels\Home\LinkItem.cs" />
     <Compile Include="ViewModels\Media\OutDoorItemViewModel.cs" />
     <Compile Include="ViewModels\Media\OutDoorViewModel.cs" />
     <Compile Include="ViewModels\Message\MessageViewModel.cs" />

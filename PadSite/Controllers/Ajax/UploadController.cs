@@ -60,7 +60,7 @@ namespace PadSite.Controllers
             string imgPath = Server.MapPath("~" + imgurl);
             if (FileHelper.Crop(imgPath, width, height, x, y, targetwidth))
             {
-                res = string.Format("{{\"err\":\"\",\"imgurl\":\"{0}\"}}", FileHelper.GetImgCutpath(imgurl));
+                res = string.Format("{{\"err\":\"\",\"imgurl\":\"{0}\"}}", FileHelper.GetImgCutpath(imgurl, targetwidth));
             }
             else
             {

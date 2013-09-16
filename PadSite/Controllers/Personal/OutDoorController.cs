@@ -459,11 +459,6 @@ namespace PadSite.Controllers
             return View(model);
         }
 
-
-
-
-
-
         #region Set OutDoorStatus
 
         [HttpPost]

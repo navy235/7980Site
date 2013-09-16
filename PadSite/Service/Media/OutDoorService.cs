@@ -18,11 +18,13 @@ namespace PadSite.Service
         private readonly ICrowdCateService CrowdCateService;
         private readonly IAreaCateService AreaCateService;
         private readonly IPurposeCateService PurposeCateService;
+        private readonly IOutDoorLuceneService OutDoorLuceneService;
         public OutDoorService(IUnitOfWork db
             , IIndustryCateService IndustryCateService
             , ICrowdCateService CrowdCateService
             , IAreaCateService AreaCateService
             , IPurposeCateService PurposeCateService
+            , IOutDoorLuceneService OutDoorLuceneService
             )
         {
             this.db = db;
@@ -30,6 +32,7 @@ namespace PadSite.Service
             this.CrowdCateService = CrowdCateService;
             this.AreaCateService = AreaCateService;
             this.PurposeCateService = PurposeCateService;
+            this.OutDoorLuceneService = OutDoorLuceneService;
         }
 
         public IQueryable<OutDoor> GetALL()
@@ -192,6 +195,14 @@ namespace PadSite.Service
             var IdsArray = Utilities.GetIdList(ids);
             db.Set<OutDoor>().Where(x => IdsArray.Contains(x.ID)).ToList().ForEach(x => x.Status = (int)Status);
             db.Commit();
+            if (Status == OutDoorStatus.Verified)
+            {
+                OutDoorLuceneService.CreateIndex(ids);
+            }
+            else
+            {
+                OutDoorLuceneService.ChangeStatus(ids, Status);
+            }
         }
 
 
@@ -386,9 +397,8 @@ namespace PadSite.Service
 
             //set OutDoor Status 待审核状态
             od.Status = (int)OutDoorStatus.PreVerify;
-
             db.Commit();
-
+            OutDoorLuceneService.ChangeStatus(model.ID.ToString(), OutDoorStatus.PreVerify);
             return od;
         }
     }
