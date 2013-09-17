@@ -88,5 +88,21 @@ namespace PadSite.Utils
             }
             return id;
         }
+
+        public static int GetMaxCode(int code, int level)
+        {
+            var codeStr = code.ToString();
+            var maxLength = codeStr.Length;
+            codeStr = codeStr.Substring(0, (level + 1) * 2);
+            var needLength = maxLength - codeStr.Length;
+            if (needLength > 0)
+            {
+                for (var i = 0; i < needLength; i++)
+                {
+                    codeStr += "9";
+                }
+            }
+            return Convert.ToInt32(codeStr);
+        }
     }
 }

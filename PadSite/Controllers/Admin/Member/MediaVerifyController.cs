@@ -112,7 +112,7 @@ namespace PadSite.Controllers
             ServiceResult result = new ServiceResult();
             try
             {
-                OutDoorService.ChangeStatus(ids, OutDoorStatus.ShowOnline);
+                OutDoorService.ChangeStatus(ids, OutDoorStatus.Verified);
                 result.Message = "媒体信息未审核成功！";
             }
             catch (Exception ex)

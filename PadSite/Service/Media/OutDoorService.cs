@@ -193,7 +193,14 @@ namespace PadSite.Service
         public void ChangeStatus(string ids, OutDoorStatus Status)
         {
             var IdsArray = Utilities.GetIdList(ids);
-            db.Set<OutDoor>().Where(x => IdsArray.Contains(x.ID)).ToList().ForEach(x => x.Status = (int)Status);
+
+            var dbStatus = Status;
+            if (Status == OutDoorStatus.Verified)
+            {
+                dbStatus = OutDoorStatus.ShowOnline;
+            }
+
+            db.Set<OutDoor>().Where(x => IdsArray.Contains(x.ID)).ToList().ForEach(x => x.Status = (int)dbStatus);
             db.Commit();
             if (Status == OutDoorStatus.Verified)
             {

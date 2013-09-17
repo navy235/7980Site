@@ -1,6 +1,7 @@
 ﻿@model  IEnumerable<OutDoorItemViewModel>
 @{
     ViewBag.Title = "户外待审核信息列表";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 
 
@@ -108,7 +109,8 @@
                     url: url,
                     data: { ids: Ids },
                     success: function (res) {
-                        if (res) {
+                        Maitonn.JHelper.showMessage(res);
+                        if (res.Success) {
                             var grid = $("#Grid").data("kendoGrid");
                             grid.dataSource.read();
                             grid.refresh();

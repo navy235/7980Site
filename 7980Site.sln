@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PadSite", "PadSite\PadSite.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PadSite.Tests", "PadSite.Tests\PadSite.Tests.csproj", "{0D6CDD57-07A1-4005-9577-B675229F53CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maitonn.Core", "..\WebSite\Maitonn.Core\Maitonn.Core.csproj", "{8404C3A7-9F29-4C74-9913-165BAE8C86DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{0D6CDD57-07A1-4005-9577-B675229F53CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D6CDD57-07A1-4005-9577-B675229F53CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D6CDD57-07A1-4005-9577-B675229F53CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8404C3A7-9F29-4C74-9913-165BAE8C86DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8404C3A7-9F29-4C74-9913-165BAE8C86DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8404C3A7-9F29-4C74-9913-165BAE8C86DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8404C3A7-9F29-4C74-9913-165BAE8C86DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

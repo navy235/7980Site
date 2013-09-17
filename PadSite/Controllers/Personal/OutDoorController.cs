@@ -437,7 +437,6 @@ namespace PadSite.Controllers
             {
                 try
                 {
-
                     OutDoorService.Update(model);
                     result.Message = "编辑户外成功！";
                     return RedirectToAction("preverify");

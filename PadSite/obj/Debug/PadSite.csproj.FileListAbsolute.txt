@@ -124,3 +124,15 @@ E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddPurpose.resources
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorField.resources
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorMediaCode.resources
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorMediaCodeValue.resources
+D:\GitProject\7980Site\PadSite\bin\ICSharpCode.SharpZipLib.dll
+D:\GitProject\7980Site\PadSite\bin\Lucene.Net.dll
+D:\GitProject\7980Site\PadSite\bin\PanGu.dll
+D:\GitProject\7980Site\PadSite\bin\PanGu.HighLight.dll
+D:\GitProject\7980Site\PadSite\bin\PanGu.Lucene.Analyzer.dll
+D:\GitProject\7980Site\PadSite\bin\Lucene.Net.pdb
+D:\GitProject\7980Site\PadSite\bin\Lucene.Net.xml
+D:\GitProject\7980Site\PadSite\bin\MiniProfiler.dll
+D:\GitProject\7980Site\PadSite\bin\MiniProfiler.EntityFramework.dll
+D:\GitProject\7980Site\PadSite\bin\MiniProfiler.pdb
+D:\GitProject\7980Site\PadSite\bin\MiniProfiler.xml
+D:\GitProject\7980Site\PadSite\bin\MiniProfiler.EntityFramework.pdb

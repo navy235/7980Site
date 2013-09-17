@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PadSite.Models;
+using PadSite.ViewModels;
 using Maitonn.Core;
 namespace PadSite.Service.Interface
 {
@@ -12,5 +13,6 @@ namespace PadSite.Service.Interface
 
         void ChangeStatus(string ids, OutDoorStatus Status);
 
+        List<LinkItem> Search(QueryTerm queryTerm, SearchFilter searchFilter, out int totalHits);
     }
 }

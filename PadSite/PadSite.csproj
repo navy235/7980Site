@@ -61,6 +61,12 @@
       <HintPath>Binaries\Maitonn.Core.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MiniProfiler">
+      <HintPath>..\packages\MiniProfiler.2.1.0\lib\net40\MiniProfiler.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler.EntityFramework">
+      <HintPath>..\packages\MiniProfiler.EF.2.1.0\lib\net40\MiniProfiler.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -158,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\MiniProfiler.cs" />
     <Compile Include="Config\ConfigSetting.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectBinding.cs" />
@@ -192,6 +199,7 @@
     <Compile Include="Controllers\Personal\MessageController.cs" />
     <Compile Include="Controllers\Personal\OutDoorController.cs" />
     <Compile Include="Controllers\Personal\PersonalController.cs" />
+    <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Filters\LoginAuthorizeAttribute.cs" />
     <Compile Include="Filters\PermissionAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -294,7 +302,9 @@
     <Compile Include="Service\Lucene\LuceneCommon.cs" />
     <Compile Include="Service\Lucene\OutDoorIndexEntity.cs" />
     <Compile Include="Service\Lucene\OutDoorLuceneService.cs" />
-    <Compile Include="Service\Lucene\QueryTerm.cs" />
+    <Compile Include="ViewModels\Home\QuerySort.cs" />
+    <Compile Include="ViewModels\Home\QuerySource.cs" />
+    <Compile Include="ViewModels\Home\QueryTerm.cs" />
     <Compile Include="Service\Lucene\SearchFilter.cs" />
     <Compile Include="Service\Media\OutDoorService.cs" />
     <Compile Include="Service\Member\MemberService.cs" />
@@ -379,6 +389,7 @@
     <Content Include="Content\images\mapicon.gif" />
     <Content Include="Content\images\min-loading.gif" />
     <Content Include="Content\images\noimages.gif" />
+    <Content Include="Content\images\productBg.png" />
     <Content Include="Content\images\search-bg.png" />
     <Content Include="Content\images\slider\1.jpg" />
     <Content Include="Content\images\slider\2.jpg" />
@@ -736,6 +747,7 @@
     <Content Include="Views\Shared\DisplayTemplates\IntegerExtension.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Price.cshtml" />
     <Content Include="Views\MediaVerify\Authed.cshtml" />
+    <Content Include="Views\List\_QueryTerm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

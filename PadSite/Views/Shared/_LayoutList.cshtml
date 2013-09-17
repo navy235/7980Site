@@ -1,6 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using StackExchange.Profiling;
+
+<!DOCTYPE html>
 <html>
 <head>
+    @this.InitClientTimings()
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
@@ -8,6 +11,7 @@
     <!--[if IE 7]>
       <link rel="stylesheet" href="netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css">
     <![endif]-->
+    @Styles.Render("~/Content/kendo/2012.3.1114/css")
     @Styles.Render("~/Content/source")
     @Scripts.Render("~/bundles/modernizr")
     <script src="~/Scripts/kendo/2012.3.1114/jquery.min.js"></script>
@@ -129,8 +133,8 @@
             </div>
             <iframe frameborder="0" class="top-menu-frame" scrolling="no" style="height: 420px; display: none;"></iframe>
             <ul class="top-menu-list">
-                <li class="active"><a href="/">首页</a></li>
-                <li><a href="/list-0-0-0-0-0-0-0-0-0-p_1">户外资源</a></li>
+                <li><a href="/">首页</a></li>
+                <li class="active"><a href="/list-0-0-0-0-0-0-0-0-0-p_1">户外资源</a></li>
             </ul>
         </div>
     </div>
@@ -160,5 +164,6 @@
             })
         })
     </script>
+  @MiniProfiler.RenderIncludes(position: RenderPosition.Right, showTrivial: false, showTimeWithChildren: false)
 </body>
 </html>

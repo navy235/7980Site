@@ -1913,6 +1913,7 @@ a.top-head-changcity {
 .list-result {
     width: 710px;
     float: left;
+    margin-bottom: 400px;
 }
 
 .list-right {
@@ -1923,24 +1924,15 @@ a.top-head-changcity {
 .list-filter {
     color: #666;
     zoom: 1;
-    background: none repeat scroll 0 0 #f5f5f5;
     padding: 0;
-    border-top: 2px solid #d90000;
+    border-top: 3px solid #ee2a2a;
     border-bottom: #d5d5d5 1px solid;
     width: 710px;
     background-color: #fff;
 }
 
-    .list-filter a:link,
-    .list-filter a:visited,
-    .list-filter a:hover,
-    .list-filter a:active {
-        color: #333;
-    }
-
 .list-filter-top {
     padding: 7px 10px;
-    background: #f7f7f7 url(images/proRpt_x.png) 0 -37px repeat-x;
     border-left: #d5d5d5 1px solid;
     border-right: #d5d5d5 1px solid;
     width: 688px;
@@ -1952,131 +1944,59 @@ a.top-head-changcity {
     position: relative;
     float: left;
     height: 30px;
-    width: 24px;
+    width: 44px;
     line-height: 30px;
     border: #bcbcbc 1px solid;
-    padding: 0 15px 0 8px;
-    background: url(images/productBg.png) -104px -208px no-repeat;
+    padding: 0 0 0 8px;
     color: #333;
+    text-decoration: none;
 }
 
-    .list-filter-sort:link,
-    .list-filter-sort:visited,
-    .list-filter-sort:hover,
-    .list-filter-sort:active {
+    .list-filter-sort .icon-maitonn {
+        color: #f60;
+        margin-left: 3px;
+    }
+
+    .list-filter-sort:hover {
         text-decoration: none;
-        color: #333;
     }
 
 .list-filter-default {
-    background-position: -70px -233px;
     color: #333;
     text-align: center;
-    padding: 0 12px;
     border-color: #bcbcbc;
-    background: none;
+    text-decoration: none;
+    padding-left: 0;
 }
 
 .list-filter-sort.selected {
-    background-position: -104px -356px;
-    padding: 0 18px 0 6px;
-    width: 24px;
     border-color: #d90000;
 }
 
-.list-filter-default.selected {
-    padding: 0 12px;
-}
 
-.list-filter-down {
-    background-position: -104px -206px;
-}
-
-    .list-filter-down.selected {
-        background-position: -104px -356px;
-    }
-
-.list-filter-up {
-    background-position: -154px -206px;
-}
-
-    .list-filter-up.selected {
-        background-position: -154px -356px;
-    }
-
-.list-filter-price {
-    background: url(images/productBg.png)no-repeat;
-    background-position: -115px -179px;
-    height: 30px;
-    border: #bcbcbc 1px solid;
-    margin-right: 10px;
-    cursor: pointer;
-    color: #333;
-    position: relative;
-    float: left;
-    zoom: 1;
-    width: 88px;
-    z-index: 21;
-}
-
-.list-filter-price-text {
-    display: inline-block;
-    height: 30px;
-    text-align: center;
-    overflow: hidden;
-    width: 67px;
-    line-height: 30px;
-}
-
-.list-filter-price-list {
-    position: absolute;
-    display: none;
-    background-color: #fff;
-    width: 88px;
-    z-index: 31;
-    top: 30px;
-    left: -1px;
-    overflow: hidden;
-    border: #bcbcbc 1px solid;
-    border-top: 0;
-    zoom: 1;
-}
-
-    .list-filter-price-list li {
-        z-index: 33;
-    }
-
-    .list-filter-price-list li {
-        height: 28px;
-        line-height: 28px;
-        background-color: #fff;
-        zoom: 1;
-    }
-
-        .list-filter-price-list li a {
-            display: block;
-            color: #333;
-            padding: 0 0 0 10px;
-            background-color: #fff;
-        }
-
-            .list-filter-price-list li a:hover,
-            .list-filter-price-list li a.selected {
-                background-color: #f60;
-                color: #fff;
-            }
 
 .list-filter-search {
     float: left;
 }
 
+    .list-filter-search #querybtn {
+        padding: 4px 15px;
+        margin-top: -3px;
+    }
+
+        .list-filter-search #querybtn .icon-maitonn {
+            font-size: 15px;
+            color: #f60;
+            margin-right: 5px;
+        }
+
 .list-filter-search-query {
-    height: 28px;
-    line-height: 28px;
-    width: 220px;
-    padding-left: 4px;
+    height: 22px;
+    line-height: 22px;
+    width: 180px;
     border: #bcbcbc 1px solid;
     outline: none;
+    padding: 3px 4px;
 }
 
 .list-grayline {
@@ -2130,9 +2050,11 @@ a.top-head-changcity {
 .list-filter-page-number {
     float: right;
     font-family: '宋体';
-    height: 26px;
-    line-height: 26px;
 }
+
+    .list-filter-page-number strong {
+        color: #f60;
+    }
 
 .list-filter-bottom {
     padding: 7px 10px;
@@ -2140,15 +2062,12 @@ a.top-head-changcity {
     border-top: 1px solid #e1e1e1;
     border-left: #d5d5d5 1px solid;
     border-right: #d5d5d5 1px solid;
-    background: #f2f2f2 url(images/proRpt_x.png) 0 -80px repeat-x;
+    background: #f2f2f2;
     margin-top: 1px;
 }
 
 .list-filter-menu {
-    border: 0;
-    background: 0;
-    height: auto;
-    float: none;
+    float: left;
     line-height: 18px;
     padding: 0 7px 0 0;
     position: relative;
@@ -2263,6 +2182,72 @@ a.top-head-changcity {
     border-bottom: 1px solid #e8e8e8;
     -webkit-text-size-adjust: none;
 }
+
+
+.list-dropdown {
+    height: 30px;
+    border: #bcbcbc 1px solid;
+    margin-right: 10px;
+    cursor: pointer;
+    color: #333;
+    position: relative;
+    float: left;
+    zoom: 1;
+    width: 88px;
+    z-index: 21;
+}
+
+    .list-dropdown.disabled {
+        color: gray;
+    }
+
+.list-dropdown-title {
+    display: inline-block;
+    height: 30px;
+    text-align: center;
+    overflow: hidden;
+    width: 67px;
+    line-height: 30px;
+}
+
+.list-dropdown-list {
+    position: absolute;
+    display: none;
+    background-color: #fff;
+    width: 88px;
+    z-index: 31;
+    top: 30px;
+    left: -1px;
+    overflow: hidden;
+    border: #bcbcbc 1px solid;
+    border-top: 0;
+    zoom: 1;
+}
+
+    .list-dropdown-list li {
+        z-index: 33;
+    }
+
+    .list-dropdown-list li {
+        height: 28px;
+        line-height: 28px;
+        background-color: #fff;
+        zoom: 1;
+    }
+
+        .list-dropdown-list li a {
+            display: block;
+            color: #333;
+            padding: 0 0 0 10px;
+            background-color: #fff;
+        }
+
+            .list-dropdown-list li a:hover,
+            .list-dropdown-list li a.selected {
+                background-color: #f60;
+                color: #fff;
+            }
+
 
 .list-page {
 }
@@ -2965,3 +2950,114 @@ a.top-head-changcity {
     .personal .form-step li {
         width: 190px;
     }
+
+
+.gray-box {
+    border: #E1E1E1 1px solid;
+    width: 268px;
+}
+
+    .gray-box h4 {
+        font-weight: bold;
+        height: 35px;
+        line-height: 36px;
+        background-color: #F8F8F8;
+        color: #333;
+        font-size: 14px;
+        padding-left: 15px;
+    }
+
+        .gray-box h4 .more {
+            float: right;
+            margin-right: 10px;
+            _display: inline;
+            padding-right: 14px;
+            background: url(images/companysprites.png) no-repeat;
+            background-position: right -128px;
+            font-size: 12px;
+            font-weight: normal;
+        }
+
+.gary-loadding {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.gray-list {
+    padding: 10px;
+}
+
+    .gray-list li {
+        padding: 10px 0;
+        border-bottom: 1px dashed #cccccc;
+    }
+
+        .gray-list li.last {
+            margin-bottom: 0px;
+            padding-bottom: 10px;
+            border-bottom: 0;
+        }
+
+        .gray-list li a {
+            float: left;
+        }
+
+            .gray-list li a img {
+                width: 56px;
+                height: 56px;
+                border: 1px solid #cccccc;
+                padding: 1px;
+            }
+
+    .gray-list p {
+        float: left;
+        height: 20px;
+        line-height: 20px;
+        overflow: hidden;
+        width: 170px;
+        padding-left: 10px;
+        word-wrap: break-word;
+        word-break: normal;
+    }
+
+    .gray-list .item-category {
+        color: #666;
+    }
+
+.gray-view {
+    margin: 5px 0 5px 8px;
+}
+
+    .gray-view li {
+        border: 0;
+        float: left;
+        width: 128px;
+        height: 18px;
+        overflow: hidden;
+        text-indent: 4px;
+        padding: 5px 0;
+    }
+
+.gray-view-user li {
+    padding: 10px 0;
+    border-bottom: #E1E1E1 1px solid;
+}
+
+.gray-view li.gray-view-last {
+    border-bottom: none;
+}
+
+.gray-view li a {
+    height: 18px;
+    line-height: 18px;
+    overflow: hidden;
+    width: 127px;
+    display: inline-block;
+}
+
+.gray-view a,
+.gray-view a:link,
+.gray-view a:visited,
+.gray-view a:hover {
+    color: #333;
+}

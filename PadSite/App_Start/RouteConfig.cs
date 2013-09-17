@@ -13,16 +13,10 @@ namespace PadSite
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-
 
             routes.MapRoute(
                name: "defaultlist",
-               url: "list-{city}-{mediacode}-{formatcode}-{ownercode}-{periodcode}-{price}-{order}-{descending}-p_{page}",
+               url: "list-{city}-{mediacode}-{formatcode}-{ownercode}-{periodcode}-{authstatus}-{deadline}-{price}-{order}-{descending}-p_{page}",
                defaults: new
                {
                    controller = "List",
@@ -33,6 +27,8 @@ namespace PadSite
                    formatcode = 0,
                    ownercode = 0,
                    periodcode = 0,
+                   authstatus = 0,
+                   deadline = 0,
                    price = 0,
                    order = 0,
                    descending = 0,
@@ -46,12 +42,20 @@ namespace PadSite
                    formatcode = @"\d+",
                    ownercode = @"\d+",
                    periodcode = @"\d+",
+                   authstatus = @"\d+",
+                   deadline = @"\d+",
                    price = @"\d+",
                    order = @"\d+",
                    descending = @"\d+",
                    page = @"\d+"
                }
             );
+            routes.MapRoute(
+               name: "Default",
+               url: "{controller}/{action}/{id}",
+               defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+           );
+
 
         }
     }

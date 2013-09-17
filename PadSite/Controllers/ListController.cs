@@ -23,6 +23,7 @@ namespace PadSite.Controllers
         private IEmailService EmailService;
         private ICompanyService CompanyService;
         private IMember_ActionService Member_ActionService;
+        private IMediaCateService MediaCateService;
         private ICityCateService CityCateService;
         private ICompanyCredentialsImgService CompanyCredentialsImgService;
         private ICompanyNoticeService CompanyNoticeService;
@@ -35,12 +36,13 @@ namespace PadSite.Controllers
         private IPurposeCateService PurposeCateService;
         private IFormatCateService FormatCateService;
         private IPeriodCateService PeriodCateService;
-
+        private IOutDoorLuceneService OutDoorLuceneService;
         public ListController(
             IMemberService MemberService,
             IEmailService EmailService,
             ICompanyService CompanyService,
             IMember_ActionService Member_ActionService,
+            IMediaCateService MediaCateService,
             ICityCateService CityCateService,
             ICompanyCredentialsImgService CompanyCredentialsImgService,
             ICompanyNoticeService CompanyNoticeService,
@@ -52,13 +54,15 @@ namespace PadSite.Controllers
             IAreaCateService AreaCateService,
             IPurposeCateService PurposeCateService,
             IFormatCateService FormatCateService,
-            IPeriodCateService PeriodCateService
+            IPeriodCateService PeriodCateService,
+            IOutDoorLuceneService OutDoorLuceneService
             )
         {
             this.MemberService = MemberService;
             this.EmailService = EmailService;
             this.CompanyService = CompanyService;
             this.Member_ActionService = Member_ActionService;
+            this.MediaCateService = MediaCateService;
             this.CityCateService = CityCateService;
             this.CompanyCredentialsImgService = CompanyCredentialsImgService;
             this.CompanyNoticeService = CompanyNoticeService;
@@ -71,6 +75,7 @@ namespace PadSite.Controllers
             this.PurposeCateService = PurposeCateService;
             this.FormatCateService = FormatCateService;
             this.PeriodCateService = PeriodCateService;
+            this.OutDoorLuceneService = OutDoorLuceneService;
         }
 
 
@@ -79,6 +84,8 @@ namespace PadSite.Controllers
             int formatcode = 0,
             int ownercode = 0,
             int periodcode = 0,
+            int authstatus = 0,
+            int deadline = 0,
             int price = 0,
             int order = 0,
             int descending = 0,
@@ -96,56 +103,119 @@ namespace PadSite.Controllers
                 OwnerCode = ownercode,
                 PeriodCode = periodcode,
                 Page = page,
+                AuthStatus = authstatus,
+                DeadLine = deadline,
                 Price = price,
                 Order = order,
                 Descending = descending,
                 Query = query
             };
 
-            //ViewBag.Bread = GetBread(LeftMenu, queryTerm);
+            //CacheService.Clear();
+
+            if (queryTerm.City != 0)
+            {
+                var cityCate = CityCateService.Find(queryTerm.City);
+                queryTerm.CityCateCode = cityCate.Code;
+                queryTerm.CityMaxCode = Utilities.GetMaxCode(cityCate.Code, cityCate.Level);
+            }
+
+            if (queryTerm.MediaCode != 0)
+            {
+                var mediaCate = MediaCateService.Find(queryTerm.City);
+                queryTerm.MediaCateCode = mediaCate.Code;
+                queryTerm.MediaMaxCode = Utilities.GetMaxCode(mediaCate.Code, mediaCate.Level);
+            }
+
 
             ViewBag.Search = GetSearch(queryTerm);
 
             ViewBag.PriceListFilter = GetPriceListFilter(queryTerm);
 
+            ViewBag.DeadLineMonthFilter = GetDeadLineMonthFilter(queryTerm);
+
             ViewBag.DefaultOrderUrl = Url.Action("index", new
             {
+                province = queryTerm.Province,
                 city = queryTerm.City,
                 mediacode = queryTerm.MediaCode,
                 formatcode = queryTerm.FormatCode,
                 ownercode = queryTerm.OwnerCode,
                 periodcode = queryTerm.PeriodCode,
+                authstatus = queryTerm.AuthStatus,
+                deadline = queryTerm.DeadLine,
                 price = queryTerm.Price,
                 order = 0,
                 descending = 0,
-                page = queryTerm.Page,
+                page = 1,
             });
 
             ViewBag.PriceOrderAscUrl = Url.Action("index", new
             {
+                province = queryTerm.Province,
                 city = queryTerm.City,
                 mediacode = queryTerm.MediaCode,
                 formatcode = queryTerm.FormatCode,
                 ownercode = queryTerm.OwnerCode,
                 periodcode = queryTerm.PeriodCode,
+                authstatus = queryTerm.AuthStatus,
+                deadline = queryTerm.DeadLine,
                 price = queryTerm.Price,
                 order = (int)SortProperty.Price,
                 descending = (int)SortDirection.Ascending,
-                page = queryTerm.Page
+                page = 1
             });
 
             ViewBag.PriceOrderDescUrl = Url.Action("index", new
             {
+                province = queryTerm.Province,
                 city = queryTerm.City,
                 mediacode = queryTerm.MediaCode,
                 formatcode = queryTerm.FormatCode,
                 ownercode = queryTerm.OwnerCode,
                 periodcode = queryTerm.PeriodCode,
+                authstatus = queryTerm.AuthStatus,
+                deadline = queryTerm.DeadLine,
                 price = queryTerm.Price,
                 order = (int)SortProperty.Price,
                 descending = (int)SortDirection.Descending,
-                page = queryTerm.Page
+                page = 1
             });
+
+            ViewBag.NoAuthedUrl = Url.Action("index", new
+            {
+                province = queryTerm.Province,
+                city = queryTerm.City,
+                mediacode = queryTerm.MediaCode,
+                formatcode = queryTerm.FormatCode,
+                ownercode = queryTerm.OwnerCode,
+                periodcode = queryTerm.PeriodCode,
+                authstatus = 0,
+                deadline = queryTerm.DeadLine,
+                price = queryTerm.Price,
+                order = queryTerm.Order,
+                descending = queryTerm.Descending,
+                page = 1
+            });
+
+            ViewBag.AuthedUrl = Url.Action("index", new
+            {
+                province = queryTerm.Province,
+                city = queryTerm.City,
+                mediacode = queryTerm.MediaCode,
+                formatcode = queryTerm.FormatCode,
+                ownercode = queryTerm.OwnerCode,
+                periodcode = queryTerm.PeriodCode,
+                authstatus = 1,
+                deadline = queryTerm.DeadLine,
+                price = queryTerm.Price,
+                order = queryTerm.Order,
+                descending = queryTerm.Descending,
+                page = 1
+            });
+
+            ViewBag.Authed = queryTerm.AuthStatus == 1;
+
 
             ViewBag.Result = GetResult(queryTerm);
 
@@ -155,206 +225,126 @@ namespace PadSite.Controllers
 
             return View();
         }
+        private Dictionary<string, string> CreateSearchDic(string MethodName, QueryTerm queryTerm)
+        {
+            Dictionary<string, string> cacheDic = new Dictionary<string, string>();
+            cacheDic.Add(CacheService.ServiceName, "ListController");
+            cacheDic.Add(CacheService.ServiceMethod, MethodName);
+            cacheDic.Add("Province", queryTerm.Province.ToString());
+            cacheDic.Add("City", queryTerm.City.ToString());
+            cacheDic.Add("MediaCode", queryTerm.MediaCode.ToString());
+            cacheDic.Add("FormatCode", queryTerm.FormatCode.ToString());
+            cacheDic.Add("OwnerCode", queryTerm.OwnerCode.ToString());
+            cacheDic.Add("PeriodCode", queryTerm.PeriodCode.ToString());
+            cacheDic.Add("AuthStatus", queryTerm.AuthStatus.ToString());
+            cacheDic.Add("DeadLine", queryTerm.DeadLine.ToString());
+            cacheDic.Add("Order", queryTerm.Order.ToString());
+            cacheDic.Add("Descending", queryTerm.Descending.ToString());
+            cacheDic.Add("Price", queryTerm.Price.ToString());
+            cacheDic.Add("Page", queryTerm.Page.ToString());
+            return cacheDic;
+        }
+
+        private SearchFilter GetSearchFilter(string q, int sortOrder, int descending, int page, int pageSize)
+        {
+            var searchFilter = new SearchFilter
+            {
+                PageSize = pageSize,
+                SearchTerm = q,
+                Skip = (page - 1) * pageSize, // pages are 1-based. 
+                Take = pageSize
+            };
+            searchFilter.SortProperty = (SortProperty)sortOrder;
+
+            searchFilter.SortDirection = (SortDirection)descending;
+
+            return searchFilter;
+        }
+
+        private QuerySource GetResult(QueryTerm queryTerm)
+        {
+            const int PageSize = 15;
+            var model = new QuerySource();
+            var query = new List<LinkItem>();
+            int totalHits;
+            Dictionary<string, string> cacheDic = CreateSearchDic("ResultList", queryTerm);
+            Dictionary<string, string> countDic = CreateSearchDic("ResultCount", queryTerm);
+            if (string.IsNullOrWhiteSpace(queryTerm.Query)
+                && CacheService.Exists(cacheDic)
+                && CacheService.Exists(countDic))
+            {
+                query = CacheService.Get<List<LinkItem>>(cacheDic);
+                totalHits = CacheService.GetInt32Value(countDic);
+            }
+            else
+            {
+                var searchFilter = GetSearchFilter(queryTerm.Query, queryTerm.Order, queryTerm.Descending, queryTerm.Page, PageSize);
+                query = OutDoorLuceneService.Search(queryTerm, searchFilter, out totalHits);
+                if (string.IsNullOrWhiteSpace(queryTerm.Query))
+                {
+                    CacheService.Add<List<LinkItem>>(query, cacheDic, 10);
+                    CacheService.AddInt32Value(totalHits, countDic, 10);
+                }
+            }
+            model.Items = query;
+            model.TotalCount = totalHits;
+            model.CurrentPage = queryTerm.Page;
+            model.PageSize = PageSize;
+            model.Querywords = string.IsNullOrEmpty(queryTerm.Query) ? "" : queryTerm.Query;
+            return model;
+        }
 
 
         private List<LinkGroup> GetSearch(QueryTerm queryTerm)
         {
             List<LinkGroup> result = new List<LinkGroup>();
 
-            #region CityGroup
+            Dictionary<string, string> cacheDic = new Dictionary<string, string>();
 
-            LinkGroup cityGroup = new LinkGroup()
+            cacheDic.Add(CacheService.ServiceName, "ListController");
+            cacheDic.Add(CacheService.ServiceMethod, "GetSearch");
+            cacheDic.Add("City", queryTerm.City.ToString());
+            cacheDic.Add("MediaCode", queryTerm.MediaCode.ToString());
+            cacheDic.Add("FormatCode", queryTerm.FormatCode.ToString());
+            cacheDic.Add("OwnerCode", queryTerm.OwnerCode.ToString());
+            cacheDic.Add("PeriodCode", queryTerm.PeriodCode.ToString());
+            if (CacheService.Exists(cacheDic))
             {
-                Group = new LinkItem()
-                {
-                    Name = "城市",
-                    Url = Url.Action("index", new
-                    {
-                        province = queryTerm.Province,
-                        city = 0,
-                        mediacode = queryTerm.MediaCode,
-                        formatcode = queryTerm.FormatCode,
-                        ownercode = queryTerm.OwnerCode,
-                        periodcode = queryTerm.PeriodCode,
-                        price = queryTerm.Price,
-                        order = queryTerm.Order,
-                        descending = queryTerm.Descending,
-                        page = 1
-                    })
-                }
-            };
+                result = CacheService.Get<List<LinkGroup>>(cacheDic);
+                return result;
+            }
 
-            var cityRootList = CityCateService.GetALL()
-               .Where(x => x.PID == queryTerm.Province).ToList();
 
-            var cityRootSelectList = cityRootList.Select(x => new LinkItem()
-               {
-                   ID = x.ID,
-                   Name = x.CateName,
-                   Url = Url.Action("index", new
-                   {
-                       province = queryTerm.Province,
-                       city = x.ID,
-                       mediacode = queryTerm.MediaCode,
-                       formatcode = queryTerm.FormatCode,
-                       ownercode = queryTerm.OwnerCode,
-                       periodcode = queryTerm.PeriodCode,
-                       price = queryTerm.Price,
-                       order = queryTerm.Order,
-                       descending = queryTerm.Descending,
-                       page = 1
-                   })
-               }).ToList();
-
-            cityGroup.Items = cityRootSelectList;
+            #region CityGroup
             if (queryTerm.City != 0)
             {
                 var city = CityCateService.Find(queryTerm.City);
-                var level = city.Level;
-                if (level == 1)
-                {
-                    cityRootSelectList.Single(x => x.ID == queryTerm.City).Selected = true;
-                }
-                else
-                {
-                    for (var i = 2; i <= level; i++)
-                    {
-                        var pcityCode = GetLevelCode(level, city.Code);
-                        var pcity = CityCateService.GetALL().Single(x => x.Code == pcityCode);
-                        var childcityGroup = new LinkGroup()
-                        {
-                            Group = new LinkItem()
-                            {
-                                Name = pcity.CateName,
-                                Url = Url.Action("index", new
-                                {
-                                    province = queryTerm.Province,
-                                    city = pcity.ID,
-                                    mediacode = queryTerm.MediaCode,
-                                    formatcode = queryTerm.FormatCode,
-                                    ownercode = queryTerm.OwnerCode,
-                                    periodcode = queryTerm.PeriodCode,
-                                    price = queryTerm.Price,
-                                    order = queryTerm.Order,
-                                    descending = queryTerm.Descending,
-                                    page = 1
-                                })
-                            }
-                        };
-
-                        var childCityList = CityCateService.GetALL()
-                            .Where(x => x.PID == pcity.ID).ToList();
-
-                        var childCitySelectList = childCityList.Select(x => new LinkItem()
-                        {
-                            ID = x.ID,
-                            Name = x.CateName,
-                            Url = Url.Action("index", new
-                            {
-                                province = queryTerm.Province,
-                                city = x.ID,
-                                mediacode = queryTerm.MediaCode,
-                                formatcode = queryTerm.FormatCode,
-                                ownercode = queryTerm.OwnerCode,
-                                periodcode = queryTerm.PeriodCode,
-                                price = queryTerm.Price,
-                                order = queryTerm.Order,
-                                descending = queryTerm.Descending,
-                                page = 1
-                            })
-                        }).ToList();
-
-                        childcityGroup.Items = cityRootSelectList;
-                    }
-                }
-
+                var prevCityGroup = new List<LinkGroup>();
+                GetPrevCityGroup(prevCityGroup, city, queryTerm);
+                prevCityGroup.Reverse();
+                result.AddRange(prevCityGroup);
+                GetNextCityGroup(result, city, queryTerm);
             }
-
+            else
+            {
+                var city = CityCateService.Find(queryTerm.Province);
+                GetNextCityGroup(result, city, queryTerm);
+            }
             #endregion
 
             #region MediaCode
-
-            LinkGroup categoryGroup = new LinkGroup()
-            {
-                Group = new LinkItem()
-                {
-                    Name = "媒体类别",
-                    Url = Url.Action("index", new
-                    {
-                        province = queryTerm.Province,
-                        city = queryTerm.City,
-                        mediacode = 0,
-                        childmediacode = 0,
-                        formatcode = queryTerm.FormatCode,
-                        ownercode = queryTerm.OwnerCode,
-                        periodcode = queryTerm.PeriodCode
-                    })
-                }
-            };
-            categoryGroup.Items = outDoorMediaCateService.GetALL().Where(x => x.PID.Equals(null)).ToList().Select(x => new LinkItem()
-            {
-                ID = x.ID,
-                Name = x.CateName,
-                Url = Url.Action("index", new
-                {
-                    province = queryTerm.Province,
-                    city = queryTerm.City,
-                    mediacode = x.ID,
-                    childmediacode = 0,
-                    formatcode = queryTerm.FormatCode,
-                    ownercode = queryTerm.OwnerCode,
-                    periodcode = queryTerm.PeriodCode
-
-                }),
-                Selected = queryTerm.MediaCode == x.ID
-
-            }).ToList();
-
-            result.Add(categoryGroup);
-
-            #endregion
-
-            #region ChildMediaCode
             if (queryTerm.MediaCode != 0)
             {
-                LinkGroup childCategoryGroup = new LinkGroup()
-                {
-                    Group = new LinkItem()
-                    {
-                        Name = "媒体子类别",
-                        Url = Url.Action("index", new
-                        {
-                            province = queryTerm.Province,
-                            city = queryTerm.City,
-                            mediacode = queryTerm.MediaCode,
-                            childmediacode = 0,
-                            formatcode = queryTerm.FormatCode,
-                            ownercode = queryTerm.OwnerCode,
-                            periodcode = queryTerm.PeriodCode
-                        })
-                    }
-                };
-
-                childCategoryGroup.Items = outDoorMediaCateService.GetALL().Where(x => x.PID == queryTerm.MediaCode).ToList().Select(x => new LinkItem()
-                {
-                    ID = x.ID,
-                    Name = x.CateName,
-                    Url = Url.Action("index", new
-                    {
-                        province = queryTerm.Province,
-                        city = queryTerm.City,
-                        mediacode = queryTerm.MediaCode,
-                        childmediacode = x.ID,
-                        formatcode = queryTerm.FormatCode,
-                        ownercode = queryTerm.OwnerCode,
-                        periodcode = queryTerm.PeriodCode
-
-                    }),
-                    Selected = queryTerm.ChildMediaCode == x.ID
-
-                }).ToList();
-
-                result.Add(childCategoryGroup);
+                var media = MediaCateService.Find(queryTerm.MediaCode);
+                var prevMediaGroup = new List<LinkGroup>();
+                GetPrevMediaGroup(prevMediaGroup, media, queryTerm);
+                prevMediaGroup.Reverse();
+                result.AddRange(prevMediaGroup);
+                GetNextMediaGroup(result, media, queryTerm, false);
+            }
+            else
+            {
+                GetNextMediaGroup(result, null, queryTerm, true);
             }
             #endregion
 
@@ -369,14 +359,19 @@ namespace PadSite.Controllers
                         province = queryTerm.Province,
                         city = queryTerm.City,
                         mediacode = queryTerm.MediaCode,
-                        childmediacode = queryTerm.ChildMediaCode,
                         formatcode = 0,
                         ownercode = queryTerm.OwnerCode,
-                        periodcode = queryTerm.PeriodCode
+                        periodcode = queryTerm.PeriodCode,
+                        authstatus = queryTerm.AuthStatus,
+                        deadline = queryTerm.DeadLine,
+                        price = queryTerm.Price,
+                        order = queryTerm.Order,
+                        descending = queryTerm.Descending,
+                        page = 1
                     })
                 }
             };
-            formatGroup.Items = formatCateService.GetALL().Where(x => x.PID.Equals(null)).ToList().Select(x => new LinkItem()
+            formatGroup.Items = FormatCateService.GetALL().Where(x => x.PID.Equals(null)).ToList().Select(x => new LinkItem()
             {
                 ID = x.ID,
                 Name = x.CateName,
@@ -385,10 +380,15 @@ namespace PadSite.Controllers
                     province = queryTerm.Province,
                     city = queryTerm.City,
                     mediacode = queryTerm.MediaCode,
-                    childmediacode = queryTerm.ChildMediaCode,
                     formatcode = x.ID,
                     ownercode = queryTerm.OwnerCode,
-                    periodcode = queryTerm.PeriodCode
+                    periodcode = queryTerm.PeriodCode,
+                    authstatus = queryTerm.AuthStatus,
+                    deadline = queryTerm.DeadLine,
+                    price = queryTerm.Price,
+                    order = queryTerm.Order,
+                    descending = queryTerm.Descending,
+                    page = 1
 
                 }),
                 Selected = queryTerm.FormatCode == x.ID
@@ -410,14 +410,19 @@ namespace PadSite.Controllers
                         province = queryTerm.Province,
                         city = queryTerm.City,
                         mediacode = queryTerm.MediaCode,
-                        childmediacode = queryTerm.ChildMediaCode,
                         formatcode = queryTerm.FormatCode,
                         ownercode = 0,
-                        periodcode = queryTerm.PeriodCode
+                        periodcode = queryTerm.PeriodCode,
+                        authstatus = queryTerm.AuthStatus,
+                        deadline = queryTerm.DeadLine,
+                        price = queryTerm.Price,
+                        order = queryTerm.Order,
+                        descending = queryTerm.Descending,
+                        page = 1
                     })
                 }
             };
-            ownerGroup.Items = ownerCateService.GetALL().Where(x => x.PID.Equals(null)).ToList().Select(x => new LinkItem()
+            ownerGroup.Items = OwnerCateService.GetALL().Where(x => x.PID.Equals(null)).ToList().Select(x => new LinkItem()
             {
                 ID = x.ID,
                 Name = x.CateName,
@@ -426,10 +431,15 @@ namespace PadSite.Controllers
                     province = queryTerm.Province,
                     city = queryTerm.City,
                     mediacode = queryTerm.MediaCode,
-                    childmediacode = queryTerm.ChildMediaCode,
                     formatcode = queryTerm.FormatCode,
                     ownercode = x.ID,
-                    periodcode = queryTerm.PeriodCode
+                    periodcode = queryTerm.PeriodCode,
+                    authstatus = queryTerm.AuthStatus,
+                    deadline = queryTerm.DeadLine,
+                    price = queryTerm.Price,
+                    order = queryTerm.Order,
+                    descending = queryTerm.Descending,
+                    page = 1
 
                 }),
                 Selected = queryTerm.OwnerCode == x.ID
@@ -451,13 +461,18 @@ namespace PadSite.Controllers
                         province = queryTerm.Province,
                         city = queryTerm.City,
                         mediacode = queryTerm.MediaCode,
-                        childmediacode = queryTerm.ChildMediaCode,
                         formatcode = queryTerm.FormatCode,
-                        ownercode = queryTerm.OwnerCode
+                        ownercode = queryTerm.OwnerCode,
+                        authstatus = queryTerm.AuthStatus,
+                        deadline = queryTerm.DeadLine,
+                        price = queryTerm.Price,
+                        order = queryTerm.Order,
+                        descending = queryTerm.Descending,
+                        page = 1
                     })
                 }
             };
-            periodGroup.Items = periodCateService.GetALL().Where(x => x.PID.Equals(null)).ToList().Select(x => new LinkItem()
+            periodGroup.Items = PeriodCateService.GetALL().Where(x => x.PID.Equals(null)).ToList().Select(x => new LinkItem()
             {
                 ID = x.ID,
                 Name = x.CateName,
@@ -466,10 +481,15 @@ namespace PadSite.Controllers
                     province = queryTerm.Province,
                     city = queryTerm.City,
                     mediacode = queryTerm.MediaCode,
-                    childmediacode = queryTerm.ChildMediaCode,
                     formatcode = queryTerm.FormatCode,
                     ownercode = queryTerm.OwnerCode,
-                    periodcode = x.ID
+                    periodcode = x.ID,
+                    authstatus = queryTerm.AuthStatus,
+                    deadline = queryTerm.DeadLine,
+                    price = queryTerm.Price,
+                    order = queryTerm.Order,
+                    descending = queryTerm.Descending,
+                    page = 1
 
                 }),
                 Selected = queryTerm.PeriodCode == x.ID
@@ -479,27 +499,52 @@ namespace PadSite.Controllers
             result.Add(periodGroup);
 
             #endregion
+
+            CacheService.Add<List<LinkGroup>>(result, cacheDic, 180);
+            return result;
         }
 
 
-
-        private void GetCityGroup(List<LinkGroup> result, QueryTerm queryTerm, CityCate city)
+        private QuerySort GetSort(QueryTerm queryTerm)
         {
-            var pcityCode = GetLevelCode(city.Level, city.Code);
-            var pcity = CityCateService.GetALL().Single(x => x.Code == pcityCode);
-            var childcityGroup = new LinkGroup()
+            QuerySort result = new QuerySort();
+            if (queryTerm.Order == 0)
+            {
+                result.SortDefault = true;
+            }
+            else if (queryTerm.Order == (int)SortProperty.Price)
+            {
+                if (queryTerm.Descending == (int)SortDirection.Descending)
+                {
+                    result.SortPriceDesc = true;
+                }
+                else
+                {
+                    result.SortPriceAsc = true;
+                }
+            }
+            return result;
+        }
+
+        private void GetPrevCityGroup(List<LinkGroup> result, CityCate city, QueryTerm queryTerm)
+        {
+            var pCity = CityCateService.GetALL().Single(x => x.ID == city.PID);
+
+            LinkGroup cityGroup = new LinkGroup()
             {
                 Group = new LinkItem()
                 {
-                    Name = pcity.CateName,
+                    Name = !pCity.PID.HasValue ? "城市" : pCity.CateName,
                     Url = Url.Action("index", new
                     {
                         province = queryTerm.Province,
-                        city = pcity.ID,
+                        city = !pCity.PID.HasValue ? 0 : pCity.ID,
                         mediacode = queryTerm.MediaCode,
                         formatcode = queryTerm.FormatCode,
                         ownercode = queryTerm.OwnerCode,
                         periodcode = queryTerm.PeriodCode,
+                        authstatus = queryTerm.AuthStatus,
+                        deadline = queryTerm.DeadLine,
                         price = queryTerm.Price,
                         order = queryTerm.Order,
                         descending = queryTerm.Descending,
@@ -508,10 +553,10 @@ namespace PadSite.Controllers
                 }
             };
 
-            var childCityList = CityCateService.GetALL()
-                .Where(x => x.PID == pcity.ID).ToList();
+            var cityList = CityCateService.GetALL()
+               .Where(x => x.PID == pCity.ID).ToList();
 
-            var childCitySelectList = childCityList.Select(x => new LinkItem()
+            var citySelectList = cityList.Select(x => new LinkItem()
             {
                 ID = x.ID,
                 Name = x.CateName,
@@ -523,20 +568,324 @@ namespace PadSite.Controllers
                     formatcode = queryTerm.FormatCode,
                     ownercode = queryTerm.OwnerCode,
                     periodcode = queryTerm.PeriodCode,
+                    authstatus = queryTerm.AuthStatus,
+                    deadline = queryTerm.DeadLine,
                     price = queryTerm.Price,
                     order = queryTerm.Order,
                     descending = queryTerm.Descending,
                     page = 1
                 })
             }).ToList();
-            childcityGroup.Items = childCitySelectList;
-            result.Add(childcityGroup);
-            if (childcityGroup.Items.Any(x => x.ID == queryTerm.City))
+
+            if (citySelectList.Any(x => x.ID == city.ID))
             {
-                childcityGroup.Items.Single(x => x.ID == queryTerm.City).Selected = true;
+                citySelectList.Single(x => x.ID == city.ID).Selected = true;
             }
-            else { 
-                
+
+            cityGroup.Items = citySelectList;
+
+            result.Add(cityGroup);
+
+            if (pCity.PID.HasValue)
+            {
+                GetPrevCityGroup(result, pCity, queryTerm);
+            }
+
+        }
+
+        private void GetNextCityGroup(List<LinkGroup> result, CityCate city, QueryTerm queryTerm)
+        {
+            if (CityCateService.GetALL().Any(x => x.PID == city.ID))
+            {
+                LinkGroup cityGroup = new LinkGroup()
+                {
+                    Group = new LinkItem()
+                    {
+                        Name = city.CateName,
+                        Url = Url.Action("index", new
+                        {
+                            province = queryTerm.Province,
+                            city = city.ID,
+                            mediacode = queryTerm.MediaCode,
+                            formatcode = queryTerm.FormatCode,
+                            ownercode = queryTerm.OwnerCode,
+                            periodcode = queryTerm.PeriodCode,
+                            authstatus = queryTerm.AuthStatus,
+                            deadline = queryTerm.DeadLine,
+                            price = queryTerm.Price,
+                            order = queryTerm.Order,
+                            descending = queryTerm.Descending,
+                            page = 1
+                        })
+                    }
+                };
+
+                var cityList = CityCateService.GetALL()
+                   .Where(x => x.PID == city.ID).ToList();
+
+                var citySelectList = cityList.Select(x => new LinkItem()
+                {
+                    ID = x.ID,
+                    Name = x.CateName,
+                    Url = Url.Action("index", new
+                    {
+                        province = queryTerm.Province,
+                        city = x.ID,
+                        mediacode = queryTerm.MediaCode,
+                        formatcode = queryTerm.FormatCode,
+                        ownercode = queryTerm.OwnerCode,
+                        periodcode = queryTerm.PeriodCode,
+                        authstatus = queryTerm.AuthStatus,
+                        deadline = queryTerm.DeadLine,
+                        price = queryTerm.Price,
+                        order = queryTerm.Order,
+                        descending = queryTerm.Descending,
+                        page = 1
+                    })
+                }).ToList();
+
+
+                cityGroup.Items = citySelectList;
+
+                result.Add(cityGroup);
+            }
+        }
+
+        private void GetPrevMediaGroup(List<LinkGroup> result, MediaCate media, QueryTerm queryTerm)
+        {
+            if (media.PID.HasValue)
+            {
+                var pMedia = MediaCateService.GetALL().Single(x => x.ID == media.PID);
+
+                LinkGroup mediaGroup = new LinkGroup()
+                {
+                    Group = new LinkItem()
+                    {
+                        Name = pMedia.CateName,
+                        Url = Url.Action("index", new
+                        {
+                            province = queryTerm.Province,
+                            city = queryTerm.City,
+                            mediacode = pMedia.ID,
+                            formatcode = queryTerm.FormatCode,
+                            ownercode = queryTerm.OwnerCode,
+                            periodcode = queryTerm.PeriodCode,
+                            authstatus = queryTerm.AuthStatus,
+                            deadline = queryTerm.DeadLine,
+                            price = queryTerm.Price,
+                            order = queryTerm.Order,
+                            descending = queryTerm.Descending,
+                            page = 1
+                        })
+                    }
+                };
+
+                var mediaList = MediaCateService.GetALL()
+                   .Where(x => x.PID == pMedia.ID).ToList();
+
+                var mediaSelectList = mediaList.Select(x => new LinkItem()
+                {
+                    ID = x.ID,
+                    Name = x.CateName,
+                    Url = Url.Action("index", new
+                    {
+                        province = queryTerm.Province,
+                        city = queryTerm.City,
+                        mediacode = x.ID,
+                        formatcode = queryTerm.FormatCode,
+                        ownercode = queryTerm.OwnerCode,
+                        periodcode = queryTerm.PeriodCode,
+                        authstatus = queryTerm.AuthStatus,
+                        deadline = queryTerm.DeadLine,
+                        price = queryTerm.Price,
+                        order = queryTerm.Order,
+                        descending = queryTerm.Descending,
+                        page = 1
+                    })
+                }).ToList();
+
+                if (mediaSelectList.Any(x => x.ID == media.ID))
+                {
+                    mediaSelectList.Single(x => x.ID == media.ID).Selected = true;
+                }
+
+                mediaGroup.Items = mediaSelectList;
+
+                result.Add(mediaGroup);
+
+                GetPrevMediaGroup(result, pMedia, queryTerm);
+            }
+            else
+            {
+                LinkGroup mediaGroup = new LinkGroup()
+                {
+                    Group = new LinkItem()
+                    {
+                        Name = "媒体分类",
+                        Url = Url.Action("index", new
+                        {
+                            province = queryTerm.Province,
+                            city = queryTerm.City,
+                            mediacode = 0,
+                            formatcode = queryTerm.FormatCode,
+                            ownercode = queryTerm.OwnerCode,
+                            periodcode = queryTerm.PeriodCode,
+                            authstatus = queryTerm.AuthStatus,
+                            deadline = queryTerm.DeadLine,
+                            price = queryTerm.Price,
+                            order = queryTerm.Order,
+                            descending = queryTerm.Descending,
+                            page = 1
+                        })
+                    }
+                };
+
+                var mediaList = MediaCateService.GetALL()
+                   .Where(x => x.PID.Equals(null)).ToList();
+
+                var mediaSelectList = mediaList.Select(x => new LinkItem()
+                {
+                    ID = x.ID,
+                    Name = x.CateName,
+                    Url = Url.Action("index", new
+                    {
+                        province = queryTerm.Province,
+                        city = queryTerm.City,
+                        mediacode = x.ID,
+                        formatcode = queryTerm.FormatCode,
+                        ownercode = queryTerm.OwnerCode,
+                        periodcode = queryTerm.PeriodCode,
+                        authstatus = queryTerm.AuthStatus,
+                        deadline = queryTerm.DeadLine,
+                        price = queryTerm.Price,
+                        order = queryTerm.Order,
+                        descending = queryTerm.Descending,
+                        page = 1
+                    })
+                }).ToList();
+
+                if (mediaSelectList.Any(x => x.ID == media.ID))
+                {
+                    mediaSelectList.Single(x => x.ID == media.ID).Selected = true;
+                }
+
+                mediaGroup.Items = mediaSelectList;
+
+                result.Add(mediaGroup);
+
+            }
+        }
+
+        private void GetNextMediaGroup(List<LinkGroup> result, MediaCate media, QueryTerm queryTerm, bool root)
+        {
+            if (root)
+            {
+                LinkGroup mediaGroup = new LinkGroup()
+                {
+                    Group = new LinkItem()
+                    {
+                        Name = "媒体分类",
+                        Url = Url.Action("index", new
+                        {
+                            province = queryTerm.Province,
+                            city = queryTerm.City,
+                            mediacode = 0,
+                            formatcode = queryTerm.FormatCode,
+                            ownercode = queryTerm.OwnerCode,
+                            periodcode = queryTerm.PeriodCode,
+                            authstatus = queryTerm.AuthStatus,
+                            deadline = queryTerm.DeadLine,
+                            price = queryTerm.Price,
+                            order = queryTerm.Order,
+                            descending = queryTerm.Descending,
+                            page = 1
+                        })
+                    }
+                };
+
+                var mediaList = MediaCateService.GetALL()
+                   .Where(x => x.PID.Equals(null)).ToList();
+
+                var mediaSelectList = mediaList.Select(x => new LinkItem()
+                {
+                    ID = x.ID,
+                    Name = x.CateName,
+                    Url = Url.Action("index", new
+                    {
+                        province = queryTerm.Province,
+                        city = queryTerm.City,
+                        mediacode = x.ID,
+                        formatcode = queryTerm.FormatCode,
+                        ownercode = queryTerm.OwnerCode,
+                        periodcode = queryTerm.PeriodCode,
+                        authstatus = queryTerm.AuthStatus,
+                        deadline = queryTerm.DeadLine,
+                        price = queryTerm.Price,
+                        order = queryTerm.Order,
+                        descending = queryTerm.Descending,
+                        page = 1
+                    })
+                }).ToList();
+
+                mediaGroup.Items = mediaSelectList;
+
+                result.Add(mediaGroup);
+            }
+            else
+            {
+                if (MediaCateService.GetALL().Any(x => x.PID == media.ID))
+                {
+                    LinkGroup mediaGroup = new LinkGroup()
+                    {
+                        Group = new LinkItem()
+                        {
+                            Name = media.CateName,
+                            Url = Url.Action("index", new
+                            {
+                                province = queryTerm.Province,
+                                city = queryTerm.City,
+                                mediacode = media.ID,
+                                formatcode = queryTerm.FormatCode,
+                                ownercode = queryTerm.OwnerCode,
+                                periodcode = queryTerm.PeriodCode,
+                                authstatus = queryTerm.AuthStatus,
+                                deadline = queryTerm.DeadLine,
+                                price = queryTerm.Price,
+                                order = queryTerm.Order,
+                                descending = queryTerm.Descending,
+                                page = 1
+                            })
+                        }
+                    };
+
+                    var mediaList = MediaCateService.GetALL()
+                       .Where(x => x.PID == media.ID).ToList();
+
+                    var mediaSelectList = mediaList.Select(x => new LinkItem()
+                    {
+                        ID = x.ID,
+                        Name = x.CateName,
+                        Url = Url.Action("index", new
+                        {
+                            province = queryTerm.Province,
+                            city = queryTerm.City,
+                            mediacode = x.ID,
+                            formatcode = queryTerm.FormatCode,
+                            ownercode = queryTerm.OwnerCode,
+                            periodcode = queryTerm.PeriodCode,
+                            authstatus = queryTerm.AuthStatus,
+                            deadline = queryTerm.DeadLine,
+                            price = queryTerm.Price,
+                            order = queryTerm.Order,
+                            descending = queryTerm.Descending,
+                            page = 1
+                        })
+                    }).ToList();
+
+                    mediaGroup.Items = mediaSelectList;
+
+                    result.Add(mediaGroup);
+                }
             }
         }
 
@@ -552,6 +901,62 @@ namespace PadSite.Controllers
             }
             return Convert.ToInt32(codeStr);
         }
+
+        private List<LinkItem> GetPriceListFilter(QueryTerm queryTerm)
+        {
+            List<LinkItem> result = new List<LinkItem>();
+            result = UIHelper.PriceList.Select(x => new LinkItem()
+            {
+                Name = x.Text,
+                Selected = x.Value == queryTerm.Price.ToString(),
+                Url = Url.Action("index", new
+                {
+                    province = queryTerm.Province,
+                    city = queryTerm.City,
+                    mediacode = queryTerm.MediaCode,
+                    formatcode = queryTerm.FormatCode,
+                    ownercode = queryTerm.OwnerCode,
+                    periodcode = queryTerm.PeriodCode,
+                    authstatus = queryTerm.AuthStatus,
+                    deadline = queryTerm.DeadLine,
+                    price = Convert.ToInt32(x.Value),
+                    order = queryTerm.Order,
+                    descending = queryTerm.Descending,
+                    page = 1,
+                })
+
+            }).ToList();
+            return result;
+        }
+        private List<LinkItem> GetDeadLineMonthFilter(QueryTerm queryTerm)
+        {
+            List<LinkItem> result = new List<LinkItem>();
+
+            result = UIHelper.DeadLineMonthList.Select(x => new LinkItem()
+            {
+                Name = x.Text,
+                Selected = x.Value == queryTerm.DeadLine.ToString(),
+                Url = Url.Action("index", new
+                {
+                    province = queryTerm.Province,
+                    city = queryTerm.City,
+                    mediacode = queryTerm.MediaCode,
+                    formatcode = queryTerm.FormatCode,
+                    ownercode = queryTerm.OwnerCode,
+                    periodcode = queryTerm.PeriodCode,
+                    authstatus = queryTerm.AuthStatus,
+                    deadline = Convert.ToInt32(x.Value),
+                    price = queryTerm.Price,
+                    order = queryTerm.Order,
+                    descending = queryTerm.Descending,
+                    page = 1,
+                })
+
+            }).ToList();
+            return result;
+        }
+
+
     }
 
 
