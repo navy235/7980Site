@@ -14,5 +14,7 @@ namespace PadSite.Service.Interface
         void ChangeStatus(string ids, OutDoorStatus Status);
 
         List<LinkItem> Search(QueryTerm queryTerm, SearchFilter searchFilter, out int totalHits);
+
+        List<LinkItem> Search(out int totalHits);
     }
 }

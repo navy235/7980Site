@@ -285,6 +285,8 @@ namespace PadSite.Service
             od.MediaImg = model.MediaImg;
             od.MediaFoucsImg = UIHelper.GetImgUrl(model.MediaImg.Split(',')[0], ImgUrlType.Img120);
 
+            od.CredentialsImg = model.CredentialsImg;
+
             var AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
             if (AreaCateArray.Count == 0)
             {

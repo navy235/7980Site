@@ -35,14 +35,17 @@ namespace PadSite.ViewModels
 
         public string CityCateValue { get; set; }
 
+        public int CityCateCode { get; set; }
+
+
+
         public int MediaCode { get; set; }
 
         public string MediaCateName { get; set; }
 
         public string MediaCateValue { get; set; }
 
-
-
+        public int MediaCateCode { get; set; }
 
         public string Name { get; set; }
 
@@ -84,6 +87,9 @@ namespace PadSite.ViewModels
         public string OwnerName { get; set; }
 
         public string FormatName { get; set; }
+
+        public int Status { get; set; }
+
 
     }
 

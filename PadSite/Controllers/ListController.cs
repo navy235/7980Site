@@ -111,7 +111,7 @@ namespace PadSite.Controllers
                 Query = query
             };
 
-            //CacheService.Clear();
+            CacheService.Clear();
 
             if (queryTerm.City != 0)
             {
@@ -122,7 +122,7 @@ namespace PadSite.Controllers
 
             if (queryTerm.MediaCode != 0)
             {
-                var mediaCate = MediaCateService.Find(queryTerm.City);
+                var mediaCate = MediaCateService.Find(queryTerm.MediaCode);
                 queryTerm.MediaCateCode = mediaCate.Code;
                 queryTerm.MediaMaxCode = Utilities.GetMaxCode(mediaCate.Code, mediaCate.Level);
             }
@@ -280,6 +280,8 @@ namespace PadSite.Controllers
             {
                 var searchFilter = GetSearchFilter(queryTerm.Query, queryTerm.Order, queryTerm.Descending, queryTerm.Page, PageSize);
                 query = OutDoorLuceneService.Search(queryTerm, searchFilter, out totalHits);
+                //query = OutDoorLuceneService.Search(out totalHits);
+
                 if (string.IsNullOrWhiteSpace(queryTerm.Query))
                 {
                     CacheService.Add<List<LinkItem>>(query, cacheDic, 10);

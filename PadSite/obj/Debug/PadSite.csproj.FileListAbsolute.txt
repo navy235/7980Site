@@ -136,3 +136,15 @@ D:\GitProject\7980Site\PadSite\bin\MiniProfiler.EntityFramework.dll
 D:\GitProject\7980Site\PadSite\bin\MiniProfiler.pdb
 D:\GitProject\7980Site\PadSite\bin\MiniProfiler.xml
 D:\GitProject\7980Site\PadSite\bin\MiniProfiler.EntityFramework.pdb
+E:\GitProject\7980Site\PadSite\bin\ICSharpCode.SharpZipLib.dll
+E:\GitProject\7980Site\PadSite\bin\Lucene.Net.dll
+E:\GitProject\7980Site\PadSite\bin\MiniProfiler.dll
+E:\GitProject\7980Site\PadSite\bin\MiniProfiler.EntityFramework.dll
+E:\GitProject\7980Site\PadSite\bin\PanGu.dll
+E:\GitProject\7980Site\PadSite\bin\PanGu.HighLight.dll
+E:\GitProject\7980Site\PadSite\bin\PanGu.Lucene.Analyzer.dll
+E:\GitProject\7980Site\PadSite\bin\Lucene.Net.pdb
+E:\GitProject\7980Site\PadSite\bin\Lucene.Net.xml
+E:\GitProject\7980Site\PadSite\bin\MiniProfiler.pdb
+E:\GitProject\7980Site\PadSite\bin\MiniProfiler.xml
+E:\GitProject\7980Site\PadSite\bin\MiniProfiler.EntityFramework.pdb

@@ -98,8 +98,15 @@ namespace PadSite.Service
                     LogHelper.WriteLog("Lucene更新媒体索引状态出错,不存在索引目录");
                 }
                 var Ids = Utilities.GetIdList(ids);
-                Ids.ForEach(x => ChangeStatus(x, Status));
-                _indexWriter.Optimize();
+                var data = GetOutDoors(Ids);
+                for (var i = 0; i < Ids.Count; i++)
+                {
+                    var id = Ids[i];
+                    var outDoorIndexEntity = data.Single(x => x.ID == id);
+                    var doc = CreateDocument(outDoorIndexEntity);
+                    ChangeStatus(id, doc);
+                }
+
             }
             catch (Exception ex)
             {
@@ -107,34 +114,12 @@ namespace PadSite.Service
             }
         }
 
-        public void ChangeStatus(int id, OutDoorStatus Status)
+        public void ChangeStatus(int id, Document doc)
         {
-            using (var directory = new SimpleFSDirectory(new DirectoryInfo(LuceneCommon.IndexOutDoorDirectory)))
-            {
-                var searcher = new IndexSearcher(directory, readOnly: true);
-                var term = new Term(OutDoorIndexFields.ID, id.ToString());
-                TermQuery query = new TermQuery(term);
-                var hits = searcher.Search(query, 10);
-                if (hits.TotalHits == 0)
-                {
-                    LogHelper.WriteLog("Lucene没有搜索到媒体ID为" + id + "的户外媒体");
-                }
-                else if (hits.TotalHits > 1)
-                {
-                    LogHelper.WriteLog("Lucene媒体ID为" + id + "的户外媒体多余1条");
-                }
-                else
-                {
-                    int docId = hits.ScoreDocs[0].Doc;
-                    Document doc = searcher.Doc(docId);
-                    NumericField statusField = new NumericField(OutDoorIndexFields.Status, Field.Store.YES, true)
-                        .SetIntValue((int)Status);
-                    doc.RemoveField(statusField.Name);
-                    doc.Add(statusField);
-                    _indexWriter.UpdateDocument(term, doc);
-                    _indexWriter.Commit();
-                }
-            }
+            var term = new Term(OutDoorIndexFields.ID, id.ToString());
+            _indexWriter.UpdateDocument(term, doc);
+            _indexWriter.Commit();
+
         }
 
         private static void EnsureIndexWriter(bool creatingIndex)
@@ -258,6 +243,13 @@ namespace PadSite.Service
 
         private void WriteIndex(OutDoorIndexEntity OutDoor)
         {
+            var document = CreateDocument(OutDoor);
+            _indexWriter.AddDocument(document);
+        }
+
+
+        private Document CreateDocument(OutDoorIndexEntity OutDoor)
+        {
             var document = new Document();
 
             var field = new Field(OutDoorIndexFields.Title, OutDoor.Title, Field.Store.YES, Field.Index.ANALYZED);
@@ -362,9 +354,8 @@ namespace PadSite.Service
             document.Add(new NumericField(OutDoorIndexFields.Lat, Field.Store.YES, true).SetDoubleValue(OutDoor.Lat));
             document.Add(new NumericField(OutDoorIndexFields.Lng, Field.Store.YES, true).SetDoubleValue(OutDoor.Lng));
             document.Add(new NumericField(OutDoorIndexFields.MemberID, Field.Store.YES, true).SetIntValue(OutDoor.MemberID));
-            _indexWriter.AddDocument(document);
+            return document;
         }
-
 
         public List<LinkItem> Search(QueryTerm queryTerm, SearchFilter searchFilter, out int totalHits)
         {
@@ -419,18 +410,30 @@ namespace PadSite.Service
 
             int IsRegularValue = Int32.Parse(doc.Get(OutDoorIndexFields.IsRegular), CultureInfo.InvariantCulture);
 
+
+            int CityCateCode = Int32.Parse(doc.Get(OutDoorIndexFields.CityCateCode), CultureInfo.InvariantCulture);
+
+            int MediaCateCode = Int32.Parse(doc.Get(OutDoorIndexFields.MediaCateCode), CultureInfo.InvariantCulture);
+
+            int Status = Int32.Parse(doc.Get(OutDoorIndexFields.Status), CultureInfo.InvariantCulture);
+
             bool IsRegular = IsRegularValue == 1;
+
+
 
             LinkItem item = new LinkItem();
             item.ID = ID;
             item.MemberID = MemberID;
+            item.Status = Status;
             item.FocusImgUrl = doc.Get(OutDoorIndexFields.FocusImgUrl);
             item.CityCode = CityCode;
             item.CityCateName = doc.Get(OutDoorIndexFields.CityCateName);
             item.CityCateValue = doc.Get(OutDoorIndexFields.CityCateValue);
+            item.CityCateCode = CityCateCode;
             item.MediaCode = MediaCode;
             item.MediaCateName = doc.Get(OutDoorIndexFields.MediaCateName);
             item.MediaCateValue = doc.Get(OutDoorIndexFields.MediaCateValue);
+            item.MediaCateCode = MediaCateCode;
             item.Name = doc.Get(OutDoorIndexFields.Title);
             item.Description = doc.Get(OutDoorIndexFields.Description);
             item.Price = Price;
@@ -588,7 +591,7 @@ namespace PadSite.Service
             #region 媒体类别查询
             if (queryTerm.MediaCode != 0)
             {
-                var mediaCodeQuery = NumericRangeQuery.NewIntRange(OutDoorIndexFields.MediaCateCode,
+                var mediaCodeQuery = NumericRangeQuery.NewLongRange(OutDoorIndexFields.MediaCateCode,
                     queryTerm.MediaCateCode, queryTerm.MediaMaxCode, true, true);
                 combineQuery.Add(mediaCodeQuery, Occur.MUST);
             }
@@ -677,6 +680,34 @@ namespace PadSite.Service
                 .Distinct(StringComparer.OrdinalIgnoreCase)
                 .Select(Escape);
 
+        }
+
+
+        public List<LinkItem> Search(out int totalHits)
+        {
+            List<LinkItem> result = new List<LinkItem>();
+            totalHits = 0;
+            if (!Directory.Exists(LuceneCommon.IndexOutDoorDirectory))
+            {
+                totalHits = 0;
+                return result;
+            }
+            using (var directory = new SimpleFSDirectory(new DirectoryInfo(LuceneCommon.IndexOutDoorDirectory)))
+            {
+                var searcher = new IndexSearcher(directory, readOnly: false);
+                var reader = IndexReader.Open(directory, false);
+                var docs = new List<Document>();
+                var term = reader.TermDocs();
+                while (term.Next())
+                {
+                    totalHits++;
+                    docs.Add(searcher.Doc(term.Doc));
+                    result.Add(GetMediaItem(searcher.Doc(term.Doc)));
+                }
+                reader.Dispose();
+                searcher.Dispose();
+            }
+            return result;
         }
     }
 }

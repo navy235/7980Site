@@ -3,12 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Text;
+using System.Data.Entity;
 using PadSite.ViewModels;
+using Maitonn.Core;
+using PadSite.Models;
+using PadSite.Filters;
+using PadSite.Utils;
+using PadSite.Service.Interface;
+using PadSite.Setting;
+using Kendo.Mvc.UI;
+using Kendo.Mvc.Extensions;
+using PadSite.Service;
 namespace PadSite.Controllers
 {
     public class HomeController : Controller
     {
+
+        private IOutDoorLuceneService OutDoorLuceneService;
+        public HomeController(IOutDoorLuceneService OutDoorLuceneService)
+        {
+            this.OutDoorLuceneService = OutDoorLuceneService;
+        }
         //
         // GET: /Home/
         public ActionResult Index()
@@ -81,6 +96,13 @@ namespace PadSite.Controllers
             return View();
         }
 
+
+        public ActionResult Test()
+        {
+            int totalHits = 0;
+            var query = OutDoorLuceneService.Search(out totalHits);
+            return Json(query, JsonRequestBehavior.AllowGet);
+        }
         public string GetString(int number)
         {
             if (number > 9)

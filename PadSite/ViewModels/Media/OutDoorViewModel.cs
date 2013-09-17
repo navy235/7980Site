@@ -36,7 +36,7 @@ namespace PadSite.ViewModels
         [Display(Name = "媒体类别")]
         [UIHint("Cascading")]
         public string MediaCode { get; set; }
-    
+
         [Required(ErrorMessage = "请选择媒体展现形式")]
         [Display(Name = "展现形式")]
         [UIHint("DropDownList")]
@@ -60,6 +60,13 @@ namespace PadSite.ViewModels
         [UIHint("DropdownList")]
         public int PeriodCode { get; set; }
 
+
+        [Required(ErrorMessage = "请选择档期开始时间")]
+        [Display(Name = "档期开始")]
+        [DataType(DataType.DateTime)]
+        [UIHint("Date")]
+        public DateTime Deadline { get; set; }
+        [Hint("设置媒体档期，档期时间之前为不可售，默认为当天")]
 
         [HintSeparateTitle("位置信息")]
         [Required(ErrorMessage = "请选择媒体城市")]
@@ -147,10 +154,7 @@ namespace PadSite.ViewModels
         [HintLabel("请上传1-6张不小于800X600像素的图片,图片文件大小不超过5M")]
         public string CredentialsImg { get; set; }
 
-        [Display(Name = "所有权至")]
-        [DataType(DataType.DateTime)]
-        [UIHint("Date")]
-        public DateTime Deadline { get; set; }
+
 
 
         [HintSeparateTitle("媒体补充信息")]
