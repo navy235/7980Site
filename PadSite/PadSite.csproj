@@ -39,6 +39,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Calabonga.Mvc.PagedListExt">
+      <HintPath>..\packages\PagedListExt.Mvc4.1.2.2\lib\net45\Calabonga.Mvc.PagedListExt.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
@@ -178,6 +181,7 @@
     <Compile Include="Controllers\Admin\Member\BizVerifyController.cs" />
     <Compile Include="Controllers\Admin\Member\MediaVerifyController.cs" />
     <Compile Include="Controllers\Admin\Member\MemberController.cs" />
+    <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\Personal\BizController.cs" />
     <Compile Include="Controllers\Admin\Category\CityCateController.cs" />
     <Compile Include="Controllers\Admin\DashboardController.cs" />
@@ -199,6 +203,7 @@
     <Compile Include="Controllers\Personal\MessageController.cs" />
     <Compile Include="Controllers\Personal\OutDoorController.cs" />
     <Compile Include="Controllers\Personal\PersonalController.cs" />
+    <Compile Include="Controllers\ShowController.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Filters\LoginAuthorizeAttribute.cs" />
     <Compile Include="Filters\PermissionAuthorizeAttribute.cs" />
@@ -362,6 +367,7 @@
     <Compile Include="ViewModels\Personal\AvtarViewModel.cs" />
     <Compile Include="ViewModels\Personal\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\Personal\CompanyBaseInfoViewModel.cs" />
+    <Compile Include="ViewModels\Shop\CompanyIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Binaries\Kendo.Mvc.dll" />
@@ -369,6 +375,9 @@
     <Content Include="Binaries\Maitonn.Core.dll" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\avtar\avtar_default.jpg" />
+    <Content Include="Content\company.css" />
+    <Content Include="Content\images\companybg.png" />
+    <Content Include="Content\images\companybtn.png" />
     <Content Include="Content\images\cusp.png" />
     <Content Include="Content\images\formloading.gif" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
@@ -390,6 +399,7 @@
     <Content Include="Content\images\min-loading.gif" />
     <Content Include="Content\images\noimages.gif" />
     <Content Include="Content\images\productBg.png" />
+    <Content Include="Content\images\productSpring.png" />
     <Content Include="Content\images\search-bg.png" />
     <Content Include="Content\images\slider\1.jpg" />
     <Content Include="Content\images\slider\2.jpg" />
@@ -473,6 +483,7 @@
     <Content Include="EmailTemplate\active.htm" />
     <Content Include="EmailTemplate\bizactive.htm" />
     <Content Include="EmailTemplate\getpwd.htm" />
+    <Content Include="EmailTemplate\companyauthed.htm" />
     <Content Include="Global.asax" />
     <Content Include="Content\site.css" />
     <Content Include="Content\kendo\2012.3.1114\images\KendoUI.ttf" />
@@ -497,6 +508,7 @@
     <Content Include="Scripts\effectcontrol\control-slider.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery.Jcrop.min.js" />
+    <Content Include="Scripts\effectcontrol\control-jqzoom-core.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.zcustom.js" />
@@ -748,6 +760,16 @@
     <Content Include="Views\Shared\DisplayTemplates\Price.cshtml" />
     <Content Include="Views\MediaVerify\Authed.cshtml" />
     <Content Include="Views\List\_QueryTerm.cshtml" />
+    <Content Include="Views\Show\Index.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutCompany.cshtml" />
+    <Content Include="Views\Company\Intro.cshtml" />
+    <Content Include="Views\Company\source.cshtml" />
+    <Content Include="Views\Company\notice.cshtml" />
+    <Content Include="Views\Company\viewnotice.cshtml" />
+    <Content Include="Views\Company\contact.cshtml" />
+    <Content Include="Views\Company\Credentials.cshtml" />
+    <Content Include="Views\Company\show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

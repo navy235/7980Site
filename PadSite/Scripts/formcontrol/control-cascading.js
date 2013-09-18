@@ -53,9 +53,9 @@
           if (res.length > 0) {
             createSelect(level + 1, res, defaultvalue, isInit);
           } else {
+            clearLevel(level + 1);
             setValue();
             validate();
-            clearLevel(level + 1);
           }
         })
       }

@@ -29,7 +29,7 @@
             <div class="top-head-logo">
                 <h5>
                     <a hidefocus="true" title="@(ConfigSetting.SiteName)" class="top-head-link" href="/"></a>
-                    <span>全国</span>
+                    <span>湖南省</span>
                 </h5>
                 <div class="top-head-city">
                     <a href="javascript:;" class="top-head-changcity">[切换省份]</a>
@@ -136,12 +136,11 @@
             </div>
             <iframe frameborder="0" class="top-menu-frame" scrolling="no" style="height: 420px; display: none;"></iframe>
             <ul class="top-menu-list">
-                <li class="active"><a href="/">首页</a></li>
-                <li><a href="/list-0-0-0-0-0-0-0-0-0-p_1">户外资源</a></li>
+                <li><a href="@Url.Action("index", "home")">首页</a></li>
+                <li><a href="@Url.Action("index", "list")">户外资源</a></li>
             </ul>
         </div>
     </div>
-
     <div class="nav-bread">
         <a class="nav-bread-home" href="@Url.Action("index", "home")"><i class="icon-maitonn icon-home"></i></a>&gt;
         <a href="@Url.Action("index", "personal")"></a>个人中心 &gt;

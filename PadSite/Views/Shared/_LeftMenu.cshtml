@@ -35,70 +35,81 @@
                 </li>
             </ul>
 
-            <div class="nav-title ">
-                <em></em>
-                <p class="nav-company"><i class="icon-maitonn icon-credit-card"></i>企业资料</p>
+            @if (Convert.ToInt32(CookieHelper.Status) >= (int)MemberStatus.CompanyAuth)
+            { 
 
-            </div>
-            <ul class="menu-company" style="display: none;">
-                <li class="item-company-baseinfo">
-                    <p><a href="@Url.Action("index", "biz")">基本信息</a></p>
-                </li>
-                <li class="item-company-contact">
-                    <p><a href="@Url.Action("contact", "biz")">联系方式</a></p>
-                </li>
-                <li class="item-company-credentials ">
-                    <p><a href="@Url.Action("credentials", "biz")">资质证书</a></p>
-                </li>
-            </ul>
-            <div class="nav-title ">
-                <em></em>
-                <p class="nav-shop"><i class="icon-maitonn icon-columns"></i>企业商铺</p>
+                <div class="nav-title ">
+                    <em></em>
+                    <p class="nav-company"><i class="icon-maitonn icon-credit-card"></i>企业资料</p>
 
-            </div>
-            <ul class="menu-shop" style="display: none;">
-                <li>
-                    <p><a href="/biz/1" target="_blank">商铺首页</a></p>
-                </li>
-                <li class="item-shop-logo ">
-                    <p><a href="@Url.Action("logo", "biz")">企业标志</a></p>
-                </li>
-                <li class="item-shop-banner ">
-                    <p><a href="@Url.Action("banner", "biz")">商铺横幅</a></p>
-                </li>
-                <li class="item-shop-notice ">
-                    <p><a href="@Url.Action("notice", "biz")">公告管理</a></p>
-                </li>
-                <li class="item-shop-message ">
-                    <p><a href="@Url.Action("message", "biz")">留言管理</a></p>
-                </li>
-            </ul>
-            <div class="nav-title ">
-                <em></em>
-                <p class="nav-media"><i class="icon-maitonn icon-edit-sign"></i>媒体信息</p>
+                </div>
+                <ul class="menu-company" style="display: none;">
+                    <li class="item-company-baseinfo">
+                        <p><a href="@Url.Action("index", "biz")">基本信息</a></p>
+                    </li>
+                    <li class="item-company-contact">
+                        <p><a href="@Url.Action("contact", "biz")">联系方式</a></p>
+                    </li>
+                    <li class="item-company-credentials ">
+                        <p><a href="@Url.Action("credentials", "biz")">资质证书</a></p>
+                    </li>
+                </ul>
+                <div class="nav-title ">
+                    <em></em>
+                    <p class="nav-shop"><i class="icon-maitonn icon-columns"></i>企业商铺</p>
 
-            </div>
-            <ul class="menu-media" style="display: none;">
-                <li class="item-media-publish ">
-                    <p><a href="/outdoor/add">发布信息</a></p>
-                </li>
-                <li class="item-media-list ">
-                    <p><a href="/outdoor">显示中信息</a></p>
-                </li>
-                <li class="item-media-notshow ">
-                    <p><a href="/outdoor/notshow">未显示信息</a></p>
-                </li>
-                <li class="item-media-preverify ">
-                    <p><a href="/outdoor/preverify">待审核信息</a></p>
-                </li>
-                <li class="item-media-verifyfailed ">
-                    <p><a href="/outdoor/verifyfailed">审核失败信息</a></p>
-                </li>
-                <li class="item-media-delete ">
-                    <p><a href="/outdoor/delete">已删除信息</a></p>
-                </li>
-            </ul>
+                </div>
+                <ul class="menu-shop" style="display: none;">
+                    <li>
+                        <p><a href="/biz/1" target="_blank">商铺首页</a></p>
+                    </li>
+                    <li class="item-shop-logo ">
+                        <p><a href="@Url.Action("logo", "biz")">企业标志</a></p>
+                    </li>
+                    <li class="item-shop-banner ">
+                        <p><a href="@Url.Action("banner", "biz")">商铺横幅</a></p>
+                    </li>
+                    <li class="item-shop-notice ">
+                        <p><a href="@Url.Action("notice", "biz")">公告管理</a></p>
+                    </li>
+                    <li class="item-shop-message ">
+                        <p><a href="@Url.Action("message", "biz")">留言管理</a></p>
+                    </li>
+                </ul>
+                <div class="nav-title ">
+                    <em></em>
+                    <p class="nav-media"><i class="icon-maitonn icon-edit-sign"></i>媒体信息</p>
 
+                </div>
+                <ul class="menu-media" style="display: none;">
+                    <li class="item-media-publish ">
+                        <p><a href="@Url.Action("add", "outdoor")">发布信息</a></p>
+                    </li>
+                    <li class="item-media-list ">
+                        <p><a href="@Url.Action("index", "outdoor")">显示中信息</a></p>
+                    </li>
+                    <li class="item-media-notshow ">
+                        <p><a href="@Url.Action("notshow", "outdoor")">未显示信息</a></p>
+                    </li>
+                    <li class="item-media-preverify ">
+                        <p><a href="@Url.Action("preverify", "outdoor")">待审核信息</a></p>
+                    </li>
+                    <li class="item-media-verifyfailed ">
+                        <p><a href="@Url.Action("verifyfailed", "outdoor")">审核失败信息</a></p>
+                    </li>
+                    <li class="item-media-delete ">
+                        <p><a href="@Url.Action("delete", "outdoor")">已删除信息</a></p>
+                    </li>
+                </ul>
+            }
+            else
+            {
+                <div class="nav-title ">
+                    <em></em>
+                    <p class="nav-auth"><i class="icon-maitonn icon-credit-card"></i><a href="@Url.Action("openbiz", "reg")">企业入驻</a></p>
+                    <i></i>
+                </div>
+            }
             <div class="nav-title ">
                 <em></em>
                 <p class="nav-scheme"><i class="icon-maitonn icon-paste"></i>方案管理</p>
@@ -135,13 +146,13 @@
             </div>
             <ul class="menu-message" style="display: none;">
                 <li class="item-message-list">
-                    <p><a href="/message">收到的留言</a></p>
+                    <p><a href="@Url.Action("index", "message")">收到的留言</a></p>
                 </li>
                 <li class="item-message-send ">
-                    <p><a href="/message/send">发出的留言</a></p>
+                    <p><a href="@Url.Action("send", "message")">发出的留言</a></p>
                 </li>
             </ul>
-            <div class="nav-title ">
+            @*<div class="nav-title ">
                 <em></em>
                 <p class="nav-wallet"><i class="icon-maitonn icon-archive"></i>钱包管理</p>
 
@@ -170,7 +181,7 @@
                 <li class="item-gztvip-paytop ">
                     <p><a href="/gztvip/paytop">置顶服务</a></p>
                 </li>
-            </ul>
+            </ul>*@
 
         </div>
 

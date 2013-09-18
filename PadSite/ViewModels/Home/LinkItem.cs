@@ -23,6 +23,14 @@ namespace PadSite.ViewModels
 
         public string HintClass { get; set; }
 
+        public string AreaCate { get; set; }
+
+        public string CrowdCate { get; set; }
+
+        public string IndustryCate { get; set; }
+
+        public string PurposeCate { get; set; }
+
         public string Url { get; set; }
 
         public decimal Price { get; set; }
@@ -36,8 +44,6 @@ namespace PadSite.ViewModels
         public string CityCateValue { get; set; }
 
         public int CityCateCode { get; set; }
-
-
 
         public int MediaCode { get; set; }
 
@@ -80,7 +86,6 @@ namespace PadSite.ViewModels
         public DateTime DeadLine { get; set; }
 
         public DateTime AddTime { get; set; }
-
 
         public string PeriodName { get; set; }
 

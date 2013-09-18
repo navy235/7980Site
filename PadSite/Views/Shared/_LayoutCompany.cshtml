@@ -1,0 +1,39 @@
+﻿@using StackExchange.Profiling;
+<!DOCTYPE html>
+<html>
+<head>
+    @this.InitClientTimings()
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    @Styles.Render("~/Content/kendo/2012.3.1114/css")
+    @Styles.Render("~/Content/company")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/kendo/2012.3.1114/jquery.min.js"></script>
+    <script src="~/Scripts/kendo/2012.3.1114/kendo.all.min.js"></script>
+    <script src="~/Scripts/kendo/2012.3.1114/kendo.aspnetmvc.min.js"></script>
+    @Scripts.Render("~/bundles/effectcontrol")
+</head>
+<body>
+    @Html.Partial("_TopNav")
+    @RenderBody()
+    <div class="footer-about">
+        <a target="_blank" href="#">XXX</a> | 
+        <a target="_blank" href="#">网站帮助</a> |
+        <a target="_blank" href="#">会员注册</a> | 
+        <a target="_blank" href="#">网站地图</a> | 
+        <a target="_blank" href="#">联系我们</a> | 
+        <a target="_blank" href="#">广告网址导航</a> | 
+        <a target="_blank" href="#">网站律师</a> | 
+        <a target="_blank" href="#">意见反馈</a><br>
+        Copyright @@ 1996-2012 Dotaeye Corporation, All Rights Reserved<br>
+        XXX技术支持客服服务热线：400-606-6969
+    </div>
+    @RenderSection("scripts", required: false)
+    @MiniProfiler.RenderIncludes(position: RenderPosition.Right, showTrivial: false, showTimeWithChildren: false)
+</body>
+</html>

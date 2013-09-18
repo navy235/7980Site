@@ -148,3 +148,4 @@ E:\GitProject\7980Site\PadSite\bin\Lucene.Net.xml
 E:\GitProject\7980Site\PadSite\bin\MiniProfiler.pdb
 E:\GitProject\7980Site\PadSite\bin\MiniProfiler.xml
 E:\GitProject\7980Site\PadSite\bin\MiniProfiler.EntityFramework.pdb
+D:\GitProject\7980Site\PadSite\bin\Calabonga.Mvc.PagedListExt.dll

@@ -14,7 +14,7 @@
         var lat = '@(String.IsNullOrEmpty(Model) ? string.Empty : Model.Split('|')[0])';
         var lng = '@(String.IsNullOrEmpty(Model) ? string.Empty : Model.Split('|')[1])'
         var point = new BMap.Point(116.404, 39.915);
-        if (lng !== '' && lng !== '0') {
+        if (lng != '' && lat != '') {
             point = new BMap.Point(new Number(lng), new Number(lat));
         }
         var map;

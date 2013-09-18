@@ -17,7 +17,7 @@ namespace PadSite.ViewModels
         {
             //this.StartTime = DateTime.Now;
             //this.EndTime = DateTime.Now;
-            this.Deadline = DateTime.Now.AddYears(1);
+            this.Deadline = DateTime.Now;
         }
 
         [HiddenInput(DisplayValue = false)]
@@ -42,13 +42,13 @@ namespace PadSite.ViewModels
         [UIHint("DropDownList")]
         public int FormatCode { get; set; }
 
-        [Required(ErrorMessage = "请输入价格")]
         [Display(Name = "价格")]
         [Range(0F, 1000F, ErrorMessage = "{0}必须位于{1}-{2}之间")]
         [UIHint("Price")]
         [AdditionalMetadata("Price", "0,1000")]
         [AdditionalMetadata("PriceUnit", "万元/年")]
         [HintClass("price")]
+        [Hint("不填价格，默认为面议，为了方便搜索请填写参考价格")]
         public decimal Price { get; set; }
 
         [Display(Name = "价格说明")]
@@ -65,8 +65,9 @@ namespace PadSite.ViewModels
         [Display(Name = "档期开始")]
         [DataType(DataType.DateTime)]
         [UIHint("Date")]
-        public DateTime Deadline { get; set; }
         [Hint("设置媒体档期，档期时间之前为不可售，默认为当天")]
+        public DateTime Deadline { get; set; }
+
 
         [HintSeparateTitle("位置信息")]
         [Required(ErrorMessage = "请选择媒体城市")]

@@ -53,3 +53,13 @@ D:\GitProject\7980Site\PadSite.Tests\bin\Debug\zh-Hans\System.Web.Optimization.r
 D:\GitProject\7980Site\PadSite.Tests\bin\Debug\zh-Hans\EntityFramework.resources.dll
 D:\GitProject\7980Site\PadSite.Tests\obj\Debug\PadSite.Tests.dll
 D:\GitProject\7980Site\PadSite.Tests\obj\Debug\PadSite.Tests.pdb
+D:\GitProject\7980Site\PadSite.Tests\bin\Debug\Lucene.Net.dll
+D:\GitProject\7980Site\PadSite.Tests\bin\Debug\MiniProfiler.dll
+D:\GitProject\7980Site\PadSite.Tests\bin\Debug\MiniProfiler.EntityFramework.dll
+D:\GitProject\7980Site\PadSite.Tests\bin\Debug\PanGu.Lucene.Analyzer.dll
+D:\GitProject\7980Site\PadSite.Tests\bin\Debug\PanGu.dll
+D:\GitProject\7980Site\PadSite.Tests\bin\Debug\Lucene.Net.pdb
+D:\GitProject\7980Site\PadSite.Tests\bin\Debug\Lucene.Net.xml
+D:\GitProject\7980Site\PadSite.Tests\bin\Debug\MiniProfiler.pdb
+D:\GitProject\7980Site\PadSite.Tests\bin\Debug\MiniProfiler.xml
+D:\GitProject\7980Site\PadSite.Tests\bin\Debug\MiniProfiler.EntityFramework.pdb

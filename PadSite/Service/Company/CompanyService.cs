@@ -7,17 +7,24 @@ using PadSite.ViewModels;
 using PadSite.Service.Interface;
 using PadSite.Utils;
 using Maitonn.Core;
+
 namespace PadSite.Service
 {
     public class CompanyService : ICompanyService
     {
         private readonly IUnitOfWork db;
         private readonly IMemberService MemberService;
+        private readonly IEmailService EmailService;
+        private readonly IMessageService MessageService;
         public CompanyService(IUnitOfWork db,
-            IMemberService MemberService)
+            IMemberService MemberService
+            , IEmailService EmailService
+            , IMessageService MessageService)
         {
             this.db = db;
             this.MemberService = MemberService;
+            this.EmailService = EmailService;
+            this.MessageService = MessageService;
         }
 
         public IQueryable<Company> GetALL()
@@ -193,6 +200,40 @@ namespace PadSite.Service
             else if (CompanyStatus == CompanyStatus.CompanyAuth)
             {
                 MemberService.ChangeStatus(IdsArray, (int)MemberStatus.CompanyAuth);
+                SendCompanyAuthedMail(IdsArray);
+            }
+        }
+
+
+        private void SendCompanyAuthedMail(IEnumerable<int> IdsArray)
+        {
+            foreach (var id in IdsArray)
+            {
+                var member = MemberService.Find(id);
+                string emailTitle = member.NickName + ",您好！您的企业资料已经通过审核";
+                EmailModel em = EmailService.GetMail(HttpContext.Current.Server.MapPath("~/EmailTemplate/companyauthed.htm"), emailTitle, member.MemberID, member.Email,
+                       member.NickName,
+                       string.Empty);
+                EmailService.SendMail(em);
+            }
+        }
+
+        private void SendCompanyAuthFailedMessage(IEnumerable<int> IdsArray)
+        {
+            foreach (var id in IdsArray)
+            {
+                var member = MemberService.Find(id);
+                var message = new Message()
+                {
+                    AddTime = DateTime.Now,
+                    SenderID = 0,
+                    RecipientID = member.MemberID,
+                    MessageType = (int)MessageType.System,
+                    RecipienterStatus = (int)MessageStatus.Show,
+                    Title = member.NickName + ",您好！您的企业资料未通过审核",
+                    Content = member.NickName + ",您好！您的企业资料未通过审核。具体原因,请查看企业基本信息"
+                };
+                MessageService.Create(message);
             }
         }
 

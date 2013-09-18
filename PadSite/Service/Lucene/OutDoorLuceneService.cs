@@ -426,6 +426,7 @@ namespace PadSite.Service
             item.MemberID = MemberID;
             item.Status = Status;
             item.FocusImgUrl = doc.Get(OutDoorIndexFields.FocusImgUrl);
+            item.ImgUrl = doc.Get(OutDoorIndexFields.ImgUrl);
             item.CityCode = CityCode;
             item.CityCateName = doc.Get(OutDoorIndexFields.CityCateName);
             item.CityCateValue = doc.Get(OutDoorIndexFields.CityCateValue);
@@ -443,6 +444,12 @@ namespace PadSite.Service
             item.AuthStatus = AuthStatus;
             item.MemberStatus = MemberStatus;
             item.CompanyName = doc.Get(OutDoorIndexFields.CompanyName);
+            item.AreaCate = doc.Get(OutDoorIndexFields.AreaCate);
+            item.IndustryCate = doc.Get(OutDoorIndexFields.IndustryCate);
+            item.CrowdCate = doc.Get(OutDoorIndexFields.CrowdCate);
+            item.PurposeCate = doc.Get(OutDoorIndexFields.PurposeCate);
+            item.AddTime = Published;
+            item.DeadLine = DeadLine;
             decimal TotalArea = Decimal.Parse(doc.Get(OutDoorIndexFields.TotalArea), CultureInfo.InvariantCulture);
             if (IsRegular)
             {
@@ -548,6 +555,15 @@ namespace PadSite.Service
             }
             #endregion
 
+            #region 指定媒体ID查询
+            if (queryTerm.MediaID != 0)
+            {
+                var mediaIdQuery = new TermQuery(new Term(OutDoorIndexFields.ID, queryTerm.MediaID.ToString()));
+                combineQuery.Add(mediaIdQuery, Occur.MUST);
+            }
+            #endregion
+
+
             #region 用户状态
             var memberStatusQuery = NumericRangeQuery.NewIntRange(OutDoorIndexFields.MemberStatus, (int)MemberStatus.CompanyAuth, 99, true, true);
             combineQuery.Add(memberStatusQuery, Occur.MUST);
@@ -558,6 +574,13 @@ namespace PadSite.Service
             combineQuery.Add(verifyStatus, Occur.MUST);
             #endregion
 
+            #region 指定用户ID查询
+            if (queryTerm.MemberID != 0)
+            {
+                var memberIdQuery = NumericRangeQuery.NewIntRange(OutDoorIndexFields.MemberID, queryTerm.MemberID, queryTerm.MemberID, true, true);
+                combineQuery.Add(memberIdQuery, Occur.MUST);
+            }
+            #endregion
 
             #region 城市查询
             if (queryTerm.City != 0)
@@ -575,8 +598,6 @@ namespace PadSite.Service
             }
             #endregion
 
-
-
             #region 经纬度搜索
             if (queryTerm.MinX != 0)
             {
@@ -586,7 +607,6 @@ namespace PadSite.Service
                 combineQuery.Add(lngQuery, Occur.MUST);
             }
             #endregion
-
 
             #region 媒体类别查询
             if (queryTerm.MediaCode != 0)
@@ -708,6 +728,22 @@ namespace PadSite.Service
                 searcher.Dispose();
             }
             return result;
+        }
+
+
+        public LinkItem Search(int MediaID)
+        {
+            var model = new LinkItem();
+            using (var directory = new SimpleFSDirectory(new DirectoryInfo(LuceneCommon.IndexOutDoorDirectory)))
+            {
+                var searcher = new IndexSearcher(directory, readOnly: true);
+                var term = new Term(OutDoorIndexFields.ID, MediaID.ToString());
+                var result = searcher.Search(new TermQuery(term), 1);
+                var doc = searcher.Doc(result.ScoreDocs[0].Doc);
+                model = GetMediaItem(doc);
+                searcher.Dispose();
+            }
+            return model;
         }
     }
 }

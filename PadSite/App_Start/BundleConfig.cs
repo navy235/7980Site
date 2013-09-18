@@ -40,6 +40,14 @@ namespace PadSite
                         "~/Content/kendohelper.css"));
 
 
+            bundles.Add(new StyleBundle("~/Content/company")
+             .Include("~/Content/animate.css",
+                      "~/Content/source.css",
+                      "~/Content/company.css",
+                      "~/Content/site.css",
+                      "~/Content/kendohelper.css"));
+
+
             bundles.Add(new StyleBundle("~/Content/admin")
               .Include("~/Content/animate.css",
                        "~/Content/site.css",

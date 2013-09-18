@@ -1,0 +1,196 @@
+﻿@model CompanyIndexViewModel
+@{
+    ViewBag.Title = Model.Name + "-广告资源";
+    Layout = "~/Views/Shared/_LayoutCompany.cshtml";
+}
+<div class="company-brand">
+    <img src="@Model.BannerImg" />
+</div>
+<nav class="company-nav clearfix">
+    <ul>
+        <li><a href="@Url.Action("index", "company", new { id = Model.ID })" ><span>公司首页</span></a></li>
+        <li>| </li>
+        <li><a href="@Url.Action("intro", "company", new { id = Model.ID })"><span>公司简介</span></a></li>
+        <li>| </li>
+        <li><a href="@Url.Action("source", "company", new { id = Model.ID })"  class="selected"><span>广告资源</span></a></li>
+        <li>| </li>
+        <li><a href="@Url.Action("notice", "company", new { id = Model.ID })"><span>公司公告</span></a></li>
+        <li>| </li>
+        <li><a href="@Url.Action("contact", "company", new { id = Model.ID })"><span>联系方式</span></a></li>
+        <li>| </li>
+        <li><a href="@Url.Action("credentials", "company", new { id = Model.ID })"><span>相关证书</span></a></li>
+    </ul>
+</nav>
+
+<div class="bread-container">
+    <div class="company-bread">
+        <a class="company-bread-home" href="@Url.Action("index", "home")"><i class="icon-maitonn icon-home"></i></a>&gt;
+    <a href="@Url.Action("index", new { id = Model.ID })">@Model.Name</a>&gt;
+    <strong>广告资源</strong>
+    </div>
+</div>
+
+<div class="company-container clearfix">
+    <div class="company-left">
+        <div class="m-body">
+            <div class="m-header">
+                <h3>公司介绍</h3>
+            </div>
+            <div class="m-content">
+                <div class="info-body">
+                    <div class="info-logo">
+                        <a href="@Url.Action("index", new { id = Model.ID })" title="@Model.Name" >
+                            <img src="@Model.LogoImg" alt="@Model.Name" /></a>
+                    </div>
+                    <a href="@Url.Action("intro", new { id = Model.ID })">@Model.Name</a>
+                    <br />
+                    <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "先生" : "女士")
+                    <br />
+                    <span class="fg-color-gray">所在地区:</span> @Model.CityName
+                </div>
+            </div>
+        </div>
+
+        <div class="m-body">
+            <div class="m-header">
+                <h3>产品分类</h3>
+            </div>
+            <div class="m-content">
+                <ul class="m-list">
+                    @foreach (var item in Model.Categories)
+                    {
+                        <li><a href="@Url.Action("source", new { id = Model.ID, c = item.Code })">@item.Name</a>
+                            <span class="fg-color-gray">(@item.Count)</span></li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="m-body">
+            <div class="m-header">
+                <h3>联系方式</h3>
+            </div>
+            <div class="m-content">
+                <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "先生" : "女士")<br />
+                <span class="fg-color-gray">电话:</span> @Model.Phone
+                <br />
+                <span class="fg-color-gray">手机:</span> @Model.Mobile
+                <br />
+                <span class="fg-color-gray">QQ:</span> @Model.QQ
+                @if (Model.Lat != 0)
+                {
+                    <div id="map-contact" class="map-container">
+                    </div>
+                    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=497ff27739928a1aa7617446f02f6998"></script>
+                    <script type="text/javascript">
+                        $(function () {
+                            var lat = '@Model.Lat';
+                            var lng = '@Model.Lng';
+                            var point = new BMap.Point(116.404, 39.915);
+                            if (lng != '' && lng != '0' && lat != '0') {
+                                point = new BMap.Point(new Number(lng), new Number(lat));
+                            }
+                            var map;
+                            map = new BMap.Map("map-contact");
+                            map.centerAndZoom(point, 16);
+                            addMarker(point);
+                            function addMarker(point) {
+                                var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+                                    offset: new BMap.Size(0, 0),
+                                    imageOffset: new BMap.Size(0, 0 - 10 * 25)
+                                });
+                                var marker = new BMap.Marker(point, { icon: myIcon });
+                                map.addOverlay(marker);
+                                return marker;
+                            }
+                        })
+                    </script>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="company-right">
+        <div class="m-body">
+            <div class="m-header">
+                <h3>@(Model.Links.Name)</h3>
+            </div>
+            <div class="m-content">
+                <div class="media-content">
+                    <div class="clearfix details-box">
+                        <a href="javascript:;" id="litimgUp" class="details-scroll-btn details-scroll-up"><b class="up"></b></a>
+                        <a href="javascript:;" id="litimgDown" class="details-scroll-btn   details-scroll-down "><b class="down"></b></a>
+                        <div class=" details-info-show">
+                            <a href="@UIHelper.GetImgUrl(Model.Links.ImgUrl.Split(',')[0], ImgUrlType.Img800)" class="jqzoom" rel='gal1'>
+                                <img src="@UIHelper.GetImgUrl(Model.Links.ImgUrl.Split(',')[0], ImgUrlType.Img430)" width="430" height="430" >
+                            </a>
+                        </div>
+                        <div class="details-info-box">
+                            <ul id="thumblist" class="details-info-list">
+                                @for (var i = 0; i < Model.Links.ImgUrl.Split(',').Length; i++)
+                                {
+                                    var imgurl = Model.Links.ImgUrl.Split(',')[i];
+                                    <li class="@(i == 0 ? "zoomThumbActive" : "")">
+                                        <a href="javascript:;" rel="{gallery:'gal1', smallimage:'@UIHelper.GetImgUrl(imgurl, ImgUrlType.Img430)',largeimage:'@UIHelper.GetImgUrl(imgurl, ImgUrlType.Img800)'}">
+                                            <img src="@UIHelper.GetImgUrl(imgurl, ImgUrlType.Img120)"></a></li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $('.jqzoom').jqzoom({
+                                zoomType: 'standard',
+                                lens:true,
+                                preloadImages: false,
+                                alwaysOn:false,
+                                preloadText:'加载中...',
+                                zoomWidth:430,
+                                zoomHeight:430
+                            });
+                            if($('#thumblist').children('li').length<6){
+                                $('.details-scroll-btn').addClass('details-scroll-btn-disabled');
+                            }
+                            var currentIndex=0;
+                            $('.details-scroll-btn').click(function(){
+                                if($(this).hasClass('details-scroll-btn-disabled')){
+                                    return false;
+                                }else{
+                                    var maxShowLength=5;
+                                    var totalLength=@Model.Links.ImgUrl.Split(',').Length;
+                                    var marginTop=parseInt($('#thumblist').css('marginTop'));
+                                    var itemHeight=$('#thumblist').children('li').eq(0).outerHeight(true);
+                                    if($(this).hasClass('details-scroll-up')){
+                                        if(currentIndex+maxShowLength<totalLength){
+                                            currentIndex++;
+                                            $('#thumblist').css('marginTop',(marginTop-itemHeight)+'px');
+                                        }
+                                    }else{
+                                        if(marginTop!=0){
+                                            currentIndex--;
+                                            $('#thumblist').css('marginTop',(marginTop+itemHeight)+'px');
+                                        }
+                                    }
+                                }
+                            })
+                        });
+                    </script>
+                    <dl class="details-info-content">
+                        <dt>@Model.Links.Name </dt>
+                        <dd>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：<span class="details-info-item details-info-price">@Model.Links.CityCateName.Replace(",", " - ")</span></dd>
+                        <dd>售&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：<span class="details-info-item details-info-price-current"><strong>¥<b>@Model.Links.Price</b> 万元/年</strong></span></dd>
+                        <dd>媒体类型：<span class="details-info-item">@Model.Links.MediaCateName.Replace(",", " - ")</span></dd>
+                        <dd>最短投放：<span class="details-info-item">@Model.Links.PeriodName</span></dd>
+                        <dd>媒体形式：<span class="details-info-item">@Model.Links.FormatName</span></dd>
+                        <dd>区域属性：<span class="details-info-item">@Model.Links.AreaCate</span></dd>
+                        <dd>受众人群：<span class="details-info-item">@Model.Links.CrowdCate</span></dd>
+                        <dd>投放行业：<span class="details-info-item">@Model.Links.IndustryCate</span></dd>
+                        <dd>投放目的：<span class="details-info-item">@Model.Links.PurposeCate</span></dd>
+                        <dd>代理类型：<span class="details-info-item">@Model.Links.OwnerName</span> </dd>
+                        <dd>媒体档期：@(Model.Links.DeadLine.CompareTo(DateTime.Now) > 0 ? Model.Links.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

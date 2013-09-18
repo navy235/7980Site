@@ -10,6 +10,10 @@ namespace PadSite.ViewModels
 
         public int Province { get; set; }
 
+        public int MemberID { get; set; }
+
+        public int MediaID { get; set; }
+
         public int City { get; set; }
 
         public int CityCateCode { get; set; }

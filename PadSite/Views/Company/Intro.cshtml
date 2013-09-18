@@ -1,0 +1,127 @@
+﻿@model CompanyIndexViewModel
+@{
+    ViewBag.Title = Model.Name + "-公司简介";
+    Layout = "~/Views/Shared/_LayoutCompany.cshtml";
+}
+<div class="company-brand">
+    <img src="@Model.BannerImg" />
+</div>
+<nav class="company-nav clearfix">
+    <ul>
+        <li><a href="@Url.Action("index", new { id = Model.ID })" ><span>公司首页</span></a></li>
+        <li>| </li>
+        <li><a href="@Url.Action("intro", new { id = Model.ID })" class="selected"><span>公司简介</span></a></li>
+        <li>| </li>
+        <li><a href="@Url.Action("source", new { id = Model.ID })"><span>广告资源</span></a></li>
+        <li>| </li>
+        <li><a href="@Url.Action("notice", new { id = Model.ID })"><span>公司公告</span></a></li>
+        <li>| </li>
+        <li><a href="@Url.Action("contact", new { id = Model.ID })"><span>联系方式</span></a></li>
+        <li>| </li>
+        <li><a href="@Url.Action("credentials", new { id = Model.ID })"><span>相关证书</span></a></li>
+    </ul>
+</nav>
+
+<div class="bread-container">
+    <div class="company-bread">
+        <a class="company-bread-home" href="@Url.Action("index", "home")"><i class="icon-maitonn icon-home"></i></a>&gt;
+    <a href="@Url.Action("index", new { id = Model.ID })">@Model.Name</a>&gt;
+    <strong>公司简介</strong>
+    </div>
+</div>
+
+<div class="company-container clearfix">
+    <div class="company-left">
+        <div class="m-body">
+            <div class="m-header">
+                <h3>公司介绍</h3>
+            </div>
+            <div class="m-content">
+                <div class="info-body">
+                    <div class="info-logo">
+                        <a href="@Url.Action("index", new { id = Model.ID })" title="@Model.Name" >
+                            <img src="@Model.LogoImg" alt="@Model.Name" /></a>
+                    </div>
+
+                    <a href="@Url.Action("intro", new { id = Model.ID })">@Model.Name</a>
+                    <br />
+                    <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "先生" : "女士")
+                    <br />
+                    <span class="fg-color-gray">所在地区:</span> @Model.CityName
+                </div>
+            </div>
+        </div>
+
+        <div class="m-body">
+            <div class="m-header">
+                <h3>产品分类</h3>
+            </div>
+            <div class="m-content">
+                <ul class="m-list">
+                    @foreach (var item in Model.Categories)
+                    {
+                        <li><a href="@Url.Action("source", new { id = Model.ID, c = item.Code })">@item.Name</a>
+                            <span class="fg-color-gray">(@item.Count)</span></li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="m-body">
+            <div class="m-header">
+                <h3>联系方式</h3>
+            </div>
+            <div class="m-content">
+                <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "先生" : "女士")<br />
+                <span class="fg-color-gray">电话:</span> @Model.Phone
+                <br />
+                <span class="fg-color-gray">手机:</span> @Model.Mobile
+                <br />
+                <span class="fg-color-gray">QQ:</span> @Model.QQ
+                @if (Model.Lat != 0)
+                {
+                    <div id="map-contact" class="map-container">
+                    </div>
+                    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=497ff27739928a1aa7617446f02f6998"></script>
+                    <script type="text/javascript">
+                        $(function () {
+                            var lat = '@Model.Lat';
+                            var lng = '@Model.Lng';
+                            var point = new BMap.Point(116.404, 39.915);
+                            if (lng != '' && lng != '0' && lat != '0') {
+                                point = new BMap.Point(new Number(lng), new Number(lat));
+                            }
+                            var map;
+                            map = new BMap.Map("map-contact");
+                            map.centerAndZoom(point, 16);
+                            addMarker(point);
+                            function addMarker(point) {
+                                var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+                                    offset: new BMap.Size(0, 0),
+                                    imageOffset: new BMap.Size(0, 0 - 10 * 25)
+                                });
+                                var marker = new BMap.Marker(point, { icon: myIcon });
+                                map.addOverlay(marker);
+                                return marker;
+                            }
+                        })
+                    </script>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="company-right">
+        <div class="m-body">
+            <div class="m-header">
+                <h3>公司介绍</h3>
+            </div>
+            <div class="m-content">
+                <div class="info-body">
+                    <p>
+                        @Model.Description
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
