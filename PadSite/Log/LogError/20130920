@@ -1,0 +1,32 @@
+
+ ExTime :2013-09-20 15:13:09,508 [23] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1编辑户外失败! 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 PadSite.Service.OutDoorService.Update(OutDoorViewModel model) 位置 e:\GitProject\7980Site\PadSite\Service\Media\OutDoorService.cs:行号 401
+   在 PadSite.Controllers.OutDoorController.Edit(OutDoorViewModel model) 位置 e:\GitProject\7980Site\PadSite\Controllers\Personal\OutDoorController.cs:行号 440
+
+ ExTime :2013-09-20 15:13:21,394 [13] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1编辑户外失败! 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 PadSite.Service.OutDoorService.Update(OutDoorViewModel model) 位置 e:\GitProject\7980Site\PadSite\Service\Media\OutDoorService.cs:行号 401
+   在 PadSite.Controllers.OutDoorController.Edit(OutDoorViewModel model) 位置 e:\GitProject\7980Site\PadSite\Controllers\Personal\OutDoorController.cs:行号 440
+
+ ExTime :2013-09-20 15:15:41,947 [13] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1编辑户外失败! 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 PadSite.Service.OutDoorService.Update(OutDoorViewModel model) 位置 e:\GitProject\7980Site\PadSite\Service\Media\OutDoorService.cs:行号 401
+   在 PadSite.Controllers.OutDoorController.Edit(OutDoorViewModel model) 位置 e:\GitProject\7980Site\PadSite\Controllers\Personal\OutDoorController.cs:行号 440
+
+ ExTime :2013-09-20 15:16:29,151 [16] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1编辑户外失败! 
+ System.NullReferenceException: 未将对象引用设置到对象的实例。
+   在 PadSite.Service.OutDoorService.Update(OutDoorViewModel model) 位置 e:\GitProject\7980Site\PadSite\Service\Media\OutDoorService.cs:行号 401
+   在 PadSite.Controllers.OutDoorController.Edit(OutDoorViewModel model) 位置 e:\GitProject\7980Site\PadSite\Controllers\Personal\OutDoorController.cs:行号 440

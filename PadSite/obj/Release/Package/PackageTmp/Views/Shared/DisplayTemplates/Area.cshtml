@@ -1,0 +1,40 @@
+@model  string
+
+@{
+    string name = ViewData.TemplateInfo.GetFullHtmlFieldId(null);
+    bool isRegular = string.IsNullOrEmpty(Model) ? true : Convert.ToBoolean(Model.Split('|')[0]);
+    var array = new List<string>();
+    if (!string.IsNullOrEmpty(Model))
+    {
+        for (var i = 1; i < Model.Split('|').Length; i++)
+        {
+            array.Add(Model.Split('|')[i]);
+        }
+
+    }
+    var allareas = 0.0F;
+}
+<div class="display-areas">
+    @if (isRegular)
+    {
+        <span>宽:@array[0] m *</span>
+        <span>高:@array[1] m *</span>
+        <span>面:@array[2] </span>
+        <span>总面积：@(Convert.ToSingle(array[0]) * Convert.ToSingle(array[1]) * Convert.ToSingle(array[2]))平方米</span>
+    }
+    else
+    {
+        <span>共@(array.Count / 2)面</span>
+        
+        for (var j = 0; j < array.Count; j += 2)
+        {
+            allareas += (Convert.ToSingle(array[j]) * Convert.ToSingle(array[j + 1]));
+            
+        <div class="display-areas-item">
+            <span>宽:@array[j] m *</span>
+            <span>高:@array[j + 1] m *</span>
+        </div>
+        }
+        <span>总面积：@(allareas)平方米</span>
+    }
+</div>

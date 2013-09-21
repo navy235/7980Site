@@ -1,0 +1,29 @@
+﻿@model  CompanyBaseInfoViewModel
+@{
+    ViewBag.Title = "企业基本信息";
+    Layout = "~/Views/Shared/_LayoutPersonal.cshtml";
+}
+<div class="personal clearfix">
+    @Html.Partial("_LeftMenu")
+    <div class="personal-right">
+        <div class="personal-right-body">
+            <div class="personal-body-title clearfix">
+                <ul class="personal-tab clearfix">
+                    <li class="selected"><a href="@Url.Action("index")"><span>企业基本信息</span></a></li>
+                    <li><a href="@Url.Action("contact")"><span>联系方式</span></a></li>
+                    <li><a href="@Url.Action("credentials")"><span>资质证书</span></a></li>
+                </ul>
+            </div>
+            @if (!ViewBag.Authed)
+            {
+                <div class="personal-form-tips">
+                    <i class="icon-maitonn icon-exclamation-sign"></i><strong>友情提醒:</strong>
+                    @CookieHelper.NickName ,您好,您的企业信息当前正在审核中,如果需要修改请点击 <a href="@Url.Action("openbiz", "reg")">修改企业信息</a>。
+                </div>
+            }
+            <div class="dispaly-container">
+                @Html.DisplayForModel()
+            </div>
+        </div>
+    </div>
+</div>

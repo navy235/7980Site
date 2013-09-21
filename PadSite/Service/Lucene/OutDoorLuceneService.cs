@@ -172,16 +172,12 @@ namespace PadSite.Service
                 item.ID = entity.ID;
                 item.MemberID = entity.MemberID;
 
-
-
                 var cityIds = entity.CityCodeValue.Split(',').Select(x => Convert.ToInt32(x)).ToList();
                 var cityValues = CityCateService.GetALL().Where(x => cityIds.Contains(x.ID)).Select(x => x.CateName).ToList();
                 item.CityCode = entity.CityCode;
                 item.CityCateCode = entity.CityCate.Code;
                 item.CityCateValue = entity.CityCodeValue;
                 item.CityCateName = String.Join(",", cityValues);
-
-
 
                 var meidaIds = entity.MediaCodeValue.Split(',').Select(x => Convert.ToInt32(x)).ToList();
                 var meidaValues = MediaCateService.GetALL().Where(x => meidaIds.Contains(x.ID)).Select(x => x.CateName).ToList();
@@ -190,12 +186,21 @@ namespace PadSite.Service
                 item.MediaCateValue = entity.MediaCodeValue;
                 item.MediaCateName = String.Join(",", meidaValues);
 
-
+                item.TrafficAuto = entity.TrafficAuto;
+                item.TrafficPerson = entity.TrafficPerson;
+                item.Location = entity.Location;
                 item.FormatCode = entity.FormatCode;
                 item.FormatName = entity.FormatCate.CateName;
                 item.PeriodCode = entity.PeriodCode;
                 item.PeriodName = entity.PeriodCate.CateName;
-                item.Price = entity.Price;
+                if (entity.Price == 0)
+                {
+                    item.Price = 99999;
+                }
+                else
+                {
+                    item.Price = entity.Price;
+                }
                 item.OwnerCode = entity.OwnerCode;
                 item.OwnerName = entity.OwnerCate.CateName;
                 item.Status = entity.Status;
@@ -204,12 +209,26 @@ namespace PadSite.Service
                 item.Description = entity.Description;
                 item.ImgUrl = entity.MediaImg;
                 item.FocusImgUrl = entity.MediaFoucsImg;
+                if (!string.IsNullOrEmpty(entity.CredentialsImg))
+                {
+                    item.CredentialsImg = entity.CredentialsImg;
+                }
+                else
+                {
+                    item.CredentialsImg = string.Empty;
+                }
                 item.VideoUrl = entity.VideoUrl;
                 item.AreaCate = string.Join(",", entity.AreaCate.Select(x => x.CateName).ToList());
                 item.CrowdCate = string.Join(",", entity.CrowdCate.Select(x => x.CateName).ToList());
                 item.IndustryCate = string.Join(",", entity.IndustryCate.Select(x => x.CateName).ToList());
                 item.PurposeCate = string.Join(",", entity.PurposeCate.Select(x => x.CateName).ToList());
                 item.IsRegular = entity.IsRegular ? 1 : 0;
+                item.HasLight = entity.HasLight ? 1 : 0;
+                if (entity.HasLight)
+                {
+                    item.LightStart = entity.LightStart;
+                    item.LightEnd = entity.LightEnd;
+                }
                 if (entity.IsRegular)
                 {
                     item.Width = entity.Wdith;
@@ -264,6 +283,10 @@ namespace PadSite.Service
             field.Boost = 2.0f;
             document.Add(field);
 
+            field = new Field(OutDoorIndexFields.Location, OutDoor.Location, Field.Store.YES, Field.Index.ANALYZED);
+            field.Boost = 2.0f;
+            document.Add(field);
+
             field = new Field(OutDoorIndexFields.AreaCate, OutDoor.AreaCate, Field.Store.YES, Field.Index.ANALYZED);
             field.Boost = 1.0f;
             document.Add(field);
@@ -303,6 +326,9 @@ namespace PadSite.Service
             field = new Field(OutDoorIndexFields.ImgUrl, OutDoor.ImgUrl, Field.Store.YES, Field.Index.NOT_ANALYZED);
             document.Add(field);
 
+            field = new Field(OutDoorIndexFields.CredentialsImg, OutDoor.CredentialsImg, Field.Store.YES, Field.Index.NOT_ANALYZED);
+            document.Add(field);
+
             field = new Field(OutDoorIndexFields.FocusImgUrl, OutDoor.FocusImgUrl, Field.Store.YES, Field.Index.NOT_ANALYZED);
             document.Add(field);
 
@@ -334,6 +360,12 @@ namespace PadSite.Service
                 field = new Field(OutDoorIndexFields.IrRegularArea, OutDoor.IrRegularArea, Field.Store.YES, Field.Index.NOT_ANALYZED);
                 document.Add(field);
             }
+            document.Add(new NumericField(OutDoorIndexFields.HasLight, Field.Store.YES, true).SetIntValue(OutDoor.HasLight));
+            if (OutDoor.HasLight == 1)
+            {
+                document.Add(new NumericField(OutDoorIndexFields.LightStart, Field.Store.YES, true).SetIntValue(OutDoor.LightStart));
+                document.Add(new NumericField(OutDoorIndexFields.LightEnd, Field.Store.YES, true).SetIntValue(OutDoor.LightEnd));
+            }
 
             document.Add(new NumericField(OutDoorIndexFields.TotalArea, Field.Store.YES, true).SetDoubleValue(Convert.ToDouble(OutDoor.TotalArea)));
             document.Add(new NumericField(OutDoorIndexFields.CityCode, Field.Store.YES, true).SetIntValue(OutDoor.CityCode));
@@ -345,6 +377,8 @@ namespace PadSite.Service
             document.Add(new NumericField(OutDoorIndexFields.PeriodCode, Field.Store.YES, true).SetIntValue(OutDoor.PeriodCode));
             document.Add(new NumericField(OutDoorIndexFields.OwnerCode, Field.Store.YES, true).SetIntValue(OutDoor.OwnerCode));
             document.Add(new NumericField(OutDoorIndexFields.Status, Field.Store.YES, true).SetIntValue(OutDoor.Status));
+            document.Add(new NumericField(OutDoorIndexFields.TrafficAuto, Field.Store.YES, true).SetIntValue(OutDoor.TrafficAuto));
+            document.Add(new NumericField(OutDoorIndexFields.TrafficPerson, Field.Store.YES, true).SetIntValue(OutDoor.TrafficPerson));
             document.Add(new NumericField(OutDoorIndexFields.AuthStatus, Field.Store.YES, true).SetIntValue(OutDoor.AuthStatus));
 
             document.Add(new NumericField(OutDoorIndexFields.Hit, Field.Store.YES, true).SetIntValue(OutDoor.Hit));
@@ -400,6 +434,9 @@ namespace PadSite.Service
             int FormatCode = Int32.Parse(doc.Get(OutDoorIndexFields.FormatCode), CultureInfo.InvariantCulture);
             int AuthStatus = Int32.Parse(doc.Get(OutDoorIndexFields.AuthStatus), CultureInfo.InvariantCulture);
             int MediaCode = Int32.Parse(doc.Get(OutDoorIndexFields.MediaCode), CultureInfo.InvariantCulture);
+
+            int TrafficAuto = Int32.Parse(doc.Get(OutDoorIndexFields.TrafficAuto), CultureInfo.InvariantCulture);
+            int TrafficPerson = Int32.Parse(doc.Get(OutDoorIndexFields.TrafficPerson), CultureInfo.InvariantCulture);
             decimal Price = Decimal.Parse(doc.Get(OutDoorIndexFields.Price), CultureInfo.InvariantCulture);
 
             double Lng = double.Parse(doc.Get(OutDoorIndexFields.Lng), CultureInfo.InvariantCulture);
@@ -409,6 +446,7 @@ namespace PadSite.Service
             DateTime DeadLine = new DateTime(Int64.Parse(doc.Get(OutDoorIndexFields.DeadLine), CultureInfo.InvariantCulture));
 
             int IsRegularValue = Int32.Parse(doc.Get(OutDoorIndexFields.IsRegular), CultureInfo.InvariantCulture);
+            int HasLightValue = Int32.Parse(doc.Get(OutDoorIndexFields.HasLight), CultureInfo.InvariantCulture);
 
 
             int CityCateCode = Int32.Parse(doc.Get(OutDoorIndexFields.CityCateCode), CultureInfo.InvariantCulture);
@@ -418,7 +456,7 @@ namespace PadSite.Service
             int Status = Int32.Parse(doc.Get(OutDoorIndexFields.Status), CultureInfo.InvariantCulture);
 
             bool IsRegular = IsRegularValue == 1;
-
+            bool HasLight = HasLightValue == 1;
 
 
             LinkItem item = new LinkItem();
@@ -426,6 +464,7 @@ namespace PadSite.Service
             item.MemberID = MemberID;
             item.Status = Status;
             item.FocusImgUrl = doc.Get(OutDoorIndexFields.FocusImgUrl);
+            item.CredentialsImg = doc.Get(OutDoorIndexFields.CredentialsImg);
             item.ImgUrl = doc.Get(OutDoorIndexFields.ImgUrl);
             item.CityCode = CityCode;
             item.CityCateName = doc.Get(OutDoorIndexFields.CityCateName);
@@ -450,6 +489,9 @@ namespace PadSite.Service
             item.PurposeCate = doc.Get(OutDoorIndexFields.PurposeCate);
             item.AddTime = Published;
             item.DeadLine = DeadLine;
+            item.TrafficAuto = TrafficAuto;
+            item.TrafficPerson = TrafficPerson;
+            item.Location = doc.Get(OutDoorIndexFields.Location);
             decimal TotalArea = Decimal.Parse(doc.Get(OutDoorIndexFields.TotalArea), CultureInfo.InvariantCulture);
             if (IsRegular)
             {
@@ -467,6 +509,14 @@ namespace PadSite.Service
                 item.IsRegular = IsRegular;
                 item.IrRegularArea = doc.Get(OutDoorIndexFields.IrRegularArea);
                 item.TotalArea = TotalArea;
+            }
+            if (HasLight)
+            {
+                item.HasLight = HasLight;
+                int LightStart = Int32.Parse(doc.Get(OutDoorIndexFields.LightStart), CultureInfo.InvariantCulture);
+                int LightEnd = Int32.Parse(doc.Get(OutDoorIndexFields.LightEnd), CultureInfo.InvariantCulture);
+                item.LightStart = LightStart;
+                item.LightEnd = LightEnd;
             }
             item.Lat = Lat;
             item.Lng = Lng;

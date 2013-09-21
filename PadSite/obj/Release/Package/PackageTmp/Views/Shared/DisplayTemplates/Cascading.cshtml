@@ -1,0 +1,10 @@
+@model  string
+@{
+    string name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    List<string> listValues = (List<string>)ViewData["Data_" + name];
+}
+@foreach (var value in listValues)
+{
+    <span>@value</span> 
+}
+

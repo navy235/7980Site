@@ -203,40 +203,11 @@
     <Compile Include="Controllers\Personal\MessageController.cs" />
     <Compile Include="Controllers\Personal\OutDoorController.cs" />
     <Compile Include="Controllers\Personal\PersonalController.cs" />
-    <Compile Include="Controllers\ShowController.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Filters\LoginAuthorizeAttribute.cs" />
     <Compile Include="Filters\PermissionAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309110549509_AddSenderIDForMessage.cs" />
-    <Compile Include="Migrations\201309110549509_AddSenderIDForMessage.Designer.cs">
-      <DependentUpon>201309110549509_AddSenderIDForMessage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309120642012_AddMessage.cs" />
-    <Compile Include="Migrations\201309120642012_AddMessage.Designer.cs">
-      <DependentUpon>201309120642012_AddMessage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309120844180_AddOutDoor.cs" />
-    <Compile Include="Migrations\201309120844180_AddOutDoor.Designer.cs">
-      <DependentUpon>201309120844180_AddOutDoor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309120924578_AddPurpose.cs" />
-    <Compile Include="Migrations\201309120924578_AddPurpose.Designer.cs">
-      <DependentUpon>201309120924578_AddPurpose.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309130222406_OutDoorField.cs" />
-    <Compile Include="Migrations\201309130222406_OutDoorField.Designer.cs">
-      <DependentUpon>201309130222406_OutDoorField.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309130741239_OutDoorMediaCode.cs" />
-    <Compile Include="Migrations\201309130741239_OutDoorMediaCode.Designer.cs">
-      <DependentUpon>201309130741239_OutDoorMediaCode.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309130742542_OutDoorMediaCodeValue.cs" />
-    <Compile Include="Migrations\201309130742542_OutDoorMediaCodeValue.Designer.cs">
-      <DependentUpon>201309130742542_OutDoorMediaCodeValue.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Base\Article.cs" />
@@ -307,6 +278,7 @@
     <Compile Include="Service\Lucene\LuceneCommon.cs" />
     <Compile Include="Service\Lucene\OutDoorIndexEntity.cs" />
     <Compile Include="Service\Lucene\OutDoorLuceneService.cs" />
+    <Compile Include="ViewModels\Admin\DashBoardViewModel.cs" />
     <Compile Include="ViewModels\Home\QuerySort.cs" />
     <Compile Include="ViewModels\Home\QuerySource.cs" />
     <Compile Include="ViewModels\Home\QueryTerm.cs" />
@@ -384,6 +356,10 @@
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\images\h6sub.gif" />
     <Content Include="Content\images\ical_16X16.png" />
+    <Content Include="Content\images\icon\error.png" />
+    <Content Include="Content\images\icon\info.png" />
+    <Content Include="Content\images\icon\success.png" />
+    <Content Include="Content\images\icon\warning.png" />
     <Content Include="Content\images\index-footer.gif" />
     <Content Include="Content\images\index-header.gif" />
     <Content Include="Content\images\indexSprite.png" />
@@ -411,6 +387,7 @@
     <Content Include="Content\images\zh-rr.jpg" />
     <Content Include="Content\images\zh-sina.jpg" />
     <Content Include="Content\images\zh-tb.jpg" />
+    <Content Include="Content\images\zoomloader.gif" />
     <Content Include="Content\jcrop\Jcrop.gif" />
     <Content Include="Content\jcrop\jquery.Jcrop.css" />
     <Content Include="Content\jcrop\jquery.Jcrop.min.css" />
@@ -760,7 +737,6 @@
     <Content Include="Views\Shared\DisplayTemplates\Price.cshtml" />
     <Content Include="Views\MediaVerify\Authed.cshtml" />
     <Content Include="Views\List\_QueryTerm.cshtml" />
-    <Content Include="Views\Show\Index.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutCompany.cshtml" />
     <Content Include="Views\Company\Intro.cshtml" />
@@ -777,29 +753,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201309110549509_AddSenderIDForMessage.resx">
-      <DependentUpon>201309110549509_AddSenderIDForMessage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201309120642012_AddMessage.resx">
-      <DependentUpon>201309120642012_AddMessage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201309120844180_AddOutDoor.resx">
-      <DependentUpon>201309120844180_AddOutDoor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201309120924578_AddPurpose.resx">
-      <DependentUpon>201309120924578_AddPurpose.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201309130222406_OutDoorField.resx">
-      <DependentUpon>201309130222406_OutDoorField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201309130741239_OutDoorMediaCode.resx">
-      <DependentUpon>201309130741239_OutDoorMediaCode.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201309130742542_OutDoorMediaCodeValue.resx">
-      <DependentUpon>201309130742542_OutDoorMediaCodeValue.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

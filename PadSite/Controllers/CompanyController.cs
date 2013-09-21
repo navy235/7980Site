@@ -174,6 +174,10 @@ namespace PadSite.Controllers
         public ActionResult show(int ID)
         {
             var outdoor = OutDoorLuceneService.Search(ID);
+            if (outdoor.Status < (int)OutDoorStatus.ShowOnline)
+            {
+                return HttpNotFound();
+            }
             var company = CompanyService.Find(outdoor.MemberID);
             if (company == null || outdoor == null)
             {
@@ -198,6 +202,7 @@ namespace PadSite.Controllers
             model.Mobile = company.Mobile;
             model.Phone = company.Phone;
             model.QQ = company.QQ;
+            model.Address = company.Address;
             model.Categories = GetCompanyCategorise(outdoor.MemberID);
             model.Links = outdoor;
             return View(model);

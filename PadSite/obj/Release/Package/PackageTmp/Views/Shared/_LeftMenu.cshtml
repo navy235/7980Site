@@ -1,0 +1,214 @@
+﻿<div class="personal-left">
+    <div class="personal-nav">
+        <div class="nav-body nav-top">
+            <div class="nav-title">
+                <em></em>
+                <p class="nav-account"><i class="icon-maitonn icon-key"></i><a href="@Url.Action("index", "personal")">我的账号</a></p>
+            </div>
+            <div class="nav-title">
+                <em></em>
+                <p class="nav-profile"><i class="icon-maitonn icon-user"></i>个人资料</p>
+            </div>
+            <ul class="menu-profile" style="display: none;">
+                <li class="item-baseinfo">
+                    <p><a href="@Url.Action("baseinfo", "personal")">基本信息</a></p>
+                </li>
+                <li class="item-avtar  ">
+                    <p><a href="@Url.Action("avtar", "personal")">设置头像</a></p>
+                </li>
+                <li class="item-contact ">
+                    <p><a href="@Url.Action("contact", "personal")">联系方式</a></p>
+                </li>
+            </ul>
+            <div class="nav-title">
+                <em></em>
+                <p class="nav-bound"><i class="icon-maitonn icon-shield"></i>安全中心</p>
+
+            </div>
+            <ul class="menu-bound" style="display: none;">
+
+                <li class="item-email ">
+                    <p><a href="@Url.Action("bindemail", "personal")">邮箱绑定</a></p>
+                </li>
+                <li class="item-changepwd ">
+                    <p><a href="@Url.Action("changepwd", "personal")">修改密码</a></p>
+                </li>
+            </ul>
+
+            @if (Convert.ToInt32(CookieHelper.Status) >= (int)MemberStatus.CompanyAuth)
+            { 
+
+                <div class="nav-title ">
+                    <em></em>
+                    <p class="nav-company"><i class="icon-maitonn icon-credit-card"></i>企业资料</p>
+
+                </div>
+                <ul class="menu-company" style="display: none;">
+                    <li class="item-company-baseinfo">
+                        <p><a href="@Url.Action("index", "biz")">基本信息</a></p>
+                    </li>
+                    <li class="item-company-contact">
+                        <p><a href="@Url.Action("contact", "biz")">联系方式</a></p>
+                    </li>
+                    <li class="item-company-credentials ">
+                        <p><a href="@Url.Action("credentials", "biz")">资质证书</a></p>
+                    </li>
+                </ul>
+                <div class="nav-title ">
+                    <em></em>
+                    <p class="nav-shop"><i class="icon-maitonn icon-columns"></i>企业商铺</p>
+
+                </div>
+                <ul class="menu-shop" style="display: none;">
+                    <li>
+                        <p><a href="/biz/1" target="_blank">商铺首页</a></p>
+                    </li>
+                    <li class="item-shop-logo ">
+                        <p><a href="@Url.Action("logo", "biz")">企业标志</a></p>
+                    </li>
+                    <li class="item-shop-banner ">
+                        <p><a href="@Url.Action("banner", "biz")">商铺横幅</a></p>
+                    </li>
+                    <li class="item-shop-notice ">
+                        <p><a href="@Url.Action("notice", "biz")">公告管理</a></p>
+                    </li>
+                    <li class="item-shop-message ">
+                        <p><a href="@Url.Action("message", "biz")">留言管理</a></p>
+                    </li>
+                </ul>
+                <div class="nav-title ">
+                    <em></em>
+                    <p class="nav-media"><i class="icon-maitonn icon-edit-sign"></i>媒体信息</p>
+
+                </div>
+                <ul class="menu-media" style="display: none;">
+                    <li class="item-media-publish ">
+                        <p><a href="@Url.Action("add", "outdoor")">发布信息</a></p>
+                    </li>
+                    <li class="item-media-list ">
+                        <p><a href="@Url.Action("index", "outdoor")">显示中信息</a></p>
+                    </li>
+                    <li class="item-media-notshow ">
+                        <p><a href="@Url.Action("notshow", "outdoor")">未显示信息</a></p>
+                    </li>
+                    <li class="item-media-preverify ">
+                        <p><a href="@Url.Action("preverify", "outdoor")">待审核信息</a></p>
+                    </li>
+                    <li class="item-media-verifyfailed ">
+                        <p><a href="@Url.Action("verifyfailed", "outdoor")">审核失败信息</a></p>
+                    </li>
+                    <li class="item-media-delete ">
+                        <p><a href="@Url.Action("delete", "outdoor")">已删除信息</a></p>
+                    </li>
+                </ul>
+            }
+            else
+            {
+                <div class="nav-title ">
+                    <em></em>
+                    <p class="nav-auth"><i class="icon-maitonn icon-credit-card"></i><a href="@Url.Action("openbiz", "reg")">企业入驻</a></p>
+                    <i></i>
+                </div>
+            }
+            <div class="nav-title ">
+                <em></em>
+                <p class="nav-scheme"><i class="icon-maitonn icon-paste"></i>方案管理</p>
+
+            </div>
+            <ul class="menu-scheme" style="display: none;">
+                <li class="item-scheme-media ">
+                    <p><a href="/scheme">方案列表</a></p>
+                </li>
+                <li class="item-scheme-add ">
+                    <p><a href="/scheme/add">添加方案</a></p>
+                </li>
+            </ul>
+
+            <div class="nav-title ">
+                <em></em>
+                <p class="nav-favorite"><i class="icon-maitonn icon-star"></i>收藏管理</p>
+
+            </div>
+            <ul class="menu-favorite" style="display: none;">
+                <li class="item-favorite-media ">
+                    <p><a href="/favorite">媒体收藏夹</a></p>
+                </li>
+                <li class="item-favorite-company ">
+                    <p><a href="/favorite/recive">企业收藏夹</a></p>
+                </li>
+            </ul>
+
+
+            <div class="nav-title ">
+                <em></em>
+                <p class="nav-message"><i class="icon-maitonn icon-envelope"></i>留言管理</p>
+
+            </div>
+            <ul class="menu-message" style="display: none;">
+                <li class="item-message-list">
+                    <p><a href="@Url.Action("index", "message")">收到的留言</a></p>
+                </li>
+                <li class="item-message-send ">
+                    <p><a href="@Url.Action("send", "message")">发出的留言</a></p>
+                </li>
+            </ul>
+            @*<div class="nav-title ">
+                <em></em>
+                <p class="nav-wallet"><i class="icon-maitonn icon-archive"></i>钱包管理</p>
+
+            </div>
+            <ul class="menu-wallet" style="display: none;">
+                <li class="item-wallet-list ">
+                    <p><a href="/wallet">消费记录</a></p>
+                </li>
+                <li class="item-wallet-gain ">
+                    <p><a href="/wallet/gain">赚币记录</a></p>
+                </li>
+            </ul>
+
+            <div class="nav-title ">
+                <em></em>
+                <p class="nav-gztvip"><i class="icon-maitonn icon-coffee"></i>增值服务</p>
+
+            </div>
+            <ul class="menu-gztvip" style="display: none;">
+                <li class="item-gztvip-index ">
+                    <p><a href="/gztvip">广知通服务</a></p>
+                </li>
+                <li class="item-gztvip-paycz ">
+                    <p><a href="/gztvip/paycz">广知币充值</a></p>
+                </li>
+                <li class="item-gztvip-paytop ">
+                    <p><a href="/gztvip/paytop">置顶服务</a></p>
+                </li>
+            </ul>*@
+
+        </div>
+
+        <script type="text/javascript">
+            $(function () {
+
+                var currentMenuItem = '@ViewBag.MenuItem';
+                $('.nav-title').click(function () {
+                    var $navitem = $(this).children('p');
+                    if (!$navitem.children('a')[0]) {
+                        var menuClass = 'menu-' + $navitem.attr('class').replace('nav-', '');
+                        $('.nav-body').find('ul:not(".' + menuClass + '")').hide();
+                        $('.' + menuClass).show();
+                        $('.nav-current').removeClass('nav-current');
+                        $('.' + menuClass).prev('div').addClass('nav-current');
+
+                    }
+                })
+                if ($('.nav-' + currentMenuItem)[0]) {
+                    $('.nav-' + currentMenuItem).parent().addClass('nav-current');
+                } else {
+
+                    $('.item-' + currentMenuItem).addClass('current').parents('ul').show();
+                    $('.item-' + currentMenuItem).parents('ul').prev('div').addClass('nav-current');
+                }
+            })
+        </script>
+    </div>
+</div>
+@Html.Partial("_DisplayMessage")

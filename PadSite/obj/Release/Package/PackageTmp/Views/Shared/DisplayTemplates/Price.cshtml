@@ -1,0 +1,11 @@
+@model  decimal?
+@{
+    string name = ViewData.TemplateInfo.GetFullHtmlFieldId("");
+    var Unit = ViewData.ModelMetadata.AdditionalValues["PriceUnit"].ToString();
+}
+
+<div class="display-integerextension">
+    @Model <span>@Unit</span>
+</div>
+
+

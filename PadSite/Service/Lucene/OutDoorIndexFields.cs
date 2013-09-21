@@ -45,6 +45,12 @@ namespace PadSite.Service
 
         public const string Title = "Title";
 
+        public const string HasLight = "HasLight";
+
+        public const string LightStart = "LightStart";
+
+        public const string LightEnd = "LightEnd";
+
         public const string Description = "Description";
 
         public const string AreaCate = "AreaCate";
@@ -59,6 +65,8 @@ namespace PadSite.Service
 
         public const string FocusImgUrl = "FocusImgUrl";
 
+        public const string CredentialsImg = "CredentialsImg";
+
         public const string VideoUrl = "VideoUrl";
 
         public const string Hit = "Hit";
@@ -69,6 +77,11 @@ namespace PadSite.Service
 
         public const string Price = "Price";
 
+        public const string TrafficAuto = "TrafficAuto";
+
+        public const string TrafficPerson = "TrafficPerson";
+
+        public const string Location = "Location";
 
         public const string IsRegular = "IsRegular";
 

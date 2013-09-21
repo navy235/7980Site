@@ -347,7 +347,7 @@ namespace PadSite.Controllers
 
                 if (entity.HasLight)
                 {
-                    model.LightTime = entity.LightStrat + "|" + entity.LightEnd;
+                    model.LightTime = entity.LightStart + "|" + entity.LightEnd;
                 }
                 if (entity.IsRegular)
                 {

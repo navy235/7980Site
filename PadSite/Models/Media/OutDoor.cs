@@ -73,11 +73,9 @@
 
         public bool HasLight { get; set; }
 
-        [MaxLength(50)]
-        public string LightStrat { get; set; }
+        public int LightStart { get; set; }
 
-        [MaxLength(50)]
-        public string LightEnd { get; set; }
+        public int LightEnd { get; set; }
 
         [MaxLength(250)]
         public string VideoUrl { get; set; }

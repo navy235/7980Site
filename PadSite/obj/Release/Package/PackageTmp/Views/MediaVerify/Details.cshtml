@@ -1,0 +1,24 @@
+﻿@model OutDoorViewModel
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style type="text/css">
+    html, body {
+        _height: 400px;
+        height: 400px;
+        min-height: 400px;
+    }
+
+    .admin-content {
+        height: 400px;
+    }
+
+    .form-title {
+        padding-left: 0;
+    }
+</style>
+<div class="dispaly-container">
+    @Html.DisplayForModel()
+</div>
+

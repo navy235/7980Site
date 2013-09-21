@@ -1,0 +1,44 @@
+@model  string
+
+@{
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var displayname = ViewData.ModelMetadata.DisplayName;
+    var iconUrl = Url.Content("~/Content/images/mapicon.gif");
+    var lat = 0.00;
+    var lng = 0.00;
+
+    if (!string.IsNullOrEmpty(Model))
+    {
+        lat = Convert.ToDouble(Model.Split('|')[0]);
+        lng = Convert.ToDouble(Model.Split('|')[1]);
+    }
+}
+
+@Html.TextBoxFor(m => m, new { tabindex = -1, @class = "field-valid-text" })
+@Html.Kendo().Window().Name(name + "_window").Title("请标注" + displayname).Content(
+    @<text>
+<div id="@(name + "_container")" class="map-container">
+</div>
+</text>
+).Draggable(true).Width(900).Height(600).Modal(true).Visible(false)
+<button type="button" id="@Html.Raw(name + "_select")" class="k-button" ><span class="k-icon k-add"></span>标记位置</button>
+<div id="@(name + "_mapcontrol")" class="map-control">
+    <div class="map-control-content">
+        <span class="k-textbox k-space-right map-keywords">
+            <input type="text" id="@(name + "_keywords")" class="k-textbox ">
+            <a href="javascript:void(0)" id="@(name + "_search")" class="k-icon k-i-search map-search-btn">&nbsp;</a>
+        </span>
+        <a class="k-button k-button-icontext btn-map-marker" id="@(name + "_marker")"><i class="icon-maitonn icon-map-marker"></i></a>
+    </div>
+</div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=497ff27739928a1aa7617446f02f6998"></script>
+<script type="text/javascript">
+    $(function () {
+        jQuery("#@name").mapMaker({
+            iconUrl: '@iconUrl',
+            lat: @lat,
+            lng:@lng,
+            city:'长沙'
+        });
+    })
+</script>

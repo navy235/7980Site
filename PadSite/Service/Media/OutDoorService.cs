@@ -19,12 +19,16 @@ namespace PadSite.Service
         private readonly IAreaCateService AreaCateService;
         private readonly IPurposeCateService PurposeCateService;
         private readonly IOutDoorLuceneService OutDoorLuceneService;
+        private readonly IMemberService MemberService;
+        private readonly IMessageService MessageService;
         public OutDoorService(IUnitOfWork db
             , IIndustryCateService IndustryCateService
             , ICrowdCateService CrowdCateService
             , IAreaCateService AreaCateService
             , IPurposeCateService PurposeCateService
             , IOutDoorLuceneService OutDoorLuceneService
+            , IMemberService MemberService
+            , IMessageService MessageService
             )
         {
             this.db = db;
@@ -33,6 +37,8 @@ namespace PadSite.Service
             this.AreaCateService = AreaCateService;
             this.PurposeCateService = PurposeCateService;
             this.OutDoorLuceneService = OutDoorLuceneService;
+            this.MemberService = MemberService;
+            this.MessageService = MessageService;
         }
 
         public IQueryable<OutDoor> GetALL()
@@ -134,8 +140,8 @@ namespace PadSite.Service
                 if (!string.IsNullOrEmpty(model.LightTime) && model.LightTime.Split('|').Length == 2)
                 {
                     var LightTime = model.LightTime.Split('|');
-                    od.LightStrat = LightTime[0];
-                    od.LightEnd = LightTime[1];
+                    od.LightStart = Convert.ToInt32(LightTime[0]);
+                    od.LightEnd = Convert.ToInt32(LightTime[1]);
                 }
             }
 
@@ -205,13 +211,59 @@ namespace PadSite.Service
             if (Status == OutDoorStatus.Verified)
             {
                 OutDoorLuceneService.CreateIndex(ids);
+                SendAuthedMessage(IdsArray);
             }
             else
             {
                 OutDoorLuceneService.ChangeStatus(ids, Status);
+                if (Status == OutDoorStatus.VerifyFailed)
+                {
+                    SendAuthFieldedMessage(IdsArray);
+                }
             }
         }
 
+        private void SendAuthedMessage(IEnumerable<int> IdsArray)
+        {
+            foreach (var id in IdsArray)
+            {
+                var outdoor = Find(id);
+                var memberID = outdoor.MemberID;
+                var member = MemberService.Find(memberID);
+                var message = new Message()
+                {
+                    AddTime = DateTime.Now,
+                    SenderID = 0,
+                    RecipientID = member.MemberID,
+                    MessageType = (int)MessageType.System,
+                    RecipienterStatus = (int)MessageStatus.Show,
+                    Title = member.NickName + ",您好！您发布媒体信息:(" + outdoor.Name + ")通过审核",
+                    Content = member.NickName + ",您好！您发布媒体信息:(" + outdoor.Name + ")通过审核"
+                };
+                MessageService.Create(message);
+            }
+        }
+
+        private void SendAuthFieldedMessage(IEnumerable<int> IdsArray)
+        {
+            foreach (var id in IdsArray)
+            {
+                var outdoor = Find(id);
+                var memberID = outdoor.MemberID;
+                var member = MemberService.Find(memberID);
+                var message = new Message()
+                {
+                    AddTime = DateTime.Now,
+                    SenderID = 0,
+                    RecipientID = member.MemberID,
+                    MessageType = (int)MessageType.System,
+                    RecipienterStatus = (int)MessageStatus.Show,
+                    Title = member.NickName + ",您好！您发布媒体信息:(" + outdoor.Name + ")未通过审核",
+                    Content = member.NickName + ",您好！您发布媒体信息:(" + outdoor.Name + ")未通过审核【请检查信息是否含有非法字符，或者表单未填写完整】"
+                };
+                MessageService.Create(message);
+            }
+        }
 
         public OutDoor Update(OutDoorViewModel model)
         {
@@ -242,8 +294,7 @@ namespace PadSite.Service
             od.TrafficPerson = model.TrafficPerson;
             od.VideoUrl = model.VideoUrl;
             od.Unapprovedlog = string.Empty;
-
-
+            od.Deadline = model.Deadline;
             //MediaArea参数设置
             if (!string.IsNullOrEmpty(model.MediaArea))
             {
@@ -275,8 +326,8 @@ namespace PadSite.Service
                 if (!string.IsNullOrEmpty(model.LightTime) && model.LightTime.Split('|').Length == 2)
                 {
                     var LightTime = model.LightTime.Split('|');
-                    od.LightStrat = LightTime[0];
-                    od.LightEnd = LightTime[1];
+                    od.LightStart = Convert.ToInt32(LightTime[0]);
+                    od.LightEnd = Convert.ToInt32(LightTime[1]);
                 }
             }
 
@@ -287,13 +338,14 @@ namespace PadSite.Service
 
             od.CredentialsImg = model.CredentialsImg;
 
-            var AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            if (AreaCateArray.Count == 0)
+            var AreaCateArray = new List<int>();
+            if (string.IsNullOrEmpty(model.AreaCate))
             {
                 od.AreaCate = new List<AreaCate>();
             }
             else
             {
+                AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
                 var AreaCateList = AreaCateService.GetALL().Where(x => AreaCateArray.Contains(x.ID));
                 var currentAreaCateArray = od.AreaCate.Select(x => x.ID).ToList();
 
@@ -316,14 +368,14 @@ namespace PadSite.Service
                 }
             }
 
-
-            var CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            if (CrowdCateArray.Count == 0)
+            var CrowdCateArray = new List<int>();
+            if (string.IsNullOrEmpty(model.CrowdCate))
             {
                 od.CrowdCate = new List<CrowdCate>();
             }
             else
             {
+                CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
                 var CrowdCateList = CrowdCateService.GetALL().Where(x => CrowdCateArray.Contains(x.ID));
                 var currentCrowdCateArray = od.CrowdCate.Select(x => x.ID).ToList();
 
@@ -346,13 +398,14 @@ namespace PadSite.Service
                 }
             }
 
-            var IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            if (IndustryCateArray.Count == 0)
+            var IndustryCateArray = new List<int>();
+            if (string.IsNullOrEmpty(model.IndustryCate))
             {
                 od.IndustryCate = new List<IndustryCate>();
             }
             else
             {
+                IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
                 var IndustryCateList = IndustryCateService.GetALL().Where(x => IndustryCateArray.Contains(x.ID));
                 var currentIndustryCateArray = od.IndustryCate.Select(x => x.ID).ToList();
 
@@ -375,13 +428,14 @@ namespace PadSite.Service
                 }
             }
 
-            var PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            if (PurposeCateArray.Count == 0)
+            var PurposeCateArray = new List<int>();
+            if (string.IsNullOrEmpty(model.PurposeCate))
             {
                 od.PurposeCate = new List<PurposeCate>();
             }
             else
             {
+                PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
                 var PurposeCateList = PurposeCateService.GetALL().Where(x => PurposeCateArray.Contains(x.ID));
                 var currentPurposeCateArray = od.PurposeCate.Select(x => x.ID).ToList();
 

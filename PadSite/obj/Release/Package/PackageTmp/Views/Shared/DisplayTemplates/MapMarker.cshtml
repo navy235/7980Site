@@ -1,0 +1,37 @@
+@model  string
+
+@{
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var displayname = ViewData.ModelMetadata.DisplayName;
+    var iconUrl = Url.Content("~/Content/mapicon.gif");
+}
+
+<div id="@(name + "_container")" class="map-container">
+</div>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=497ff27739928a1aa7617446f02f6998"></script>
+<script type="text/javascript">
+    $(function () {
+        var lat = '@(String.IsNullOrEmpty(Model) ? string.Empty : Model.Split('|')[0])';
+        var lng = '@(String.IsNullOrEmpty(Model) ? string.Empty : Model.Split('|')[1])'
+        var point = new BMap.Point(116.404, 39.915);
+        if (lng != '' && lat != '') {
+            point = new BMap.Point(new Number(lng), new Number(lat));
+        }
+        var map;
+        map = new BMap.Map("@(name + "_container")");
+        map.centerAndZoom(point, 16);
+        map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
+        map.addControl(new BMap.ScaleControl());                    // 添加比例尺控件
+        map.addControl(new BMap.OverviewMapControl());
+        addMarker(point);
+        function addMarker(point) {
+            var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
+                offset: new BMap.Size(0, 0),
+                imageOffset: new BMap.Size(0, 0 - 10 * 25)
+            });
+            var marker = new BMap.Marker(point, { icon: myIcon });
+            map.addOverlay(marker);
+            return marker;
+        }
+    })
+</script>

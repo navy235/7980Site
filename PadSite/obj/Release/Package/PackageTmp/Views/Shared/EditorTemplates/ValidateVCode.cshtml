@@ -1,0 +1,20 @@
+@model  string
+@{
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+}
+
+@(Html.TextBoxFor(m => m, new { @class = "k-textbox single-line text-box k-vcode" })
+)
+
+<a id="@(name + "_change")" class="vcode" tabindex="-1">
+    <img  id="@(name + "_vcodeImg")" src="@Url.Action("GetValidateCode", "AjaxService")" title="点击换一张">
+    换一张
+</a>
+<script type="text/javascript">
+    $(function () {
+        $('#@name').validateVCode({});
+    })
+</script>
+
+
+

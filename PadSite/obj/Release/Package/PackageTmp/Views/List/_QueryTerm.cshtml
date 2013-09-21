@@ -1,0 +1,69 @@
+﻿@model  List<LinkGroup>
+
+<div class="list-search-wrap clearfix">
+    <div class="list-search-attr clearfix">
+        @foreach (var item in Model)
+        {
+            var searchlist = item.Items;
+
+            if (searchlist.Any())
+            {
+            <div class="list-search-attr-bread clearfix">
+                <div class="list-search-attr-title">@item.Group.Name：</div>
+                <div class="list-search-attr-all">
+                    <a  class="@(searchlist.Any(x => x.Selected == true) ? "" : "selected")"  href="@item.Group.Url">不限</a>
+                </div>
+                <ul class="list-search-attr-list clearfix">
+                    @foreach (var childitem in searchlist)
+                    {
+                        <li class="@(childitem.Selected ? "selected" : "")">
+                            <span>
+                                <a href="@(childitem.Selected ? item.Group.Url : childitem.Url)">@childitem.Name</a>
+                                @if (childitem.Selected)
+                                { 
+                                    <a  class="delete"  href="@item.Group.Url">×</a>
+                                }
+                            </span>
+                        </li>
+                    }
+                </ul>
+                <span class="list-search-attr-more" style="display: none">更多<i class="icon-maitonn icon-angle-down"></i></span>
+                <span class="list-search-attr-little" style="display: none">收起<i class="icon-maitonn icon-angle-up"></i></span>
+            </div>
+            }
+        }
+
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $.each($(".list-search-attr-list"), function (index, item) {
+            var hasSelected = $(item).find('.selected').length > 0;
+            if (hasSelected && $(item).height() > 58) {
+                var selectItem = $(item).find('.selected');
+                var top = selectItem.offset().top - $(item).offset().top;
+                if (top < 58) {
+                    $(item).height(58);
+                    $(item).siblings(".list-search-attr-more").show();
+                } else {
+                    $(item).siblings(".list-search-attr-little").show();
+                }
+            } else if ($(item).height() > 58) {
+                $(item).height(58);
+                $(item).siblings(".list-search-attr-more").show();
+            }
+        });
+
+        $(".list-search-attr-more").click(function () {
+            $(this).siblings(".list-search-attr-list").height("auto");
+            $(this).hide();
+            $(this).next().show();
+        })
+
+        $(".list-search-attr-little").click(function () {
+            $(this).siblings(".list-search-attr-list").height(58);
+            $(this).hide();
+            $(this).prev().show();
+        })
+    })
+</script>

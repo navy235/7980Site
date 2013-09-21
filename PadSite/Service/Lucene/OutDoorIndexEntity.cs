@@ -36,18 +36,25 @@ namespace PadSite.Service
 
         public string OwnerName { get; set; }
 
+        public int HasLight { get; set; }
+
+        public int LightStart { get; set; }
+
+        public int LightEnd { get; set; }
 
         public int Status { get; set; }
 
         public int AuthStatus { get; set; }
 
+        public int TrafficAuto { get; set; }
 
-
-
+        public int TrafficPerson { get; set; }
 
         public string Title { get; set; }
 
         public string Description { get; set; }
+
+        public string Location { get; set; }
 
         public string AreaCate { get; set; }
         public string CrowdCate { get; set; }
@@ -57,6 +64,8 @@ namespace PadSite.Service
         public string ImgUrl { get; set; }
 
         public string FocusImgUrl { get; set; }
+
+        public string CredentialsImg { get; set; }
 
         public string VideoUrl { get; set; }
 

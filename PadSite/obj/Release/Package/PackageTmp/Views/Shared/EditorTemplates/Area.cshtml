@@ -1,0 +1,73 @@
+@model  string
+
+@{
+    string name = ViewData.TemplateInfo.GetFullHtmlFieldId(null);
+    bool isRegular = string.IsNullOrEmpty(Model) ? true : Convert.ToBoolean(Model.Split('|')[0]);
+    var array = new List<string>();
+    if (!string.IsNullOrEmpty(Model))
+    {
+        for (var i = 1; i < Model.Split(',').Length; i++)
+        {
+            array.Add(Model.Split(',')[i]);
+        }
+
+    }
+    
+}
+<div class="form-areas" id="@(name + "_area")">
+    <div class="k-checklist clearfix">
+        <span class="k-checklist-item">
+            <input type="radio" id="@(name + "_isRegular1")"  name="@(name + "_isRegular")" value=true  @if (isRegular)
+                                                                                                        {<text> checked="checked"</text>}>
+            <label for="@(name + "_isRegular1")" data-for="Roles">
+                规则</label>
+        </span>
+        <span class="k-checklist-item">
+            <input type="radio" id="@(name + "_isRegular2")" name="@(name + "_isRegular")" value=false  @if (!isRegular)
+                                                                                                        {<text> checked="checked"</text>}>
+            <label for="@(name + "_isRegular2")" data-for="Roles">
+                不规则</label>
+        </span>
+    </div>
+    <div class="form-areas-container form-areas-regular" style="display: @(isRegular ? "block" : "none")">
+        <span class="form-areas-item">宽：
+            <input type="text" class="form-areas-decimals" name="@(name + "_width")" />m *
+        </span>
+        <span class="form-areas-item">高：
+            <input type="text" class="form-areas-decimals" name="@(name + "_height")" />m *
+        </span>
+        <span class="form-areas-item">面：
+            <input type="text" class="form-areas-int" name="@(name + "_face")" />
+        </span>
+    </div>
+    <div class="form-areas-container form-areas-irregular" style="display: @(isRegular ? "none" : "block")">
+        <div class="form-areas-single">
+            <span class="form-areas-item">宽：
+            <input type="text"  class="form-areas-decimals" name="@(name + "_width")" />m *
+            </span>
+            <span class="form-areas-item">高：
+            <input type="text"  class="form-areas-decimals" name="@(name + "_height")" />m *
+            </span>
+            <span class="form-areas-item">
+                <button type="button" name="@(name + "_delete")" class="k-button @(name + "_delete")" >
+                    <span class="k-icon k-delete"></span>删除该面
+                </button>
+            </span>
+        </div>
+
+        <button type="button" id="@(name + "_add")" class="k-button " >
+            <span class="k-icon k-add"></span>添加一面
+        </button>
+
+    </div>
+    <div class="form-areas-result">
+        总面积：<span class="form-areas-number" id="@(name + "_result")"></span>平方米
+    </div>
+</div>
+@Html.TextBoxFor(m => m, new { tabindex = -1, @class = "field-valid-text" })
+
+<script type="text/javascript">
+    $('#@(name)').areaSelect({
+        value: '@Model'
+    });
+</script>

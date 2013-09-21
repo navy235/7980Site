@@ -1,0 +1,36 @@
+﻿@model CompanyNoticeViewModel
+@{
+    ViewBag.Title = "编辑企业公告";
+    Layout = "~/Views/Shared/_LayoutPersonal.cshtml";
+}
+<div class="personal clearfix">
+
+    @Html.Partial("_leftmenu")
+
+    <div class="personal-right">
+        <div class="personal-right-body">
+            <div class="personal-body-title clearfix">
+                <ul class="personal-tab clearfix">
+                    <li><a href="@Url.Action("logo")"><span>企业标志</span></a></li>
+                    <li><a href="@Url.Action("banner")"><span>企业横幅</span></a></li>
+                    <li class="selected"><a href="@Url.Action("notice")"><span>企业公告</span></a></li>
+                    <li><a href="@Url.Action("message")"><span>企业留言</span></a></li>
+                </ul>
+            </div>
+
+            <div class="personal-form mt20">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.EditorForModel()
+
+                    <div class="form-field form-field-submit">
+                        <button type="submit" class="k-button ">
+                            <i class="icon-maitonn icon-save"></i>
+                            &nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

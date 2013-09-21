@@ -1,0 +1,15 @@
+@model  string
+@{
+    string name = ViewData.TemplateInfo.GetFullHtmlFieldId(null);
+    List<SelectListItem> listValues = (List<SelectListItem>)ViewData["Data_" + name];
+}
+<div class="checklist" id="@name">
+    @foreach (var value in listValues)
+    {
+        if (value.Selected)
+        {
+        <span>@value.Text</span> 
+        }
+    }
+</div>
+

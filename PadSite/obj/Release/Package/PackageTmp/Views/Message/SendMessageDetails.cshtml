@@ -1,0 +1,18 @@
+﻿@model MessageViewModel
+@{
+    ViewBag.Title = "发送留言-" + Model.Name;
+}
+<style type="text/css">
+    html, body {
+        _height: 400px;
+        height: 400px;
+        min-height: 400px;
+    }
+
+    .admin-content {
+        height: 350px;
+    }
+</style>
+<div class="dispaly-container">
+    @Html.DisplayForModel()
+</div>

@@ -15,6 +15,9 @@ namespace PadSite.ViewModels
 
         public string FocusImgUrl { get; set; }
 
+        public string CredentialsImg { get; set; }
+
+
         public string VideoUrl { get; set; }
 
         public string MidImgUrl { get; set; }
@@ -32,6 +35,12 @@ namespace PadSite.ViewModels
         public string PurposeCate { get; set; }
 
         public string Url { get; set; }
+
+        public string Location { get; set; }
+
+        public int TrafficAuto { get; set; }
+
+        public int TrafficPerson { get; set; }
 
         public decimal Price { get; set; }
 
@@ -76,6 +85,12 @@ namespace PadSite.ViewModels
         public double Lng { get; set; }
 
         public int TotalFaces { get; set; }
+
+        public bool HasLight { get; set; }
+
+        public int LightStart { get; set; }
+
+        public int LightEnd { get; set; }
 
         public bool IsRegular { get; set; }
 

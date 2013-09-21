@@ -113,13 +113,13 @@ namespace PadSite.Controllers
             try
             {
                 OutDoorService.ChangeStatus(ids, OutDoorStatus.Verified);
-                result.Message = "媒体信息未审核成功！";
+                result.Message = "媒体信息审核通过成功！";
             }
             catch (Exception ex)
             {
-                result.Message = "媒体信息未审核失败!";
+                result.Message = "媒体信息审核通过失败!";
                 result.AddServiceError(Utilities.GetInnerMostException(ex));
-                LogHelper.WriteLog("用户:" + CookieHelper.MemberID + "媒体信息未审核失败!", ex);
+                LogHelper.WriteLog("用户:" + CookieHelper.MemberID + "媒体信息审核通过失败!", ex);
             }
             return Json(result);
 
@@ -180,7 +180,7 @@ namespace PadSite.Controllers
 
             if (entity.HasLight)
             {
-                model.LightTime = entity.LightStrat + "|" + entity.LightEnd;
+                model.LightTime = entity.LightStart + "|" + entity.LightEnd;
             }
             if (entity.IsRegular)
             {

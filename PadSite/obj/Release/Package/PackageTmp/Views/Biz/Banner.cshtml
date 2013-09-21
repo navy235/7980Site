@@ -1,0 +1,56 @@
+﻿@model  CompanyBannerViewModel
+@{
+    ViewBag.Title = "企业横幅";
+    Layout = "~/Views/Shared/_LayoutPersonal.cshtml";
+}
+<div class="personal clearfix">
+
+    @Html.Partial("_leftmenu")
+
+    <div class="personal-right">
+        <div class="personal-right-body">
+            <div class="personal-body-title clearfix">
+                <ul class="personal-tab clearfix">
+                    <li><a href="@Url.Action("logo")"><span>企业标志</span></a></li>
+                    <li class="selected"><a href="@Url.Action("banner")"><span>企业横幅</span></a></li>
+                    <li><a href="@Url.Action("notice")"><span>企业公告</span></a></li>
+                    <li><a href="@Url.Action("message")"><span>企业留言</span></a></li>
+                </ul>
+            </div>
+
+            <div class="personal-form-tips">
+                <i class="icon-maitonn icon-exclamation-sign"></i><strong>友情提醒:</strong>
+                @CookieHelper.NickName ,请上传企业横幅,方便大家了解你的企业。
+            </div>
+
+            <div class="personal-form personal-form-avtar personal-form-banner">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-field">
+                        @Html.LabelFor(x => x.BannerImg, new { @class = "field-label field-required" })
+                        @Html.EditorFor(x => x.BannerImg)
+                        @Html.ValidationMessageFor(x => x.BannerImg)
+                    </div>
+
+                    <div class="form-field form-field-submit">
+                        <button type="submit" class="k-button ">
+                            <i class="icon-maitonn icon-save"></i>
+                            &nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button>
+                    </div>
+                }
+            </div>
+            <div class="personal-avtar-tips mt10">
+                <ul>
+                    <li>· 请上传您的企业横幅</li>
+                    <li>· 请勿在形象标示上留有任何联系方式的信息</li>
+                    <li>· 支持JPG格式，图片大小不超过5MB</li>
+                    <li>· 请保证图片质量，分辨率至少为960*200</li>
+                    <li class="personal-avtar-tips-desc mt15">· 上传遇到问题，请联系客服：400-188-6666</li>
+                </ul>
+            </div>
+
+        </div>
+
+    </div>
+</div>

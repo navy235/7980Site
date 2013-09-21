@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "编辑投放行业分类";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.EditorFor(m => Model)
+    <div class="form-submit">
+        <button class="k-button k-button-icontext" type="submit">
+            <i class="k-icon k-i-tick"></i>提交</button>
+    </div>
+}

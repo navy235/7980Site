@@ -1,0 +1,29 @@
+﻿@model MessageViewModel
+@{
+    ViewBag.Title = "用户留言详情-" + Model.Name;
+}
+
+<style type="text/css">
+    html, body {
+        _height: 400px;
+        height: 400px;
+        min-height: 400px;
+    }
+
+    .admin-content {
+        height: 350px;
+    }
+
+    .form-title {
+        padding-left: 0;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.EditorFor(m => Model)
+    <div class="form-submit">
+        <button class="k-button k-button-icontext" type="submit">
+            <i class="k-icon k-i-tick"></i>提交</button>
+    </div>
+}

@@ -1,0 +1,10 @@
+@model  int?
+
+@{
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var selectList = (List<SelectListItem>)ViewData["Data_" + name];
+}
+@Html.DropDownListFor(m => m, selectList)
+
+
+
