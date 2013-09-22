@@ -83,6 +83,16 @@ namespace PadSite.Controllers
         {
             ViewBag.CityTree = GetCityTree();
             ViewBag.MediaTree = GetMediaTree();
+            ViewBag.IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            ViewBag.CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            ViewBag.PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            var PriceCate = new List<SelectListItem>();
+            PriceCate.Add(new SelectListItem() { Text = "10万以下", Value = ((int)PriceListType.Price10Lower).ToString() });
+            PriceCate.Add(new SelectListItem() { Text = "10~50万元", Value = ((int)PriceListType.Price50Lower).ToString() });
+            PriceCate.Add(new SelectListItem() { Text = "50~100万元", Value = ((int)PriceListType.Price100Lower).ToString() });
+            PriceCate.Add(new SelectListItem() { Text = "100~200万元", Value = ((int)PriceListType.Price200Lower).ToString() });
+            PriceCate.Add(new SelectListItem() { Text = "200万元以上", Value = ((int)PriceListType.PriceMax).ToString() });
+            ViewBag.PriceCate = PriceCate;
             return View();
         }
 
@@ -92,7 +102,8 @@ namespace PadSite.Controllers
             model = CityCateService.GetALL().Where(x => x.PID == 1).Select(x => new LinkItemTree()
                 {
                     Text = x.CateName,
-                    Value = x.ID
+                    Value = x.ID,
+                    Code = x.Code
                 }).ToList();
             foreach (var item in model)
             {
@@ -101,32 +112,32 @@ namespace PadSite.Controllers
             return model;
         }
 
-
-
         public void GetCityTree(LinkItemTree item, int pid)
         {
-            if (CityCateService.GetALL().Any(x => x.PID == pid))
+            //if (CityCateService.GetALL().Any(x => x.PID == pid))
+            //{
+            var query = CityCateService.GetALL().Where(x => x.PID == pid);
+            item.Children = query.Select(x => new LinkItemTree()
             {
-                var query = CityCateService.GetALL().Where(x => x.PID == pid);
-                item.Children = query.Select(x => new LinkItemTree()
-                {
-                    Text = x.CateName,
-                    Value = x.ID
-                }).ToList();
-                foreach (var citem in item.Children)
-                {
-                    GetCityTree(citem, citem.Value);
-                }
-            }
+                Text = x.CateName,
+                Value = x.ID,
+                Code = x.Code
+            }).ToList();
+            //    foreach (var citem in item.Children)
+            //    {
+            //        GetCityTree(citem, citem.Value);
+            //    }
+            //}
         }
 
         public List<LinkItemTree> GetMediaTree()
         {
             List<LinkItemTree> model = new List<LinkItemTree>();
-            model = MediaCateService.GetALL().Where(x => x.PID == 1).Select(x => new LinkItemTree()
+            model = MediaCateService.GetALL().Where(x => x.PID.Equals(null)).Select(x => new LinkItemTree()
             {
                 Text = x.CateName,
-                Value = x.ID
+                Value = x.ID,
+                Code = x.Code
             }).ToList();
             foreach (var item in model)
             {
@@ -143,7 +154,8 @@ namespace PadSite.Controllers
                 item.Children = query.Select(x => new LinkItemTree()
                 {
                     Text = x.CateName,
-                    Value = x.ID
+                    Value = x.ID,
+                    Code = x.Code
                 }).ToList();
                 foreach (var citem in item.Children)
                 {
@@ -151,5 +163,6 @@ namespace PadSite.Controllers
                 }
             }
         }
+
     }
 }

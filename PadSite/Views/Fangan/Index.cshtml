@@ -3,6 +3,10 @@
     Layout = "~/Views/Shared/_LayoutFangan.cshtml";
     var CityTree = (List<LinkItemTree>)ViewBag.CityTree;
     var MediaTree = (List<LinkItemTree>)ViewBag.MediaTree;
+    var IndustryCate = (IList<SelectListItem>)ViewBag.IndustryCate;
+    var CrowdCate = (IList<SelectListItem>)ViewBag.CrowdCate;
+    var PurposeCate = (IList<SelectListItem>)ViewBag.PurposeCate;
+    var PriceCate = (IList<SelectListItem>)ViewBag.PriceCate;
 }
 <div class="nav-bread">
     <a class="nav-bread-home" href="/"><i class="icon-maitonn icon-home"></i></a>&gt;
@@ -20,17 +24,18 @@
         float: left;
         height: 24px;
         line-height: 24px;
-        min-width: 100px;
+        min-width: 80px;
         color: #333333;
         background-color: none;
+        padding: 0 5px;
     }
 
         .drop-list-item.hover {
-            background-color: #409DDC;
+            background-color: #f60;
             color: #ffffff;
         }
 
-            .drop-list-item.hover .drop-list {
+            .drop-list-item.hover > .drop-list {
                 display: block;
             }
 
@@ -43,24 +48,47 @@
             float: left;
             height: 24px;
             line-height: 24px;
-            min-width: 64px;
+            min-width: 60px;
         }
 
     .drop-list {
         position: absolute;
-        width: 300px;
-        border: 3px solid #409DDC;
+        width: 290px;
+        border: 3px solid #f60;
         padding: 10px;
         background-color: #FFFFFF;
         z-index: 1002;
         display: none;
         top: 0;
-        left: 100px;
+        left: 80px;
     }
 
     .list-search-attr {
         margin-bottom: 500px;
     }
+
+    .fangan-select-list {
+        float: left;
+        width: 970px;
+        margin-top: 5px;
+        display: none;
+    }
+
+    .drop-selected-item {
+        float: left;
+        height: 24px;
+        line-height: 24px;
+        min-width: 50px;
+        background-color: #f60;
+        color: #ffffff;
+        padding: 0 5px;
+        margin: 0 5px 5px 5px;
+        cursor: pointer;
+    }
+
+        .drop-selected-item .icon-maitonn {
+            margin-left: 10px;
+        }
 </style>
 
 @helper RenderChild(LinkItemTree tree, string Code)
@@ -71,12 +99,9 @@
         @foreach (var item in tree.Children)
         {
             <span class="drop-list-item">
-                <input type="checkbox" id="@(Code)_@item.Value" name="@(Code)" />
-                <label for="@(Code)_@item.Value">@item.Text</label>
-                @if (item.Children.Any())
-                {
-                    RenderChild(item, Code);
-                }
+                <input type="checkbox" class="fangan-check" id="@(Code)_@item.Code" name="@(Code)" value="@item.Code" />
+                <label for="@(Code)_@item.Code">@item.Text</label>
+                @RenderChild(item, Code)
             </span>
         }
     </div>
@@ -89,33 +114,112 @@
         <div class="list-search-wrap clearfix">
             <div class="list-search-attr clearfix">
                 <div class="list-search-attr-bread clearfix">
-                    <div class="list-search-attr-title">地区：</div>
-                    <div class="fangan-list clearfix">
-                        @foreach (var item in CityTree)
-                        { 
-                            <span class="drop-list-item">
-                                <input type="checkbox" id="CityCode_@item.Value" name="CityCode" />
-                                <label for="CityCode_@item.Value">@item.Text</label>
-                                @RenderChild(item, "CityCode")
-                            </span>
-                        }
-                    </div>
-
-                </div>
-
-                <div class="list-search-attr-bread clearfix">
                     <div class="list-search-attr-title">媒体类别：</div>
                     <div class="fangan-list clearfix">
                         @foreach (var item in MediaTree)
                         { 
                             <span class="drop-list-item">
-                                <input type="checkbox" id="MediaCode_@item.Value" name="MediaCode" />
-                                <label for="MediaCode_@item.Value">@item.Text</label>
+                                <input type="checkbox" class="fangan-check" id="MediaCode_@item.Code" name="MediaCode" value="@item.Code" />
+                                <label for="MediaCode_@item.Code">@item.Text</label>
                                 @RenderChild(item, "MediaCode")
                             </span>
                         }
                     </div>
-
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">投放行业：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in IndustryCate)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" class="fangan-check" id="IndustryCate_@item.Value" name="IndustryCate" value="@item.Value" />
+                                <label for="IndustryCate_@item.Value">@item.Text</label>
+                            </span>
+                        }
+                    </div>
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">投放区域：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in CityTree)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" class="fangan-check" id="CityCode_@item.Code" name="CityCode"  value="@item.Code" />
+                                <label for="CityCode_@item.Code">@item.Text</label>
+                                @RenderChild(item, "CityCode")
+                            </span>
+                        }
+                    </div>
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">推广目的：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in PurposeCate)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" class="fangan-check" id="PurposeCate_@item.Value" name="PurposeCate" value="@item.Value" />
+                                <label for="PurposeCate_@item.Value">@item.Text</label>
+                            </span>
+                        }
+                    </div>
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">受众人群：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in CrowdCate)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" class="fangan-check" id="CrowdCate_@item.Value" name="CrowdCate" value="@item.Value" />
+                                <label for="CrowdCate_@item.Value">@item.Text</label>
+                            </span>
+                        }
+                    </div>
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">预计费用：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in PriceCate)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" class="fangan-check" id="PriceCate_@item.Value" name="PriceCate" value="@item.Value" />
+                                <label for="PriceCate_@item.Value">@item.Text</label>
+                            </span>
+                        }
+                    </div>
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">生成方案：</div>
+                    <button class="k-button" type="button">生成方案</button>
                 </div>
             </div>
         </div>
@@ -127,6 +231,35 @@
             $(this).addClass('hover');
         }, function () {
             $(this).removeClass('hover');
+        })
+        $('input[type="checkbox"].fangan-check').on('click', function (e) {
+            var target = $(e.currentTarget);
+            var containerlist = target.parents('.fangan-list').next();
+            var selectlist = containerlist.find('.fangan-list');
+            if (target.prop('checked')) {
+                var span = $('<span/>').attr({
+                    "class": "drop-selected-item",
+                    "data-id": target.val()
+                });
+                span.html($('[for="' + target.attr('id') + '"]').text() + '<i class="icon-maitonn icon-remove"></i>');
+                selectlist.append(span);
+                containerlist.show();
+            } else {
+                selectlist.find('span[data-id="' + target.val() + '"]').remove();
+                if (selectlist.find('.drop-selected-item').size() === 0) {
+                    containerlist.hide();
+                }
+            }
+        })
+        $('.list-search-attr').on('click', 'span.drop-selected-item', function (e) {
+            var target = $(e.currentTarget);
+            var selectlist = target.parents('.fangan-select-list').prev();
+            var id = target.data('id');
+            selectlist.find('[value="' + id + '"]').prop('checked', false);
+            if (target.siblings().size() == 0) {
+                target.parents('.fangan-select-list').hide();
+            }
+            target.remove();
         })
     })
 

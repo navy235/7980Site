@@ -14,6 +14,8 @@ namespace PadSite.ViewModels
 
         public int Value { get; set; }
 
+        public int Code { get; set; }
+
         public int PID { get; set; }
 
         public string Text { get; set; }
