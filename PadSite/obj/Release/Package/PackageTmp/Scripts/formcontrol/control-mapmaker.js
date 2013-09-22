@@ -55,7 +55,7 @@
         var point = new BMap.Point(116.404, 39.915);
 
         map = new BMap.Map(id + ps.containerId);
-        map.centerAndZoom(point, 12);
+        map.centerAndZoom(point, 16);
         map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
         map.addControl(new BMap.ScaleControl());                    // 添加比例尺控件
         map.addControl(new BMap.OverviewMapControl());

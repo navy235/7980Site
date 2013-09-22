@@ -142,6 +142,24 @@ namespace PadSite.Controllers
         #endregion
 
 
+        #region login_returnUrl
+        public ActionResult LoginReturnUrl(string url)
+        {
+            if (CookieHelper.IsLogin)
+            {
+                var member = MemberService.Find(CookieHelper.MemberID);
+                CookieHelper.ClearCookie();
+                MemberService.Login(member.Email, CheckHelper.StrToMd5(member.Password));
+                return Redirect(url);
+            }
+            else
+            {
+                return RedirectToAction("index", new { ReturnUrl = url });
+            }
+        }
+
+        #endregion
+
         public ActionResult QQ()
         {
             //应用的APPID

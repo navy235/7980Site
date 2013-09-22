@@ -148,7 +148,7 @@
                                 zoomWidth:430,
                                 zoomHeight:430
                             });
-                            if($('#thumblist').children('li').length<6){
+                            if($('#thumblist').children('li').length<4){
                                 $('.details-scroll-btn').addClass('details-scroll-btn-disabled');
                             }
                             var currentIndex=0;
@@ -156,19 +156,19 @@
                                 if($(this).hasClass('details-scroll-btn-disabled')){
                                     return false;
                                 }else{
-                                    var maxShowLength=5;
+                                    var maxShowLength=4;
                                     var totalLength=@Model.Links.ImgUrl.Split(',').Length;
-                                    var marginTop=parseInt($('#thumblist').css('marginTop'));
-                                    var itemHeight=$('#thumblist').children('li').eq(0).outerHeight(true);
+                                    var marginLeft=parseInt($('#thumblist').css('marginLeft'));
+                                    var itemWidth=$('#thumblist').children('li').eq(0).outerWidth(true);
                                     if($(this).hasClass('details-scroll-up')){
                                         if(currentIndex+maxShowLength<totalLength){
                                             currentIndex++;
-                                            $('#thumblist').css('marginTop',(marginTop-itemHeight)+'px');
+                                            $('#thumblist').css('marginLeft',(marginLeft-itemWidth)+'px');
                                         }
                                     }else{
-                                        if(marginTop!=0){
+                                        if(marginLeft!=0){
                                             currentIndex--;
-                                            $('#thumblist').css('marginTop',(marginTop+itemHeight)+'px');
+                                            $('#thumblist').css('marginLeft',(marginLeft+itemWidth)+'px');
                                         }
                                     }
                                 }
@@ -176,15 +176,15 @@
                         });
                     </script>
                     <dl class="details-info-content">
-                        <dd>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：<span class="details-info-item details-info-price">@Model.Links.CityCateName.Replace(",", " - ")</span></dd>
-                        <dd>售&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：<span class="details-info-item details-info-price-current">
+                        <dd>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：<span class="details-info-item">@Model.Links.CityCateName.Replace(",", " - ")</span></dd>
+                        <dd>售&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：<span class="details-info-item ">
                             @if (Model.Links.Price == 99999)
                             { 
-                                <strong><b>面议</b></strong>
+                                <strong><b class="fg-color-red">面议</b></strong>
                             }
                             else
                             {
-                                <strong>¥<b>@Model.Links.Price</b> 万元/年</strong>
+                                <strong>¥<b class="fg-color-red">@Model.Links.Price</b> 万元/年</strong>
                             }
                         </span></dd>
                         <dd>媒体类型：<span class="details-info-item">@Model.Links.MediaCateName.Replace(",", " - ")</span></dd>
@@ -446,7 +446,16 @@
                                         <img src="@Model.Links.FocusImgUrl" width="70" height="70" alt="@Model.Links.Name" title="@Model.Links.Name"></a></td>
                                     <td width="240" align="left" title="@Model.Links.Name"><a class="aC333" href="@Url.Action("show", "company", new { id = Model.Links.ID })" target="_blank">@Model.Links.Name
                                     </a></td>
-                                    <td width="190" align="center">价格：<strong class="c_ba2636">¥@Model.Links.Price 万元/年</strong></td>
+                                    <td width="190" align="center">价格：
+                                         @if (Model.Links.Price == 99999)
+                                         { 
+                                             <strong><b class="fg-color-red">面议</b></strong>
+                                         }
+                                         else
+                                         {
+                                             <strong>¥<b class="fg-color-red">@Model.Links.Price</b> 万元/年</strong>
+                                         }
+                                    </td>
                                     <td align="left"></td>
                                 </tr>
                             </tbody>
@@ -493,8 +502,8 @@
                                             return false;
                                         } 
                                         var id=@Model.ID,
-                                          name='@Model.Links.ID',
-                                    content=$('#input-feedback').val();
+                                            name='@Model.Links.ID',
+                                            content=$('#input-feedback').val();
                                         $.ajax({
                                             type:'POST',
                                             url:'@Url.Action("addmessage", "ajaxservice")',
@@ -527,14 +536,10 @@
                                         Maitonn.JHelper.checkFavorite(mediaId).done(function(result){
                                             if(result.Success){
                                                 Maitonn.JHelper.addFavorite(mediaId).done(function(res){
-                                                    if(res.Success){
-                                                        kwindow.center().open();
-                                                    }else{
-                                                        Maitonn.JHelper.showErrorMessage(res.Message);
-                                                    }
+                                                    Maitonn.JHelper.showMessage(res);
                                                 })
                                             }else{
-                                                Maitonn.JHelper.showErrorMessage(result.Message);
+                                                Maitonn.JHelper.showMessage(result);
                                             }
                                         })
                                     }else{
@@ -549,24 +554,11 @@
                                 Maitonn.JHelper.checkLogin().done(function(isLogin){
                                     if(isLogin){
                                         var mediaId='@Model.Links.ID';
-                                        var price=@(Model.Links.Price / 365);
+                                        var price= @(Model.Links.Price == 99999 ? 0 : Model.Links.Price / 365);
                                         var kwindow=$('#Win-scheme').data('kendoWindow');
                                         if(!$('.goods-addscheme')[0]){
                                             Maitonn.JHelper.getSchemeForm().done(function(html){
                                                 $('#goods-addscheme-info').after(html);
-                                                Maitonn.JHelper.getScheme().done(function(res){
-                                                    if(res.length>0){
-                                                        $("#schemeId").kendoDropDownList({
-                                                            dataTextField: "Text",
-                                                            dataValueField: "Value",
-                                                            dataSource: res,
-                                                            index: 0
-                                                        });
-                                                    }else{
-                                                        $('[name="addtype"][value="2"]').attr('disabled','disabled');
-                                                    }
-                                                })
-
                                                 Maitonn.JHelper.getMediaPeriodCode(mediaId).done(function(res){
                                                     $("#period").kendoDropDownList({
                                                         dataTextField: "Text",
@@ -576,28 +568,19 @@
                                                         change:changePeriodCode
                                                     });
                                                 })
-
                                                 var today=new Date();
-
                                                 $('[name="startTime"]').kendoDatePicker();
-
                                                 var startTime= $('[name="startTime"]').data('kendoDatePicker');
-
                                                 startTime.min(today);
-
                                                 startTime.value(today);
-
                                                 $('[name="number"]').kendoNumericTextBox({
                                                     "format":"n0",
                                                     "decimals":0,
                                                     "change":changePeriodCode,
                                                     "spin":changePeriodCode
                                                 })
-                                    
                                                 var number= $('[name="number"]').data('kendoNumericTextBox');
-                                    
                                                 number.min(1);
-
                                                 function changePeriodCode(){
                                                     var periodValue=$("#period").val();
                                                     var numberValue=number.value();
@@ -698,7 +681,7 @@
                                 var $form_tips=$('.form_tips_error').find('span');
                                 var validateErrors=[];
                                 if(addType==1){
-                                    var schemeName=$('#schemeName').val();
+                                    var schemeName=$('#Name').val();
                                     if(schemeName==''){
                                         $form_tips.text('请填写方案名称');
                                         validateErrors.push('请填写方案名称');

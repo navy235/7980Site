@@ -99,6 +99,9 @@ namespace PadSite
 
             #region Media
             kernel.Bind<IOutDoorService>().To<OutDoorService>().InRequestScope();
+            kernel.Bind<IFavoriteService>().To<FavoriteService>().InRequestScope();
+            kernel.Bind<ISchemeService>().To<SchemeService>().InRequestScope();
+            kernel.Bind<ISchemeItemService>().To<SchemeItemService>().InRequestScope();
             #endregion
 
             #region email

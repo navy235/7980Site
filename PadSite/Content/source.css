@@ -1514,9 +1514,12 @@ a.top-head-changcity {
     .nav-bread strong {
         color: #333;
         display: inline-block;
-        margin: 0 10px;
+        margin-right: 10px;
     }
 
+    .nav-bread strong {
+        margin-left: 10px;
+    }
 
 /************************
         list

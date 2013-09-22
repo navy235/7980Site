@@ -1,6 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using StackExchange.Profiling;
+
+<!DOCTYPE html>
 <html>
 <head>
+    @this.InitClientTimings()
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
@@ -8,6 +11,7 @@
     <!--[if IE 7]>
       <link rel="stylesheet" href="netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css">
     <![endif]-->
+    @Styles.Render("~/Content/kendo/2012.3.1114/css")
     @Styles.Render("~/Content/source")
     @Scripts.Render("~/bundles/modernizr")
     <script src="~/Scripts/kendo/2012.3.1114/jquery.min.js"></script>
@@ -17,47 +21,21 @@
 </head>
 <body>
     @Html.Partial("_TopNav")
-    <div class="top-head">
-        <div class="top-head-wrap">
-            <div class="top-head-logo">
-                <h5>
-                    <a hidefocus="true" title="@(ConfigSetting.SiteName)" class="top-head-link" href="/"></a>
-                    <span>全国</span>
-                </h5>
-                <div class="top-head-city">
-                    <a href="javascript:;" class="top-head-changcity">[切换省份]</a>
-                </div>
-            </div>
-            <div class="top-head-search ">
-                <input class="search-text" id="search-text" type="text" value="三面翻" x-webkit-speech>
-                <input class="search-button" id="search-button" type="button" value="搜索">
-                <ul class="top-head-suggest" style="display: none;"></ul>
-                <div class="top-head-hot-keys">
-                    <label>热门搜索：</label>
-                    <a target="_blank" href="/list-0-0-0-0-0-0-0-0-0-p_1?query=高速立柱">高速立柱</a>
-                    <a target="_blank" href="/list-0-0-0-0-0-0-0-0-0-p_1?query=市内巴士">市内巴士</a>
-                    <a target="_blank" href="/list-0-0-0-0-0-0-0-0-0-p_1?query=机场广告">机场广告</a>
-                    <a target="_blank" href="/list-0-0-0-0-0-0-0-0-0-p_1?query=商场">商场</a>
-                    <a target="_blank" href="/list-0-0-0-0-0-0-0-0-0-p_1?query=别墅住宅">别墅住宅</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @Html.Partial("_TopHead")
     <div class="top-menu">
         <div class="top-menu-tab">
-            <div class="top-menu-category">
-                <h2>
-                    <strong>全部户外分类</strong>
-                </h2>
-            </div>
+            @Html.Partial("_TopMenu")
             <ul class="top-menu-list">
-                <li class="active"><a href="/">首页</a></li>
-                <li><a href="/list-0-0-0-0-0-0-0-0-0-p_1">户外资源</a></li>
+                <li class="active"><a href="@Url.Action("index", "home")">首页</a></li>
+                <li><a href="@Url.Action("index", "list")">户外资源</a></li>
+                <li><a href="@Url.Action("index", "fangan")">方案定制</a></li>
             </ul>
         </div>
     </div>
+
     @RenderBody()
     @Html.Partial("_Footer")
     @RenderSection("scripts", required: false)
+    @MiniProfiler.RenderIncludes(position: RenderPosition.Right, showTrivial: false, showTimeWithChildren: false)
 </body>
 </html>

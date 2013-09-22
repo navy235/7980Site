@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+<div class="goods-addscheme">
+    <p class="form_tips form_tips_error" style="display: none; margin-left: 115px"><em class="s_icon i_point"></em><span></span></p>
+    <div class="form-field">
+        <label class="field-label">添加到</label>
+        <div class="k-checklist k-form-checklist clearfix">
+            <span class="k-checklist-item">
+                <input type="radio" id="addtype0" name="addtype" value="1" checked="checked">
+                <label for="addtype0" class="checkbox">新增方案</label>
+            </span>
+            <span class="k-checklist-item">
+                <input type="radio" id="addtype1" name="addtype" value="2" @(((IList<SelectListItem>)ViewBag.schemeId).Any() ? "" : "disabled") >
+                <label for="addtype1" class="checkbox">已有方案</label>
+            </span>
+        </div>
+    </div>
+    <div class="form-field">
+        <label class="field-label">方案名称</label>
+        <input type="text" class="k-textbox single-line text-box" name="Name" id="Name" />
+    </div>
+    <div class="form-field">
+        <label class="field-label">方案描述</label>
+        <textarea class="k-textbox multi-line text-box" id="Description" name="Description"></textarea>
+    </div>
+    <div class="form-field" style="display: none">
+        <label class="field-label">已有方案</label>
+        @Html.DropDownList("schemeId", (IList<SelectListItem>)ViewBag.schemeId)
+
+    </div>
+    <div class="form-field form-field-period">
+        <label class="field-label">预定周期</label>
+        <input type="text" name="startTime" id="startTime" />
+        <input type="text" name="number" id="number" value="1" />
+        <input type="text" name="period" id="period" value="1" />
+    </div>
+    <div class="form-field">
+        <label class="field-label">预估总价</label>
+        <div class="goods-price">¥<b>0</b> 万元</div>
+        <input type="hidden" id="price" name="price" />
+    </div>
+    <div class="form-field">
+        <button type="button" id="btn-comfirm-scheme" class="k-button">确定</button>
+        <button type="button" id="btn-cancle-scheme" class="k-button">取消</button>
+    </div>
+</div>

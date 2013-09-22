@@ -1,0 +1,28 @@
+﻿<div class="footer-about">
+    <a target="_blank" href="#">XXX</a> | 
+        <a target="_blank" href="#">网站帮助</a> |
+        <a target="_blank" href="#">会员注册</a> | 
+        <a target="_blank" href="#">网站地图</a> | 
+        <a target="_blank" href="#">联系我们</a> | 
+        <a target="_blank" href="#">广告网址导航</a> | 
+        <a target="_blank" href="#">网站律师</a> | 
+        <a target="_blank" href="#">意见反馈</a><br>
+    Copyright @@ 1996-2012 Dotaeye Corporation, All Rights Reserved<br>
+    XXX技术支持客服服务热线：400-606-6969
+</div>
+@(Html.Kendo().Window().Name("Win-PopLogin")
+    .Title("登录")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(false)
+    .Width(600)
+    .Height(390)
+    .Scrollable(true)
+    .Content(@<text>
+<input type="hidden" id="popLoginUrl" value="@Url.Action("poplogin", "login")" />
+<div id="loginLoading">
+    <img src="~/Content/images/formloading.gif" alt="loading" border="0" />
+</div>
+<iframe id="loginContent" name="verifycontent" width="100%" height="100%" style="display: none;" marginwidth="0" marginheight="0" frameborder="0" src=""></iframe>
+</text>)
+    )

@@ -182,6 +182,7 @@
     <Compile Include="Controllers\Admin\Member\MediaVerifyController.cs" />
     <Compile Include="Controllers\Admin\Member\MemberController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\FanganController.cs" />
     <Compile Include="Controllers\Personal\BizController.cs" />
     <Compile Include="Controllers\Admin\Category\CityCateController.cs" />
     <Compile Include="Controllers\Admin\DashboardController.cs" />
@@ -203,11 +204,20 @@
     <Compile Include="Controllers\Personal\MessageController.cs" />
     <Compile Include="Controllers\Personal\OutDoorController.cs" />
     <Compile Include="Controllers\Personal\PersonalController.cs" />
+    <Compile Include="Controllers\Personal\SchemeController.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Filters\LoginAuthorizeAttribute.cs" />
     <Compile Include="Filters\PermissionAuthorizeAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309220303319_AddMediaScheme.cs" />
+    <Compile Include="Migrations\201309220303319_AddMediaScheme.Designer.cs">
+      <DependentUpon>201309220303319_AddMediaScheme.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201309220307462_AddMediaFavorite.cs" />
+    <Compile Include="Migrations\201309220307462_AddMediaFavorite.Designer.cs">
+      <DependentUpon>201309220307462_AddMediaFavorite.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Base\Article.cs" />
@@ -233,7 +243,10 @@
     <Compile Include="Models\Company\CompanyNotice.cs" />
     <Compile Include="Models\Context\EntitiesContext.cs" />
     <Compile Include="Models\Category\MediaCate.cs" />
+    <Compile Include="Models\Media\Favorite.cs" />
     <Compile Include="Models\Media\OutDoor.cs" />
+    <Compile Include="Models\Media\Scheme.cs" />
+    <Compile Include="Models\Media\SchemeItem.cs" />
     <Compile Include="Models\Message\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Category\CityCateService.cs" />
@@ -263,7 +276,10 @@
     <Compile Include="Service\Interface\Category\IFormatCateService.cs" />
     <Compile Include="Service\Interface\Category\IPeriodCateService.cs" />
     <Compile Include="Service\Interface\Lucene\IOutDoorLuceneService.cs" />
+    <Compile Include="Service\Interface\Media\IFavoriteService.cs" />
     <Compile Include="Service\Interface\Media\IOutDoorService.cs" />
+    <Compile Include="Service\Interface\Media\ISchemeService.cs" />
+    <Compile Include="Service\Interface\Media\ISchemeItemService.cs" />
     <Compile Include="Service\Interface\Member\IMemberService.cs" />
     <Compile Include="Service\Interface\Member\IMember_ActionService.cs" />
     <Compile Include="Service\Interface\Message\IMessageService.cs" />
@@ -278,7 +294,11 @@
     <Compile Include="Service\Lucene\LuceneCommon.cs" />
     <Compile Include="Service\Lucene\OutDoorIndexEntity.cs" />
     <Compile Include="Service\Lucene\OutDoorLuceneService.cs" />
+    <Compile Include="Service\Media\FavoriteService.cs" />
+    <Compile Include="Service\Media\SchemeService.cs" />
+    <Compile Include="Service\Media\SchemeItemService.cs" />
     <Compile Include="ViewModels\Admin\DashBoardViewModel.cs" />
+    <Compile Include="ViewModels\Home\LinkItemTree.cs" />
     <Compile Include="ViewModels\Home\QuerySort.cs" />
     <Compile Include="ViewModels\Home\QuerySource.cs" />
     <Compile Include="ViewModels\Home\QueryTerm.cs" />
@@ -328,6 +348,7 @@
     <Compile Include="ViewModels\Category\FormatCateViewModel.cs" />
     <Compile Include="Service\Lucene\OutDoorIndexFields.cs" />
     <Compile Include="ViewModels\Home\LinkItem.cs" />
+    <Compile Include="ViewModels\Media\AddSchemeViewModel.cs" />
     <Compile Include="ViewModels\Media\OutDoorItemViewModel.cs" />
     <Compile Include="ViewModels\Media\OutDoorViewModel.cs" />
     <Compile Include="ViewModels\Message\MessageViewModel.cs" />
@@ -475,7 +496,7 @@
     <Content Include="Scripts\formcontrol\control-foreignkeyforcheck.js" />
     <Content Include="Scripts\formcontrol\control-foreignkeyforradio.js" />
     <Content Include="Scripts\formcontrol\control-mapmaker.js" />
-    <Content Include="Scripts\formcontrol\control-helper.js" />
+    <Content Include="Scripts\base\base-helper.js" />
     <Content Include="Scripts\formcontrol\control-radio.js" />
     <Content Include="Scripts\formcontrol\control-uploadimg.js" />
     <Content Include="Scripts\formcontrol\control-uploadimgedit.js" />
@@ -746,6 +767,13 @@
     <Content Include="Views\Company\contact.cshtml" />
     <Content Include="Views\Company\Credentials.cshtml" />
     <Content Include="Views\Company\show.cshtml" />
+    <Content Include="Views\Shared\_CommonJavascript.cshtml" />
+    <Content Include="Views\Scheme\GetSchemeForm.cshtml" />
+    <Content Include="Views\Fangan\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutFangan.cshtml" />
+    <Content Include="Views\Shared\_TopHead.cshtml" />
+    <Content Include="Views\Shared\_TopMenu.cshtml" />
+    <Content Include="Views\Shared\_CompanyFooter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -753,6 +781,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201309220303319_AddMediaScheme.resx">
+      <DependentUpon>201309220303319_AddMediaScheme.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201309220307462_AddMediaFavorite.resx">
+      <DependentUpon>201309220307462_AddMediaFavorite.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

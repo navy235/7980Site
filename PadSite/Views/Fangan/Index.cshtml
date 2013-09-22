@@ -1,0 +1,133 @@
+﻿@{
+    ViewBag.Title = ConfigSetting.SiteName + "-方案生成";
+    Layout = "~/Views/Shared/_LayoutFangan.cshtml";
+    var CityTree = (List<LinkItemTree>)ViewBag.CityTree;
+    var MediaTree = (List<LinkItemTree>)ViewBag.MediaTree;
+}
+<div class="nav-bread">
+    <a class="nav-bread-home" href="/"><i class="icon-maitonn icon-home"></i></a>&gt;
+        <strong>方案生成</strong>
+</div>
+
+<style type="text/css">
+    .fangan-list {
+        float: left;
+        width: 600px;
+    }
+
+    .drop-list-item {
+        position: relative;
+        float: left;
+        height: 24px;
+        line-height: 24px;
+        min-width: 100px;
+        color: #333333;
+        background-color: none;
+    }
+
+        .drop-list-item.hover {
+            background-color: #409DDC;
+            color: #ffffff;
+        }
+
+            .drop-list-item.hover .drop-list {
+                display: block;
+            }
+
+        .drop-list-item input {
+            float: left;
+            margin: 6px;
+        }
+
+        .drop-list-item label {
+            float: left;
+            height: 24px;
+            line-height: 24px;
+            min-width: 64px;
+        }
+
+    .drop-list {
+        position: absolute;
+        width: 300px;
+        border: 3px solid #409DDC;
+        padding: 10px;
+        background-color: #FFFFFF;
+        z-index: 1002;
+        display: none;
+        top: 0;
+        left: 100px;
+    }
+
+    .list-search-attr {
+        margin-bottom: 500px;
+    }
+</style>
+
+@helper RenderChild(LinkItemTree tree, string Code)
+{
+    if (tree.Children.Any())
+    {
+    <div class="drop-list">
+        @foreach (var item in tree.Children)
+        {
+            <span class="drop-list-item">
+                <input type="checkbox" id="@(Code)_@item.Value" name="@(Code)" />
+                <label for="@(Code)_@item.Value">@item.Text</label>
+                @if (item.Children.Any())
+                {
+                    RenderChild(item, Code);
+                }
+            </span>
+        }
+    </div>
+    }
+        
+}
+
+<div class="list-wrap">
+    <div class="list-search">
+        <div class="list-search-wrap clearfix">
+            <div class="list-search-attr clearfix">
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">地区：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in CityTree)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" id="CityCode_@item.Value" name="CityCode" />
+                                <label for="CityCode_@item.Value">@item.Text</label>
+                                @RenderChild(item, "CityCode")
+                            </span>
+                        }
+                    </div>
+
+                </div>
+
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">媒体类别：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in MediaTree)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" id="MediaCode_@item.Value" name="MediaCode" />
+                                <label for="MediaCode_@item.Value">@item.Text</label>
+                                @RenderChild(item, "MediaCode")
+                            </span>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('.drop-list-item').hover(function () {
+            $(this).addClass('hover');
+        }, function () {
+            $(this).removeClass('hover');
+        })
+    })
+
+</script>

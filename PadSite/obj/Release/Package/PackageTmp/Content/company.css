@@ -331,7 +331,7 @@
 
 .details-info-box {
     position: absolute;
-    height: 72px;
+    height: 68px;
     overflow: hidden;
     top: 307px;
     width: 272px;
@@ -341,10 +341,10 @@
 
 .details-scroll-btn {
     display: inline-block;
-    width: 17px;
-    height: 72px;
+    width: 16px;
+    height: 66px;
     left: 0;
-    top: 307px;
+    top: 308px;
     position: absolute;
     z-index: 11;
     background: #ccc;
@@ -370,7 +370,7 @@
 
 .details-scroll-down {
     cursor: pointer;
-    left: 289px;
+    left: 290px;
 }
 
 
@@ -378,13 +378,13 @@
     position: absolute;
     top: 0;
     z-index: 2;
+    width: 1000px;
 }
 
     .details-info-list li {
-        width: 72px;
-        height: 72px;
+        width: 68px;
+        height: 68px;
         overflow: hidden;
-        margin-bottom: 5px;
         float: left;
     }
 
@@ -394,13 +394,13 @@
             display: inline-block;
             overflow: hidden;
             zoom: 1;
-            height: 68px;
-            width: 68px;
+            height: 64px;
+            width: 64px;
         }
 
             .details-info-list li a img {
-                height: 68px;
-                width: 68px;
+                height: 64px;
+                width: 64px;
             }
 
             .details-info-list .active a,
@@ -476,6 +476,7 @@
     vertical-align: top;
     zoom: 1;
     font-family: Verdana;
+    color: #333;
 }
 
     .details-info-item em {
@@ -987,6 +988,10 @@ goods-pack .goods-desc {
         width: 108px;
     }
 
+        .goods-feedback-tips .rightspan a {
+            color: #333;
+        }
+
 .goods-feedback-box {
     border: 1px solid #e8e8e8;
     background: #f5f5f5;
@@ -1106,6 +1111,19 @@ goods-pack .goods-desc {
         width: 60px;
     }
 
-    .goods-addscheme .form-field-period .k-dropdown {
+    .goods-addscheme .form-field .k-dropdown {
         width: 75px;
+    }
+
+    .goods-addscheme .form-field {
+        padding-left: 90px;
+    }
+
+    .goods-addscheme .field-label {
+        width: 70px;
+        margin-left: -70px;
+    }
+
+    .goods-addscheme .k-form-checklist {
+        width: 300px;
     }

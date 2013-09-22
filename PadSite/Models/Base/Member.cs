@@ -80,5 +80,7 @@ namespace PadSite.Models
 
         public virtual ICollection<OutDoor> OutDoor { get; set; }
 
+        public virtual ICollection<Scheme> Scheme { get; set; }
+
     }
 }

@@ -108,14 +108,6 @@ D:\GitProject\7980Site\PadSite\bin\zh-Hans\System.Web.WebPages.Deployment.resour
 D:\GitProject\7980Site\PadSite\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.dll
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.pdb
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddSenderIDForMessage.resources
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddMessage.resources
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddOutDoor.resources
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddPurpose.resources
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorField.resources
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorMediaCode.resources
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.OutDoorMediaCodeValue.resources
 D:\GitProject\7980Site\PadSite\bin\ICSharpCode.SharpZipLib.dll
 D:\GitProject\7980Site\PadSite\bin\Lucene.Net.dll
 D:\GitProject\7980Site\PadSite\bin\PanGu.dll
@@ -143,3 +135,7 @@ E:\GitProject\7980Site\PadSite\bin\MiniProfiler.EntityFramework.pdb
 D:\GitProject\7980Site\PadSite\bin\Calabonga.Mvc.PagedListExt.dll
 E:\GitProject\7980Site\PadSite\bin\Calabonga.Mvc.PagedListExt.dll
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csprojResolveAssemblyReference.cache
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddMediaScheme.resources
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddMediaFavorite.resources
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csprojResolveAssemblyReference.cache

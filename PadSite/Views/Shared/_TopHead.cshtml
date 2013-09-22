@@ -1,0 +1,98 @@
+﻿@{
+    var baseUrl = Url.Action("index", "list", new
+                         {
+                             province = 1,
+                             city = 0,
+                             mediacode = 0,
+                             formatcode = 0,
+                             ownercode = 0,
+                             periodcode = 0,
+                             authstatus = 0,
+                             deadline = 0,
+                             price = 0,
+                             order = 0,
+                             descending = 0,
+                             page = 1
+
+                         });  
+}
+<div class="top-head">
+    <div class="top-head-wrap">
+        <div class="top-head-logo">
+            <h5>
+                <a hidefocus="true" title="@(ConfigSetting.SiteName)" class="top-head-link" href="/"></a>
+                <span>全国</span>
+            </h5>
+            <div class="top-head-city">
+                <a href="javascript:;" class="top-head-changcity">[切换省份]</a>
+            </div>
+        </div>
+        <div class="top-head-search ">
+            <input class="search-text" id="search-text" type="text" value="请输入搜索的关键字" x-webkit-speech>
+            <input class="search-button" id="search-button" type="button" value="搜索">
+            <ul class="top-head-suggest" style="display: none;"></ul>
+            <div class="top-head-hot-keys">
+                <label>热门搜索：</label>
+                <a target="_blank" href="@baseUrl?query=高速立柱">高速立柱</a>
+                <a target="_blank" href="@baseUrl?query=市内巴士">市内巴士</a>
+                <a target="_blank" href="@baseUrl?query=机场广告">机场广告</a>
+                <a target="_blank" href="@baseUrl?query=商场">商场</a>
+                <a target="_blank" href="@baseUrl?query=别墅住宅">别墅住宅</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#search-button").click(function () {
+            var self = this;
+            var keywordInput = $('#search-text');
+            var keywords = keywordInput.val();
+            if (keywords === '') {
+                keywordInput.val('请输入搜索的关键字')
+                keywordInput.addClass('search-text-gray')
+                return false;
+            } else if (keywords === '请输入搜索的关键字') {
+                keywordInput.focus();
+                return false;
+            } else {
+                window.location.href = "@baseUrl?query=" + encodeURIComponent($("#search-text").val());
+            }
+        });
+        $('#search-text').keydown(function (e) {
+            var target = $(e.currentTarget);
+            if (target.val() === '请输入搜索的关键字') {
+                target.val('');
+                target.removeClass('search-text-gray')
+            }
+            if (e.keyCode && e.keyCode === 13) {
+                $("#search-button").click();
+                return false;
+            } else {
+                if ($(target).val().length > 20) {
+                    return false;
+                }
+            }
+        });
+
+        $('#search-text').focusin(function (e) {
+            var target = $(e.currentTarget);
+            if (target.val() === '请输入搜索的关键字') {
+                target.val('');
+                target.removeClass('search-text-gray')
+            }
+            if (e.keyCode && e.keyCode === 13) {
+                $("#search-button").click();
+                return false;
+            }
+        });
+
+        $('#search-text').focusout(function (e) {
+            var target = $(e.currentTarget);
+            if (target.val() === '') {
+                target.val('请输入搜索的关键字')
+                target.addClass('search-text-gray')
+            }
+        })
+    })
+</script>

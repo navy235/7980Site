@@ -45,6 +45,7 @@
         "success": onSuccess,
         "upload": onUpload,
         "remove": onRemove,
+        "multiple": false,
         "localization":
             {
               "cancel": "取消",

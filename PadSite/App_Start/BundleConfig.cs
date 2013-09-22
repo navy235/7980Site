@@ -24,6 +24,10 @@ namespace PadSite
                 "~/Scripts/effectcontrol/control-*"
             ));
 
+            bundles.Add(new ScriptBundle("~/bundles/base").Include(
+                "~/Scripts/base/base-*"
+            ));
+
             bundles.Add(new ScriptBundle("~/bundles/modernizr")
                 .Include(
                         "~/Scripts/modernizr-*"));

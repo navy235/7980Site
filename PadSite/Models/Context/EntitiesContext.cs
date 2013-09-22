@@ -14,7 +14,7 @@ namespace PadSite.Models
         {
 
         }
-
+        public IDbSet<Favorite> Favorite { get; set; }
         public IDbSet<Message> Message { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -88,6 +88,17 @@ namespace PadSite.Models
                 .HasMany(x => x.CompanyNotice)
                 .WithRequired(x => x.Member)
                 .HasForeignKey(x => x.MemberID);
+
+            modelBuilder.Entity<Member>()
+                .HasMany(x => x.Scheme)
+                .WithRequired(x => x.Member)
+                .HasForeignKey(x => x.MemberID);
+
+            modelBuilder.Entity<Scheme>()
+                .HasMany(s => s.SchemeItem)
+                .WithRequired(m => m.Scheme)
+                .HasForeignKey(o => o.SchemeID)
+                .WillCascadeOnDelete(true);
 
             #endregion
 
