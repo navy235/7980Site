@@ -2154,6 +2154,10 @@ a.top-head-changcity {
     margin: 2px 0px 0px 10px;
 }
 
+    .products-footer .products-footer-company {
+        text-align: right;
+    }
+
 .list-search .products-details {
     height: 80px;
 }

@@ -86,6 +86,10 @@ namespace PadSite.Controllers
             ViewBag.IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, false);
             ViewBag.CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, false);
             ViewBag.PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            var periodCate = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.OrderIndex, x => x.CateName, false);
+            periodCate.RemoveAt(0);
+            periodCate.RemoveAt(0);
+            ViewBag.PeriodCate = periodCate;
             var PriceCate = new List<SelectListItem>();
             PriceCate.Add(new SelectListItem() { Text = "10万以下", Value = ((int)PriceListType.Price10Lower).ToString() });
             PriceCate.Add(new SelectListItem() { Text = "10~50万元", Value = ((int)PriceListType.Price50Lower).ToString() });

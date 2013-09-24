@@ -86,7 +86,12 @@
                             <a class="fg-color-red"  href="@Url.Action("show", "company", new { id = product.ID })" >[详细]</a>
                         </div>
                         <div class="products-footer">
-                            <p><a href="@Url.Action("index", "company", new { id = product.MemberID })">@product.CompanyName</a></p>
+                            <div class="products-footer-company">
+                                <a class="pull-left" href="@Url.Action("index", "company", new { id = product.MemberID })">@product.CompanyName</a>
+                                <button class="k-button btn-compare mr10 " type="button"  data-title="@product.Name" data-value="@product.ID" >
+                                    <i class="icon-maitonn icon-list"></i>对比方案</button>
+                                <button class="k-button btn-addScheme  " type="button"  data-title="@product.Name"   data-value="@product.ID" ><i class="icon-maitonn icon-briefcase"></i>加入方案</button>
+                            </div>
                             <span class="mr5 fg-color-gray">刊例：
                                     @if (product.Price == 99999)
                                     {
@@ -163,6 +168,13 @@
             } else {
                 window.location.href = v0Url;
             }
+        })
+        $('.btn-compare').click(function (e) {
+            var target = $(e.currentTarget);
+            var currentValue = Maitonn.Cookies.Get("compare");
+            var cValue = target.data("value") + "|" + decodeURIComponent(target.data("title"));
+            var newValue = ((currentValue == null || currentValue) == "" ? "" : currentValue + ",") + cValue
+            Maitonn.Cookies.Set("compare", newValue);
         })
     })
 </script>

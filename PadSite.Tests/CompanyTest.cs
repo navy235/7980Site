@@ -37,6 +37,17 @@ namespace PadSite.Tests
                 Console.WriteLine(item.Code);
             }
         }
+        [TestMethod]
+        public void GetMaxCode()
+        {
+            var codes = new int[] { 10030000, 10030100, 10030101, 10030104, 13000000 };
+
+            foreach (var c in codes)
+            {
+                var code = Utilities.GetMaxCode(c);
+                Console.WriteLine(code);
+            }
+        }
 
 
     }

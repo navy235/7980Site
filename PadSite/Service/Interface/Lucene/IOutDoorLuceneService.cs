@@ -15,8 +15,12 @@ namespace PadSite.Service.Interface
 
         List<LinkItem> Search(QueryTerm queryTerm, SearchFilter searchFilter, out int totalHits);
 
+        List<LinkItem> Search(GenerateSchemeViewModel model, out int totalHits);
+
         List<LinkItem> Search(out int totalHits);
 
         LinkItem Search(int MediaID);
+
+
     }
 }

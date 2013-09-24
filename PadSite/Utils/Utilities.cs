@@ -104,5 +104,34 @@ namespace PadSite.Utils
             }
             return Convert.ToInt32(codeStr);
         }
+
+        public static int GetMaxCode(int code)
+        {
+            var codeStr = code.ToString();
+            var maxLength = codeStr.Length;
+            var lastNotEquelZeroIndex = 0;
+            for (var i = maxLength - 1; i >= 0; i--)
+            {
+                if (Convert.ToInt32(codeStr.Substring(i, 1)) != 0)
+                {
+                    lastNotEquelZeroIndex = i;
+                    break;
+                }
+            }
+            if (lastNotEquelZeroIndex % 2 == 0)
+            {
+                lastNotEquelZeroIndex += 1;
+            }
+            if (lastNotEquelZeroIndex < maxLength - 1)
+            {
+                codeStr = codeStr.Substring(0, lastNotEquelZeroIndex + 1);
+                var needLength = maxLength - lastNotEquelZeroIndex - 1;
+                for (var i = 0; i < needLength; i++)
+                {
+                    codeStr += "9";
+                }
+            }
+            return Convert.ToInt32(codeStr);
+        }
     }
 }

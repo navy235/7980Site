@@ -1,0 +1,116 @@
+
+ ExTime :2013-09-24 17:17:25,244 [7] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/ajaxService/GenerateScheme?mediaCode=10030000%2C10030100%2C10030101%2C10030104%2C13000000&industryCate=3&cityCode=100300&purposeCate=3&crowdCate=3%2C15&priceCate=50&generateType=3&day=365
+ ErrMessage:Invalid shift value in prefixCoded string (is encoded value really a LONG?) 
+ System.FormatException: Invalid shift value in prefixCoded string (is encoded value really a LONG?)
+   在 Lucene.Net.Util.NumericUtils.PrefixCodedToLong(String prefixCoded) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Util\NumericUtils.cs:行号 224
+   在 Lucene.Net.Search.AnonymousClassLongParser1.ParseLong(String val) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCache.cs:行号 345
+   在 Lucene.Net.Search.FieldCacheImpl.LongCache.CreateValue(IndexReader reader, Entry entryKey) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 631
+   在 Lucene.Net.Search.FieldCacheImpl.Cache.Get(IndexReader reader, Entry key) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 238
+   在 Lucene.Net.Search.FieldCacheImpl.GetLongs(IndexReader reader, String field, LongParser parser) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 598
+   在 Lucene.Net.Search.FieldCacheImpl.LongCache.CreateValue(IndexReader reader, Entry entryKey) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 620
+   在 Lucene.Net.Search.FieldCacheImpl.Cache.Get(IndexReader reader, Entry key) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 238
+   在 Lucene.Net.Search.FieldCacheImpl.GetLongs(IndexReader reader, String field, LongParser parser) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 598
+   在 Lucene.Net.Search.FieldComparator.LongComparator.SetNextReader(IndexReader reader, Int32 docBase) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldComparator.cs:行号 568
+   在 Lucene.Net.Search.TopFieldCollector.OneComparatorNonScoringCollector.SetNextReader(IndexReader reader, Int32 docBase) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\TopFieldCollector.cs:行号 99
+   在 Lucene.Net.Search.IndexSearcher.Search(Weight weight, Filter filter, Collector collector) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\IndexSearcher.cs:行号 224
+   在 Lucene.Net.Search.IndexSearcher.Search(Weight weight, Filter filter, Int32 nDocs, Sort sort, Boolean fillFields) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\IndexSearcher.cs:行号 212
+   在 Lucene.Net.Search.IndexSearcher.Search(Weight weight, Filter filter, Int32 nDocs, Sort sort) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\IndexSearcher.cs:行号 194
+   在 Lucene.Net.Search.Searcher.Search(Query query, Filter filter, Int32 n, Sort sort) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\Searcher.cs:行号 57
+   在 PadSite.Service.OutDoorLuceneService.Search(GenerateSchemeViewModel model, Int32& totalHits) 位置 d:\GitProject\7980Site\PadSite\Service\Lucene\OutDoorLuceneService.cs:行号 925
+   在 PadSite.Controllers.AjaxServiceController.GenerateScheme(GenerateSchemeViewModel model) 位置 d:\GitProject\7980Site\PadSite\Controllers\Ajax\AjaxServiceController.cs:行号 303
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-24 17:17:29,824 [7] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980mt.com/ajaxService/GenerateScheme?mediaCode=10030000%2C10030100%2C10030101%2C10030104%2C13000000&industryCate=3&cityCode=100300&purposeCate=3&crowdCate=3%2C15&priceCate=50&generateType=3&day=365
+ ErrMessage:Invalid shift value in prefixCoded string (is encoded value really a LONG?) 
+ System.FormatException: Invalid shift value in prefixCoded string (is encoded value really a LONG?)
+   在 Lucene.Net.Util.NumericUtils.PrefixCodedToLong(String prefixCoded) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Util\NumericUtils.cs:行号 224
+   在 Lucene.Net.Search.AnonymousClassLongParser1.ParseLong(String val) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCache.cs:行号 345
+   在 Lucene.Net.Search.FieldCacheImpl.LongCache.CreateValue(IndexReader reader, Entry entryKey) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 631
+   在 Lucene.Net.Search.FieldCacheImpl.Cache.Get(IndexReader reader, Entry key) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 238
+   在 Lucene.Net.Search.FieldCacheImpl.GetLongs(IndexReader reader, String field, LongParser parser) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 598
+   在 Lucene.Net.Search.FieldCacheImpl.LongCache.CreateValue(IndexReader reader, Entry entryKey) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 620
+   在 Lucene.Net.Search.FieldCacheImpl.Cache.Get(IndexReader reader, Entry key) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 238
+   在 Lucene.Net.Search.FieldCacheImpl.GetLongs(IndexReader reader, String field, LongParser parser) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldCacheImpl.cs:行号 598
+   在 Lucene.Net.Search.FieldComparator.LongComparator.SetNextReader(IndexReader reader, Int32 docBase) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\FieldComparator.cs:行号 568
+   在 Lucene.Net.Search.TopFieldCollector.OneComparatorNonScoringCollector.SetNextReader(IndexReader reader, Int32 docBase) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\TopFieldCollector.cs:行号 99
+   在 Lucene.Net.Search.IndexSearcher.Search(Weight weight, Filter filter, Collector collector) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\IndexSearcher.cs:行号 224
+   在 Lucene.Net.Search.IndexSearcher.Search(Weight weight, Filter filter, Int32 nDocs, Sort sort, Boolean fillFields) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\IndexSearcher.cs:行号 212
+   在 Lucene.Net.Search.IndexSearcher.Search(Weight weight, Filter filter, Int32 nDocs, Sort sort) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\IndexSearcher.cs:行号 194
+   在 Lucene.Net.Search.Searcher.Search(Query query, Filter filter, Int32 n, Sort sort) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\Searcher.cs:行号 57
+   在 PadSite.Service.OutDoorLuceneService.Search(GenerateSchemeViewModel model, Int32& totalHits) 位置 d:\GitProject\7980Site\PadSite\Service\Lucene\OutDoorLuceneService.cs:行号 925
+   在 PadSite.Controllers.AjaxServiceController.GenerateScheme(GenerateSchemeViewModel model) 位置 d:\GitProject\7980Site\PadSite\Controllers\Ajax\AjaxServiceController.cs:行号 303
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)

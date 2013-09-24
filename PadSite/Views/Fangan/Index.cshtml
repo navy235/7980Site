@@ -137,7 +137,7 @@
                         @foreach (var item in IndustryCate)
                         { 
                             <span class="drop-list-item">
-                                <input type="checkbox" class="fangan-check" id="IndustryCate_@item.Value" name="IndustryCate" value="@item.Value" />
+                                <input type="checkbox" class="fangan-check" id="IndustryCate_@item.Value" name="IndustryCate" value="@item.Text" />
                                 <label for="IndustryCate_@item.Value">@item.Text</label>
                             </span>
                         }
@@ -172,7 +172,7 @@
                         @foreach (var item in PurposeCate)
                         { 
                             <span class="drop-list-item">
-                                <input type="checkbox" class="fangan-check" id="PurposeCate_@item.Value" name="PurposeCate" value="@item.Value" />
+                                <input type="checkbox" class="fangan-check" id="PurposeCate_@item.Value" name="PurposeCate" value="@item.Text" />
                                 <label for="PurposeCate_@item.Value">@item.Text</label>
                             </span>
                         }
@@ -189,7 +189,7 @@
                         @foreach (var item in CrowdCate)
                         { 
                             <span class="drop-list-item">
-                                <input type="checkbox" class="fangan-check" id="CrowdCate_@item.Value" name="CrowdCate" value="@item.Value" />
+                                <input type="checkbox" class="fangan-check" id="CrowdCate_@item.Value" name="CrowdCate" value="@item.Text" />
                                 <label for="CrowdCate_@item.Value">@item.Text</label>
                             </span>
                         }
@@ -201,25 +201,53 @@
                     </div>
                 </div>
                 <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">购买周期：</div>
+                    <div class="fangan-list clearfix" style="padding-left: 10px;">
+                        @(Html.Kendo().IntegerTextBox().Name("periodNumber")
+                              .Min(1)
+                              .Max(int.MaxValue).Value(1).HtmlAttributes(new { style = "width:50px;" })
+                        )
+                        @Html.DropDownList("periodCate", (IList<SelectListItem>)ViewBag.PeriodCate);
+                       @* @Html.Kendo().DropDownList().Name("PeriodCate").BindTo((IList<SelectListItem>)ViewBag.PeriodCate).HtmlAttributes(new { style = "width:60px;" })*@
+                    </div>
+                </div>
+
+
+                <div class="list-search-attr-bread clearfix">
                     <div class="list-search-attr-title">预计费用：</div>
                     <div class="fangan-list clearfix">
                         @foreach (var item in PriceCate)
                         { 
                             <span class="drop-list-item">
-                                <input type="checkbox" class="fangan-check" id="PriceCate_@item.Value" name="PriceCate" value="@item.Value" />
+                                <input type="radio" class="fangan-check" id="PriceCate_@item.Value" name="PriceCate" value="@item.Value" />
                                 <label for="PriceCate_@item.Value">@item.Text</label>
                             </span>
                         }
                     </div>
-                    <div class="fangan-select-list">
-                        <div class="list-search-attr-title">已选择：</div>
-                        <div class="fangan-list">
-                        </div>
-                    </div>
                 </div>
+
                 <div class="list-search-attr-bread clearfix">
                     <div class="list-search-attr-title">生成方案：</div>
-                    <button class="k-button" type="button">生成方案</button>
+                    <div class="fangan-list clearfix">
+                        <span class="drop-list-item">
+                            <input type="radio" class="fangan-check" id="generateType0" checked="checked" name="generateType" value="0" />
+                            <label for="generateType0">推荐资源</label>
+                        </span>
+                        <span class="drop-list-item">
+                            <input type="radio" class="fangan-check" id="generateType1" name="generateType" value="1" />
+                            <label for="generateType1">最低价格</label>
+                        </span>
+                        <span class="drop-list-item">
+                            <input type="radio" class="fangan-check" id="generateType2" name="generateType" value="2" />
+                            <label for="generateType2">最高价格</label>
+                        </span>
+
+                        <span class="drop-list-item">
+                            <input type="radio" class="fangan-check" id="generateType3" name="generateType" value="3" />
+                            <label for="generateType3">认证资源</label>
+                        </span>
+                    </div>
+                    <button class="k-button ml10" id="btn-generate" type="button">生成方案</button>
                 </div>
             </div>
         </div>
@@ -232,7 +260,7 @@
         }, function () {
             $(this).removeClass('hover');
         })
-        $('input[type="checkbox"].fangan-check').on('click', function (e) {
+        $('[type="checkbox"].fangan-check').on('click', function (e) {
             var target = $(e.currentTarget);
             var containerlist = target.parents('.fangan-list').next();
             var selectlist = containerlist.find('.fangan-list');
@@ -261,6 +289,36 @@
             }
             target.remove();
         })
+
+        $('#btn-generate').click(function () {
+            var mediaCode = getSelectedVal($('[name="MediaCode"]:checked'));
+            var IndustryCate = getSelectedVal($('[name="IndustryCate"]:checked'))
+            var CityCode = getSelectedVal($('[name="CityCode"]:checked'));
+            var PurposeCate = getSelectedVal($('[name="PurposeCate"]:checked'));
+            var CrowdCate = getSelectedVal($('[name="CrowdCate"]:checked'));
+            var PriceCate = getSelectedVal($('[name="PriceCate"]:checked'));
+            var generateType = $('[name="generateType"]:checked').val();
+            var periodNumber = $('#periodNumber').val();
+            var periodCate = $('#periodCate').val();
+            var data = {
+                mediaCode: mediaCode,
+                industryCate: IndustryCate,
+                cityCode: CityCode,
+                purposeCate: PurposeCate,
+                crowdCate: CrowdCate,
+                priceCate: PriceCate,
+                generateType: generateType,
+                day: periodNumber * periodCate
+            };
+            $.get('@Url.Action("GenerateScheme", "ajaxService")', data, function (res) {
+                console.log(res);
+            })
+            //console.log(data);
+        })
+
+        function getSelectedVal(elements) {
+            return $.map(elements, function (item) { return $(item).val() }).join(",");
+        }
     })
 
 </script>

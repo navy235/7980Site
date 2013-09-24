@@ -538,6 +538,22 @@ namespace PadSite.Service
             return SortField.FIELD_SCORE;
         }
 
+        private static SortField GetSortField(int genrateType)
+        {
+            switch (genrateType)
+            {
+                case 0:
+                    return new SortField(OutDoorIndexFields.AuthStatus, SortField.INT, reverse: true);
+                case 1:
+                    return new SortField(OutDoorIndexFields.Price, SortField.DOUBLE, reverse: false);
+                case 2:
+                    return new SortField(OutDoorIndexFields.Price, SortField.DOUBLE, reverse: true);
+                case 3:
+                    return new SortField(OutDoorIndexFields.AuthStatus, SortField.LONG, reverse: true);
+            }
+            return SortField.FIELD_SCORE;
+        }
+
         private static Query ParseQuery(QueryTerm queryTerm, SearchFilter searchFilter)
         {
             var combineQuery = new BooleanQuery();
@@ -794,6 +810,131 @@ namespace PadSite.Service
                 searcher.Dispose();
             }
             return model;
+        }
+
+
+        public List<LinkItem> Search(GenerateSchemeViewModel model, out int totalHits)
+        {
+            if (!Directory.Exists(LuceneCommon.IndexOutDoorDirectory))
+            {
+                totalHits = 0;
+                return new List<LinkItem>();
+            }
+            var combineQuery = new BooleanQuery();
+
+            SortField sortField = GetSortField(model.generateType);
+
+            #region 媒体类别查询
+            if (!string.IsNullOrEmpty(model.mediaCode))
+            {
+                var mediaCodes = model.mediaCode.Split(',').Select(x => Convert.ToInt32(x));
+                var mediaCodeCombineQuery = new BooleanQuery();
+                foreach (var code in mediaCodes)
+                {
+                    var maxCode = Utilities.GetMaxCode(code);
+                    var mediaCodeQuery = NumericRangeQuery.NewLongRange(OutDoorIndexFields.MediaCateCode,
+                        code, maxCode, true, true);
+                    mediaCodeCombineQuery.Add(mediaCodeQuery, Occur.SHOULD);
+                }
+                combineQuery.Add(mediaCodeCombineQuery, Occur.MUST);
+            }
+            #endregion
+
+            #region 地区查询
+            if (!string.IsNullOrEmpty(model.cityCode))
+            {
+                var cityCodes = model.cityCode.Split(',').Select(x => Convert.ToInt32(x));
+                var cityCodeCombineQuery = new BooleanQuery();
+                foreach (var code in cityCodes)
+                {
+                    var maxCode = Utilities.GetMaxCode(code);
+                    var cityCodeQuery = NumericRangeQuery.NewLongRange(OutDoorIndexFields.CityCateCode,
+                        code, maxCode, true, true);
+                    cityCodeCombineQuery.Add(cityCodeQuery, Occur.SHOULD);
+                }
+                combineQuery.Add(cityCodeCombineQuery, Occur.MUST);
+            }
+            #endregion
+
+            #region 关键字查询
+            if (!string.IsNullOrEmpty(model.crowdCate) || !string.IsNullOrEmpty(model.industryCate) || !string.IsNullOrEmpty(model.purposeCate))
+            {
+                var fields = new[] { 
+                    OutDoorIndexFields.IndustryCate,
+                    OutDoorIndexFields.CrowdCate,
+                    OutDoorIndexFields.PurposeCate
+                };
+                var keywords = (string.IsNullOrEmpty(model.crowdCate) ? string.Empty : model.crowdCate + ",")
+                    + (string.IsNullOrEmpty(model.industryCate) ? string.Empty : model.industryCate + ",")
+                    + (string.IsNullOrEmpty(model.purposeCate) ? string.Empty : model.purposeCate);
+                var analyzer = new PanGuAnalyzer();
+                //var analyzer = new StandardAnalyzer(LuceneCommon.LuceneVersion);
+                var queryParser = new MultiFieldQueryParser(LuceneCommon.LuceneVersion, fields, analyzer);
+                //conjuction 一起选择
+                var conjuctionQuery = new BooleanQuery();
+                conjuctionQuery.Boost = 2.0f;
+
+                //disjunction 分离
+                var disjunctionQuery = new BooleanQuery();
+                disjunctionQuery.Boost = 0.1f;
+
+                //wildCard 通配符
+                var wildCardQuery = new BooleanQuery();
+                wildCardQuery.Boost = 0.5f;
+
+                var escapedSearchTerm = Escape(keywords);
+
+                foreach (var term in GetSearchTerms(keywords))
+                {
+                    var termQuery = queryParser.Parse(term);
+                    conjuctionQuery.Add(termQuery, Occur.MUST);
+                    disjunctionQuery.Add(termQuery, Occur.SHOULD);
+                    foreach (var field in fields)
+                    {
+                        var wildCardTermQuery = new WildcardQuery(new Term(field, term + "*"));
+                        wildCardTermQuery.Boost = 0.7f;
+                        wildCardQuery.Add(wildCardTermQuery, Occur.SHOULD);
+                    }
+                }
+                //关键查询
+                var keywordsQuery =
+                    conjuctionQuery.Combine(new Query[] { conjuctionQuery, disjunctionQuery, wildCardQuery });
+
+                combineQuery.Add(keywordsQuery, Occur.MUST);
+            }
+            #endregion
+
+            //#region 媒体价格区间查询
+            //if (model.priceCate != 0)
+            //{
+            //    var rangeValue = EnumHelper.GetPriceValue(model.priceCate);
+            //    if (rangeValue.Max > 99999)
+            //    {
+            //        rangeValue.Max = 1000;
+            //    }
+            //    var PriceQuery = NumericRangeQuery.NewDoubleRange(OutDoorIndexFields.Price,
+            //        Convert.ToDouble(rangeValue.Min), Convert.ToDouble(rangeValue.Max), true, true);
+            //    combineQuery.Add(PriceQuery, Occur.MUST);
+            //}
+            //#endregion
+
+            using (var directory = new SimpleFSDirectory(new DirectoryInfo(LuceneCommon.IndexOutDoorDirectory)))
+            {
+                var searcher = new IndexSearcher(directory, readOnly: true);
+
+                var results = searcher.Search(combineQuery, filter: null, n: 30, sort: new Sort(sortField));
+
+                var keys = results.ScoreDocs.Skip(0)
+                    .Select(c => GetMediaItem(searcher.Doc(c.Doc)))
+                    .ToList();
+
+                totalHits = results.TotalHits;
+
+                searcher.Dispose();
+
+                return keys;
+            }
+           
         }
     }
 }

@@ -38,4 +38,23 @@ namespace PadSite.ViewModels
 
         public int periodCount { get; set; }
     }
+
+    public class GenerateSchemeViewModel
+    {
+        public string mediaCode { get; set; }
+
+        public string industryCate { get; set; }
+
+        public string cityCode { get; set; }
+
+        public string purposeCate { get; set; }
+
+        public string crowdCate { get; set; }
+
+        public int priceCate { get; set; }
+
+        public int generateType { get; set; }
+
+        public int day { get; set; }
+    }
 }

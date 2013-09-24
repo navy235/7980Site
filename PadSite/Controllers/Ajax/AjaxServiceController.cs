@@ -27,6 +27,7 @@ namespace PadSite.Controllers
         private ISchemeItemService SchemeItemService;
         private ISchemeService SchemeService;
         private IOutDoorService OutDoorService;
+        private IOutDoorLuceneService OutDoorLuceneService;
         public AjaxServiceController(
              ICityCateService CityCateService,
              IArticleCateService ArticleCateService,
@@ -38,7 +39,8 @@ namespace PadSite.Controllers
              IFavoriteService FavoriteService,
              ISchemeItemService SchemeItemService,
              ISchemeService SchemeService,
-            IOutDoorService OutDoorService
+            IOutDoorService OutDoorService,
+            IOutDoorLuceneService OutDoorLuceneService
           )
         {
             this.CityCateService = CityCateService;
@@ -52,6 +54,7 @@ namespace PadSite.Controllers
             this.SchemeItemService = SchemeItemService;
             this.SchemeService = SchemeService;
             this.OutDoorService = OutDoorService;
+            this.OutDoorLuceneService = OutDoorLuceneService;
         }
 
 
@@ -292,6 +295,31 @@ namespace PadSite.Controllers
                 x => x.OrderIndex,
                 x => x.CateName, false), JsonRequestBehavior.AllowGet);
         }
+
+
+        public ActionResult GenerateScheme(GenerateSchemeViewModel model)
+        {
+            var totalCount = 0;
+            var list = OutDoorLuceneService.Search(model, out totalCount);
+            var maxPrice = EnumHelper.GetPriceValue(model.priceCate).Max;
+            var currentPrice = 0m;
+            var day = model.day;
+            var result = new List<LinkItem>();
+            foreach (var item in list)
+            {
+                currentPrice += ((item.Price / 365) * day);
+                if (currentPrice > maxPrice)
+                {
+                    break;
+                }
+                else
+                {
+                    result.Add(item);
+                }
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
 
         #endregion
