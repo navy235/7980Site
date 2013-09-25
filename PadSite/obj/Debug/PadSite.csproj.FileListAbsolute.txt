@@ -140,4 +140,3 @@ D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddMediaFavorite.res
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddMediaScheme.resources
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddMediaFavorite.resources
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csprojResolveAssemblyReference.cache

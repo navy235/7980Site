@@ -195,7 +195,7 @@
                         <dd>投放行业：<span class="details-info-item">@Model.Links.IndustryCate</span></dd>
                         <dd>投放目的：<span class="details-info-item">@Model.Links.PurposeCate</span></dd>
                         <dd>代理类型：<span class="details-info-item">@Model.Links.OwnerName</span> </dd>
-                        <dd>媒体档期：@(Model.Links.DeadLine.CompareTo(DateTime.Now) > 0 ? Model.Links.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")</dd>
+                        <dd>媒体档期：<span class="details-info-item fg-color-red">@(Model.Links.DeadLine.CompareTo(DateTime.Now) > 0 ? Model.Links.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")</span></dd>
                     </dl>
                 </div>
                 <div class="details-right">
@@ -227,13 +227,16 @@
                                                                }
                                                                else
                                                                {
-                                                                   var areaParams = Model.Links.IrRegularArea.Split(',');
-
-
-
+                                                                   var areaParams = Model.Links.IrRegularArea.Split('|');
+                                                                   for (var i = 1; i < areaParams.Length; i += 2)
+                                                                   { 
+                                <font> (@(areaParams[i])米*@(areaParams[i + 1])米*1面) </font> 
+                              
+                                                                   }
+                                <font>总面积=@Model.Links.TotalArea 平方米</font>
                                                                }</li>
                             <li class="">代理类型：<span>@Model.Links.OwnerName</span></li>
-                            <li class="">媒体档期：<span>@(Model.Links.DeadLine.CompareTo(DateTime.Now) > 0 ? Model.Links.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")</span></li>
+                            <li class="">媒体档期：<span> @(Model.Links.DeadLine.CompareTo(DateTime.Now) > 0 ? Model.Links.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")   </span></li>
                             @if (Model.Links.HasLight)
                             {
                                 <li class="">照明情况：<span>
@@ -244,8 +247,8 @@
                             {
                                 <li class="">照明情况：<span>无</span></li>
                             }
-                            <li class="">日车流量：<span>@Model.Links.TrafficAuto 万辆</span></li>
-                            <li class="">日人流量：<span>@Model.Links.TrafficPerson 万人</span></li>
+                            <li class="">日车流量：<span>@Model.Links.TrafficAuto 万辆/天</span></li>
+                            <li class="">日人流量：<span>@Model.Links.TrafficPerson 万人/天</span></li>
                             <li class="goods-params-long">具体描述：<span>@Model.Description</span></li>
                         </ul>
 

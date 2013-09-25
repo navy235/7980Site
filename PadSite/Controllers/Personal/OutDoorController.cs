@@ -16,64 +16,64 @@ using Kendo.Mvc.Extensions;
 
 namespace PadSite.Controllers
 {
-        [LoginAuthorize]
-        public class OutDoorController : Controller
+    [LoginAuthorize]
+    public class OutDoorController : Controller
+    {
+        private IMemberService MemberService;
+        private IEmailService EmailService;
+        private ICompanyService CompanyService;
+        private IMember_ActionService Member_ActionService;
+        private ICityCateService CityCateService;
+        private ICompanyCredentialsImgService CompanyCredentialsImgService;
+        private ICompanyNoticeService CompanyNoticeService;
+        private ICompanyMessageService CompanyMessageService;
+        private IOutDoorService OutDoorService;
+        private IIndustryCateService IndustryCateService;
+        private ICrowdCateService CrowdCateService;
+        private IOwnerCateService OwnerCateService;
+        private IAreaCateService AreaCateService;
+        private IPurposeCateService PurposeCateService;
+        private IFormatCateService FormatCateService;
+        private IPeriodCateService PeriodCateService;
+
+        public OutDoorController(
+            IMemberService MemberService,
+            IEmailService EmailService,
+            ICompanyService CompanyService,
+            IMember_ActionService Member_ActionService,
+            ICityCateService CityCateService,
+            ICompanyCredentialsImgService CompanyCredentialsImgService,
+            ICompanyNoticeService CompanyNoticeService,
+            ICompanyMessageService CompanyMessageService,
+            IOutDoorService OutDoorService,
+            IIndustryCateService IndustryCateService,
+            ICrowdCateService CrowdCateService,
+            IOwnerCateService OwnerCateService,
+            IAreaCateService AreaCateService,
+            IPurposeCateService PurposeCateService,
+            IFormatCateService FormatCateService,
+            IPeriodCateService PeriodCateService
+
+
+            )
         {
-            private IMemberService MemberService;
-            private IEmailService EmailService;
-            private ICompanyService CompanyService;
-            private IMember_ActionService Member_ActionService;
-            private ICityCateService CityCateService;
-            private ICompanyCredentialsImgService CompanyCredentialsImgService;
-            private ICompanyNoticeService CompanyNoticeService;
-            private ICompanyMessageService CompanyMessageService;
-            private IOutDoorService OutDoorService;
-            private IIndustryCateService IndustryCateService;
-            private ICrowdCateService CrowdCateService;
-            private IOwnerCateService OwnerCateService;
-            private IAreaCateService AreaCateService;
-            private IPurposeCateService PurposeCateService;
-            private IFormatCateService FormatCateService;
-            private IPeriodCateService PeriodCateService;
-
-            public OutDoorController(
-                IMemberService MemberService,
-                IEmailService EmailService,
-                ICompanyService CompanyService,
-                IMember_ActionService Member_ActionService,
-                ICityCateService CityCateService,
-                ICompanyCredentialsImgService CompanyCredentialsImgService,
-                ICompanyNoticeService CompanyNoticeService,
-                ICompanyMessageService CompanyMessageService,
-                IOutDoorService OutDoorService,
-                IIndustryCateService IndustryCateService,
-                ICrowdCateService CrowdCateService,
-                IOwnerCateService OwnerCateService,
-                IAreaCateService AreaCateService,
-                IPurposeCateService PurposeCateService,
-                IFormatCateService FormatCateService,
-                IPeriodCateService PeriodCateService
-
-
-                )
-            {
-                this.MemberService = MemberService;
-                this.EmailService = EmailService;
-                this.CompanyService = CompanyService;
-                this.Member_ActionService = Member_ActionService;
-                this.CityCateService = CityCateService;
-                this.CompanyCredentialsImgService = CompanyCredentialsImgService;
-                this.CompanyNoticeService = CompanyNoticeService;
-                this.CompanyMessageService = CompanyMessageService;
-                this.OutDoorService = OutDoorService;
-                this.IndustryCateService = IndustryCateService;
-                this.CrowdCateService = CrowdCateService;
-                this.OwnerCateService = OwnerCateService;
-                this.AreaCateService = AreaCateService;
-                this.PurposeCateService = PurposeCateService;
-                this.FormatCateService = FormatCateService;
-                this.PeriodCateService = PeriodCateService;
-            }
+            this.MemberService = MemberService;
+            this.EmailService = EmailService;
+            this.CompanyService = CompanyService;
+            this.Member_ActionService = Member_ActionService;
+            this.CityCateService = CityCateService;
+            this.CompanyCredentialsImgService = CompanyCredentialsImgService;
+            this.CompanyNoticeService = CompanyNoticeService;
+            this.CompanyMessageService = CompanyMessageService;
+            this.OutDoorService = OutDoorService;
+            this.IndustryCateService = IndustryCateService;
+            this.CrowdCateService = CrowdCateService;
+            this.OwnerCateService = OwnerCateService;
+            this.AreaCateService = AreaCateService;
+            this.PurposeCateService = PurposeCateService;
+            this.FormatCateService = FormatCateService;
+            this.PeriodCateService = PeriodCateService;
+        }
 
         private bool CheckMemberStatus()
         {

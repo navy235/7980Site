@@ -182,6 +182,7 @@
     <Compile Include="Controllers\Admin\Member\MediaVerifyController.cs" />
     <Compile Include="Controllers\Admin\Member\MemberController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\CompareController.cs" />
     <Compile Include="Controllers\FanganController.cs" />
     <Compile Include="Controllers\Personal\BizController.cs" />
     <Compile Include="Controllers\Admin\Category\CityCateController.cs" />
@@ -774,6 +775,7 @@
     <Content Include="Views\Shared\_TopHead.cshtml" />
     <Content Include="Views\Shared\_TopMenu.cshtml" />
     <Content Include="Views\Shared\_CompanyFooter.cshtml" />
+    <Content Include="Views\Compare\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -57,6 +57,16 @@ namespace PadSite.Controllers
             this.OutDoorLuceneService = OutDoorLuceneService;
         }
 
+        public ActionResult isLogin()
+        {
+            return Json(
+                new
+                {
+                    Login = CookieHelper.IsLogin,
+                    NickName = CookieHelper.NickName
+                }, JsonRequestBehavior.AllowGet
+              );
+        }
 
         #region control
 

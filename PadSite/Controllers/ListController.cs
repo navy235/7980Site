@@ -93,6 +93,10 @@ namespace PadSite.Controllers
             int page = 1,
             string query = null)
         {
+            if (city == 1)
+            {
+                city = 0;
+            }
 
             //搜索条件
             QueryTerm queryTerm = new QueryTerm()

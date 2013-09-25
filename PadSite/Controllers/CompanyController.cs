@@ -369,6 +369,7 @@ namespace PadSite.Controllers
             {
                 var codeId = Convert.ToInt32(item.Code);
                 item.Name = MediaCateService.Find(codeId).CateName;
+                item.Count = result.Where(x => x.Code == item.Code).Sum(x => x.Count);
             }
 
             return model;

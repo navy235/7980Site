@@ -148,7 +148,7 @@
                                 </div>
                             </div>
                             <div class="products-details">
-                                @(product.Description.Length > 500 ? product.Description.Substring(0, 500) + "..." : product.Description)
+                                @(product.Description.Length > 150 ? product.Description.Substring(0, 150) + "..." : product.Description)
                                 <a class="fg-color-red"  href="@Url.Action("show", new { id = product.ID })" >[详细]</a>
                             </div>
                             <div class="products-footer">

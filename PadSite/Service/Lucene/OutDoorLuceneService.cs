@@ -69,11 +69,32 @@ namespace PadSite.Service
             this.MediaCateService = MediaCateService;
         }
 
+        protected internal virtual bool EnsureIndexExsit()
+        {
+            var metadataPath = LuceneCommon.IndexMetadataPath;
+            return File.Exists(metadataPath);
+        }
+
+        protected internal virtual void UpdateLastWriteTime()
+        {
+            var metadataPath = LuceneCommon.IndexMetadataPath;
+            if (!File.Exists(metadataPath))
+            {
+                // Create the index and add a timestamp to it that specifies the time at which it was created.
+                File.WriteAllBytes(metadataPath, new byte[0]);
+            }
+            else
+            {
+                File.SetLastWriteTimeUtc(metadataPath, DateTime.UtcNow);
+            }
+        }
+
         public void CreateIndex(string ids)
         {
             try
             {
-                EnsureIndexWriter(true);
+                bool createIndex = !EnsureIndexExsit();
+                EnsureIndexWriter(createIndex);
                 var Ids = Utilities.GetIdList(ids);
                 var data = GetOutDoors(Ids);
                 var IdsQuery = from ID in data.Select(p => p.ID).Distinct()
@@ -82,6 +103,7 @@ namespace PadSite.Service
                 data.ForEach(x => WriteIndex(x));
                 _indexWriter.Commit();
                 _indexWriter.Optimize();
+                UpdateLastWriteTime();
             }
             catch (Exception ex)
             {
@@ -824,6 +846,16 @@ namespace PadSite.Service
 
             SortField sortField = GetSortField(model.generateType);
 
+            #region 用户状态
+            var memberStatusQuery = NumericRangeQuery.NewIntRange(OutDoorIndexFields.MemberStatus, (int)MemberStatus.CompanyAuth, 99, true, true);
+            combineQuery.Add(memberStatusQuery, Occur.MUST);
+            #endregion
+
+            #region 审核状态查询构建
+            var verifyStatus = NumericRangeQuery.NewIntRange(OutDoorIndexFields.Status, (int)OutDoorStatus.ShowOnline, 99, true, true);
+            combineQuery.Add(verifyStatus, Occur.MUST);
+            #endregion
+
             #region 媒体类别查询
             if (!string.IsNullOrEmpty(model.mediaCode))
             {
@@ -934,7 +966,49 @@ namespace PadSite.Service
 
                 return keys;
             }
-           
+
+        }
+
+        public List<LinkItem> Search(IEnumerable<int> idArr)
+        {
+            if (!Directory.Exists(LuceneCommon.IndexOutDoorDirectory))
+            {
+                return new List<LinkItem>();
+            }
+            var combineQuery = new BooleanQuery();
+
+            var queryList = idArr.Select(x => new TermQuery(new Term(OutDoorIndexFields.ID, x.ToString()))).ToArray();
+
+            foreach (var q in queryList)
+            {
+                combineQuery.Add(q, Occur.SHOULD);
+            }
+
+
+            #region 用户状态
+            var memberStatusQuery = NumericRangeQuery.NewIntRange(OutDoorIndexFields.MemberStatus, (int)MemberStatus.CompanyAuth, 99, true, true);
+            combineQuery.Add(memberStatusQuery, Occur.MUST);
+            #endregion
+
+            #region 审核状态查询构建
+            var verifyStatus = NumericRangeQuery.NewIntRange(OutDoorIndexFields.Status, (int)OutDoorStatus.ShowOnline, 99, true, true);
+            combineQuery.Add(verifyStatus, Occur.MUST);
+            #endregion
+
+            using (var directory = new SimpleFSDirectory(new DirectoryInfo(LuceneCommon.IndexOutDoorDirectory)))
+            {
+                var searcher = new IndexSearcher(directory, readOnly: true);
+
+                var results = searcher.Search(combineQuery, idArr.Count());
+
+                var keys = results.ScoreDocs.Skip(0)
+                    .Select(c => GetMediaItem(searcher.Doc(c.Doc)))
+                    .ToList();
+
+                searcher.Dispose();
+
+                return keys;
+            }
         }
     }
 }

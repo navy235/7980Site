@@ -3042,3 +3042,106 @@ a.top-head-changcity {
 .gray-view a:hover {
     color: #333;
 }
+
+
+.media-compare-list {
+    position: fixed;
+    z-index: 3000;
+    top: 30%;
+    right: 10px;
+    display: none;
+    width: 200px;
+    border: 1px solid #ee2a2a;
+    background: #fff;
+}
+
+    .media-compare-list h3 {
+        background: #ee2a2a;
+        color: #fff;
+        display: block;
+        height: 32px;
+        line-height: 30px;
+        position: relative;
+        padding-left: 20px;
+    }
+
+        .media-compare-list h3 .icon-maitonn {
+            right: 10px;
+            top: 8px;
+            cursor: pointer;
+            position: absolute;
+        }
+
+.media-compare-item {
+    line-height: 30px;
+    border: 1px solid #ee2a2a;
+    margin: 5px;
+    padding: 0 25px 0 10px;
+    position: relative;
+}
+
+    .media-compare-item .icon-maitonn {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+    }
+
+.media-compare-button {
+    text-align: center;
+    margin: 10px;
+}
+
+.compare-container {
+    width: 990px;
+    margin: 0 auto;
+}
+
+.compare-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border-bottom: 1px dashed #ccc;
+    font-family: microsoft yahei,"宋体",Arial, Helvetica;
+}
+
+    .compare-table td {
+        padding: 7px 10px;
+        border-bottom: 1px dashed #ccc;
+        border-right: 1px dashed #ccc;
+    }
+
+.compare-table-title {
+    height: 35px;
+    line-height: 34px;
+    overflow: hidden;
+    text-align: left;
+    margin-top: -1px;
+}
+
+    .compare-table-title td {
+        border-bottom: 0;
+        padding: 0;
+        margin: 0;
+        border-right: none;
+    }
+
+        .compare-table-title td span {
+            width: 100%;
+            display: block;
+            font-weight: bold;
+            font-size: 20px;
+            border-bottom: 2px solid #aaa;
+            padding: 10px 0;
+        }
+
+
+
+.compare-table-tip {
+    width: 99px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    color: #333;
+    white-space: nowrap;
+}

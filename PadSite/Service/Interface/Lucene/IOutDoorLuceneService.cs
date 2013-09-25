@@ -19,6 +19,8 @@ namespace PadSite.Service.Interface
 
         List<LinkItem> Search(out int totalHits);
 
+        List<LinkItem> Search(IEnumerable<int> idArr);
+
         LinkItem Search(int MediaID);
 
 

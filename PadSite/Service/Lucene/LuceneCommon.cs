@@ -10,5 +10,6 @@ namespace PadSite.Service
         internal static readonly string IndexTestDirectory = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data", "LuceneTest", "OutDoor");
         internal static readonly string IndexMetadataPath = Path.Combine(IndexOutDoorDirectory, "index.metadata");
         internal static readonly Version LuceneVersion = Version.LUCENE_30;
+
     }
 }

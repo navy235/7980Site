@@ -82,14 +82,14 @@
                             </div>
                         </div>
                         <div class="products-details">
-                            @(product.Description.Length > 500 ? product.Description.Substring(0, 500) + "..." : product.Description)
+                            @(product.Description.Length > 120 ? product.Description.Substring(0, 120) + "..." : product.Description)
                             <a class="fg-color-red"  href="@Url.Action("show", "company", new { id = product.ID })" >[详细]</a>
                         </div>
                         <div class="products-footer">
                             <div class="products-footer-company">
                                 <a class="pull-left" href="@Url.Action("index", "company", new { id = product.MemberID })">@product.CompanyName</a>
                                 <button class="k-button btn-compare mr10 " type="button"  data-title="@product.Name" data-value="@product.ID" >
-                                    <i class="icon-maitonn icon-list"></i>对比方案</button>
+                                    <i class="icon-maitonn icon-retweet"></i>对比方案</button>
                                 <button class="k-button btn-addScheme  " type="button"  data-title="@product.Name"   data-value="@product.ID" ><i class="icon-maitonn icon-briefcase"></i>加入方案</button>
                             </div>
                             <span class="mr5 fg-color-gray">刊例：
@@ -139,6 +139,12 @@
                 </div>
             </div>
         </div>
+        <div class="media-compare-list" id="media-compare-list">
+            <h3>方案对比<i class="icon-maitonn icon-remove media-compare-clear" title="清空"></i></h3>
+            <div class="media-compare-button">
+                <button type="button" class="k-button btn-jumpcompare">对比所选媒体</button>
+            </div>
+        </div>
     </div>
 </div>
 <script type="text/javascript">
@@ -169,12 +175,11 @@
                 window.location.href = v0Url;
             }
         })
-        $('.btn-compare').click(function (e) {
-            var target = $(e.currentTarget);
-            var currentValue = Maitonn.Cookies.Get("compare");
-            var cValue = target.data("value") + "|" + decodeURIComponent(target.data("title"));
-            var newValue = ((currentValue == null || currentValue) == "" ? "" : currentValue + ",") + cValue
-            Maitonn.Cookies.Set("compare", newValue);
-        })
+        $('.btn-compare').on('click', $.proxy(Maitonn.JHelper.addCompare, Maitonn.JHelper));
+        $('.btn-jumpcompare').on('click', $.proxy(Maitonn.JHelper.jumptoCompare, Maitonn.JHelper));
+
+        $('#media-compare-list').on('click', 'i.media-compare-clear', $.proxy(Maitonn.JHelper.clearCompare, Maitonn.JHelper))
+        $('#media-compare-list').on('click', 'i.media-compare-remove', $.proxy(Maitonn.JHelper.removeCompare, Maitonn.JHelper))
+        Maitonn.JHelper.showCompare();
     })
 </script>
