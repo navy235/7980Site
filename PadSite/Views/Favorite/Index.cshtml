@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "媒体收藏列表";
+    Layout = "~/Views/Shared/_LayoutPersonal.cshtml";
+}
+<div class="personal clearfix">
+
+    @Html.Partial("_leftmenu")
+
+    <div class="personal-right">
+        <div class="personal-right-body">
+            <div class="personal-body-title clearfix">
+                <h5>媒体收藏夹</h5>
+            </div>
+            <div class="personal-form mt10">
+                @(Html.Kendo().Grid<FavoriteViewModel>()
+                    .Name("Grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(c => c.ID).Title("留言ID")
+                            .Sortable(false)
+                            .ClientTemplate("<input type='checkbox' name='ID_check' id='#=ID#_check'  class='chkbx' value='#=ID#' />")
+                            .HeaderTemplate("<div style='text-align:center'><input type='checkbox' id='checkAll' onclick='Grid.checkAll(this)' title='全选'/></div>")
+                            .Width(40).HtmlAttributes(new { style = "text-align:center" });
+                        columns.Bound(c => c.ImgUrl).Title("媒体图片").ClientTemplate("<img class='table-list-img' src='#=ImgUrl#' alt='#=Name#' />").Width(76).Sortable(false);
+                        columns.Bound(c => c.Name).Title("媒体信息").ClientTemplate("<ul class='table-list-info'><li>媒体名称：<a class='fg-color-link' href='" + @Url.Action("show", "company") + "/#=ID#'>#=Name#</a></li><li>联系方式：<a class='fg-color-link' href='" + @Url.Action("contact", "company") + "/#=MemberID#'>查看</a></li></ul>").Sortable(false);
+                        columns.Bound(c => c.AddTime).Format("{0:yyyy-MM-dd}").Width(80).Title("添加时间");
+                        columns.Template(@<text></text>)
+                .ClientTemplate("<a class='k-button k-button-icontext ' href='javascript:void(0);' onclick='Grid.deleteSingle(this,\"#=ID#\");' ><span class='k-icon k-i-close'></span>删除</a>"
+                )
+                .Title("操作")
+                .Width(80);
+                    })
+                    .ToolBar(toolbar =>
+                    {
+                        toolbar.Custom().Text("批量删除").HtmlAttributes(new { onclick = "Grid.deleteAll(this);", href = "javascript:void(0);" });
+                    })
+                    .Pageable()
+                    .Sortable()
+                    .Scrollable()
+                    .DataSource(dataSource => dataSource
+                        .Ajax()
+                        .PageSize(20)
+                        .Model(model => model.Id(c => c.ID))
+                        .Sort(sort => sort.Add(x => x.AddTime).Descending())
+                        .Read(read => read.Action("Favorite_Read", "Favorite"))
+                     )
+                     .HtmlAttributes(new { style = "height:500px;" })
+                    )
+
+
+                <script type="text/javascript">
+                    var Grid = {
+                        id: 'Grid',
+                        checkAll: function (element) {
+                            var self = Grid;
+                            var state = $(element).is(':checked');
+                            $('[name="ID_check"]').attr('checked', state);
+                        },
+                        getCheckIds: function () {
+                            return $.map($('[name="ID_check"]:checked'), function (item) { return $(item).val() }).join(',');
+                        },
+                        addSpinner: function (element) {
+                            var $spinner = $('<img class="ajax-working" src="@Url.Content("~/Content/images/min-loading.gif")" title="work...." />').appendTo($(element));
+                            $(element).addClass('disabled');
+                        },
+                        removeSpinner: function (element) {
+                            $(element).find('.ajax-working').remove();
+                            $(element).removeClass('disabled');
+                        },
+                        excute: function (element, url, Ids) {
+                            if ($(element).hasClass('disabled'))
+                                return false;
+                            var self = Grid;
+                            if (Ids) {
+                                self.addSpinner(element);
+                                $.ajax({
+                                    type: 'POST',
+                                    url: url,
+                                    data: { ids: Ids },
+                                    success: function (res) {
+                                        if (res) {
+                                            var grid = $("#Grid").data("kendoGrid");
+                                            grid.dataSource.read();
+                                            grid.refresh();
+                                        }
+                                    },
+                                    complete: function () {
+                                        self.removeSpinner(element);
+                                    }
+                                })
+                            } else {
+                                alert('请选择要处理的信息');
+                                return false;
+                            }
+                        },
+                        deleteAll: function (element) {
+                            var self = Grid;
+                            var url = '@Url.Action("FavoriteDelete", "Favorite")';
+                            var Ids = self.getCheckIds();
+                            self.excute(element, url, Ids);
+                        },
+                        deleteSingle: function (element, id) {
+                            var self = Grid;
+                            var url = '@Url.Action("FavoriteDelete", "Favorite")';
+                            var Ids = id;
+                            self.excute(element, url, Ids);
+                        }
+                    }
+                    $(function () {
+                        $('#verifyContent').load(function () {
+                            $('#verifyLoading').hide();
+                            $(this).show();
+                        })
+                    })
+
+                </script>
+            </div>
+        </div>
+
+    </div>
+</div>

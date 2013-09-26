@@ -181,9 +181,11 @@
     <Compile Include="Controllers\Admin\Member\BizVerifyController.cs" />
     <Compile Include="Controllers\Admin\Member\MediaVerifyController.cs" />
     <Compile Include="Controllers\Admin\Member\MemberController.cs" />
+    <Compile Include="Controllers\Ajax\AjaxContentController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\CompareController.cs" />
     <Compile Include="Controllers\FanganController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\Personal\BizController.cs" />
     <Compile Include="Controllers\Admin\Category\CityCateController.cs" />
     <Compile Include="Controllers\Admin\DashboardController.cs" />
@@ -202,6 +204,7 @@
     <Compile Include="Controllers\Permission\PermissionsController.cs" />
     <Compile Include="Controllers\Permission\RolesController.cs" />
     <Compile Include="Controllers\Permission\GroupController.cs" />
+    <Compile Include="Controllers\Personal\FavoriteController.cs" />
     <Compile Include="Controllers\Personal\MessageController.cs" />
     <Compile Include="Controllers\Personal\OutDoorController.cs" />
     <Compile Include="Controllers\Personal\PersonalController.cs" />
@@ -350,6 +353,7 @@
     <Compile Include="Service\Lucene\OutDoorIndexFields.cs" />
     <Compile Include="ViewModels\Home\LinkItem.cs" />
     <Compile Include="ViewModels\Media\AddSchemeViewModel.cs" />
+    <Compile Include="ViewModels\Media\FavoriteViewModel.cs" />
     <Compile Include="ViewModels\Media\OutDoorItemViewModel.cs" />
     <Compile Include="ViewModels\Media\OutDoorViewModel.cs" />
     <Compile Include="ViewModels\Message\MessageViewModel.cs" />
@@ -394,6 +398,7 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\logo_100.png" />
     <Content Include="Content\images\mapicon.gif" />
+    <Content Include="Content\images\mapmarker.png" />
     <Content Include="Content\images\min-loading.gif" />
     <Content Include="Content\images\noimages.gif" />
     <Content Include="Content\images\productBg.png" />
@@ -776,6 +781,13 @@
     <Content Include="Views\Shared\_TopMenu.cshtml" />
     <Content Include="Views\Shared\_CompanyFooter.cshtml" />
     <Content Include="Views\Compare\Index.cshtml" />
+    <Content Include="Views\Scheme\Index.cshtml" />
+    <Content Include="Views\Scheme\GetEditSchemeForm.cshtml" />
+    <Content Include="Views\Scheme\Add.cshtml" />
+    <Content Include="Views\Scheme\Edit.cshtml" />
+    <Content Include="Views\Favorite\Index.cshtml" />
+    <Content Include="Views\Map\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutMap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

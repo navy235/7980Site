@@ -3135,8 +3135,6 @@ a.top-head-changcity {
             padding: 10px 0;
         }
 
-
-
 .compare-table-tip {
     width: 99px;
     overflow: hidden;
@@ -3145,3 +3143,233 @@ a.top-head-changcity {
     color: #333;
     white-space: nowrap;
 }
+
+listview-container {
+    margin-left: -0.6em;
+    padding: 0px 0px 10px 40px;
+    margin: -0.4em -0.6em;
+}
+
+.listview-box {
+    border: 1px solid #c5c5c5;
+    padding: 10px;
+}
+
+.listview-desc {
+    margin-bottom: 10px;
+}
+
+.listview-container .k-listview {
+    border: none;
+}
+
+.listview-product {
+    line-height: 22px;
+    width: 140px;
+    display: inline-block;
+    border: 1px solid #c5c5c5;
+    padding: 10px;
+    margin: 0 5px 10px 0;
+}
+
+.listview-product-img {
+    width: 140px;
+    height: 120px;
+    display: block;
+}
+
+    .listview-product-img img {
+        width: 140px;
+        height: 120px;
+    }
+
+.listview-product-link {
+    display: block;
+    width: 140px;
+    height: 22px;
+    overflow: hidden;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.listview-price {
+    color: #BA2636;
+}
+
+    .listview-price b {
+        font-weight: bold;
+    }
+
+.k-grid .listview-product-control .k-button {
+    margin: 0;
+}
+
+.m-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+
+.m-header {
+    height: 90px;
+    width: 100%;
+}
+
+.m-header-container {
+    position: relative;
+}
+
+.m-logo {
+    width: 195px;
+    height: 62px;
+    background: url(images/logo.png) 0 0 no-repeat;
+    outline: 0;
+    position: absolute;
+    top: 10px;
+    overflow: hidden;
+    left: 20px;
+}
+
+    .m-logo a {
+        display: block;
+        width: 195px;
+        height: 62px;
+        overflow: hidden;
+        text-indent: -99999px;
+    }
+
+.m-search {
+    color: #333;
+    padding: 4px 0 0 45px;
+    background: url(images/indexSprite.png) 0 -45px no-repeat;
+    width: 407px;
+    height: 44px;
+    position: absolute;
+    top: 17px;
+    z-index: 83;
+    left: 240px;
+}
+
+    .m-search .search-text {
+        background-image: none;
+        width: 335px;
+        height: 40px;
+        line-height: 38px 9;
+        outline: 0;
+        color: #999;
+        border: 0;
+    }
+
+    .m-search .search-button {
+        width: 61px;
+        height: 40px;
+        cursor: pointer;
+        position: absolute;
+        right: 0px;
+        color: #fff;
+        background: transparent;
+        font-family: "微软雅黑";
+        border: none;
+    }
+
+.m-header-filter {
+    color: #333;
+    position: absolute;
+    top: 17px;
+    z-index: 83;
+    left: 720px;
+    padding: 8px 0;
+}
+
+.m-content {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.m-left {
+    width: 400px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 10;
+}
+
+.m-filter {
+    width: 378px;
+    height: 26px;
+    line-height: 26px;
+    border: 1px solid #DCDBDB;
+    padding-left: 20px;
+    position: relative;
+    z-index: 9;
+}
+
+a.m-filter-btn {
+    margin-left: 13px;
+    padding-right: 12px;
+    display: inline-block;
+    line-height: 26px;
+    color: #0041D9;
+}
+
+.m-control {
+    position: absolute;
+    left: 400px;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 1;
+    overflow: hidden;
+    zoom: 1;
+    border-top: 1px solid #DCDBDB;
+    border-left: 1px solid #DCDBDB;
+}
+
+.m-list {
+    overflow-y: auto;
+    position: absolute;
+    top: 26px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+}
+
+.m-filter-selectbox {
+    display: none;
+}
+
+li.m-list-item {
+    padding-left: 10px;
+}
+
+.m-list-item-hover {
+    background: #f2d7d7;
+    cursor: pointer;
+}
+
+
+.m-loadding {
+    display: none;
+}
+
+.search-text-gray {
+    color: #999;
+}
+
+.list-num {
+    font-weight: bold;
+    height: 16px;
+    line-height: 16px;
+    padding: 15px 0 17px 20px;
+    border-bottom: 1px dashed #cccccc;
+}
+
+    .list-num strong {
+        color: #f60;
+        font-size: 14px;
+    }

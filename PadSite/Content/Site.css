@@ -123,6 +123,10 @@ textarea {
 }
 
 
+.fg-color-link {
+    color: #0066cc !important;
+}
+
 .fg-color-blue {
     color: #2d89ef !important;
 }
@@ -495,9 +499,25 @@ textarea {
     position: relative;
 }
 
-    .form-field .k-numerictextbox {
-        width: 100px;
+.form-tips {
+    line-height: 26px;
+    overflow: hidden;
+    -webkit-tap-highlight-color: rgba(255,0,0,0);
+    position: relative;
+    border: 1px solid #FCDFA9;
+    padding: 5px 8px;
+    background: #fffeee;
+}
+
+    .form-tips .icon-maitonn {
+        font-size: 16px;
+        color: #ff6600;
+        margin-right: 10px;
     }
+
+.form-field .k-numerictextbox {
+    width: 100px;
+}
 
 .field-label {
     float: left;
@@ -523,10 +543,19 @@ textarea {
     height: 0;
 }
 
+.form-field-period .k-numerictextbox {
+    width: 80px;
+}
+
+.form-field-period .k-dropdown {
+    width: 80px;
+}
+
 .form-field .vcode {
     outline: 0;
     cursor: pointer;
 }
+
 
     .form-field .vcode img {
         width: 52px;
@@ -893,3 +922,23 @@ select {
     margin: 100px auto;
     width: 100px;
 }
+
+
+.alert {
+}
+
+    .alert .image {
+        width: 70px;
+        float: left;
+    }
+
+    .alert .text {
+        float: left;
+        height: 40px;
+        line-height: 40px;
+    }
+
+        .alert .text a {
+            color: #0066cc;
+            margin-left: 5px;
+        }
