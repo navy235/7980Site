@@ -60,7 +60,7 @@
                 <ul class="m-list">
                     @foreach (var item in Model.Categories)
                     {
-                        <li><a href="@Url.Action("source", new { id = Model.ID, c = item.Code })">@item.Name</a> 
+                        <li><a href="@Url.Action("source", new { id = Model.ID, c = item.Code })">@item.Name</a>
                             <span class="fg-color-gray">(@item.Count)</span></li>
                     }
                 </ul>
@@ -175,12 +175,19 @@
                                 </div>
 
                                 <div class="products-details">
-                                    @(product.Description.Length > 500 ? product.Description.Substring(0, 500) + "..." : product.Description)
+                                    @(product.Description.Length > 150 ? product.Description.Substring(0, 150) + "..." : product.Description)
                                     <a class="fg-color-red"  href="@Url.Action("index", "show", new { id = product.ID })" >[详细]</a>
                                 </div>
                                 <div class="products-footer">
                                     <span class="mr5">所在城市: @product.CityCateName.Replace(",", " - ")</span>
-                                    <span class="mr5 fg-color-gray">刊例：<b class="fg-color-red">¥@product.Price 万元/年</b></span>
+                                    <span class="mr5 fg-color-gray">刊例： @if (product.Price == 99999)
+                                                                        { 
+                                        <b class="fg-color-red">面议</b>
+                                                                        }
+                                                                        else
+                                                                        {
+                                        <b class="fg-color-red">¥@product.Price 万元/年</b>
+                                                                        }</span>
                                     <span class="fg-color-gray">最短投放：<b class="fg-color-red">@(product.PeriodName)</b></span>
                                 </div>
                             </div>

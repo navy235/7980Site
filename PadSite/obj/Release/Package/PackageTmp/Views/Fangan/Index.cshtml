@@ -1,41 +1,383 @@
 ﻿@{
     ViewBag.Title = ConfigSetting.SiteName + "-方案生成";
     Layout = "~/Views/Shared/_LayoutFangan.cshtml";
+    var CityTree = (List<LinkItemTree>)ViewBag.CityTree;
+    var MediaTree = (List<LinkItemTree>)ViewBag.MediaTree;
+    var IndustryCate = (IList<SelectListItem>)ViewBag.IndustryCate;
+    var CrowdCate = (IList<SelectListItem>)ViewBag.CrowdCate;
+    var PurposeCate = (IList<SelectListItem>)ViewBag.PurposeCate;
+    var PriceCate = (IList<SelectListItem>)ViewBag.PriceCate;
 }
 <div class="nav-bread">
     <a class="nav-bread-home" href="/"><i class="icon-maitonn icon-home"></i></a>&gt;
         <strong>方案生成</strong>
 </div>
+
+<style type="text/css">
+    .fangan-list {
+        float: left;
+        width: 600px;
+    }
+
+    .drop-list-item {
+        position: relative;
+        float: left;
+        height: 24px;
+        line-height: 24px;
+        min-width: 80px;
+        color: #333333;
+        background-color: none;
+        padding: 0 5px;
+    }
+
+        .drop-list-item.hover {
+            background-color: #f60;
+            color: #ffffff;
+        }
+
+            .drop-list-item.hover > .drop-list {
+                display: block;
+            }
+
+        .drop-list-item input {
+            float: left;
+            margin: 6px;
+        }
+
+        .drop-list-item label {
+            float: left;
+            height: 24px;
+            line-height: 24px;
+            min-width: 60px;
+        }
+
+    .drop-list {
+        position: absolute;
+        width: 290px;
+        border: 3px solid #f60;
+        padding: 10px;
+        background-color: #FFFFFF;
+        z-index: 1002;
+        display: none;
+        top: 0;
+        left: 80px;
+    }
+
+
+    .fangan-select-list {
+        float: left;
+        width: 970px;
+        margin-top: 5px;
+        display: none;
+    }
+
+    .drop-selected-item {
+        float: left;
+        height: 24px;
+        line-height: 24px;
+        min-width: 50px;
+        background-color: #f60;
+        color: #ffffff;
+        padding: 0 5px;
+        margin: 0 5px 5px 5px;
+        cursor: pointer;
+    }
+
+        .drop-selected-item .icon-maitonn {
+            margin-left: 10px;
+        }
+</style>
+
+@helper RenderChild(LinkItemTree tree, string Code)
+{
+    if (tree.Children.Any())
+    {
+    <div class="drop-list">
+        @foreach (var item in tree.Children)
+        {
+            <span class="drop-list-item">
+                <input type="checkbox" class="fangan-check" id="@(Code)_@item.Code" name="@(Code)" value="@item.Code" />
+                <label for="@(Code)_@item.Code">@item.Text</label>
+                @RenderChild(item, Code)
+            </span>
+        }
+    </div>
+    }
+        
+}
+
 <div class="list-wrap">
     <div class="list-search">
         <div class="list-search-wrap clearfix">
             <div class="list-search-attr clearfix">
                 <div class="list-search-attr-bread clearfix">
-                    <div class="list-search-attr-title">地区：</div>
-                    <ul class="list-search-attr-list clearfix">
-                        <li class="">
-                            <span>
-                                <input type="checkbox" id="City0" name="Citycode" />
-                                <label for="City0">长沙</label>
-                                <div class="drop-list">
-                                    <span>
-                                        <input type="checkbox" id="City01" name="Citycode" />
-                                        <label for="City01">雨花区</label>
-                                    </span>
-                                    <span>
-                                        <input type="checkbox" id="City02" name="Citycode" />
-                                        <label for="City02">雨花区</label>
-                                    </span>
-                                    <span>
-                                        <input type="checkbox" id="City03" name="Citycode" />
-                                        <label for="City03">雨花区</label>
-                                    </span>
-                                </div>
+                    <div class="list-search-attr-title">媒体类别：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in MediaTree)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" class="fangan-check" id="MediaCode_@item.Code" name="MediaCode" value="@item.Code" />
+                                <label for="MediaCode_@item.Code">@item.Text</label>
+                                @RenderChild(item, "MediaCode")
                             </span>
-                        </li>
-                    </ul>
+                        }
+                    </div>
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
                 </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">投放行业：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in IndustryCate)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" class="fangan-check" id="IndustryCate_@item.Value" name="IndustryCate" value="@item.Text" />
+                                <label for="IndustryCate_@item.Value">@item.Text</label>
+                            </span>
+                        }
+                    </div>
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">投放区域：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in CityTree)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" class="fangan-check" id="CityCode_@item.Code" name="CityCode"  value="@item.Code" />
+                                <label for="CityCode_@item.Code">@item.Text</label>
+                                @RenderChild(item, "CityCode")
+                            </span>
+                        }
+                    </div>
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">推广目的：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in PurposeCate)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" class="fangan-check" id="PurposeCate_@item.Value" name="PurposeCate" value="@item.Text" />
+                                <label for="PurposeCate_@item.Value">@item.Text</label>
+                            </span>
+                        }
+                    </div>
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">受众人群：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in CrowdCate)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" class="fangan-check" id="CrowdCate_@item.Value" name="CrowdCate" value="@item.Text" />
+                                <label for="CrowdCate_@item.Value">@item.Text</label>
+                            </span>
+                        }
+                    </div>
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">购买周期：</div>
+                    <div class="fangan-list clearfix" style="padding-left: 10px;">
+                        @(Html.Kendo().IntegerTextBox().Name("periodNumber")
+                              .Min(1)
+                              .Max(int.MaxValue).Value(1).HtmlAttributes(new { style = "width:50px;" })
+                        )
+                        @Html.DropDownList("periodCate", (IList<SelectListItem>)ViewBag.PeriodCate);
+                       @* @Html.Kendo().DropDownList().Name("PeriodCate").BindTo((IList<SelectListItem>)ViewBag.PeriodCate).HtmlAttributes(new { style = "width:60px;" })*@
+                    </div>
+                </div>
+
+
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">预计费用：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in PriceCate)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="radio" class="fangan-check" id="PriceCate_@item.Value" name="PriceCate" value="@item.Value" />
+                                <label for="PriceCate_@item.Value">@item.Text</label>
+                            </span>
+                        }
+                    </div>
+                </div>
+
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">生成方案：</div>
+                    <div class="fangan-list clearfix">
+                        <span class="drop-list-item">
+                            <input type="radio" class="fangan-check" id="generateType0" checked="checked" name="generateType" value="0" />
+                            <label for="generateType0">推荐资源</label>
+                        </span>
+                        <span class="drop-list-item">
+                            <input type="radio" class="fangan-check" id="generateType1" name="generateType" value="1" />
+                            <label for="generateType1">最低价格</label>
+                        </span>
+                        <span class="drop-list-item">
+                            <input type="radio" class="fangan-check" id="generateType2" name="generateType" value="2" />
+                            <label for="generateType2">最高价格</label>
+                        </span>
+
+                        <span class="drop-list-item">
+                            <input type="radio" class="fangan-check" id="generateType3" name="generateType" value="3" />
+                            <label for="generateType3">认证资源</label>
+                        </span>
+                    </div>
+                    <button class="k-button ml10" id="btn-generate" type="button">生成方案</button>
+                </div>
+            </div>
+        </div>
+        <div class="list-result">
+            <div class="list-products list-search clearfix ">
             </div>
         </div>
     </div>
 </div>
+<div class="media-compare-list" id="media-compare-list">
+    <h3>方案对比<i class="icon-maitonn icon-remove media-compare-clear" title="清空"></i></h3>
+    <div class="media-compare-button">
+        <button type="button" class="k-button btn-jumpcompare">对比所选媒体</button>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+
+        $('.list-products').on('click', '.btn-compare', $.proxy(Maitonn.JHelper.addCompare, Maitonn.JHelper));
+        $('#media-compare-list').on('click', '.btn-jumpcompare', $.proxy(Maitonn.JHelper.jumptoCompare, Maitonn.JHelper));
+
+        $('#media-compare-list').on('click', 'i.media-compare-clear', $.proxy(Maitonn.JHelper.clearCompare, Maitonn.JHelper))
+        $('#media-compare-list').on('click', 'i.media-compare-remove', $.proxy(Maitonn.JHelper.removeCompare, Maitonn.JHelper))
+        Maitonn.JHelper.showCompare();
+
+        $('.drop-list-item').hover(function () {
+            $(this).addClass('hover');
+        }, function () {
+            $(this).removeClass('hover');
+        })
+        $('[type="checkbox"].fangan-check').on('click', function (e) {
+            var target = $(e.currentTarget);
+            var containerlist = target.parents('.fangan-list').next();
+            var selectlist = containerlist.find('.fangan-list');
+            if (target.prop('checked')) {
+                var span = $('<span/>').attr({
+                    "class": "drop-selected-item",
+                    "data-id": target.val()
+                });
+                span.html($('[for="' + target.attr('id') + '"]').text() + '<i class="icon-maitonn icon-remove"></i>');
+                selectlist.append(span);
+                containerlist.show();
+            } else {
+                selectlist.find('span[data-id="' + target.val() + '"]').remove();
+                if (selectlist.find('.drop-selected-item').size() === 0) {
+                    containerlist.hide();
+                }
+            }
+        })
+        $('.list-search-attr').on('click', 'span.drop-selected-item', function (e) {
+            var target = $(e.currentTarget);
+            var selectlist = target.parents('.fangan-select-list').prev();
+            var id = target.data('id');
+            selectlist.find('[value="' + id + '"]').prop('checked', false);
+            if (target.siblings().size() == 0) {
+                target.parents('.fangan-select-list').hide();
+            }
+            target.remove();
+        })
+
+        $('#btn-generate').click(function () {
+            var mediaCode = getSelectedVal($('[name="MediaCode"]:checked'));
+            var IndustryCate = getSelectedVal($('[name="IndustryCate"]:checked'))
+            var CityCode = getSelectedVal($('[name="CityCode"]:checked'));
+            var PurposeCate = getSelectedVal($('[name="PurposeCate"]:checked'));
+            var CrowdCate = getSelectedVal($('[name="CrowdCate"]:checked'));
+            var PriceCate = getSelectedVal($('[name="PriceCate"]:checked'));
+            var generateType = $('[name="generateType"]:checked').val();
+            var periodNumber = $('#periodNumber').val();
+            var periodCate = $('#periodCate').val();
+            var data = {
+                mediaCode: mediaCode,
+                industryCate: IndustryCate,
+                cityCode: CityCode,
+                purposeCate: PurposeCate,
+                crowdCate: CrowdCate,
+                priceCate: PriceCate,
+                generateType: generateType,
+                day: periodNumber * periodCate
+            };
+            $.get('@Url.Action("GenerateScheme", "ajaxService")', data, function (res) {
+                console.log(res);
+                renderResult(res);
+            })
+            //console.log(data);
+        })
+
+        function renderResult(res) {
+            var html = '';
+            for (var i = 0; i < res.length; i++) {
+                var product = res[i];
+                html += '<div class="products-item">'
+                      + '<div class="products-title">'
+                          + '<a class="products-title-links"  href="@Url.Action("show", "company")/' + product.ID + '" title="' + product.Name + '" >'
+                                + '<strong>' + (product.Name.length > 20 ? product.Name.substring(0, 20) : product.Name) + '</strong>  [' + product.CityCateName.replace(/,/ig, " - ") + ']'
+                           + ' </a>'
+                            + '<div class="products-title-info">'
+                                + '<span class="mr5 ">媒体分类： ' + product.MediaCateName.replace(/,/ig, " - ") + '</span>'
+                                + '<span class="mr5 ">表现形式： ' + product.FormatName + '</span>'
+                            + '</div>'
+                        + '</div>'
+                        + '<div class="products-img">'
+                            + '<div class="products-img-container">'
+                                + '<a href="@Url.Action("show", "company")/' + product.ID + '" title="' + product.Name + '">'
+                                    + '<img alt="' + product.Name + '" title="' + product.Name + '" src="' + product.FocusImgUrl + '" >'
+                                + '</a>'
+                            + '</div>'
+                       + ' </div>'
+                        + '<div class="products-details">'
+                           + (product.Description.length > 120 ? product.Description.substring(0, 120) + "..." : product.Description)
+                            + '<a class="fg-color-red"  href="@Url.Action("show", "company")/' + product.ID + '" >[详细]</a>'
+                       + ' </div>'
+                        + '<div class="products-footer">'
+                           + ' <div class="products-footer-company">'
+                               + ' <a class="pull-left" href="@Url.Action("intro", "company")/' + product.ID + '">' + product.CompanyName + '</a>'
+                               + ' <button class="k-button btn-compare mr10 " type="button"  data-title="' + product.Name + '" data-value="' + product.ID + '" >'
+                                  + '  <i class="icon-maitonn icon-retweet"></i>对比方案</button>'
+                               //+ ' <button class="k-button btn-addScheme  " type="button"  data-title="' + product.Name + '" data-value="' + product.ID + '" ><i class="icon-maitonn icon-briefcase"></i>加入方案</button>'
+                           + ' </div>'
+                           + ' <span class="mr5 fg-color-gray">刊例：'
+                           + (product.Price == 99999 ? '<b class="fg-color-red">面议  </b>' : '<b class="fg-color-red">¥' + product.Price + '万元/年 </b>')
+                           + ' </span>'
+                            + '<span class="fg-color-gray">最短投放：<b class="fg-color-red">' + product.PeriodName + '</b></span>'
+                            + '<span class="fg-color-gray">媒体档期：<b class="fg-color-red">' + (product.DeadLine > Date.now ? product.DeadLine.format("yyyy-MM-dd") + '"之后可售"' : '可售') + '</b></span>'
+                        + '</div>'
+                   + ' </div>'
+            }
+            $('.list-products').html(html);
+        }
+
+        function getSelectedVal(elements) {
+            return $.map(elements, function (item) { return $(item).val() }).join(",");
+        }
+    })
+
+</script>

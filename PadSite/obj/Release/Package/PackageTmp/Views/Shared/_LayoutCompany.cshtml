@@ -21,6 +21,7 @@
     @Scripts.Render("~/bundles/jquerycontrol")
     @Scripts.Render("~/bundles/base")
     @Html.Partial("_CommonJavascript")
+    @RenderSection("topscripts", required: false)
 </head>
 <body>
     @Html.Partial("_DisplayMessage")

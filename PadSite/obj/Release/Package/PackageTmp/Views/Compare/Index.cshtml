@@ -1,0 +1,233 @@
+﻿@model List<LinkItem>
+@{
+    ViewBag.Title = ConfigSetting.SiteName + "媒体对比";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+<div class="nav-bread">
+    <a class="nav-bread-home" href="/"><i class="icon-maitonn icon-home"></i></a>&gt;
+        <strong>媒体对比</strong>
+</div>
+<div class="compare-container">
+    <table class="compare-table">
+        <tbody>
+            <tr class="compare-table-title">
+                <td colspan="6"><span>媒体参数对比</span></td>
+            </tr>
+            <tr>
+                <td class="compare-table-tip"><span>媒体信息</span></td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.Name
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td class="compare-table-tip"><span class="fontw">媒体图片</span></td>
+                @foreach (var item in Model)
+                {    
+                    <td>
+                        <a href="@Url.Action("show", "company", new { id = item.ID })" target="_blank" title="@item.Name">
+                            <img title="@item.Name" src="@item.FocusImgUrl"></a></td>
+                      
+                }
+
+            </tr>
+            <tr class="compare-table-title">
+                <td colspan="6"><span>基本参数</span></td>
+            </tr>
+            <tr>
+                <td class="compare-table-tip">媒体名称</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.Name </td>
+                }
+
+            </tr>
+            <tr>
+                <td class="compare-table-tip">媒体地区</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.CityCateName.Replace(",", " - ") </td>
+                }
+            </tr>
+            <tr>
+                <td class="compare-table-tip">媒体分类</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.MediaCateName.Replace(",", " - ") </td>
+                }
+            </tr>
+            <tr>
+                <td class="compare-table-tip">媒体形式</td>
+
+                @foreach (var item in Model)
+                { 
+                    <td>@item.FormatName</td>
+                }
+
+            </tr>
+            <tr>
+                <td class="compare-table-tip">照明情况</td>
+                @foreach (var item in Model)
+                {
+                    if (item.HasLight)
+                    {
+                    <td>
+                        <span>@UIHelper.GetTime(item.LightStart.ToString())-@UIHelper.GetTime(item.LightEnd.ToString())
+                        </span></td>
+                    }
+                    else
+                    {
+                    <td><span>无</span></td>
+                    }
+                }
+
+            </tr>
+            <tr>
+                <td class="compare-table-tip">刊例价格</td>
+
+                @foreach (var item in Model)
+                { 
+                    <td>@if (item.Price == 99999)
+                        {
+                        <b class="fg-color-red">面议  </b>
+                        }
+                        else
+                        {
+                        <b class="fg-color-red">¥@item.Price 万元/年 </b>
+                        }</td>
+                }
+            </tr>
+
+            <tr>
+                <td class="compare-table-tip">最短购买</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.PeriodName</td>
+                }
+            </tr>
+            <tr>
+                <td class="compare-table-tip">所有权类型</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.OwnerName </td>
+                }
+            </tr>
+            <tr>
+                <td class="compare-table-tip">媒体规格</td>
+                @foreach (var item in Model)
+                { 
+                    <td>
+                        @if (item.IsRegular)
+                        { 
+                            <span>@(item.Width)米*@(item.Width)米*@(item.Width)面</span><br />
+                            <span>总面积=@(item.TotalArea)平方米</span>
+                        }
+                        else
+                        {
+                            var areaParams = item.IrRegularArea.Split('|');
+                            for (var i = 1; i < areaParams.Length; i += 2)
+                            { 
+                            <span>@(areaParams[i])米*@(areaParams[i + 1])米*1面</span><br />
+                            }
+                            <span>总面积=@item.TotalArea 平方米</span>
+                        }
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td class="compare-table-tip">媒体档期开始</td>
+                @foreach (var item in Model)
+                { 
+                    <td>
+                        @(item.DeadLine.CompareTo(DateTime.Now) > 0 ? item.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")
+                    </td>
+                }
+            </tr>
+
+            <tr class="compare-table-title">
+                <td colspan="6"><span>环境信息</span></td>
+            </tr>
+
+            <tr>
+                <td class="compare-table-tip">具体位置</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.Location </td>
+                }
+            </tr>
+            <tr>
+                <td class="compare-table-tip">所属地区</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.CityCateName.Replace(",", " - ") </td>
+                }
+            </tr>
+            <tr>
+                <td class="compare-table-tip">所属商圈</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.AreaCate.Replace(",", " 、 ") </td>
+                }
+            </tr>
+            <tr>
+                <td class="compare-table-tip">投放周期</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.PeriodName </td>
+                }
+            </tr>
+            <tr>
+                <td class="compare-table-tip">人流量</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.TrafficPerson  万人/天</td>
+                }
+            </tr>
+            <tr>
+                <td class="compare-table-tip">车流量</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.TrafficAuto 万辆/天</td>
+                }
+            </tr>
+
+            <tr class="compare-table-title">
+                <td colspan="6"><span>补充信息</span></td>
+            </tr>
+
+            <tr>
+                <td class="compare-table-tip">受众人群</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.CrowdCate.Replace(",", " 、 ") </td>
+                }
+            </tr>
+
+            <tr>
+                <td class="compare-table-tip">投放行业</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.IndustryCate.Replace(",", " 、 ") </td>
+                }
+            </tr>
+
+            <tr>
+                <td class="compare-table-tip">投放目的</td>
+                @foreach (var item in Model)
+                { 
+                    <td>@item.PurposeCate.Replace(",", " 、 ") </td>
+                }
+            </tr>
+          @*  <tr>
+                <td class="compare-table-tip">媒体描述</td>
+                @foreach (var item in Model)
+                { 
+                    <td>
+                        <div style="width: 130px;">@item.Description</div>
+                    </td>
+                }
+            </tr>*@
+        </tbody>
+    </table>
+</div>

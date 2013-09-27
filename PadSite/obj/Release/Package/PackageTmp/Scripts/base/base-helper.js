@@ -293,6 +293,96 @@
         d.resolve(res);
       });
       return d.promise();
+    },
+
+    addCompareItem: function (item) {
+      var comparelist = $('#media-compare-list');
+      var div = $('<div/>').attr({
+        'class': 'media-compare-item',
+        'data-id': item.id
+      }).html(item.title);
+      div.append('<i class="icon-maitonn icon-remove media-compare-remove"></i>')
+      comparelist.show().find('.media-compare-button').before(div);
+    },
+    addCompare: function (e) {
+      var target = $(e.currentTarget);
+      var currentValue = this.getCompare();
+      if (currentValue.length >= 5) {
+        alert("最多选择5项进行对比");
+        return false;
+      }
+      var cValue = target.data("value")
+      for (var i = 0; i < currentValue.length; i++) {
+        if (currentValue[i].id == cValue) {
+          alert("您已经选择了该项");
+          return false;
+        }
+      }
+      var item = {
+        id: cValue,
+        title: decodeURIComponent(target.data("title"))
+      };
+      currentValue.push(item);
+      this.addCompareItem(item);
+      this.setCompare(currentValue);
+    },
+    getCompare: function () {
+      var currentValue = Cookies.Get("compare");
+      var compares = [];
+      if (!currentValue)
+        return compares;
+      var currentCompare = currentValue.split(',');
+      for (var i = 0; i < currentCompare.length; i++) {
+        var compareItem = currentCompare[i].split('|');
+        compares.push({ id: compareItem[0], title: compareItem[1] });
+      }
+      return compares;
+    },
+    setCompare: function (values) {
+      var valueArr = [];
+      for (var i = 0; i < values.length; i++) {
+        valueArr.push(values[i].id + "|" + values[i].title);
+      }
+      Cookies.Set("compare", valueArr.join(","));
+    },
+    removeCompare: function (e) {
+      var target = $(e.currentTarget).parents('.media-compare-item');
+      var id = target.data('id');
+      var compares = this.getCompare();
+      for (var i = 0; i < compares.length; i++) {
+        if (compares[i].id == id) {
+          compares.splice(i, 1);
+        }
+      }
+      this.setCompare(compares);
+      this.removeCompareItem(id);
+    },
+    removeCompareItem: function (id) {
+      var comparelist = $('#media-compare-list');
+      comparelist.find('[data-id="' + id + '"]').remove();
+      if (comparelist.find('.media-compare-item').size() == 0) {
+        comparelist.hide();
+      }
+    },
+    clearCompare: function () {
+      var comparelist = $('#media-compare-list');
+      comparelist.find('.media-compare-item').remove();
+      comparelist.hide();
+      Cookies.Set("compare", "");
+    },
+    showCompare: function () {
+      var compares = this.getCompare();
+      if (compares.length > 0) {
+        for (var i = 0; i < compares.length; i++) {
+          var item = compares[i];
+          this.addCompareItem(item);
+        }
+      }
+    },
+    jumptoCompare: function () {
+      var compares = this.getCompare();
+      var compareIds = $.map(compares, function (item) { return item.id }).join(',');
+      window.location.href = ajaxUrl.compare_media + '/index/' + compareIds;
     }
   }
   window.Maitonn = window.Maitonn || {};

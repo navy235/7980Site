@@ -19,9 +19,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/effectcontrol")
     @Scripts.Render("~/bundles/base")
-    <script type="text/javascript">
-        kendo.culture("zh-CHS");
-    </script>
+    @Html.Partial("_CommonJavascript")
 </head>
 <body>
     @Html.Partial("_TopNav")

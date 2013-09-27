@@ -80,9 +80,8 @@
       function onSuccess(e) {
         var resData = e.response;
         if (resData.err === '' && resData.status === 'upload') {
-          buildEditor(resData.imgname, resData.imgurl);
-          hideUploadSuccess();
-          that.parents('form:first').validate().element('#' + that.attr('id'));
+          //buildEditor(resData.imgname, resData.imgurl);
+          loadImg(resData.imgurl);
         }
         else {
           if (resData.err === '' && resData.status === 'remove') {
@@ -91,6 +90,16 @@
             alert(resData.err);
           }
         }
+      }
+
+      function loadImg(imgurl) {
+        var img = new Image();
+        img.src = imgurl;
+        $(img).load(function () {
+          buildEditor(img, imgurl)
+          hideUploadSuccess();
+          that.parents('form:first').validate().element('#' + that.attr('id'));
+        });
       }
 
       function onUpload(e) {
@@ -120,18 +129,39 @@
         }
       }
 
-      function buildEditor(imgname, imgurl) {
+      function buildEditor(img, imgurl) {
         var template = $('#' + id + ps.templateId);
         template.find('[name="' + id + ps.urlId + '"]')
-        .val(imgurl).end()
-        .find('img').attr('src', imgurl);
-
+        .val(imgurl);
+        template.find('img').attr('src', imgurl);
+        var targetImg = template.find('img').eq(0);
         if (jCropApi) {
           jCropApi.destroy();
           template.find('img').removeAttr('style').end()
             .find('.jcrop-holder').remove();
         }
-        initJcrop();
+        var w = img.width,
+            h = img.height;
+        if (w > h) {
+          s = 298 * h / w;
+          targetImg.css({ width: '298px', height: s + 'px' });
+          targetImg.parent().css({
+            padding: ((298 - s) / 2) + 'px 0 0 0',
+            height: 298 - ((298 - s) / 2) + 'px', width: '298px'
+          });
+        } else {
+          s = 298 * w / h;
+          targetImg.css({ height: '298px', width: s + 'px' });
+          targetImg.parent().css({
+            padding: '0 0 0 ' + ((298 - s) / 2) + 'px',
+            width: 298 - ((298 - s) / 2) + 'px',
+            height: '298px'
+          });
+        }
+        setTimeout(function () {
+          initJcrop();
+        }, 200);
+
 
         $('#' + id + ps.saveId).off('click');
         $('#' + id + ps.saveId).on('click', saveCrop);
@@ -139,13 +169,13 @@
 
       function initJcrop() {
         $('#' + id + ps.cropId).Jcrop({
-          bgFade: true,
-          bgOpacity: .3,
-          aspectRatio: ps.targetWidth / ps.targetHeight,
-          boxWidth: 450,
-          boxHeight: 400,
-          minSize: [ps.targetWidth, ps.targetHeight],
-          setSelect: [0, 0, ps.targetWidth, ps.targetHeight],
+          //bgFade: true,
+          //bgOpacity: .3,
+          aspectRatio: 1,
+          //boxWidth: 450,
+          //boxHeight: 400,
+          //minSize: [ps.targetWidth, ps.targetHeight],
+          //setSelect: [0, 0, ps.targetWidth, ps.targetHeight],
           onChange: onCropChange,
           onSelect: onCropChange
         }, function () {

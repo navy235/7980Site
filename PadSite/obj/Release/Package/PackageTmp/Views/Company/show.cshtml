@@ -3,6 +3,10 @@
     ViewBag.Title = Model.Name + "-广告资源";
     Layout = "~/Views/Shared/_LayoutCompany.cshtml";
 }
+@section topscripts{
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=497ff27739928a1aa7617446f02f6998"></script>
+}
+
 <div class="company-brand">
     <img src="@Model.BannerImg" />
 </div>
@@ -81,7 +85,6 @@
                 {
                     <div id="map-contact" class="map-container">
                     </div>
-                    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=497ff27739928a1aa7617446f02f6998"></script>
                     <script type="text/javascript">
                         $(function () {
                             var lat = '@Model.Lat';
@@ -195,7 +198,7 @@
                         <dd>投放行业：<span class="details-info-item">@Model.Links.IndustryCate</span></dd>
                         <dd>投放目的：<span class="details-info-item">@Model.Links.PurposeCate</span></dd>
                         <dd>代理类型：<span class="details-info-item">@Model.Links.OwnerName</span> </dd>
-                        <dd>媒体档期：@(Model.Links.DeadLine.CompareTo(DateTime.Now) > 0 ? Model.Links.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")</dd>
+                        <dd>媒体档期：<span class="details-info-item fg-color-red">@(Model.Links.DeadLine.CompareTo(DateTime.Now) > 0 ? Model.Links.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")</span></dd>
                     </dl>
                 </div>
                 <div class="details-right">
@@ -227,13 +230,16 @@
                                                                }
                                                                else
                                                                {
-                                                                   var areaParams = Model.Links.IrRegularArea.Split(',');
-
-
-
+                                                                   var areaParams = Model.Links.IrRegularArea.Split('|');
+                                                                   for (var i = 1; i < areaParams.Length; i += 2)
+                                                                   { 
+                                <font> (@(areaParams[i])米*@(areaParams[i + 1])米*1面) </font> 
+                              
+                                                                   }
+                                <font>总面积=@Model.Links.TotalArea 平方米</font>
                                                                }</li>
                             <li class="">代理类型：<span>@Model.Links.OwnerName</span></li>
-                            <li class="">媒体档期：<span>@(Model.Links.DeadLine.CompareTo(DateTime.Now) > 0 ? Model.Links.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")</span></li>
+                            <li class="">媒体档期：<span> @(Model.Links.DeadLine.CompareTo(DateTime.Now) > 0 ? Model.Links.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")   </span></li>
                             @if (Model.Links.HasLight)
                             {
                                 <li class="">照明情况：<span>
@@ -244,8 +250,8 @@
                             {
                                 <li class="">照明情况：<span>无</span></li>
                             }
-                            <li class="">日车流量：<span>@Model.Links.TrafficAuto 万辆</span></li>
-                            <li class="">日人流量：<span>@Model.Links.TrafficPerson 万人</span></li>
+                            <li class="">日车流量：<span>@Model.Links.TrafficAuto 万辆/天</span></li>
+                            <li class="">日人流量：<span>@Model.Links.TrafficPerson 万人/天</span></li>
                             <li class="goods-params-long">具体描述：<span>@Model.Description</span></li>
                         </ul>
 
@@ -263,7 +269,7 @@
                         <div class="goods-position-container">
                             <div id="goods-position-large" class="map-container">
                             </div>
-                            <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=497ff27739928a1aa7617446f02f6998"></script>
+
                             <script type="text/javascript">
                                 $(function () {
                                     var lat = '@Model.Links.Lat';
@@ -400,7 +406,7 @@
             .Width(500)
             .Scrollable(true)
             .Content(@<text>
-                    <div class="alert">
+                    <div class="alert clearfix">
                         <div class="image">
                             <img src="~/Content/images/icon/success.png" />
                         </div>
@@ -419,7 +425,7 @@
             .Width(500)
             .Scrollable(true)
             .Content(@<text>
-                    <div class="alert">
+                    <div class="alert clearfix">
                         <div class="image">
                             <img src="~/Content/images/icon/success.png" />
                         </div>
@@ -536,7 +542,11 @@
                                         Maitonn.JHelper.checkFavorite(mediaId).done(function(result){
                                             if(result.Success){
                                                 Maitonn.JHelper.addFavorite(mediaId).done(function(res){
-                                                    Maitonn.JHelper.showMessage(res);
+                                                    if(res.Success){
+                                                        kwindow.center().open();
+                                                    }else{
+                                                        Maitonn.JHelper.showMessage(res);
+                                                    }
                                                 })
                                             }else{
                                                 Maitonn.JHelper.showMessage(result);
@@ -567,39 +577,45 @@
                                                         index: 0,
                                                         change:changePeriodCode
                                                     });
-                                                })
-                                                var today=new Date();
-                                                $('[name="startTime"]').kendoDatePicker();
-                                                var startTime= $('[name="startTime"]').data('kendoDatePicker');
-                                                startTime.min(today);
-                                                startTime.value(today);
-                                                $('[name="number"]').kendoNumericTextBox({
-                                                    "format":"n0",
-                                                    "decimals":0,
-                                                    "change":changePeriodCode,
-                                                    "spin":changePeriodCode
-                                                })
-                                                var number= $('[name="number"]').data('kendoNumericTextBox');
-                                                number.min(1);
-                                                function changePeriodCode(){
-                                                    var periodValue=$("#period").val();
-                                                    var numberValue=number.value();
-                                                    var $price=$('.goods-price').find('b');
-                                                    $price.text((periodValue*numberValue*price).toFixed(2));
-                                                    $('#price').val((periodValue*numberValue*price).toFixed(2));
-                                                }
+                                                    var today=new Date();
+                                                    $('[name="startTime"]').kendoDatePicker();
+                                                    var startTime= $('[name="startTime"]').data('kendoDatePicker');
+                                                    startTime.min(today);
+                                                    startTime.value(today);
+                                                    $('[name="number"]').kendoNumericTextBox({
+                                                        "format":"n0",
+                                                        "decimals":0,
+                                                        "change":changePeriodCode,
+                                                        "spin":changePeriodCode
+                                                    })
+                                                    var number= $('[name="number"]').data('kendoNumericTextBox');
+                                                    number.min(1);
 
-                                                $('[name="addtype"]').on('click',addtypeClick)
+                                                    function changePeriodCode(){
+                                                        if(price==0){
+                                                            $('.goods-price').html("面议")
+                                                        }else{
+                                                            var periodValue=$("#period").val();
+                                                            var numberValue=number.value();
+                                                            var $price=$('.goods-price').find('b');
+                                                            $price.text((periodValue*numberValue*price).toFixed(2));
+                                                            $('#price').val((periodValue*numberValue*price).toFixed(2));
+                                                        }
+                                                    }
 
-                                                $('#btn-comfirm-scheme').on('click',comfirmSchemeClick)
+                                                    $('[name="addtype"]').on('click',addtypeClick)
+
+                                                    $('#btn-comfirm-scheme').on('click',comfirmSchemeClick)
                                          
-                                                $('#schemeName').on('keyup',CheckForm);
+                                                    $('#Name').on('keyup',CheckForm);
                                   
-                                                $('#btn-cancle-scheme').on('click', function() {
-                                                    $('#Win-scheme').data('kendoWindow').close();
-                                                })
+                                                    $('#btn-cancle-scheme').on('click', function() {
+                                                        $('#Win-scheme').data('kendoWindow').close();
+                                                    })
 
-                                                changePeriodCode();
+                                                    changePeriodCode();
+                                                })
+                                              
                                             })
                                         }
                                         setTimeout(function(){
@@ -615,14 +631,14 @@
                             function addtypeClick(){
                                 var value=$(this).val();
                                 if(value==1){
-                                    $('[name="schemeName"]').parents('.form-field').show();
-                                    $('[name="schemeDescription"]').parents('.form-field').show();
+                                    $('[name="Name"]').parents('.form-field').show();
+                                    $('[name="Description"]').parents('.form-field').show();
                                     $('[name="schemeId"]').parents('.form-field').hide();
                                 }else{
                                     if($(this).attr('disabled')=='disabled'){
                                     }else{
-                                        $('[name="schemeName"]').parents('.form-field').hide();
-                                        $('[name="schemeDescription"]').parents('.form-field').hide();
+                                        $('[name="Name"]').parents('.form-field').hide();
+                                        $('[name="Description"]').parents('.form-field').hide();
                                         $('[name="schemeId"]').parents('.form-field').show();
                                     }
                                 }
@@ -631,19 +647,18 @@
                             function comfirmSchemeClick(){
                                 if(CheckForm()){
                                     var mediaId=@Model.Links.ID;
-
                                     var addType=$('[name="addtype"]:checked').val();
                                     var kwindowSuccess=$('#Win-scheme-success').data('kendoWindow');
                                     var kwindow=$('#Win-scheme').data('kendoWindow');
                                     var data={};
                                     if(addType==1){
-                                        data.schemeName=$('#schemeName').val();
-                                        data.schemeDescription=$('#schemeDescription').val();
+                                        data.Name=$('#Name').val();
+                                        data.Description=$('#Description').val();
                                         data.schemeId=0;
                            
                                     }else{
-                                        data.schemeName='';
-                                        data.schemeDescription='';
+                                        data.Name='';
+                                        data.Description='';
                                         data.schemeId=$('#schemeId').val();
                                     }
 
@@ -667,7 +682,8 @@
                                             $('.goods-addscheme').remove();
                                             kwindowSuccess.center().open();
                                         }else{
-                                            Maitonn.JHelper.showErrorMessage(res.Message);
+                                            kwindow.close();
+                                            Maitonn.JHelper.showMessage(res);
                                         }
                                     })
                                 }else{
@@ -678,7 +694,7 @@
 
                             function CheckForm(){
                                 var addType=$('[name="addtype"]:checked').val();
-                                var $form_tips=$('.form_tips_error').find('span');
+                                var $form_tips=$('.form-tips-error').find('span');
                                 var validateErrors=[];
                                 if(addType==1){
                                     var schemeName=$('#Name').val();
@@ -691,9 +707,9 @@
                                     }
                                 }
                                 if(validateErrors.length==0){
-                                    $('.form_tips_error').hide();
+                                    $('.form-tips-error').hide();
                                 }else{
-                                    $('.form_tips_error').show();
+                                    $('.form-tips-error').show();
                                     return false;
                                 }
                                 return validateErrors.length==0;
