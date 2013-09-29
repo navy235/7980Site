@@ -23,17 +23,19 @@
     <table id="@Html.Raw(name + "_template")" >
         <tr>
             <td class="jcrop_orgin">
-                <img  src="@orgUrl" id="@(name + "_crop")" class="@(name + "_crop")"  />
+                <div class="jcrop_imgcontainer">
+                    <img  src="@orgUrl" id="@(name + "_crop")" class="@(name + "_crop")"  />
+                </div>
             </td>
-            <td class="jcrop_preview" style="vertical-align: top">
+            <td class="jcrop_preview" style="vertical-align: top; padding-left: 30px;">
                 <div style="width: 100px; height: 100px; overflow: hidden;">
                     <img src="@orgUrl" id="@(name + "_preview")" alt="Preview" class="jcrop-preview" />
                 </div>
                 <input type="hidden" id="@(name + "_url")" name="@(name + "_url")"  />
-                <input type="hidden" id="@(name + "_x")" name="@(name + "_x")" />
-                <input type="hidden" id="@(name + "_y")" name="@(name + "_y")" />
-                <input type="hidden" id="@(name + "_w")" name="@(name + "_w")" />
-                <input type="hidden" id="@(name + "_h")" name="@(name + "_h")" />
+                <input type="hidden" id="@(name + "_x")" name="@(name + "_x")" value="0" />
+                <input type="hidden" id="@(name + "_y")" name="@(name + "_y")" value="0" />
+                <input type="hidden" id="@(name + "_w")" name="@(name + "_w")" value="298" />
+                <input type="hidden" id="@(name + "_h")" name="@(name + "_h")"  value="298"/>
             </td>
         </tr>
 
@@ -57,13 +59,13 @@
         }
         jQuery("#@name").uploadImgEdit({
             default_url: '@orgUrl',
-                save_url: '@Url.Action("EditSave", "Upload")',
-                uploadId: 'editattachments',
-                remove_url: '@Url.Action("UpLoadRemove", "Upload")',
+            save_url: '@Url.Action("EditSave", "Upload")',
+            uploadId: 'editattachments',
+            remove_url: '@Url.Action("UpLoadRemove", "Upload")',
             crop_url: '@Url.Action("CropImg", "Upload")',
-                value: upvalue,
-                targetWidth:@targetWidth,
+            value: upvalue,
+            targetWidth:@targetWidth,
             targetHeight:@targetWidth
-                });
+            });
     })
 </script>

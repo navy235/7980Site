@@ -664,6 +664,7 @@ input.k-vcode {
     border: 1px solid #d4d4d4;
     overflow: hidden;
     position: relative;
+    padding: 0 0 50px 0;
 }
 
 .main-title {

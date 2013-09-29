@@ -11,7 +11,7 @@
             else
             {
                 <text>
-                @CookieHelper.NickName,您好,欢迎来到广知网！
+                @CookieHelper.NickName,您好,欢迎来到@(ConfigSetting.SiteName)！
                  <a href="@Url.Action("logout", "login", new { returnUrl = Request.Url.ToString() })" >安全退出</a>
                 </text>
             }

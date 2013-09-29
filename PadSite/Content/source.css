@@ -3282,7 +3282,7 @@ listview-container {
     padding: 8px 0;
 }
 
-.m-content {
+.m-container .m-content {
     position: absolute;
     top: 90px;
     left: 0;
@@ -3330,7 +3330,7 @@ a.m-filter-btn {
     border-left: 1px solid #DCDBDB;
 }
 
-.m-list {
+.m-container .m-list {
     overflow-y: auto;
     position: absolute;
     top: 26px;
@@ -3339,21 +3339,21 @@ a.m-filter-btn {
     left: 0px;
 }
 
-.m-filter-selectbox {
+.m-container .m-filter-selectbox {
     display: none;
 }
 
-li.m-list-item {
+.m-container li.m-list-item {
     padding-left: 10px;
 }
 
-.m-list-item-hover {
+.m-container .m-list-item-hover {
     background: #f2d7d7;
     cursor: pointer;
 }
 
 
-.m-loadding {
+.m-container .m-loadding {
     display: none;
 }
 
@@ -3361,7 +3361,7 @@ li.m-list-item {
     color: #999;
 }
 
-.list-num {
+.m-container .list-num {
     font-weight: bold;
     height: 16px;
     line-height: 16px;
@@ -3369,7 +3369,7 @@ li.m-list-item {
     border-bottom: 1px dashed #cccccc;
 }
 
-    .list-num strong {
+    .m-container .list-num strong {
         color: #f60;
         font-size: 14px;
     }

@@ -199,6 +199,14 @@ textarea {
     color: #b7b7b7 !important;
 }
 
+.fg-color-magenta {
+    color: #ff0097 !important;
+}
+
+.bg-color-magenta {
+    background-color: #ff0097 !important;
+}
+
 .bg-color-blue {
     background-color: #2d89ef !important;
 }
@@ -649,7 +657,7 @@ select {
     width: 720px;
     margin: 0 auto;
     text-align: center;
-    padding: 80px 30px;
+    padding: 50px 30px;
 }
 
 .search-box {
@@ -751,10 +759,10 @@ select {
 }
 
 .nav-block {
-    width: 570px;
     margin: 0 auto;
     text-align: center;
     margin-top: 40px;
+    overflow: hidden;
 }
 
 .nav-block-item {
@@ -765,16 +773,16 @@ select {
     color: #fff;
     margin-left: 20px;
     margin-bottom: 20px;
-    width: 160px;
-    height: 160px;
+    width: 220px;
+    height: 140px;
     position: relative;
     font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimHei", Arial, Helvetica, sans-serif;
 }
 
 
     .nav-block-item .full-block {
-        width: 160px;
-        height: 160px;
+        width: 220px;
+        height: 140px;
         text-align: center;
         overflow: hidden;
         color: #FFF;
@@ -803,7 +811,7 @@ select {
         }
 
     .nav-block-item .icon-maitonn {
-        font-size: 80px;
+        font-size: 70px;
         margin-top: 30px;
         color: #fff;
         display: block;
