@@ -87,7 +87,7 @@ namespace PadSite.Controllers
             CompanyIndexViewModel model = new CompanyIndexViewModel();
             model.BannerImg = company.BannerImg;
             model.LogoImg = company.LogoImg;
-            model.ID = company.ID;
+            model.ID = company.MemberID;
             model.Name = company.Name;
             var cityIds = Utilities.GetIdList(company.CityCodeValue);
             var cityName = string.Join(" - ",
@@ -119,7 +119,7 @@ namespace PadSite.Controllers
             CompanyIndexViewModel model = new CompanyIndexViewModel();
             model.BannerImg = company.BannerImg;
             model.LogoImg = company.LogoImg;
-            model.ID = company.ID;
+            model.ID = company.MemberID;
             model.Name = company.Name;
             var cityIds = Utilities.GetIdList(company.CityCodeValue);
             var cityName = string.Join(" - ",
@@ -149,7 +149,7 @@ namespace PadSite.Controllers
             CompanyIndexViewModel model = new CompanyIndexViewModel();
             model.BannerImg = company.BannerImg;
             model.LogoImg = company.LogoImg;
-            model.ID = company.ID;
+            model.ID = company.MemberID;
             model.Name = company.Name;
             var cityIds = Utilities.GetIdList(company.CityCodeValue);
             var cityName = string.Join(" - ",
@@ -186,7 +186,7 @@ namespace PadSite.Controllers
             CompanyIndexViewModel model = new CompanyIndexViewModel();
             model.BannerImg = company.BannerImg;
             model.LogoImg = company.LogoImg;
-            model.ID = company.ID;
+            model.ID = company.MemberID;
             model.Name = company.Name;
             var cityIds = Utilities.GetIdList(company.CityCodeValue);
             var cityName = string.Join(" - ",
@@ -219,7 +219,7 @@ namespace PadSite.Controllers
             CompanyIndexViewModel model = new CompanyIndexViewModel();
             model.BannerImg = company.BannerImg;
             model.LogoImg = company.LogoImg;
-            model.ID = company.ID;
+            model.ID = company.MemberID;
             model.Name = company.Name;
             var cityIds = Utilities.GetIdList(company.CityCodeValue);
             var cityName = string.Join(" - ",
@@ -252,7 +252,7 @@ namespace PadSite.Controllers
             CompanyIndexViewModel model = new CompanyIndexViewModel();
             model.BannerImg = company.BannerImg;
             model.LogoImg = company.LogoImg;
-            model.ID = company.ID;
+            model.ID = company.MemberID;
             model.Name = company.Name;
             var cityIds = Utilities.GetIdList(company.CityCodeValue);
             var cityName = string.Join(" - ",
@@ -285,7 +285,7 @@ namespace PadSite.Controllers
             CompanyIndexViewModel model = new CompanyIndexViewModel();
             model.BannerImg = company.BannerImg;
             model.LogoImg = company.LogoImg;
-            model.ID = company.ID;
+            model.ID = company.MemberID;
             model.Name = company.Name;
             var cityIds = Utilities.GetIdList(company.CityCodeValue);
             var cityName = string.Join(" - ",
@@ -316,7 +316,7 @@ namespace PadSite.Controllers
             CompanyIndexViewModel model = new CompanyIndexViewModel();
             model.BannerImg = company.BannerImg;
             model.LogoImg = company.LogoImg;
-            model.ID = company.ID;
+            model.ID = company.MemberID;
             model.Name = company.Name;
             var cityIds = Utilities.GetIdList(company.CityCodeValue);
             var cityName = string.Join(" - ",

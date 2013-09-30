@@ -1,0 +1,289 @@
+
+ ExTime :2013-09-30 14:50:22,146 [51] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980test.com/scheme/print/1
+ ErrMessage:指定的 Include 路径无效。EntityType“PadSite.Models.SchemeItem”未声明具有名称“MediaID”的导航属性。 
+ System.InvalidOperationException: 指定的 Include 路径无效。EntityType“PadSite.Models.SchemeItem”未声明具有名称“MediaID”的导航属性。
+   在 System.Data.Objects.Internal.ObjectFullSpanRewriter.ConvertSpanPath(SpanPathInfo parentInfo, List`1 navPropNames, Int32 pos)
+   在 System.Data.Objects.Internal.ObjectFullSpanRewriter.ConvertSpanPath(SpanPathInfo parentInfo, List`1 navPropNames, Int32 pos)
+   在 System.Data.Objects.Internal.ObjectFullSpanRewriter..ctor(DbCommandTree tree, DbExpression toRewrite, Span span, AliasGenerator aliasGenerator)
+   在 System.Data.Objects.Internal.ObjectSpanRewriter.TryRewrite(DbQueryCommandTree tree, Span span, MergeOption mergeOption, AliasGenerator aliasGenerator, DbExpression& newQuery, SpanIndex& spanInfo)
+   在 System.Data.Objects.Internal.ObjectQueryExecutionPlan.Prepare(ObjectContext context, DbQueryCommandTree tree, Type elementType, MergeOption mergeOption, Span span, ReadOnlyCollection`1 compiledQueryParameters, AliasGenerator aliasGenerator)
+   在 System.Data.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption)
+   在 System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption)
+   在 System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable<T>.GetEnumerator()
+   在 System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
+   在 System.Data.Objects.ELinq.ObjectQueryProvider.<GetElementFunction>b__3[TResult](IEnumerable`1 sequence)
+   在 System.Data.Objects.ELinq.ObjectQueryProvider.ExecuteSingle[TResult](IEnumerable`1 query, Expression queryRoot)
+   在 System.Data.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[S](Expression expression)
+   在 System.Data.Entity.Internal.Linq.DbQueryProvider.Execute[TResult](Expression expression)
+   在 System.Linq.Queryable.Single[TSource](IQueryable`1 source, Expression`1 predicate)
+   在 PadSite.Controllers.SchemeController.Print(Int32 id) 位置 d:\GitProject\7980Site\PadSite\Controllers\Personal\SchemeController.cs:行号 162
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-30 14:54:39,659 [68] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980test.com/scheme/print/2
+ ErrMessage:nDocs must be > 0 
+ System.ArgumentException: nDocs must be > 0
+   在 Lucene.Net.Search.IndexSearcher.Search(Weight weight, Filter filter, Int32 nDocs) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\IndexSearcher.cs:行号 183
+   在 Lucene.Net.Search.Searcher.Search(Query query, Filter filter, Int32 n) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\Searcher.cs:行号 108
+   在 Lucene.Net.Search.Searcher.Search(Query query, Int32 n) 位置 d:\Lucene.Net\FullRepo\trunk\src\core\Search\Searcher.cs:行号 118
+   在 PadSite.Service.OutDoorLuceneService.Search(IEnumerable`1 idArr) 位置 d:\GitProject\7980Site\PadSite\Service\Lucene\OutDoorLuceneService.cs:行号 1002
+   在 PadSite.Controllers.SchemeController.Print(Int32 id) 位置 d:\GitProject\7980Site\PadSite\Controllers\Personal\SchemeController.cs:行号 167
+   在 lambda_method(Closure , ControllerBase , Object[] )
+   在 System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)
+   在 System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass42.<BeginInvokeSynchronousActionMethod>b__41()
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass8`1.<BeginSynchronous>b__7(IAsyncResult _)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<>c__DisplayClass39.<BeginInvokeActionMethodWithFilters>b__33()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass4f.<InvokeActionMethodFilterAsynchronously>b__49()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass37.<BeginInvokeActionMethodWithFilters>b__36(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-30 15:09:54,418 [53] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980test.com/scheme/print/1
+ ErrMessage:d:\GitProject\7980Site\PadSite\Views\Scheme\Print.cshtml(121): error CS1061: “PadSite.ViewModels.LinkItem”不包含“lng”的定义，并且找不到可接受类型为“PadSite.ViewModels.LinkItem”的第一个参数的扩展方法“lng”(是否缺少 using 指令或程序集引用?) 
+ System.Web.HttpCompileException (0x80004005): d:\GitProject\7980Site\PadSite\Views\Scheme\Print.cshtml(121): error CS1061: “PadSite.ViewModels.LinkItem”不包含“lng”的定义，并且找不到可接受类型为“PadSite.ViewModels.LinkItem”的第一个参数的扩展方法“lng”(是否缺少 using 指令或程序集引用?)
+   在 System.Web.Compilation.AssemblyBuilder.Compile()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.FileExists(String virtualPath)
+   在 System.Web.Mvc.BuildManagerViewEngine.FileExists(ControllerContext controllerContext, String virtualPath)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.<>c__DisplayClass4.<GetPathFromGeneralName>b__0(String path)
+   在 System.Web.WebPages.DefaultDisplayMode.GetDisplayInfo(HttpContextBase httpContext, String virtualPath, Func`2 virtualPathExists)
+   在 System.Web.WebPages.DisplayModeProvider.<>c__DisplayClassb.<GetDisplayInfoForVirtualPath>b__8(IDisplayMode mode)
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   在 System.Web.WebPages.DisplayModeProvider.GetDisplayInfoForVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, IDisplayMode currentDisplayMode, Boolean requireConsistentDisplayMode)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPathFromGeneralName(ControllerContext controllerContext, List`1 locations, String name, String controllerName, String areaName, String cacheKey, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPath(ControllerContext controllerContext, String[] locations, String[] areaLocations, String locationsPropertyName, String name, String controllerName, String cacheKeyPrefix, Boolean useCache, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache)
+   在 StackExchange.Profiling.MVCHelpers.ProfilingViewEngine.<>c__DisplayClass4.<FindView>b__3() 位置 c:\Code\github\SamSaffron\MiniProfiler\StackExchange.Profiling\MVCHelpers\ProfilingViewEngine.cs:行号 95
+   在 StackExchange.Profiling.MVCHelpers.ProfilingViewEngine.Find(ControllerContext controllerContext, String name, Func`1 finder, Boolean isPartial) 位置 c:\Code\github\SamSaffron\MiniProfiler\StackExchange.Profiling\MVCHelpers\ProfilingViewEngine.cs:行号 52
+   在 StackExchange.Profiling.MVCHelpers.ProfilingViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache) 位置 c:\Code\github\SamSaffron\MiniProfiler\StackExchange.Profiling\MVCHelpers\ProfilingViewEngine.cs:行号 95
+   在 System.Web.Mvc.ViewEngineCollection.<>c__DisplayClassc.<FindView>b__b(IViewEngine e)
+   在 System.Web.Mvc.ViewEngineCollection.Find(Func`2 lookup, Boolean trackSearchedPaths)
+   在 System.Web.Mvc.ViewEngineCollection.FindView(ControllerContext controllerContext, String viewName, String masterName)
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-30 15:18:36,491 [20] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980test.com/scheme/print/1
+ ErrMessage:d:\GitProject\7980Site\PadSite\Views\Scheme\Print.cshtml(178): error CS0136: 不能在此范围内声明名为“i”的局部变量，因为这样会使“i”具有不同的含义，而它已在“父级或当前”范围中表示其他内容了 
+ System.Web.HttpCompileException (0x80004005): d:\GitProject\7980Site\PadSite\Views\Scheme\Print.cshtml(178): error CS0136: 不能在此范围内声明名为“i”的局部变量，因为这样会使“i”具有不同的含义，而它已在“父级或当前”范围中表示其他内容了
+   在 System.Web.Compilation.AssemblyBuilder.Compile()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.FileExists(String virtualPath)
+   在 System.Web.Mvc.BuildManagerViewEngine.FileExists(ControllerContext controllerContext, String virtualPath)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.<>c__DisplayClass4.<GetPathFromGeneralName>b__0(String path)
+   在 System.Web.WebPages.DefaultDisplayMode.GetDisplayInfo(HttpContextBase httpContext, String virtualPath, Func`2 virtualPathExists)
+   在 System.Web.WebPages.DisplayModeProvider.<>c__DisplayClassb.<GetDisplayInfoForVirtualPath>b__8(IDisplayMode mode)
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   在 System.Web.WebPages.DisplayModeProvider.GetDisplayInfoForVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, IDisplayMode currentDisplayMode, Boolean requireConsistentDisplayMode)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPathFromGeneralName(ControllerContext controllerContext, List`1 locations, String name, String controllerName, String areaName, String cacheKey, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPath(ControllerContext controllerContext, String[] locations, String[] areaLocations, String locationsPropertyName, String name, String controllerName, String cacheKeyPrefix, Boolean useCache, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache)
+   在 StackExchange.Profiling.MVCHelpers.ProfilingViewEngine.<>c__DisplayClass4.<FindView>b__3() 位置 c:\Code\github\SamSaffron\MiniProfiler\StackExchange.Profiling\MVCHelpers\ProfilingViewEngine.cs:行号 95
+   在 StackExchange.Profiling.MVCHelpers.ProfilingViewEngine.Find(ControllerContext controllerContext, String name, Func`1 finder, Boolean isPartial) 位置 c:\Code\github\SamSaffron\MiniProfiler\StackExchange.Profiling\MVCHelpers\ProfilingViewEngine.cs:行号 52
+   在 StackExchange.Profiling.MVCHelpers.ProfilingViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache) 位置 c:\Code\github\SamSaffron\MiniProfiler\StackExchange.Profiling\MVCHelpers\ProfilingViewEngine.cs:行号 95
+   在 System.Web.Mvc.ViewEngineCollection.<>c__DisplayClassc.<FindView>b__b(IViewEngine e)
+   在 System.Web.Mvc.ViewEngineCollection.Find(Func`2 lookup, Boolean trackSearchedPaths)
+   在 System.Web.Mvc.ViewEngineCollection.FindView(ControllerContext controllerContext, String viewName, String masterName)
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)
+
+ ExTime :2013-09-30 15:52:39,764 [56] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+
+ ClientIP:127.0.0.1
+ ErrUrl:http://www.7980test.com/company/index/1
+ ErrMessage:遇到的结束标记“div”没有匹配的起始标记。您的起始标记/结束标记是否匹配?
+ 
+ System.Web.HttpParseException (0x80004005): 遇到的结束标记“div”没有匹配的起始标记。您的起始标记/结束标记是否匹配?
+
+   在 System.Web.WebPages.Razor.RazorBuildProvider.EnsureGeneratedCode()
+   在 System.Web.WebPages.Razor.RazorBuildProvider.get_CodeCompilerType()
+   在 System.Web.Compilation.BuildProvider.GetCompilerTypeFromBuildProvider(BuildProvider buildProvider)
+   在 System.Web.Compilation.BuildProvidersCompiler.ProcessBuildProviders()
+   在 System.Web.Compilation.BuildProvidersCompiler.PerformBuild()
+   在 System.Web.Compilation.BuildManager.CompileWebFile(VirtualPath virtualPath)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultInternal(VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVPathBuildResultWithNoAssert(HttpContext context, VirtualPath virtualPath, Boolean noBuild, Boolean allowCrossApp, Boolean allowBuildInPrecompile, Boolean throwIfNotFound, Boolean ensureIsUpToDate)
+   在 System.Web.Compilation.BuildManager.GetVirtualPathObjectFactory(VirtualPath virtualPath, HttpContext context, Boolean allowCrossApp, Boolean throwIfNotFound)
+   在 System.Web.Mvc.BuildManagerWrapper.System.Web.Mvc.IBuildManager.FileExists(String virtualPath)
+   在 System.Web.Mvc.BuildManagerViewEngine.FileExists(ControllerContext controllerContext, String virtualPath)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.<>c__DisplayClass4.<GetPathFromGeneralName>b__0(String path)
+   在 System.Web.WebPages.DefaultDisplayMode.GetDisplayInfo(HttpContextBase httpContext, String virtualPath, Func`2 virtualPathExists)
+   在 System.Web.WebPages.DisplayModeProvider.<>c__DisplayClassb.<GetDisplayInfoForVirtualPath>b__8(IDisplayMode mode)
+   在 System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   在 System.Linq.Enumerable.FirstOrDefault[TSource](IEnumerable`1 source, Func`2 predicate)
+   在 System.Web.WebPages.DisplayModeProvider.GetDisplayInfoForVirtualPath(String virtualPath, HttpContextBase httpContext, Func`2 virtualPathExists, IDisplayMode currentDisplayMode, Boolean requireConsistentDisplayMode)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPathFromGeneralName(ControllerContext controllerContext, List`1 locations, String name, String controllerName, String areaName, String cacheKey, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.GetPath(ControllerContext controllerContext, String[] locations, String[] areaLocations, String locationsPropertyName, String name, String controllerName, String cacheKeyPrefix, Boolean useCache, String[]& searchedLocations)
+   在 System.Web.Mvc.VirtualPathProviderViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache)
+   在 StackExchange.Profiling.MVCHelpers.ProfilingViewEngine.<>c__DisplayClass4.<FindView>b__3() 位置 c:\Code\github\SamSaffron\MiniProfiler\StackExchange.Profiling\MVCHelpers\ProfilingViewEngine.cs:行号 95
+   在 StackExchange.Profiling.MVCHelpers.ProfilingViewEngine.Find(ControllerContext controllerContext, String name, Func`1 finder, Boolean isPartial) 位置 c:\Code\github\SamSaffron\MiniProfiler\StackExchange.Profiling\MVCHelpers\ProfilingViewEngine.cs:行号 52
+   在 StackExchange.Profiling.MVCHelpers.ProfilingViewEngine.FindView(ControllerContext controllerContext, String viewName, String masterName, Boolean useCache) 位置 c:\Code\github\SamSaffron\MiniProfiler\StackExchange.Profiling\MVCHelpers\ProfilingViewEngine.cs:行号 95
+   在 System.Web.Mvc.ViewEngineCollection.<>c__DisplayClassc.<FindView>b__b(IViewEngine e)
+   在 System.Web.Mvc.ViewEngineCollection.Find(Func`2 lookup, Boolean trackSearchedPaths)
+   在 System.Web.Mvc.ViewEngineCollection.FindView(ControllerContext controllerContext, String viewName, String masterName)
+   在 System.Web.Mvc.ViewResult.FindView(ControllerContext context)
+   在 System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<InvokeActionResultWithFilters>b__17()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   在 System.Web.Mvc.ControllerActionInvoker.<>c__DisplayClass1a.<>c__DisplayClass1c.<InvokeActionResultWithFilters>b__19()
+   在 System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<>c__DisplayClass2a.<BeginInvokeAction>b__20()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass25.<BeginInvokeAction>b__22(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeAction(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.<>c__DisplayClass1d.<BeginExecuteCore>b__18(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecuteCore(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.Controller.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Controller.System.Web.Mvc.Async.IAsyncController.EndExecute(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.<>c__DisplayClass8.<BeginProcessRequest>b__3(IAsyncResult asyncResult)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.<>c__DisplayClass4.<MakeVoidDelegate>b__3(IAsyncResult ar)
+   在 System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()
+   在 System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult)
+   在 System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result)
+   在 System.Web.HttpApplication.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute()
+   在 System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean& completedSynchronously)

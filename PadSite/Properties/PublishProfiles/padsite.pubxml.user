@@ -56,7 +56,7 @@
       <publishTime>09/03/2013 16:03:40</publishTime>
     </File>
     <File Include="bin/PadSite.dll">
-      <publishTime>09/29/2013 15:44:31</publishTime>
+      <publishTime>09/30/2013 15:29:58</publishTime>
     </File>
     <File Include="bin/PanGu.dll">
       <publishTime>09/16/2013 09:37:50</publishTime>
@@ -2126,28 +2126,28 @@
       <publishTime>09/05/2013 09:50:20</publishTime>
     </File>
     <File Include="Views/Company/contact.cshtml">
-      <publishTime>09/27/2013 17:05:05</publishTime>
+      <publishTime>09/30/2013 15:29:42</publishTime>
     </File>
     <File Include="Views/Company/Credentials.cshtml">
-      <publishTime>09/27/2013 17:05:05</publishTime>
+      <publishTime>09/30/2013 15:29:42</publishTime>
     </File>
     <File Include="Views/Company/Index.cshtml">
-      <publishTime>09/27/2013 17:05:05</publishTime>
+      <publishTime>09/30/2013 15:29:42</publishTime>
     </File>
     <File Include="Views/Company/Intro.cshtml">
-      <publishTime>09/27/2013 17:05:05</publishTime>
+      <publishTime>09/30/2013 15:29:42</publishTime>
     </File>
     <File Include="Views/Company/notice.cshtml">
-      <publishTime>09/27/2013 17:05:05</publishTime>
+      <publishTime>09/30/2013 15:29:42</publishTime>
     </File>
     <File Include="Views/Company/show.cshtml">
-      <publishTime>09/27/2013 17:05:10</publishTime>
+      <publishTime>09/30/2013 15:29:42</publishTime>
     </File>
     <File Include="Views/Company/source.cshtml">
-      <publishTime>09/27/2013 17:05:05</publishTime>
+      <publishTime>09/30/2013 15:29:42</publishTime>
     </File>
     <File Include="Views/Company/viewnotice.cshtml">
-      <publishTime>09/27/2013 17:05:05</publishTime>
+      <publishTime>09/30/2013 15:29:42</publishTime>
     </File>
     <File Include="Views/Compare/Index.cshtml">
       <publishTime>09/25/2013 16:45:36</publishTime>
@@ -2231,7 +2231,7 @@
       <publishTime>09/07/2013 16:26:51</publishTime>
     </File>
     <File Include="Views/Map/Index.cshtml">
-      <publishTime>09/27/2013 17:05:05</publishTime>
+      <publishTime>09/30/2013 15:29:43</publishTime>
     </File>
     <File Include="Views/MediaCate/Create.cshtml">
       <publishTime>09/05/2013 09:34:35</publishTime>
@@ -2410,6 +2410,9 @@
     <File Include="Views/Scheme/Index.cshtml">
       <publishTime>09/26/2013 16:12:18</publishTime>
     </File>
+    <File Include="Views/Scheme/Print.cshtml">
+      <publishTime>09/30/2013 15:29:54</publishTime>
+    </File>
     <File Include="Views/Shared/DisplayTemplates/Area.cshtml">
       <publishTime>09/16/2013 09:37:50</publishTime>
     </File>
@@ -2429,7 +2432,7 @@
       <publishTime>09/16/2013 09:37:50</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/MapMarker.cshtml">
-      <publishTime>09/27/2013 17:05:09</publishTime>
+      <publishTime>09/30/2013 15:29:43</publishTime>
     </File>
     <File Include="Views/Shared/DisplayTemplates/Object.cshtml">
       <publishTime>09/11/2013 10:04:29</publishTime>
@@ -2486,7 +2489,7 @@
       <publishTime>09/13/2013 10:29:18</publishTime>
     </File>
     <File Include="Views/Shared/EditorTemplates/MapMarker.cshtml">
-      <publishTime>09/27/2013 17:05:06</publishTime>
+      <publishTime>09/30/2013 15:29:54</publishTime>
     </File>
     <File Include="Views/Shared/EditorTemplates/Object.cshtml">
       <publishTime>09/03/2013 16:53:44</publishTime>
@@ -2588,7 +2591,7 @@
       <publishTime>09/02/2013 09:53:32</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>09/29/2013 17:53:41</publishTime>
+      <publishTime>09/30/2013 15:30:00</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -168,4 +168,23 @@ namespace PadSite.ViewModels
 
         public DateTime StartTime { get; set; }
     }
+
+    public class SchemePrintViewModel
+    {
+        public SchemePrintViewModel()
+        {
+            this.Medias = new List<LinkItem>();
+        }
+
+        public int ID { get; set; }
+
+        public string Name { get; set; }
+
+        public List<LinkItem> Medias { get; set; }
+
+        public string Description { get; set; }
+
+        public DateTime AddTime { get; set; }
+
+    }
 }

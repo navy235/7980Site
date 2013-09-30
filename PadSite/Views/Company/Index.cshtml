@@ -96,31 +96,8 @@
                 @if (Model.Lat != 0)
                 {
                     <div id="map-contact" class="map-container">
+                        <img src="http://api.map.baidu.com/staticimage?center=@(Model.Lng),@(Model.Lat)&width=191&height=203&zoom=11&markers=@(Model.Lng),@(Model.Lat)" />
                     </div>
-                    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8E9B4Db1D0648facf0f8d3f3a2092ae8"></script>
-                    <script type="text/javascript">
-                        $(function () {
-                            var lat = '@Model.Lat';
-                            var lng = '@Model.Lng';
-                            var point = new BMap.Point(116.404, 39.915);
-                            if (lng != '' && lng != '0' && lat != '0') {
-                                point = new BMap.Point(new Number(lng), new Number(lat));
-                            }
-                            var map;
-                            map = new BMap.Map("map-contact");
-                            map.centerAndZoom(point, 16);
-                            addMarker(point);
-                            function addMarker(point) {
-                                var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
-                                    offset: new BMap.Size(0, 0),
-                                    imageOffset: new BMap.Size(0, 0 - 10 * 25)
-                                });
-                                var marker = new BMap.Marker(point, { icon: myIcon });
-                                map.addOverlay(marker);
-                                return marker;
-                            }
-                        })
-                    </script>
                 }
             </div>
         </div>
@@ -157,7 +134,7 @@
                             <div class="products-item">
 
                                 <div class="products-title">
-                                    <a class="products-title-links"  href="@Url.Action("index", "show", new { id = product.ID })" title="@(product.Name)" >
+                                    <a class="products-title-links"  href="@Url.Action("show", "company", new { id = product.ID })" title="@(product.Name)" >
                                         <strong>@(product.Name)</strong>
                                     </a>
                                     <div class="products-title-info">
@@ -168,7 +145,7 @@
 
                                 <div class="products-img">
                                     <div class="products-img-container">
-                                        <a href="@Url.Action("index", "show", new { id = product.ID })" title="@(product.Name)">
+                                        <a href="@Url.Action("show", "company", new { id = product.ID })" title="@(product.Name)">
                                             <img alt="@(product.Name)" title="@(product.Name)" src="@product.FocusImgUrl" >
                                         </a>
                                     </div>
@@ -176,7 +153,7 @@
 
                                 <div class="products-details">
                                     @(product.Description.Length > 150 ? product.Description.Substring(0, 150) + "..." : product.Description)
-                                    <a class="fg-color-red"  href="@Url.Action("index", "show", new { id = product.ID })" >[详细]</a>
+                                    <a class="fg-color-red"  href="@Url.Action("show", "company", new { id = product.ID })" >[详细]</a>
                                 </div>
                                 <div class="products-footer">
                                     <span class="mr5">所在城市: @product.CityCateName.Replace(",", " - ")</span>

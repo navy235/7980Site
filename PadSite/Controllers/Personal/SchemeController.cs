@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Collections.Specialized;
 using PadSite.ViewModels;
 using Maitonn.Core;
 using PadSite.Models;
@@ -13,7 +14,7 @@ using PadSite.Service.Interface;
 using PadSite.Setting;
 using Kendo.Mvc.UI;
 using Kendo.Mvc.Extensions;
-
+using StackExchange.Profiling;
 namespace PadSite.Controllers
 {
 
@@ -39,6 +40,7 @@ namespace PadSite.Controllers
         private IFavoriteService FavoriteService;
         private ISchemeItemService SchemeItemService;
         private ISchemeService SchemeService;
+        private IOutDoorLuceneService OutDoorLuceneService;
         public SchemeController(
             IMemberService MemberService,
             IEmailService EmailService,
@@ -58,7 +60,8 @@ namespace PadSite.Controllers
             IPeriodCateService PeriodCateService,
             IFavoriteService FavoriteService,
             ISchemeItemService SchemeItemService,
-            ISchemeService SchemeService
+            ISchemeService SchemeService,
+            IOutDoorLuceneService OutDoorLuceneService
 
             )
         {
@@ -81,6 +84,7 @@ namespace PadSite.Controllers
             this.FavoriteService = FavoriteService;
             this.SchemeItemService = SchemeItemService;
             this.SchemeService = SchemeService;
+            this.OutDoorLuceneService = OutDoorLuceneService;
         }
 
         public ActionResult Index()
@@ -101,7 +105,7 @@ namespace PadSite.Controllers
             var memberID = CookieHelper.MemberID;
 
             var model = (from s in SchemeItemService.GetALL()
-                         join o in OutDoorService.GetALL().Where(x => x.MemberID == memberID && x.Status >= (int)OutDoorStatus.ShowOnline) on s.MediaID equals o.ID
+                         join o in OutDoorService.GetALL().Where(x => x.Status >= (int)OutDoorStatus.ShowOnline) on s.MediaID equals o.ID
                          where s.SchemeID == schemeID
                          select new SchemeMediaViewModel()
                          {
@@ -155,9 +159,26 @@ namespace PadSite.Controllers
 
         public ActionResult Print(int id)
         {
-
-            var scheme = SchemeService.GetALL().Include(x => x.SchemeItem).Single(x => x.ID == id);
-            return View(scheme);
+            var scheme = SchemeService.Find(id);
+            var mediaIds = SchemeItemService.GetALL().Where(x => x.SchemeID == id).Select(x => x.MediaID).ToList();
+            var list = new List<LinkItem>();
+            if (mediaIds.Any())
+            {
+                using (MiniProfiler.Current.Step("LuceneSearch"))
+                {
+                    list = OutDoorLuceneService.Search(mediaIds);
+                }
+            }
+            var model = new SchemePrintViewModel()
+            {
+                ID = scheme.ID,
+                Medias = list,
+                AddTime = scheme.AddTime,
+                Description = scheme.Description,
+                Name = scheme.Name
+            };
+            //return View(scheme);
+            return View(model);
 
         }
 
@@ -212,7 +233,7 @@ namespace PadSite.Controllers
 
         public ActionResult Edit(int id)
         {
-            ViewBag.MenuItem = "scheme-index";
+            ViewBag.MenuItem = "scheme-media";
 
             var scheme = SchemeService.Find(id);
 
@@ -230,7 +251,7 @@ namespace PadSite.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(SchemeAddViewModel model)
         {
-            ViewBag.MenuItem = "scheme-index";
+            ViewBag.MenuItem = "scheme-media";
             ServiceResult result = new ServiceResult();
             TempData["Service_Result"] = result;
             if (ModelState.IsValid)
@@ -272,7 +293,7 @@ namespace PadSite.Controllers
         public ActionResult GetEditSchemeForm(int id)
         {
             var model = (from s in SchemeItemService.GetALL()
-                         join o in OutDoorService.GetALL().Where(x => x.MemberID == CookieHelper.MemberID && x.Status >= (int)OutDoorStatus.ShowOnline) on s.MediaID equals o.ID
+                         join o in OutDoorService.GetALL().Where(x => x.Status >= (int)OutDoorStatus.ShowOnline) on s.MediaID equals o.ID
                          select new EditSchemeMediaViewModel()
                          {
                              ID = s.ID,
@@ -284,7 +305,6 @@ namespace PadSite.Controllers
                              SchemeID = s.SchemeID,
                              StartTime = s.StartTime,
                              Uprice = o.Price
-
                          }).Single(x => x.ID == id);
             return View(model);
         }

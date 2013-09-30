@@ -1,0 +1,282 @@
+﻿@model SchemePrintViewModel
+@{
+    ViewBag.Title = "Print";
+    Layout = null;
+}
+@using StackExchange.Profiling;
+<!DOCTYPE html>
+<html>
+<head>
+    @this.InitClientTimings()
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=497ff27739928a1aa7617446f02f6998"></script>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-size: small;
+            color: #222;
+            font-family: arial,sans-serif;
+        }
+
+        .print-container {
+            width: 990px;
+            margin: 0 auto;
+        }
+
+
+
+        .print-item {
+            margin: 50px 0;
+            page-break-after: always;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border-bottom: 1px dashed #ccc;
+            font-family: microsoft yahei,"宋体",Arial, Helvetica;
+        }
+
+            table td {
+                padding: 7px 10px;
+                border-bottom: 1px dashed #ccc;
+                border-right: 1px dashed #ccc;
+            }
+
+        .table-title {
+            height: 35px;
+            line-height: 34px;
+            overflow: hidden;
+            text-align: left;
+            margin-top: -1px;
+        }
+
+            .table-title td {
+                border-bottom: 0;
+                padding: 0;
+                margin: 0;
+                border-right: none;
+            }
+
+                .table-title td .table-title-text {
+                    width: 100%;
+                    display: block;
+                    font-weight: bold;
+                    font-size: 20px;
+                    border-bottom: 2px solid #aaa;
+                    padding: 10px 0;
+                    position: relative;
+                }
+
+        .print-control {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+
+            .print-control a {
+                color: #222;
+                text-decoration: none;
+            }
+
+                .print-control a span {
+                    color: #ff6a00;
+                    margin-right: 5px;
+                }
+
+        .table-tips {
+            width: 99px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .table-half {
+            width: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="print-container">
+        <div class="print-top print-item">
+            <table>
+                <tr class="table-title">
+                    <td colspan="2"><span class="table-title-text">@(ConfigSetting.SiteName)媒体方案打印
+                        <div class="print-control">
+                            <a class="k-button k-button-icontext " href="javascript:void(0);" onclick="window.print();"><span class="icon-print"></span>打印方案</a>
+                        </div>
+                    </span>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-tips">方案名称</td>
+                    <td>@Model.Name</td>
+                </tr>
+                <tr>
+                    <td class="table-tips">方案描述</td>
+                    <td>@Model.Description</td>
+                </tr>
+            </table>
+        </div>
+
+        @for (var i = 0; i < Model.Medias.Count; i++)
+        {
+            var item = Model.Medias[i];
+            
+            <div class="print-item">
+                <table>
+                    <tr class="table-title">
+                        <td colspan="4"><span class="table-title-text">@(i + 1)、@item.Name</span></td>
+                    </tr>
+                    <tr>
+                        <td class="table-half" colspan="2">
+                            <img src="@UIHelper.GetImgUrl(item.FocusImgUrl, ImgUrlType.Img430)" /></td>
+                        <td class="table-half" colspan="2">
+                            <img src="http://api.map.baidu.com/staticimage?center=@(item.Lng),@(item.Lat)&width=430&height=430&zoom=11&markers=@(item.Lng),@(item.Lat)" /></td>
+                    </tr>
+                    <tr>
+                        <td class="table-tips">媒体地区
+                        </td>
+                        <td>@item.CityCateName.Replace(",", " - ") </td>
+                        <td class="table-tips">媒体地区
+                        </td>
+                        <td>@item.MediaCateName.Replace(",", " - ") </td>
+                    </tr>
+                    <tr>
+                        <td class="table-tips">媒体形式
+                        </td>
+                        <td>@item.FormatName</td>
+                        <td class="table-tips">照明情况
+                        </td>
+                        @if (item.HasLight)
+                        {
+                            <td>
+                                <span>@UIHelper.GetTime(item.LightStart.ToString())-@UIHelper.GetTime(item.LightEnd.ToString())
+                                </span></td>
+                        }
+                        else
+                        {
+                            <td><span>无</span></td>
+                        }
+                    </tr>
+                    <tr>
+                        <td class="table-tips">刊例价格</td>
+
+
+                        <td>@if (item.Price == 99999)
+                            {
+                            <b class="fg-color-red">面议  </b>
+                            }
+                            else
+                            {
+                            <b class="fg-color-red">¥@item.Price 万元/年 </b>
+                            }</td>
+                        <td class="table-tips">最短购买</td>
+                        <td>@item.PeriodName</td>
+                    </tr>
+                    <tr>
+                        <td class="table-tips">所有权类型</td>
+                        <td>@item.OwnerName </td>
+                        <td class="table-tips">媒体规格</td>
+                        <td>
+                            @if (item.IsRegular)
+                            { 
+                                <span>@(item.Width)米*@(item.Width)米*@(item.Width)面</span><br />
+                                <span>总面积=@(item.TotalArea)平方米</span>
+                            }
+                            else
+                            {
+                                var areaParams = item.IrRegularArea.Split('|');
+                                for (var j = 1; j < areaParams.Length; j += 2)
+                                { 
+                                <span>@(areaParams[j])米*@(areaParams[j + 1])米*1面</span><br />
+                                }
+                                <span>总面积=@item.TotalArea 平方米</span>
+                            }
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td class="table-tips">媒体档期开始</td>
+
+                        <td colspan="3">
+                            @(item.DeadLine.CompareTo(DateTime.Now) > 0 ? item.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")
+                        </td>
+                    </tr>
+                    <tr class="compare-table-title">
+                        <td colspan="6"><span>环境信息</span></td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-tips">具体位置</td>
+
+                        <td>@item.Location </td>
+
+                        <td class="table-tips">所属地区</td>
+
+                        <td>@item.CityCateName.Replace(",", " - ") </td>
+
+                    </tr>
+                    <tr>
+                        <td class="table-tips">所属商圈</td>
+
+                        <td>@item.AreaCate.Replace(",", " 、 ") </td>
+
+                        <td class="table-tips">投放周期</td>
+
+                        <td>@item.PeriodName </td>
+
+                    </tr>
+                    <tr>
+                        <td class="table-tips">人流量</td>
+
+                        <td>@item.TrafficPerson  万人/天</td>
+
+                        <td class="table-tips">车流量</td>
+
+                        <td>@item.TrafficAuto 万辆/天</td>
+
+                    </tr>
+
+                    <tr class="compare-table-title">
+                        <td colspan="6"><span>补充信息</span></td>
+                    </tr>
+
+                    <tr>
+                        <td class="table-tips">受众人群</td>
+
+                        <td>@item.CrowdCate.Replace(",", " 、 ") </td>
+
+                        <td class="table-tips">投放行业</td>
+
+                        <td>@item.IndustryCate.Replace(",", " 、 ") </td>
+
+                    </tr>
+
+                    <tr>
+                        <td class="table-tips">投放目的</td>
+
+                        <td colspan="3">@item.PurposeCate.Replace(",", " 、 ") </td>
+
+                    </tr>
+                </table>
+            </div>
+        }
+    </div>
+    @MiniProfiler.RenderIncludes(position: RenderPosition.Right, showTrivial: false, showTimeWithChildren: false)
+</body>
+</html>

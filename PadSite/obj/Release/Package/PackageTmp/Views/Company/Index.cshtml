@@ -97,7 +97,7 @@
                 {
                     <div id="map-contact" class="map-container">
                     </div>
-                    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=8E9B4Db1D0648facf0f8d3f3a2092ae8"></script>
+                    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=497ff27739928a1aa7617446f02f6998"></script>
                     <script type="text/javascript">
                         $(function () {
                             var lat = '@Model.Lat';
@@ -157,7 +157,7 @@
                             <div class="products-item">
 
                                 <div class="products-title">
-                                    <a class="products-title-links"  href="@Url.Action("index", "show", new { id = product.ID })" title="@(product.Name)" >
+                                    <a class="products-title-links"  href="@Url.Action("show", "company", new { id = product.ID })" title="@(product.Name)" >
                                         <strong>@(product.Name)</strong>
                                     </a>
                                     <div class="products-title-info">
@@ -168,7 +168,7 @@
 
                                 <div class="products-img">
                                     <div class="products-img-container">
-                                        <a href="@Url.Action("index", "show", new { id = product.ID })" title="@(product.Name)">
+                                        <a href="@Url.Action("show", "company", new { id = product.ID })" title="@(product.Name)">
                                             <img alt="@(product.Name)" title="@(product.Name)" src="@product.FocusImgUrl" >
                                         </a>
                                     </div>
@@ -176,7 +176,7 @@
 
                                 <div class="products-details">
                                     @(product.Description.Length > 150 ? product.Description.Substring(0, 150) + "..." : product.Description)
-                                    <a class="fg-color-red"  href="@Url.Action("index", "show", new { id = product.ID })" >[详细]</a>
+                                    <a class="fg-color-red"  href="@Url.Action("show", "company", new { id = product.ID })" >[详细]</a>
                                 </div>
                                 <div class="products-footer">
                                     <span class="mr5">所在城市: @product.CityCateName.Replace(",", " - ")</span>
