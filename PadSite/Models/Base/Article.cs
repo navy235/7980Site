@@ -29,6 +29,8 @@ namespace PadSite.Models
 
         public int ArticleCode { get; set; }
 
+        public string ArticleCodeValue { get; set; }
+
         public DateTime AddTime { get; set; }
 
         public DateTime LastTime { get; set; }

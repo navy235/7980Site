@@ -108,6 +108,9 @@ namespace PadSite
             kernel.Bind<IEmailService>().To<EmailService>().InRequestScope();
             #endregion
 
+            #region article
+            kernel.Bind<IArticleService>().To<ArticleService>().InRequestScope();
+            #endregion
 
         }
     }

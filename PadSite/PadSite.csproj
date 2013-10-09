@@ -59,10 +59,6 @@
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Maitonn.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>Binaries\Maitonn.Core.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="MiniProfiler">
       <HintPath>..\packages\MiniProfiler.2.1.0\lib\net40\MiniProfiler.dll</HintPath>
@@ -173,11 +169,13 @@
     <Compile Include="App_Start\NinjectBinding.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\Admin\Article\ArticleController.cs" />
     <Compile Include="Controllers\Admin\Category\OwnerCateController.cs" />
     <Compile Include="Controllers\Admin\Category\CrowdCateController.cs" />
     <Compile Include="Controllers\Admin\Category\AreaCateController.cs" />
     <Compile Include="Controllers\Admin\Category\IndustryCateController.cs" />
     <Compile Include="Controllers\Admin\Category\PurposeCateController.cs" />
+    <Compile Include="Controllers\Admin\ImageBrowserController.cs" />
     <Compile Include="Controllers\Admin\Member\BizVerifyController.cs" />
     <Compile Include="Controllers\Admin\Member\MediaVerifyController.cs" />
     <Compile Include="Controllers\Admin\Member\MemberController.cs" />
@@ -215,13 +213,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201309220303319_AddMediaScheme.cs" />
-    <Compile Include="Migrations\201309220303319_AddMediaScheme.Designer.cs">
-      <DependentUpon>201309220303319_AddMediaScheme.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201309220307462_AddMediaFavorite.cs" />
-    <Compile Include="Migrations\201309220307462_AddMediaFavorite.Designer.cs">
-      <DependentUpon>201309220307462_AddMediaFavorite.cs</DependentUpon>
+    <Compile Include="Migrations\201310090900381_AddField.cs" />
+    <Compile Include="Migrations\201310090900381_AddField.Designer.cs">
+      <DependentUpon>201310090900381_AddField.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Base\Article.cs" />
@@ -253,6 +247,7 @@
     <Compile Include="Models\Media\SchemeItem.cs" />
     <Compile Include="Models\Message\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Article\ArticleService.cs" />
     <Compile Include="Service\Category\CityCateService.cs" />
     <Compile Include="Service\Category\OwnerCateService.cs" />
     <Compile Include="Service\Category\AreaCateService.cs" />
@@ -264,6 +259,7 @@
     <Compile Include="Service\Company\CompanyNoticeService.cs" />
     <Compile Include="Service\Company\CompanyMessageService.cs" />
     <Compile Include="Service\Email\EmailService.cs" />
+    <Compile Include="Service\Interface\Article\IArticleService.cs" />
     <Compile Include="Service\Interface\Category\IOwnerCateService.cs" />
     <Compile Include="Service\Interface\Category\IAreaCateService.cs" />
     <Compile Include="Service\Interface\Category\ICrowdCateService.cs" />
@@ -302,6 +298,8 @@
     <Compile Include="Service\Media\SchemeService.cs" />
     <Compile Include="Service\Media\SchemeItemService.cs" />
     <Compile Include="ViewModels\Admin\DashBoardViewModel.cs" />
+    <Compile Include="ViewModels\Article\ArticleViewModel.cs" />
+    <Compile Include="ViewModels\Article\HelpViewModel.cs" />
     <Compile Include="ViewModels\Home\LinkItemTree.cs" />
     <Compile Include="ViewModels\Home\QuerySort.cs" />
     <Compile Include="ViewModels\Home\QuerySource.cs" />
@@ -789,21 +787,30 @@
     <Content Include="Views\Map\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutMap.cshtml" />
     <Content Include="Views\Scheme\Print.cshtml" />
+    <Content Include="Views\Article\Index.cshtml" />
+    <Content Include="Views\Article\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RichEditor.cshtml" />
+    <Content Include="Views\Article\Edit.cshtml" />
+    <Content Include="Views\Shared\_LayoutHelp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
+    <Folder Include="Content\shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201309220303319_AddMediaScheme.resx">
-      <DependentUpon>201309220303319_AddMediaScheme.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201310090900381_AddField.resx">
+      <DependentUpon>201310090900381_AddField.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201309220307462_AddMediaFavorite.resx">
-      <DependentUpon>201309220307462_AddMediaFavorite.cs</DependentUpon>
-    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\WebSite\Maitonn.Core\Maitonn.Core.csproj">
+      <Project>{8404c3a7-9f29-4c74-9913-165bae8c86db}</Project>
+      <Name>Maitonn.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

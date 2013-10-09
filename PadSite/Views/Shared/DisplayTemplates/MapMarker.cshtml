@@ -8,7 +8,7 @@
 
 <div id="@(name + "_container")" class="map-container">
 </div>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=497ff27739928a1aa7617446f02f6998"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=@ConfigSetting.MapKey"></script>
 <script type="text/javascript">
     $(function () {
         var lat = '@(String.IsNullOrEmpty(Model) ? string.Empty : Model.Split('|')[0])';

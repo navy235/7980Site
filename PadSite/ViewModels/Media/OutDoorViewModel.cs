@@ -182,7 +182,7 @@ namespace PadSite.ViewModels
         [Hint("媒体投放的应用目的")]
         public string PurposeCate { get; set; }
 
-        [Required(ErrorMessage = "请输入媒体补充说明.")]
+        //[Required(ErrorMessage = "请输入媒体补充说明.")]
         [Display(Name = "补充说明")]
         [DataType(DataType.MultilineText)]
         [StringCheckLength(4, 1000)]

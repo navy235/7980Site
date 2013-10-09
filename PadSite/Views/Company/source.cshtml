@@ -45,7 +45,7 @@
 
                     <a href="@Url.Action("intro", new { id = Model.ID })">@Model.Name</a>
                     <br />
-                    <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "先生" : "女士")
+                    <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "女士" : "先生")
                     <br />
                     <span class="fg-color-gray">所在地区:</span> @Model.CityName
                 </div>
@@ -71,7 +71,7 @@
                 <h3>联系方式</h3>
             </div>
             <div class="m-content clearfix">
-                <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "先生" : "女士")<br />
+                <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "女士" : "先生")<br />
                 <span class="fg-color-gray">电话:</span> @Model.Phone
                 <br />
                 <span class="fg-color-gray">手机:</span> @Model.Mobile

@@ -26,6 +26,8 @@ namespace PadSite.Setting
 
         public static string SiteName { get; set; }
 
+        public static string MapKey { get; set; }
+
         static ConfigSetting()
         {
             Default_AvtarUrl = ConfigurationManager.AppSettings["Default_AvtarUrl"];
@@ -36,6 +38,7 @@ namespace PadSite.Setting
             ActiveEmailTimeDiffHour = Convert.ToInt32(ConfigurationManager.AppSettings["ActiveEmailTimeDiffHour"]);
             DomainUrl = ConfigurationManager.AppSettings["LocalDomain"];
             SiteName = ConfigurationManager.AppSettings["SiteName"];
+            MapKey = ConfigurationManager.AppSettings["MapKey"];
         }
     }
 }

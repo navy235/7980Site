@@ -134,8 +134,12 @@ D:\GitProject\7980Site\PadSite\bin\zh-Hans\System.Web.WebPages.resources.dll
 D:\GitProject\7980Site\PadSite\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 D:\GitProject\7980Site\PadSite\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
 D:\GitProject\7980Site\PadSite\obj\Release\PadSite.csprojResolveAssemblyReference.cache
-D:\GitProject\7980Site\PadSite\obj\Release\PadSite.Migrations.AddMediaScheme.resources
-D:\GitProject\7980Site\PadSite\obj\Release\PadSite.Migrations.AddMediaFavorite.resources
 D:\GitProject\7980Site\PadSite\obj\Release\PadSite.csproj.GenerateResource.Cache
 D:\GitProject\7980Site\PadSite\obj\Release\PadSite.dll
 D:\GitProject\7980Site\PadSite\obj\Release\PadSite.pdb
+D:\GitProject\7980Site\PadSite\bin\Yahoo.Yui.Compressor.dll
+D:\GitProject\7980Site\PadSite\bin\EcmaScript.NET.dll
+D:\GitProject\7980Site\PadSite\bin\Iesi.Collections.dll
+D:\GitProject\7980Site\PadSite\bin\Maitonn.Core.pdb
+D:\GitProject\7980Site\PadSite\bin\Iesi.Collections.xml
+D:\GitProject\7980Site\PadSite\obj\Release\PadSite.Migrations.AddField.resources

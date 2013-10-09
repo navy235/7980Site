@@ -151,6 +151,7 @@ jQuery.validator.unobtrusive.adapters.add("stringchecklength", ['minlength', 'ma
 jQuery.validator.addMethod('stringchecklength', function (value, element, params) {
   var stringlength = 0;
   var strArray = value.split('');
+  var isRequired = $(element).data('val-required');
   for (var i = 0; i < strArray.length; i++) {
     if (strArray[i].charCodeAt(0) < 299) {
       stringlength++;
@@ -158,7 +159,12 @@ jQuery.validator.addMethod('stringchecklength', function (value, element, params
       stringlength += 2;
     }
   }
-  return stringlength <= params.maxlength && stringlength >= params.minlength;
+  if (isRequired) {
+    return stringlength <= params.maxlength && stringlength >= params.minlength;
+  }
+  else {
+    return true;
+  }
 });
 
 

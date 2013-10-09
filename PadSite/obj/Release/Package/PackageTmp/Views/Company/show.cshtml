@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_LayoutCompany.cshtml";
 }
 @section topscripts{
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=497ff27739928a1aa7617446f02f6998"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=@ConfigSetting.MapKey"></script>
 }
 
 <div class="company-brand">
@@ -49,7 +49,7 @@
                     </div>
                     <a href="@Url.Action("intro", new { id = Model.ID })">@Model.Name</a>
                     <br />
-                    <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "先生" : "女士")
+                    <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "女士" : "先生")
                     <br />
                     <span class="fg-color-gray">所在地区:</span> @Model.CityName
                 </div>
@@ -75,7 +75,7 @@
                 <h3>联系方式</h3>
             </div>
             <div class="m-content clearfix">
-                <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "先生" : "女士")<br />
+                <span class="fg-color-gray">联系人:</span> @Model.LinkMan @(Model.Sex ? "女士" : "先生")<br />
                 <span class="fg-color-gray">电话:</span> @Model.Phone
                 <br />
                 <span class="fg-color-gray">手机:</span> @Model.Mobile
@@ -205,7 +205,14 @@
                     <div class="details-nav">
                         <span class="active  details-goods" data-id="goods-details">媒体详情</span>
                         <span class="details-position" data-id="goods-position">位置信息</span>
-                        <span class="details-credentials" data-id="goods-credentials">相关证书</span>
+                        @if (!string.IsNullOrEmpty(Model.Links.CredentialsImg))
+                        {
+                            <span class="details-credentials" data-id="goods-credentials">相关证书</span>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Links.VideoUrl))
+                        {
+                            <span class="details-video" data-id="goods-video">地段视频</span>
+                        }
                         <span class="details-feedback" data-id="goods-feedback">留言咨询</span>
                         <a href="javascript:;" class="k-button btn-addscheme">
                             <i class="icon-briefcase "></i>&nbsp;&nbsp;加入方案</a>
@@ -298,25 +305,30 @@
                             </script>
                         </div>
                     </div>
-                    <div class="goods-credentials" id="goods-credentials">
-                        <h3 class="goods-head goods-comment"><i class="icon-maitonn icon-credit-card"></i>相关证书</h3>
-                        @if (!string.IsNullOrEmpty(Model.Links.CredentialsImg))
-                        {
-                            for (var i = 0; i < Model.Links.CredentialsImg.Split(',').Length; i++)
+                    @if (!string.IsNullOrEmpty(Model.Links.CredentialsImg))
+                    {
+                        <div class="goods-credentials" id="goods-credentials">
+                            <h3 class="goods-head goods-comment"><i class="icon-maitonn icon-credit-card"></i>相关证书</h3>
+
+                            @for (var i = 0; i < Model.Links.CredentialsImg.Split(',').Length; i++)
                             {
                                 var imgurl = Model.Links.CredentialsImg.Split(',')[i];
-                            <div class="goods-img-box">
-                                <img src="@UIHelper.GetImgUrl(imgurl, ImgUrlType.Img800)" />
-                            </div>
+                                <div class="goods-img-box">
+                                    <img src="@UIHelper.GetImgUrl(imgurl, ImgUrlType.Img800)" />
+                                </div>
                             }
 
-                        }
-                        else
-                        {
-                            <div class="goods-img-box">该媒体没有上传媒体证书</div>
-                        }
-                    </div>
-
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(Model.Links.VideoUrl))
+                    {
+                        <div class="goods-video" id="goods-video">
+                            <h3 class="goods-head goods-comment"><i class="icon-maitonn icon-video"></i>地段视频</h3>
+                            <div class="goods-img-box">
+                                <embed src="@Model.Links.VideoUrl"  allowfullscreen="true" quality="high"  align="middle" allowscriptaccess="always" width="720" height="500" type="application/x-shockwave-flash" />
+                            </div>
+                        </div>
+                    }
                     <div class="goods-feedback" id="goods-feedback" data-show="1">
                         <h3 class="goods-head goods-feedback-bg"><i class="icon-maitonn icon-comment"></i>留言咨询</h3>
                         <div class="goods-feedback-container clearfix">
