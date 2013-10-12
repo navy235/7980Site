@@ -106,14 +106,18 @@
       function initFormItem(formitem) {
         var decimalsInputs = formitem.find('.form-areas-decimals');
         $.each(decimalsInputs, function (index, item) {
-          $(item).kendoNumericTextBox(          {
-            "spin": areaChange,            "change": areaChange
+          $(item).kendoNumericTextBox(
+          {
+            "spin": areaChange,
+            "change": areaChange
           }).attr({ "min": 0 });
         })
         var intInputs = formitem.find('.form-areas-int');
         $.each(intInputs, function (index, item) {
-          $(item).kendoNumericTextBox(              {
-                "spin": areaChange,                "change": areaChange, "format": "n0", "decimals": 0
+          $(item).kendoNumericTextBox(
+              {
+                "spin": areaChange,
+                "change": areaChange, "format": "n0", "decimals": 0
               }).attr({ "min": 1 });
         })
       }
@@ -140,6 +144,7 @@
             totalAreas += (params[i] * params[i + 1])
           }
         }
+        totalAreas = totalAreas.toFixed(2);
         $('#' + id + ps.resultId).html(totalAreas);
         $('#' + id).val(params.join('|'));
         that.parents('form:first').validate().element('#' + id);

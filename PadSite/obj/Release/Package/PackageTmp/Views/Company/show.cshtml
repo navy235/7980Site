@@ -84,30 +84,8 @@
                 @if (Model.Lat != 0)
                 {
                     <div id="map-contact" class="map-container">
+                        <img src="http://api.map.baidu.com/staticimage?center=@(Model.Lng),@(Model.Lat)&width=191&height=203&zoom=11&markers=@(Model.Lng),@(Model.Lat)" />
                     </div>
-                    <script type="text/javascript">
-                        $(function () {
-                            var lat = '@Model.Lat';
-                            var lng = '@Model.Lng';
-                            var point = new BMap.Point(116.404, 39.915);
-                            if (lng != '' && lng != '0' && lat != '0') {
-                                point = new BMap.Point(new Number(lng), new Number(lat));
-                            }
-                            var map;
-                            map = new BMap.Map("map-contact");
-                            map.centerAndZoom(point, 16);
-                            addMarker(point);
-                            function addMarker(point) {
-                                var myIcon = new BMap.Icon("http://api.map.baidu.com/img/markers.png", new BMap.Size(23, 25), {
-                                    offset: new BMap.Size(0, 0),
-                                    imageOffset: new BMap.Size(0, 0 - 10 * 25)
-                                });
-                                var marker = new BMap.Marker(point, { icon: myIcon });
-                                map.addOverlay(marker);
-                                return marker;
-                            }
-                        })
-                    </script>
                 }
             </div>
         </div>
@@ -132,8 +110,8 @@
                                 @for (var i = 0; i < Model.Links.ImgUrl.Split(',').Length; i++)
                                 {
                                     var imgurl = Model.Links.ImgUrl.Split(',')[i];
-                                    <li class="@(i == 0 ? "zoomThumbActive" : "")">
-                                        <a href="javascript:;" rel="{gallery:'gal1', smallimage:'@UIHelper.GetImgUrl(imgurl, ImgUrlType.Img430)',largeimage:'@UIHelper.GetImgUrl(imgurl, ImgUrlType.Img800)'}">
+                                    <li>
+                                        <a href="javascript:;" class="@(i == 0 ? "zoomThumbActive" : "")" rel="{gallery:'gal1', smallimage:'@UIHelper.GetImgUrl(imgurl, ImgUrlType.Img430)',largeimage:'@UIHelper.GetImgUrl(imgurl, ImgUrlType.Img800)'}">
                                             <img src="@UIHelper.GetImgUrl(imgurl, ImgUrlType.Img120)"></a></li>
                                 }
 
@@ -163,7 +141,7 @@
                                     var totalLength=@Model.Links.ImgUrl.Split(',').Length;
                                     var marginLeft=parseInt($('#thumblist').css('marginLeft'));
                                     var itemWidth=$('#thumblist').children('li').eq(0).outerWidth(true);
-                                    if($(this).hasClass('details-scroll-up')){
+                                    if($(this).hasClass('details-scroll-down')){
                                         if(currentIndex+maxShowLength<totalLength){
                                             currentIndex++;
                                             $('#thumblist').css('marginLeft',(marginLeft-itemWidth)+'px');
@@ -323,7 +301,7 @@
                     @if (!string.IsNullOrEmpty(Model.Links.VideoUrl))
                     {
                         <div class="goods-video" id="goods-video">
-                            <h3 class="goods-head goods-comment"><i class="icon-maitonn icon-video"></i>地段视频</h3>
+                            <h3 class="goods-head goods-comment"><i class="icon-maitonn icon-facetime-video"></i>地段视频</h3>
                             <div class="goods-img-box">
                                 <embed src="@Model.Links.VideoUrl"  allowfullscreen="true" quality="high"  align="middle" allowscriptaccess="always" width="720" height="500" type="application/x-shockwave-flash" />
                             </div>

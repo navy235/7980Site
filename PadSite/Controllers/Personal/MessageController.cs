@@ -40,6 +40,7 @@ namespace PadSite.Controllers
         {
             ViewBag.MenuItem = "message-list";
             ViewBag.MessageType = UIHelper.MessageTypeList;
+            CookieHelper.ClearCookieMessage();
             return View();
         }
 

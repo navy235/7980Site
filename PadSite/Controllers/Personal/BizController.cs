@@ -245,6 +245,12 @@ namespace PadSite.Controllers
             {
                 try
                 {
+                    var filepath = Server.MapPath("~" + model.BannerImg);
+                    FileHelper.deleteImg(filepath, 120);
+                    FileHelper.deleteImg(filepath, 430);
+                    FileHelper.deleteImg(filepath, 800);
+                    FileHelper.deleteImg(FileHelper.GetImgCutpath(filepath));
+                    model.BannerImg = FileHelper.GetImgCutpath(model.BannerImg, 960);
                     CompanyService.SaveBanner(CookieHelper.MemberID, model);
                     result.Message = "企业横幅保存成功！";
                     return RedirectToAction("Banner");

@@ -143,3 +143,4 @@ D:\GitProject\7980Site\PadSite\bin\Iesi.Collections.dll
 D:\GitProject\7980Site\PadSite\bin\Maitonn.Core.pdb
 D:\GitProject\7980Site\PadSite\bin\Iesi.Collections.xml
 D:\GitProject\7980Site\PadSite\obj\Release\PadSite.Migrations.AddField.resources
+D:\GitProject\7980Site\PadSite\obj\Release\PadSite.Migrations.AddSuggestStatus.resources

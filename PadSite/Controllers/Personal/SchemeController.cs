@@ -160,8 +160,10 @@ namespace PadSite.Controllers
         public ActionResult Print(int id)
         {
             var scheme = SchemeService.Find(id);
-            var mediaIds = SchemeItemService.GetALL().Where(x => x.SchemeID == id).Select(x => x.MediaID).ToList();
+            var schemeItems = SchemeItemService.GetALL().Where(x => x.SchemeID == id);
+            var mediaIds = schemeItems.Select(x => x.MediaID).ToList();
             var list = new List<LinkItem>();
+            var currentPrice = schemeItems.Sum(x => x.Price);
             if (mediaIds.Any())
             {
                 using (MiniProfiler.Current.Step("LuceneSearch"))
@@ -177,6 +179,7 @@ namespace PadSite.Controllers
                 Description = scheme.Description,
                 Name = scheme.Name
             };
+            ViewBag.currentPrice = currentPrice.ToString("F2");
             //return View(scheme);
             return View(model);
 

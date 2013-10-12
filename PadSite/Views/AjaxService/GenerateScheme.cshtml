@@ -1,0 +1,73 @@
+﻿@{
+    Layout = null;
+}
+@model List<LinkItem>
+
+@if (Model.Any())
+{
+    
+    <input type="hidden" id="mediaIds" name="mediaIds" value="@string.Join(",", Model.Select(x => x.ID))" />
+    <table>
+        <tr class="table-title">
+            <td style="text-align: left;"><span class="table-title-text">媒体条目 （ <b class="fg-color-red">@Model.Count</b> ） </span></td>
+            <td style="text-align: right;"><span class="table-title-text">总价 <b class="fg-color-red">@ViewBag.currentPrice</b> 万元</span></td>
+        </tr>
+    </table>
+    <div class="">
+        <table>
+            <tr class="table-title">
+                <td style="width: 80px"><span class="table-title-text">媒体编号</span></td>
+                <td style="width: 200px"><span class="table-title-text">媒体名称</span></td>
+                <td style="width: 130px"><span class="table-title-text">媒体图片</span></td>
+                <td><span class="table-title-text">媒体规格</span></td>
+                <td><span class="table-title-text">媒体档期</span></td>
+                <td><span class="table-title-text">媒体刊例</span></td>
+            </tr>
+            @for (var i = 0; i < Model.Count; i++)
+            {
+                var item = Model[i];
+                <tr>
+                    <td>@item.ID</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <img src="@UIHelper.GetImgUrl(item.FocusImgUrl, ImgUrlType.Img120)" /></td>
+                    <td>@if (item.IsRegular)
+                        { 
+                        <span>@(item.Width)米*@(item.Width)米*@(item.Width)面</span><br />
+                        <span>总面积=@(item.TotalArea)平方米</span>
+                        }
+                        else
+                        {
+                            var areaParams = item.IrRegularArea.Split('|');
+                            for (var j = 1; j < areaParams.Length; j += 2)
+                            { 
+                        <span>@(areaParams[j])米*@(areaParams[j + 1])米*1面</span><br />
+                            }
+                        <span>总面积=@item.TotalArea 平方米</span>
+                        }</td>
+                    <td>@(item.DeadLine.CompareTo(DateTime.Now) > 0 ? item.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")</td>
+                    <td>@if (item.Price == 99999)
+                        {
+                        <b class="fg-color-red">面议  </b>
+                        }
+                        else
+                        {
+                        <b class="fg-color-red">¥@item.Price 万元/年 </b>
+                        }</td>
+                </tr>
+            }
+            <tr class="table-footer">
+                <td colspan="6">
+                    <button class="k-button mr20" type="button" id="btn-download"><i class="icon-save mr10"></i>下载方案</button>
+                    <button class="k-button" type="button" id="btn-print"><i class="icon-print mr10"></i>打印方案</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+else
+{
+    <div class="print-empty">
+        <i class="icon-maitonn icon-exclamation-sign auth-error-type"></i>没有符合方案的资源，尝试减少搜索条件！
+    </div>
+}

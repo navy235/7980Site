@@ -70,8 +70,8 @@
                                 <strong>@(product.Name)</strong>  [@product.CityCateName.Replace(",", " - ")]
                             </a>
                             <div class="products-title-info">
-                                <span class="mr5 ">媒体分类： @product.MediaCateName.Replace(",", " - ")</span>
-                                <span class="mr5 ">表现形式： @(product.FormatName)</span>
+                                <span class="mr5 fg-color-gray">[@product.MediaCateName.Replace(",", "-")]</span>
+                                <span class="mr5 fg-color-gray">[@(product.FormatName)]</span>
                             </div>
                         </div>
                         <div class="products-img">
@@ -89,8 +89,8 @@
                             <div class="products-footer-company">
                                 <a class="pull-left" href="@Url.Action("index", "company", new { id = product.MemberID })">@product.CompanyName</a>
                                 <button class="k-button btn-compare mr10 " type="button"  data-title="@product.Name" data-value="@product.ID" >
-                                    <i class="icon-maitonn icon-retweet"></i>对比方案</button>
-                               @* <button class="k-button btn-addScheme  " type="button"  data-title="@product.Name"   data-value="@product.ID" ><i class="icon-maitonn icon-briefcase"></i>加入方案</button>*@
+                                    <i class="icon-maitonn icon-retweet"></i>加入对比</button>
+                                @* <button class="k-button btn-addScheme  " type="button"  data-title="@product.Name"   data-value="@product.ID" ><i class="icon-maitonn icon-briefcase"></i>加入方案</button>*@
                             </div>
                             <span class="mr5 fg-color-gray">刊例：
                                     @if (product.Price == 99999)

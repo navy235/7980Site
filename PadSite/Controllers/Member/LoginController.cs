@@ -163,9 +163,9 @@ namespace PadSite.Controllers
         public ActionResult QQ()
         {
             //应用的APPID
-            string app_id = "100314725";
+            string app_id = ConfigSetting.QQAppID;
             //应用的APPKEY
-            string app_secret = "04080cd408e3a9e5c5a562db2e160678";
+            string app_secret = ConfigSetting.QQKey;
             //成功授权后的回调地址
             string my_url = string.Format("http://www.{0}/login/qq", ConfigSetting.DomainUrl);
 
@@ -250,7 +250,7 @@ namespace PadSite.Controllers
                     NameValueCollection userProfile = ParseJson(response_profile);
                     OpenUser.NickName = userProfile["nickname"].ToString();
                     Session["registerAuto"] = OpenUser;
-                    return RedirectToAction("RegAuto", "Register");
+                    return RedirectToAction("RegAuto", "Reg");
                 }
 
             }
@@ -269,9 +269,9 @@ namespace PadSite.Controllers
         public ActionResult Sina()
         {
             //应用的APPID 
-            string app_id = "536362505";
+            string app_id = ConfigSetting.SinaAppID;
             //应用的APPKEY 
-            string app_secret = "0378c9aabc8a757d124cb01c1e9c04bf";
+            string app_secret = ConfigSetting.SinaKey;
             //成功授权后的回调地址 
 
             string my_url = string.Format("http://www.{0}/login/sina", ConfigSetting.DomainUrl);
@@ -326,7 +326,7 @@ namespace PadSite.Controllers
                     NameValueCollection userProfile = ParseJson(response_profile);
                     OpenUser.NickName = userProfile["screen_name"].ToString();
                     Session["registerAuto"] = OpenUser;
-                    return RedirectToAction("RegAuto", "Register");
+                    return RedirectToAction("RegAuto", "Reg");
                 }
             }
             else
@@ -344,9 +344,9 @@ namespace PadSite.Controllers
         public ActionResult Taobao()
         {
             //应用的APPID 
-            string app_id = "21401739";
+            string app_id = ConfigSetting.TaboBaoAppID;
             //应用的APPKEY 
-            string app_secret = "04d68b746dccbf3499e23962f3557ad1";
+            string app_secret = ConfigSetting.TaboBaoKey;
 
             string my_url = string.Format("http://www.{0}/login/taobao", ConfigSetting.DomainUrl);
             //Step1：获取Authorization Code 
@@ -397,7 +397,7 @@ namespace PadSite.Controllers
                 else
                 {
                     Session["registerAuto"] = OpenUser;
-                    return RedirectToAction("RegAuto", "Register");
+                    return RedirectToAction("RegAuto", "Reg");
                 }
             }
             else
@@ -414,9 +414,9 @@ namespace PadSite.Controllers
         public ActionResult Douban()
         {
             //应用的APPID 
-            string app_id = "0a884abce749d7631f98e036b5dd8629";
+            string app_id = ConfigSetting.DouBanKey;
             //应用的APPKEY 
-            string app_secret = "1644cb8e38d733d2";
+            string app_secret = ConfigSetting.DouBanSecret;
             //成功授权后的回调地址 
 
             string my_url = string.Format("http://www.{0}/login/douban", ConfigSetting.DomainUrl);
@@ -470,7 +470,7 @@ namespace PadSite.Controllers
                     NameValueCollection userProfile = ParseJson(response_profile);
                     OpenUser.NickName = userProfile["name"].ToString();
                     Session["registerAuto"] = OpenUser;
-                    return RedirectToAction("RegAuto", "Register");
+                    return RedirectToAction("RegAuto", "Reg");
                 }
             }
             else
@@ -488,9 +488,9 @@ namespace PadSite.Controllers
         public ActionResult Renren()
         {
             //应用的APPID 
-            string app_id = "3110750b91874b708336d595355b1090";
+            string app_id = ConfigSetting.RenRenAPPKey;
             //应用的APPKEY 
-            string app_secret = "766220cde659449cbbe22bec8abda805";
+            string app_secret = ConfigSetting.RenRenSecretKey;
             //成功授权后的回调地址 
             string my_url = string.Format("http://www.{0}/login/renren", ConfigSetting.DomainUrl);
 
@@ -538,7 +538,7 @@ namespace PadSite.Controllers
                 else
                 {
                     Session["registerAuto"] = OpenUser;
-                    return RedirectToAction("RegAuto", "Register");
+                    return RedirectToAction("RegAuto", "Reg");
                 }
             }
             else

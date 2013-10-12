@@ -73,6 +73,8 @@ namespace PadSite.Service
 
         public int IsRegular { get; set; }
 
+        public int SuggestStatus { get; set; }
+
         public int Hit { get; set; }
 
         public decimal Price { get; set; }

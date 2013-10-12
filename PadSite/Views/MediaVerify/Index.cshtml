@@ -24,6 +24,7 @@
             command.Custom("查看详情").Click("Grid.showDetails");
             command.Custom("审核通过").Click("Grid.verifyPassCommand");
             command.Custom("审核不通过").Click("Grid.verifyFailedCommand");
+            command.Custom("审核不通过带审核原因").Click("Grid.verifyFailedWithReason");
 
         }).Title("操作");
 
@@ -69,6 +70,38 @@
 </text>)
 )
 
+
+@(Html.Kendo().Window().Name("reasonWindow")
+    .Title("不通过原因")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(530)
+    .Height(280)
+    .Scrollable(true)
+    .Content(@<text>
+<div class="reason-list">
+    <label class="reason-item">
+        <input type="radio" name="reason" value="1" checked="checked" />媒体资料内容有敏感词
+    </label>
+    <label class="reason-item">
+        <input type="radio" name="reason" value="2" />已经有相同的媒体资料
+    </label>
+    <label class="reason-item">
+        <input type="radio" name="reason" value="3" />资料内容不真实
+    </label>
+    <label class="reason-item">
+        <input type="radio" name="reason" value="0" />其他
+        <textarea name="reasontext"></textarea>
+    </label>
+    <input type="hidden" name="reasonIds" id="reasonIds" />
+</div>
+<div class="k-window-footer">
+    <button type="button" class="k-button" onclick="Grid.verifyWithReason(this);"><span class="k-icon k-i-close"></span>确定</button>
+</div>
+</text>)
+)
+
 <script type="text/javascript">
     var Grid = {
         id: 'Grid',
@@ -98,16 +131,20 @@
             $(element).find('.ajax-working').remove();
             $(element).removeClass('disabled');
         },
-        verify: function (element, url, Ids) {
+        verify: function (element, url, Ids, reason) {
             if ($(element).hasClass('disabled'))
                 return false;
             var self = Grid;
             if (Ids) {
                 self.addSpinner(element);
+                var data = { ids: Ids };
+                if (reason) {
+                    data.reason = reason;
+                }
                 $.ajax({
                     type: 'POST',
                     url: url,
-                    data: { ids: Ids },
+                    data: data,
                     success: function (res) {
                         Maitonn.JHelper.showMessage(res);
                         if (res.Success) {
@@ -119,6 +156,7 @@
                     complete: function () {
                         self.removeSpinner(element);
                         $("#Details").data("kendoWindow").close();
+                        $("#reasonWindow").data("kendoWindow").close();
                     }
                 })
             } else {
@@ -167,6 +205,30 @@
             var Ids = dataItem.ID;
             var element = e.currentTarget;
             self.verify(element, url, Ids);
+        },
+        verifyFailedWithReason: function (e) {
+            e.preventDefault();
+            var self = Grid;
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            $('#reasonIds').val(dataItem.ID);
+            $("#reasonWindow").data("kendoWindow").center().open();
+        },
+        verifyWithReason: function (element) {
+            var self = Grid;
+            var reason = self.getReason();
+            var Ids = $('#reasonIds').val();
+            var url = '@Url.Action("VerifyFailedWithReason", "mediaverify")';
+            self.verify(element, url, Ids, reason);
+        },
+        getReason: function () {
+            var reason = '';
+            var reasonValue = $('[name="reason"]:checked').val();
+            if (reasonValue == 0) {
+                reason = $('[name="reasontext"]').val();
+            } else {
+                reason = $('[name="reason"]:checked').parents('label').text();
+            }
+            return reason;
         }
     };
     $(function () {

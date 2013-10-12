@@ -158,6 +158,10 @@
             height: '298px'
           });
         }
+        $('#' + id + ps.previewId).css({
+          width: '100px',
+          height: '100px'
+        })
         setTimeout(function () {
           initJcrop();
         }, 200);

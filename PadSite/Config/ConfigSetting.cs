@@ -28,6 +28,28 @@ namespace PadSite.Setting
 
         public static string MapKey { get; set; }
 
+        public static string QQAppID { get; set; }
+
+        public static string QQKey { get; set; }
+
+        public static string TaboBaoAppID { get; set; }
+
+        public static string TaboBaoKey { get; set; }
+
+        public static string SinaAppID { get; set; }
+
+        public static string SinaKey { get; set; }
+
+        public static string RenRenAppID { get; set; }
+
+        public static string RenRenAPPKey { get; set; }
+
+        public static string RenRenSecretKey { get; set; }
+
+        public static string DouBanKey { get; set; }
+
+        public static string DouBanSecret { get; set; }
+
         static ConfigSetting()
         {
             Default_AvtarUrl = ConfigurationManager.AppSettings["Default_AvtarUrl"];
@@ -39,6 +61,19 @@ namespace PadSite.Setting
             DomainUrl = ConfigurationManager.AppSettings["LocalDomain"];
             SiteName = ConfigurationManager.AppSettings["SiteName"];
             MapKey = ConfigurationManager.AppSettings["MapKey"];
+
+            QQAppID = ConfigurationManager.AppSettings["QQAppID"];
+            QQKey = ConfigurationManager.AppSettings["QQKey"];
+
+            TaboBaoAppID = ConfigurationManager.AppSettings["TaboBaoAppID"];
+            TaboBaoKey = ConfigurationManager.AppSettings["TaboBaoKey"];
+            SinaAppID = ConfigurationManager.AppSettings["SinaAppID"];
+            SinaKey = ConfigurationManager.AppSettings["SinaKey"];
+            RenRenAppID = ConfigurationManager.AppSettings["RenRenAppID"];
+            RenRenAPPKey = ConfigurationManager.AppSettings["RenRenAPPKey"];
+            RenRenSecretKey = ConfigurationManager.AppSettings["RenRenSecretKey"];
+            DouBanKey = ConfigurationManager.AppSettings["DouBanKey"];
+            DouBanSecret = ConfigurationManager.AppSettings["DouBanSecret"];
         }
     }
 }

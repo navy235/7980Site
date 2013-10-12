@@ -817,6 +817,10 @@ select {
         display: block;
     }
 
+    .nav-block-item a.full-block:hover {
+        color: #fff;
+    }
+
 
 .action-info {
     position: fixed;

@@ -52,7 +52,7 @@ namespace PadSite.Models
 
         public int OpenType { get; set; }
 
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string OpenID { get; set; }
 
         [MaxLength(50)]

@@ -25,6 +25,8 @@ namespace PadSite.Service.Interface
 
         OutDoor Find(int ID);
 
-        void ChangeStatus(string ids, OutDoorStatus Status);
+        void ChangeStatus(string ids, OutDoorStatus Status, string reason = null);
+
+        void ChangeSuggestStatus(string ids, int SuggestStatus);
     }
 }

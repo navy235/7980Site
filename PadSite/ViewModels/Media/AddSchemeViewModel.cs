@@ -186,5 +186,7 @@ namespace PadSite.ViewModels
 
         public DateTime AddTime { get; set; }
 
+        public string TotalPrice { get; set; }
+
     }
 }

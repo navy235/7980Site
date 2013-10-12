@@ -145,3 +145,5 @@ D:\GitProject\7980Site\PadSite\bin\Iesi.Collections.dll
 D:\GitProject\7980Site\PadSite\bin\Maitonn.Core.pdb
 D:\GitProject\7980Site\PadSite\bin\Iesi.Collections.xml
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddField.resources
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddSuggestStatus.resources
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AlertOpenIDlength.resources

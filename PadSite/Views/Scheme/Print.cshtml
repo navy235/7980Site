@@ -1,6 +1,6 @@
 ﻿@model SchemePrintViewModel
 @{
-    ViewBag.Title = "Print";
+    ViewBag.Title = ConfigSetting.SiteName + "媒体方案打印";
     Layout = null;
 }
 @using StackExchange.Profiling;
@@ -34,6 +34,9 @@
         }
 
 
+        .fg-color-red {
+            color: red;
+        }
 
         .print-item {
             margin: 50px 0;
@@ -129,6 +132,10 @@
                 <tr>
                     <td class="table-tips">方案描述</td>
                     <td>@Model.Description</td>
+                </tr>
+                <tr>
+                    <td class="table-tips">方案总价</td>
+                    <td><b class="fg-color-red">@ViewBag.currentPrice</b>万元</td>
                 </tr>
             </table>
         </div>

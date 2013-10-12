@@ -11,11 +11,14 @@ namespace PadSite.Service
     public class MemberService : IMemberService
     {
         private readonly IUnitOfWork db;
+        private readonly IMessageService MessageService;
 
         public MemberService(IUnitOfWork db
+            , IMessageService MessageService
             )
         {
             this.db = db;
+            this.MessageService = MessageService;
         }
 
         #region base
@@ -75,13 +78,16 @@ namespace PadSite.Service
 
         public void SetLoginCookie(Member member)
         {
+            var message = MessageService.GetALL().Count(x => x.RecipientID == member.MemberID && x.IsRead.Equals(false));
             CookieHelper.LoginCookieSave(member.MemberID.ToString(),
               member.Email,
               member.NickName,
               member.AvtarUrl,
               member.GroupID.ToString(),
               member.Status.ToString(),
-              member.Password, "1");
+              member.Password,
+              "1",
+              message.ToString());
         }
 
         public bool Login(string Email, string Md5Password)

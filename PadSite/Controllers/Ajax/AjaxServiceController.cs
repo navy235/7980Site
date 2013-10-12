@@ -318,8 +318,10 @@ namespace PadSite.Controllers
             foreach (var item in list)
             {
                 currentPrice += ((item.Price / 365) * day);
-                if (currentPrice > maxPrice)
+                int privceValue = Convert.ToInt32(currentPrice);
+                if (privceValue > maxPrice)
                 {
+                    currentPrice -= ((item.Price / 365) * day);
                     break;
                 }
                 else
@@ -327,7 +329,9 @@ namespace PadSite.Controllers
                     result.Add(item);
                 }
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            ViewBag.currentPrice = currentPrice.ToString("F2");
+            //return Json(result, JsonRequestBehavior.AllowGet);
+            return View(result);
         }
 
 

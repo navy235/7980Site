@@ -11,7 +11,7 @@ namespace PadSite.Service.Interface
     {
         void CreateIndex(string ids);
 
-        void ChangeStatus(string ids, OutDoorStatus Status);
+        void UpdateIndex(string ids);
 
         List<LinkItem> Search(QueryTerm queryTerm, SearchFilter searchFilter, out int totalHits);
 

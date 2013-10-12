@@ -217,6 +217,14 @@
     <Compile Include="Migrations\201310090900381_AddField.Designer.cs">
       <DependentUpon>201310090900381_AddField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201310110811088_AddSuggestStatus.cs" />
+    <Compile Include="Migrations\201310110811088_AddSuggestStatus.Designer.cs">
+      <DependentUpon>201310110811088_AddSuggestStatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201310120802107_AlertOpenIDlength.cs" />
+    <Compile Include="Migrations\201310120802107_AlertOpenIDlength.Designer.cs">
+      <DependentUpon>201310120802107_AlertOpenIDlength.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Base\Article.cs" />
     <Compile Include="Models\Base\Department.cs" />
@@ -527,6 +535,8 @@
     <Content Include="Scripts\kendo\2012.3.1114\cultures\kendo.culture.zu-ZA.min.js" />
     <Content Include="Scripts\kendo\2012.3.1114\cultures\kendo.culture.zu.min.js" />
     <Content Include="Scripts\kendo\2012.3.1114\jquery.min.js" />
+    <Content Include="wb_a24c2d87ae5d7472.txt" />
+    <Content Include="xtaoAuth.html" />
     <None Include="Properties\PublishProfiles\padsite.pubxml" />
     <None Include="Scripts\kendo\2012.3.1114\kendo.all-vsdoc.js" />
     <Content Include="Scripts\kendo\2012.3.1114\kendo.all.min.js" />
@@ -792,6 +802,9 @@
     <Content Include="Views\Shared\EditorTemplates\RichEditor.cshtml" />
     <Content Include="Views\Article\Edit.cshtml" />
     <Content Include="Views\Shared\_LayoutHelp.cshtml" />
+    <Content Include="Views\AjaxService\GenerateScheme.cshtml" />
+    <Content Include="Views\Fangan\Download.cshtml" />
+    <Content Include="Views\Fangan\Print.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -804,6 +817,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201310090900381_AddField.resx">
       <DependentUpon>201310090900381_AddField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310110811088_AddSuggestStatus.resx">
+      <DependentUpon>201310110811088_AddSuggestStatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201310120802107_AlertOpenIDlength.resx">
+      <DependentUpon>201310120802107_AlertOpenIDlength.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

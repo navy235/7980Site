@@ -1,0 +1,91 @@
+
+ ExTime :2013-10-12 10:49:01,147 [35] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+上传图片出错 
+ System.Web.HttpException (0x80004005): “~D:/GitProject/7980Site/PadSite/Upload/Normal/2013/10/12/52eaf296-7622-4b5e-bd61-e05ccbb077de_300.jpg”不是有效的虚拟路径。
+   在 System.Web.Util.UrlPath.CheckValidVirtualPath(String path)
+   在 System.Web.Util.UrlPath.Combine(String appPath, String basepath, String relative)
+   在 System.Web.VirtualPath.Combine(VirtualPath relativePath)
+   在 System.Web.HttpRequest.MapPath(VirtualPath virtualPath, VirtualPath baseVirtualDir, Boolean allowCrossAppMapping)
+   在 System.Web.HttpServerUtility.MapPath(String path)
+   在 Maitonn.Core.FileHelper.deleteImg(String imgfilePath) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 290
+   在 Maitonn.Core.FileHelper.deleteImg(String imgPath, Int32 width) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 285
+   在 Maitonn.Core.FileHelper.Crop(String imgPath, Int32 width, Int32 height, Int32 x, Int32 y, Int32 targetwidth) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 225
+
+ ExTime :2013-10-12 10:49:42,539 [34] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+上传图片出错 
+ System.Web.HttpException (0x80004005): “D:/GitProject/7980Site/PadSite/Upload/Normal/2013/10/12/52eaf296-7622-4b5e-bd61-e05ccbb077de_300.jpg”是物理路径，但应为虚拟路径。
+   在 System.Web.Util.UrlPath.CheckValidVirtualPath(String path)
+   在 System.Web.Util.UrlPath.Combine(String appPath, String basepath, String relative)
+   在 System.Web.VirtualPath.Combine(VirtualPath relativePath)
+   在 System.Web.HttpRequest.MapPath(VirtualPath virtualPath, VirtualPath baseVirtualDir, Boolean allowCrossAppMapping)
+   在 System.Web.HttpServerUtility.MapPath(String path)
+   在 Maitonn.Core.FileHelper.deleteImg(String imgfilePath) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 290
+   在 Maitonn.Core.FileHelper.deleteImg(String imgPath, Int32 width) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 285
+   在 Maitonn.Core.FileHelper.Crop(String imgPath, Int32 width, Int32 height, Int32 x, Int32 y, Int32 targetwidth) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 225
+
+ ExTime :2013-10-12 10:56:37,029 [32] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+上传图片出错 
+ System.IO.FileNotFoundException: /Upload/Normal/2013/10/12/b64b8a67-667b-4985-a2ab-d6b0c8a22b49.JPG
+   在 System.Drawing.Image.FromFile(String filename, Boolean useEmbeddedColorManagement)
+   在 System.Drawing.Image.FromFile(String filename)
+   在 Maitonn.Core.FileHelper.Crop(String imgPath, Int32 targetwidth) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 246
+
+ ExTime :2013-10-12 10:58:58,514 [32] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+上传图片出错 
+ System.IO.FileNotFoundException: /Upload/Normal/2013/10/12/57997d4d-e492-4ef4-8610-b4fca5dffeb5.JPG
+   在 System.Drawing.Image.FromFile(String filename, Boolean useEmbeddedColorManagement)
+   在 System.Drawing.Image.FromFile(String filename)
+   在 Maitonn.Core.FileHelper.Crop(String imgPath, Int32 targetwidth) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 247
+
+ ExTime :2013-10-12 10:58:58,538 [32] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1企业横幅保存失败! 
+ System.IO.DirectoryNotFoundException: 未能找到路径“c:\Upload\Normal\2013\10\12\57997d4d-e492-4ef4-8610-b4fca5dffeb5_960_120.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.File.InternalDelete(String path, Boolean checkHost)
+   在 System.IO.File.Delete(String path)
+   在 Maitonn.Core.FileHelper.deleteImg(String imgfilePath) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 291
+   在 Maitonn.Core.FileHelper.deleteImg(String imgPath, Int32 width) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 286
+   在 PadSite.Controllers.BizController.Banner(CompanyBannerViewModel model) 位置 d:\GitProject\7980Site\PadSite\Controllers\Personal\BizController.cs:行号 250
+
+ ExTime :2013-10-12 11:00:14,382 [25] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+上传图片出错 
+ System.IO.FileNotFoundException: /Upload/Normal/2013/10/12/21f078b6-9650-47eb-ab5d-0b56339ce89a.JPG
+   在 System.Drawing.Image.FromFile(String filename, Boolean useEmbeddedColorManagement)
+   在 System.Drawing.Image.FromFile(String filename)
+   在 Maitonn.Core.FileHelper.Crop(String imgPath, Int32 targetwidth) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 247
+
+ ExTime :2013-10-12 11:00:14,405 [25] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1企业横幅保存失败! 
+ System.IO.DirectoryNotFoundException: 未能找到路径“c:\Upload\Normal\2013\10\12\21f078b6-9650-47eb-ab5d-0b56339ce89a_120.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.File.InternalDelete(String path, Boolean checkHost)
+   在 System.IO.File.Delete(String path)
+   在 Maitonn.Core.FileHelper.deleteImg(String imgfilePath) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 291
+   在 Maitonn.Core.FileHelper.deleteImg(String imgPath, Int32 width) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 286
+   在 PadSite.Controllers.BizController.Banner(CompanyBannerViewModel model) 位置 d:\GitProject\7980Site\PadSite\Controllers\Personal\BizController.cs:行号 249
+
+ ExTime :2013-10-12 11:04:13,706 [26] 
+ ExLevel :ERROR 
+ ExClass :logerror [(null)] 
+用户:1企业横幅保存失败! 
+ System.IO.DirectoryNotFoundException: 未能找到路径“c:\Upload\Normal\2013\10\12\217704ef-b938-4032-9490-c283bfc4997f_120.jpg”的一部分。
+   在 System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   在 System.IO.File.InternalDelete(String path, Boolean checkHost)
+   在 System.IO.File.Delete(String path)
+   在 Maitonn.Core.FileHelper.deleteImg(String imgfilePath) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 291
+   在 Maitonn.Core.FileHelper.deleteImg(String imgPath, Int32 width) 位置 d:\GitProject\WebSite\Maitonn.Core\Files\FileHelper.cs:行号 286
+   在 PadSite.Controllers.BizController.Banner(CompanyBannerViewModel model) 位置 d:\GitProject\7980Site\PadSite\Controllers\Personal\BizController.cs:行号 248

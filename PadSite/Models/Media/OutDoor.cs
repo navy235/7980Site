@@ -118,6 +118,8 @@
 
         public int Status { get; set; }
 
+        public int SuggestStatus { get; set; }
+
         public string MediaImg { get; set; }
 
         public string MediaFoucsImg { get; set; }

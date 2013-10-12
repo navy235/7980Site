@@ -110,6 +110,9 @@ namespace PadSite.ViewModels
 
         public int Status { get; set; }
 
+        public int SuggestStatus { get; set; }
+
+        public int Hit { get; set; }
 
     }
 

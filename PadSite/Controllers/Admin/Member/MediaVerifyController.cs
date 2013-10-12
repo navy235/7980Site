@@ -88,6 +88,7 @@ namespace PadSite.Controllers
         public ActionResult Authed()
         {
             ViewBag.OutDoorStatus = UIHelper.OutDoorStatusList;
+            ViewBag.SuggestStatus = UIHelper.SuggestStatusList;
             return View();
         }
 
@@ -101,6 +102,7 @@ namespace PadSite.Controllers
                 ID = x.ID,
                 MediaFocusImg = x.MediaFoucsImg,
                 Name = x.Name,
+                SuggestStatus = x.SuggestStatus,
                 Status = x.Status
             });
             return Json(model.ToDataSourceResult(request));
@@ -138,6 +140,39 @@ namespace PadSite.Controllers
                 result.Message = "媒体信息审核不通过操作失败!";
                 result.AddServiceError(Utilities.GetInnerMostException(ex));
                 LogHelper.WriteLog("用户:" + CookieHelper.MemberID + "媒体信息审核不通过操作失败!", ex);
+            }
+            return Json(result);
+        }
+        public ActionResult VerifyFailedWithReason(string ids, string reason)
+        {
+            ServiceResult result = new ServiceResult();
+            try
+            {
+                OutDoorService.ChangeStatus(ids, OutDoorStatus.VerifyFailed, reason);
+                result.Message = "媒体信息审核不通过操作成功！";
+            }
+            catch (Exception ex)
+            {
+                result.Message = "媒体信息审核不通过操作失败!";
+                result.AddServiceError(Utilities.GetInnerMostException(ex));
+                LogHelper.WriteLog("用户:" + CookieHelper.MemberID + "媒体信息审核不通过操作失败!", ex);
+            }
+            return Json(result);
+        }
+
+        public ActionResult SetSuggest(string ids, int reason)
+        {
+            ServiceResult result = new ServiceResult();
+            try
+            {
+                OutDoorService.ChangeSuggestStatus(ids, reason);
+                result.Message = "设置媒体信息推荐状态操作成功！";
+            }
+            catch (Exception ex)
+            {
+                result.Message = "设置媒体信息推荐状态操作失败!";
+                result.AddServiceError(Utilities.GetInnerMostException(ex));
+                LogHelper.WriteLog("用户:" + CookieHelper.MemberID + "设置媒体信息推荐状态操作失败!", ex);
             }
             return Json(result);
         }

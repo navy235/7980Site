@@ -86,6 +86,112 @@
         .drop-selected-item .icon-maitonn {
             margin-left: 10px;
         }
+
+
+    .print-container {
+        width: 990px;
+        margin: 0 auto;
+    }
+
+
+
+    .print-item {
+        margin: 50px 0;
+        page-break-after: always;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+        width: 100%;
+        font-family: microsoft yahei,"宋体",Arial, Helvetica;
+    }
+
+        table td {
+            padding: 7px 10px;
+            border-bottom: 1px dashed #ccc;
+            border-right: 1px dashed #ccc;
+        }
+
+    .table-title {
+        overflow: hidden;
+        text-align: left;
+        margin-top: -1px;
+    }
+
+        .table-title td {
+            border-bottom: 0;
+            padding: 0;
+            margin: 0;
+            border-right: none;
+            text-align: center;
+        }
+
+            .table-title td .table-title-text {
+                width: 100%;
+                display: block;
+                font-weight: bold;
+                font-size: 16px;
+                border-bottom: 2px solid #aaa;
+                padding: 10px 0;
+                position: relative;
+            }
+
+    .print-empty {
+        background: #fff;
+        overflow: hidden;
+        position: relative;
+        padding: 10px;
+        line-height: 26px;
+        padding-left: 50px;
+    }
+
+        .print-empty .icon-maitonn {
+            font-size: 30px;
+            color: #f60;
+            position: absolute;
+            left: 0px;
+            top: 7px;
+            width: 50px;
+            text-align: center;
+        }
+
+    .print-control {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+        .print-control a {
+            color: #222;
+            text-decoration: none;
+        }
+
+            .print-control a span {
+                color: #ff6a00;
+                margin-right: 5px;
+            }
+
+    .table-tips {
+        width: 99px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+        white-space: nowrap;
+    }
+
+    .table-half {
+        width: 50%;
+    }
+
+    .table-footer {
+    }
+
+        .table-footer td {
+            text-align: right;
+            border-right: 0;
+            border-bottom: 2px solid #aaa;
+        }
 </style>
 
 @helper RenderChild(LinkItemTree tree, string Code)
@@ -204,8 +310,12 @@
                               .Min(1)
                               .Max(int.MaxValue).Value(1).HtmlAttributes(new { style = "width:50px;" })
                         )
-                        @Html.DropDownList("periodCate", (IList<SelectListItem>)ViewBag.PeriodCate);
-                       @* @Html.Kendo().DropDownList().Name("PeriodCate").BindTo((IList<SelectListItem>)ViewBag.PeriodCate).HtmlAttributes(new { style = "width:60px;" })*@
+                        <select name="periodCate" id="periodCate">
+                            @foreach (var item in (IList<SelectListItem>)ViewBag.PeriodCate)
+                            {
+                                <option value="@item.Value" @(item.Selected ? "selected" : "")>@item.Text</option>
+                            }
+                        </select>
                     </div>
                 </div>
 
@@ -216,7 +326,7 @@
                         @foreach (var item in PriceCate)
                         { 
                             <span class="drop-list-item">
-                                <input type="radio" class="fangan-check" id="PriceCate_@item.Value" name="PriceCate" value="@item.Value" />
+                                <input type="radio" class="fangan-check" id="PriceCate_@item.Value" name="PriceCate" value="@item.Value" @(item.Selected ? "checked" : "") />
                                 <label for="PriceCate_@item.Value">@item.Text</label>
                             </span>
                         }
@@ -248,8 +358,13 @@
                 </div>
             </div>
         </div>
-        <div class="list-result">
+        @*  <div class="list-result">
             <div class="list-products list-search clearfix ">
+            </div>
+        </div>*@
+        <div class="print-container">
+            <div class="print-empty">
+                <i class="icon-maitonn icon-exclamation-sign auth-error-type"></i>请选择方案的生成条件！
             </div>
         </div>
     </div>
@@ -268,6 +383,10 @@
 
         $('#media-compare-list').on('click', 'i.media-compare-clear', $.proxy(Maitonn.JHelper.clearCompare, Maitonn.JHelper))
         $('#media-compare-list').on('click', 'i.media-compare-remove', $.proxy(Maitonn.JHelper.removeCompare, Maitonn.JHelper))
+
+        $('.print-container').on('click', '#btn-download', $.proxy(Maitonn.JHelper.downloadFangan, Maitonn.JHelper));
+        $('.print-container').on('click', '#btn-print', $.proxy(Maitonn.JHelper.printFangan, Maitonn.JHelper));
+
         Maitonn.JHelper.showCompare();
 
         $('.drop-list-item').hover(function () {
@@ -326,8 +445,9 @@
                 day: periodNumber * periodCate
             };
             $.get('@Url.Action("GenerateScheme", "ajaxService")', data, function (res) {
-                console.log(res);
-                renderResult(res);
+                //console.log(res);
+                $('.print-container').html(res);
+                //renderResult(res);
             })
             //console.log(data);
         })

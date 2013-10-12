@@ -71,6 +71,8 @@ namespace PadSite.Service
 
         public const string Hit = "Hit";
 
+        public const string SuggestStatus = "SuggestStatus";
+
         public const string Lat = "Lat";
 
         public const string Lng = "Lng";

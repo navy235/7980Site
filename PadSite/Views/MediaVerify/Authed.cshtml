@@ -18,8 +18,15 @@
 
         columns.Bound(p => p.Name);
         columns.ForeignKey(p => p.Status, new SelectList((List<SelectListItem>)ViewBag.OutDoorStatus, "value", "text")).Width(80);
+        columns.ForeignKey(p => p.SuggestStatus, new SelectList((List<SelectListItem>)ViewBag.SuggestStatus, "value", "text")).Width(80);
         columns.Bound(p => p.AddTime).Format("{0:yyyy-MM-dd}").Width(80);
-        columns.Command(command => command.Custom("查看详情").Click("Grid.showDetails")).Title("操作");
+        columns.Command(command =>
+            {
+                command.Custom("查看详情").Click("Grid.showDetails");
+                command.Custom("设置推荐").Click("Grid.showSuggest");
+                command.Custom("审核不通过带审核原因").Click("Grid.verifyFailedWithReason");
+            }
+            ).Title("操作");
 
     })
     .Pageable()
@@ -29,7 +36,9 @@
     .HtmlAttributes(new { style = "height:500px;" })
     .DataSource(dataSource => dataSource
         .Ajax()
-        .Read(read => read.Action("outdoor_readauthed", "mediaverify"))
+        .Sort(sort => sort.Add(x => x.AddTime).Descending())
+        .Read(read => read.Action("outdoor_readauthed", "mediaverify")
+        )
     )
 )
 
@@ -50,6 +59,58 @@
 </text>)
 )
 
+@(Html.Kendo().Window().Name("reasonWindow")
+    .Title("不通过原因")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(530)
+    .Height(280)
+    .Scrollable(true)
+    .Content(@<text>
+<div class="reason-list">
+    <label class="reason-item">
+        <input type="radio" name="reason" value="1" checked="checked" />媒体资料内容有敏感词
+    </label>
+    <label class="reason-item">
+        <input type="radio" name="reason" value="2" />已经有相同的媒体资料
+    </label>
+    <label class="reason-item">
+        <input type="radio" name="reason" value="3" />资料内容不真实
+    </label>
+    <label class="reason-item">
+        <input type="radio" name="reason" value="0" />其他
+        <textarea name="reasontext"></textarea>
+    </label>
+    <input type="hidden" name="reasonIds" id="reasonIds" />
+</div>
+<div class="k-window-footer">
+    <button type="button" class="k-button" onclick="Grid.verifyWithReason(this);"><span class="k-icon k-i-close"></span>确定</button>
+</div>
+</text>)
+)
+
+@(Html.Kendo().Window().Name("suggestWindow")
+    .Title("推荐状态")
+    .Visible(false)
+    .Modal(true)
+    .Draggable(true)
+    .Width(530)
+    .Height(130)
+    .Scrollable(true)
+    .Content(@<text>
+<div class="reason-list">
+    <label class="reason-item">
+        推荐状态：@Html.DropDownList("suggest", (List<SelectListItem>)ViewBag.SuggestStatus)
+    </label>
+    <input type="hidden" name="suggestIds" id="suggestIds" />
+</div>
+<div class="k-window-footer">
+    <button type="button" class="k-button" onclick="Grid.setSuggestStatus(this);"><span class="k-icon k-i-close"></span>确定</button>
+</div>
+</text>)
+)
+
 <script type="text/javascript">
     var Grid = {
         id: 'Grid',
@@ -66,6 +127,86 @@
             var url = '@Url.Action("details", "mediaverify")';
             $('#verifyContent').attr('src', url + '/' + dataItem.ID);
             var wnd = $("#Details").data("kendoWindow").center().open();
+        },
+        addSpinner: function (element) {
+            var $spinner = $('<img class="ajax-working" src="@Url.Content("~/Content/images/min-loading.gif")" title="work...." />').appendTo($(element));
+            $(element).addClass('disabled');
+        },
+        removeSpinner: function (element) {
+            $(element).find('.ajax-working').remove();
+            $(element).removeClass('disabled');
+        },
+        verify: function (element, url, Ids, reason) {
+            if ($(element).hasClass('disabled'))
+                return false;
+            var self = Grid;
+            if (Ids) {
+                self.addSpinner(element);
+                var data = { ids: Ids };
+                if (reason) {
+                    data.reason = reason;
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: data,
+                    success: function (res) {
+                        Maitonn.JHelper.showMessage(res);
+                        if (res.Success) {
+                            var grid = $("#Grid").data("kendoGrid");
+                            grid.dataSource.read();
+                            grid.refresh();
+                        }
+                    },
+                    complete: function () {
+                        self.removeSpinner(element);
+                        $("#Details").data("kendoWindow").close();
+                        $("#reasonWindow").data("kendoWindow").close();
+                        $("#suggestWindow").data("kendoWindow").close();
+                    }
+                })
+            } else {
+                alert('请选择要审核的信息');
+                return false;
+            }
+        },
+        showSuggest: function (e) {
+            e.preventDefault();
+            var self = Grid;
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            $('#suggestIds').val(dataItem.ID);
+            $("#suggestWindow").data("kendoWindow").center().open();
+        },
+        setSuggestStatus: function (element) {
+            var self = Grid;
+            var suggestStatus = $('#suggest').val();
+            var Ids = $('#suggestIds').val();
+            var url = '@Url.Action("setSuggest", "mediaverify")';
+            self.verify(element, url, Ids, suggestStatus);
+        },
+        verifyFailedWithReason: function (e) {
+            e.preventDefault();
+            var self = Grid;
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            $('#reasonIds').val(dataItem.ID);
+            $("#reasonWindow").data("kendoWindow").center().open();
+        },
+        verifyWithReason: function (element) {
+            var self = Grid;
+            var reason = self.getReason();
+            var Ids = $('#reasonIds').val();
+            var url = '@Url.Action("VerifyFailedWithReason", "mediaverify")';
+            self.verify(element, url, Ids, reason);
+        },
+        getReason: function () {
+            var reason = '';
+            var reasonValue = $('[name="reason"]:checked').val();
+            if (reasonValue == 0) {
+                reason = $('[name="reasontext"]').val();
+            } else {
+                reason = $('[name="reason"]:checked').parents('label').text();
+            }
+            return reason;
         }
     };
     $(function () {

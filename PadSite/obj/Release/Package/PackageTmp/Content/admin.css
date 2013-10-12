@@ -161,3 +161,18 @@ a {
 .k-editor .k-editable-area {
     height: 370px!important;
 }
+
+.reason-list {
+}
+
+.reason-item {
+    display: block;
+    min-width: 500px;
+    padding: 5px;
+    vertical-align: top;
+    margin-bottom: 10px;
+}
+
+    .reason-item input {
+        vertical-align: top;
+    }

@@ -21,6 +21,9 @@ namespace PadSite.ViewModels
         [Display(Name = "审核状态")]
         public int Status { get; set; }
 
+        [Display(Name = "推荐状态")]
+        public int SuggestStatus { get; set; }
+
         [Display(Name = "添加时间")]
         public DateTime AddTime { get; set; }
 

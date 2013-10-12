@@ -5,14 +5,18 @@
             {  
                 <text>
                 欢迎来到@(ConfigSetting.SiteName)！
-                <a href="@Url.Action("index", "login")">请登录</a> <a href="@Url.Action("index", "reg")">免费注册</a>
+                <a href="@Url.Action("index", "login", new { ReturnUrl = Request.Url.ToString() })">请登录</a> <a href="@Url.Action("index", "reg")">免费注册</a>
                 </text>
             }
             else
             {
                 <text>
                 @CookieHelper.NickName,您好,欢迎来到@(ConfigSetting.SiteName)！
-                 <a href="@Url.Action("logout", "login", new { returnUrl = Request.Url.ToString() })" >安全退出</a>
+                @if (CookieHelper.Message != "0")
+                {
+<a href="@Url.Action("index", "message")" class="mr10"><i class="icon-maitonn icon-envelope mr5"></i>未读留言(@CookieHelper.Message)</a>
+                }
+                <a href="@Url.Action("logout", "login", new { returnUrl = Request.Url.ToString() })" >安全退出</a>
                 </text>
             }
         </div>

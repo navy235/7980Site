@@ -87,7 +87,14 @@ namespace PadSite.Service
             od.AddTime = DateTime.Now;
             od.CityCodeValue = model.CityCode;
             od.CityCode = Utilities.GetCascadingId(model.CityCode);
-            od.Description = model.Description;
+            if (string.IsNullOrEmpty(model.Description))
+            {
+                od.Description = string.Empty;
+            }
+            else
+            {
+                od.Description = model.Description;
+            }
             od.FormatCode = model.FormatCode;
             od.HasLight = model.HasLight;
             od.LastIP = HttpHelper.IP;
@@ -195,8 +202,7 @@ namespace PadSite.Service
             return od;
         }
 
-
-        public void ChangeStatus(string ids, OutDoorStatus Status)
+        public void ChangeStatus(string ids, OutDoorStatus Status, string reason = null)
         {
             var IdsArray = Utilities.GetIdList(ids);
 
@@ -205,61 +211,87 @@ namespace PadSite.Service
             {
                 dbStatus = OutDoorStatus.ShowOnline;
             }
-
-            db.Set<OutDoor>().Where(x => IdsArray.Contains(x.ID)).ToList().ForEach(x => x.Status = (int)dbStatus);
+            var info = string.Empty;
+            if (Status == OutDoorStatus.VerifyFailed)
+            {
+                if (!string.IsNullOrEmpty(reason))
+                {
+                    info = reason;
+                }
+                else
+                {
+                    info = "请检查信息是否含有非法字符，或者表单是否填写完整";
+                }
+            }
+            db.Set<OutDoor>().Where(x => IdsArray.Contains(x.ID)).ToList()
+                .ForEach(x =>
+                {
+                    x.Status = (int)dbStatus;
+                    x.Unapprovedlog = reason;
+                });
             db.Commit();
             if (Status == OutDoorStatus.Verified)
             {
                 OutDoorLuceneService.CreateIndex(ids);
-                SendAuthedMessage(IdsArray);
+                SendAuthedMessage(IdsArray, reason);
             }
             else
             {
-                OutDoorLuceneService.ChangeStatus(ids, Status);
+                OutDoorLuceneService.UpdateIndex(ids);
                 if (Status == OutDoorStatus.VerifyFailed)
                 {
-                    SendAuthFieldedMessage(IdsArray);
+                    SendAuthFieldedMessage(IdsArray, reason);
                 }
             }
         }
 
-        private void SendAuthedMessage(IEnumerable<int> IdsArray)
+        private void SendAuthedMessage(IEnumerable<int> IdsArray, string reason = null)
         {
             foreach (var id in IdsArray)
             {
                 var outdoor = Find(id);
                 var memberID = outdoor.MemberID;
-                var member = MemberService.Find(memberID);
+                var info = "您好！您发布媒体信息:(" + outdoor.Name + ")通过审核";
+                if (!string.IsNullOrEmpty(reason))
+                {
+                    info = reason;
+                }
+                //var member = MemberService.Find(memberID);
                 var message = new Message()
                 {
                     AddTime = DateTime.Now,
                     SenderID = 0,
-                    RecipientID = member.MemberID,
+                    RecipientID = memberID,
                     MessageType = (int)MessageType.System,
                     RecipienterStatus = (int)MessageStatus.Show,
-                    Title = member.NickName + ",您好！您发布媒体信息:(" + outdoor.Name + ")通过审核",
-                    Content = member.NickName + ",您好！您发布媒体信息:(" + outdoor.Name + ")通过审核"
+                    Title = info,
+                    Content = info
                 };
                 MessageService.Create(message);
             }
         }
 
-        private void SendAuthFieldedMessage(IEnumerable<int> IdsArray)
+        private void SendAuthFieldedMessage(IEnumerable<int> IdsArray, string reason = null)
         {
             foreach (var id in IdsArray)
             {
                 var outdoor = Find(id);
                 var memberID = outdoor.MemberID;
-                var member = MemberService.Find(memberID);
+                var info = "您好！您发布媒体信息:(" + outdoor.Name + ")未通过审核";
+                var infoContent = "【请检查信息是否含有非法字符，或者表单是否填写完整】";
+                if (!string.IsNullOrEmpty(reason))
+                {
+                    infoContent = reason;
+                }
                 var message = new Message()
                 {
                     AddTime = DateTime.Now,
                     SenderID = 0,
-                    RecipientID = member.MemberID,
+                    RecipientID = memberID,
                     MessageType = (int)MessageType.System,
                     RecipienterStatus = (int)MessageStatus.Show,
-                    Title = member.NickName + ",您好！您发布媒体信息:(" + outdoor.Name + ")未通过审核",
-                    Content = member.NickName + ",您好！您发布媒体信息:(" + outdoor.Name + ")未通过审核【请检查信息是否含有非法字符，或者表单未填写完整】"
+                    Title = info,
+                    Content = infoContent
                 };
                 MessageService.Create(message);
             }
@@ -280,7 +312,14 @@ namespace PadSite.Service
             od.MediaCodeValue = model.MediaCode;
             od.MediaCode = Utilities.GetCascadingId(model.MediaCode);
             od.FormatCode = model.FormatCode;
-            od.Description = model.Description;
+            if (string.IsNullOrEmpty(model.Description))
+            {
+                od.Description = string.Empty;
+            }
+            else
+            {
+                od.Description = model.Description;
+            }
             od.HasLight = model.HasLight;
             od.LastIP = HttpHelper.IP;
             od.LastTime = DateTime.Now;
@@ -461,8 +500,22 @@ namespace PadSite.Service
             //set OutDoor Status 待审核状态
             od.Status = (int)OutDoorStatus.PreVerify;
             db.Commit();
-            OutDoorLuceneService.ChangeStatus(model.ID.ToString(), OutDoorStatus.PreVerify);
+            OutDoorLuceneService.UpdateIndex(model.ID.ToString());
             return od;
+        }
+
+
+        public void ChangeSuggestStatus(string ids, int SuggestStatus)
+        {
+            var IdsArray = Utilities.GetIdList(ids);
+            db.Set<OutDoor>().Where(x => IdsArray.Contains(x.ID)).ToList()
+                .ForEach(x =>
+                {
+                    x.SuggestStatus = SuggestStatus;
+                });
+            db.Commit();
+            OutDoorLuceneService.UpdateIndex(ids);
+
         }
     }
 }

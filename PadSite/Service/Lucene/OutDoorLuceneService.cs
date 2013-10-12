@@ -110,7 +110,7 @@ namespace PadSite.Service
                 LogHelper.WriteLog("Lucene添加媒体索引出错", ex);
             }
         }
-        public void ChangeStatus(string ids, OutDoorStatus Status)
+        public void UpdateIndex(string ids)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace PadSite.Service
                     var id = Ids[i];
                     var outDoorIndexEntity = data.Single(x => x.ID == id);
                     var doc = CreateDocument(outDoorIndexEntity);
-                    ChangeStatus(id, doc);
+                    UpdateDocument(id, doc);
                 }
 
             }
@@ -136,7 +136,7 @@ namespace PadSite.Service
             }
         }
 
-        public void ChangeStatus(int id, Document doc)
+        public void UpdateDocument(int id, Document doc)
         {
             var term = new Term(OutDoorIndexFields.ID, id.ToString());
             _indexWriter.UpdateDocument(term, doc);
@@ -272,6 +272,8 @@ namespace PadSite.Service
 
                 }
                 item.Lat = entity.Lat;
+                item.Hit = entity.Hit;
+                item.SuggestStatus = entity.SuggestStatus;
                 item.Lng = entity.Lng;
                 item.CompanyName = entity.Member.Company.Name;
                 item.DeadLine = entity.Deadline;
@@ -404,6 +406,7 @@ namespace PadSite.Service
             document.Add(new NumericField(OutDoorIndexFields.AuthStatus, Field.Store.YES, true).SetIntValue(OutDoor.AuthStatus));
 
             document.Add(new NumericField(OutDoorIndexFields.Hit, Field.Store.YES, true).SetIntValue(OutDoor.Hit));
+            document.Add(new NumericField(OutDoorIndexFields.SuggestStatus, Field.Store.YES, true).SetIntValue(OutDoor.SuggestStatus));
             document.Add(new NumericField(OutDoorIndexFields.Published, Field.Store.YES, true).SetLongValue(OutDoor.Published.Ticks));
             document.Add(new NumericField(OutDoorIndexFields.DeadLine, Field.Store.YES, true).SetLongValue(OutDoor.DeadLine.Ticks));
             document.Add(new NumericField(OutDoorIndexFields.MemberStatus, Field.Store.YES, true).SetIntValue(OutDoor.MemberStatus));
@@ -422,6 +425,11 @@ namespace PadSite.Service
             }
             SortField sortField = GetSortField(searchFilter);
 
+            var sortFieldArry = new List<SortField>(){
+                new SortField(OutDoorIndexFields.SuggestStatus, SortField.INT, reverse: true)
+            };
+            sortFieldArry.Add(sortField);
+
             int numRecords = searchFilter.Skip + searchFilter.Take;
 
             using (var directory = new SimpleFSDirectory(new DirectoryInfo(LuceneCommon.IndexOutDoorDirectory)))
@@ -432,7 +440,7 @@ namespace PadSite.Service
 
                 //var termQuery = new TermQuery(new Term(OutDoorIndexFields.ID, "1"));
 
-                var results = searcher.Search(query, filter: null, n: numRecords, sort: new Sort(sortField));
+                var results = searcher.Search(query, filter: null, n: numRecords, sort: new Sort(sortFieldArry.ToArray()));
 
                 var keys = results.ScoreDocs.Skip(searchFilter.Skip)
                     .Select(c => GetMediaItem(searcher.Doc(c.Doc)))
@@ -451,6 +459,7 @@ namespace PadSite.Service
             int MemberStatus = Int32.Parse(doc.Get(OutDoorIndexFields.MemberStatus), CultureInfo.InvariantCulture);
             int MemberID = Int32.Parse(doc.Get(OutDoorIndexFields.MemberID), CultureInfo.InvariantCulture);
             int Hit = Int32.Parse(doc.Get(OutDoorIndexFields.Hit), CultureInfo.InvariantCulture);
+            int SuggestStatus = Int32.Parse(doc.Get(OutDoorIndexFields.SuggestStatus), CultureInfo.InvariantCulture);
             int ID = Int32.Parse(doc.Get(OutDoorIndexFields.ID), CultureInfo.InvariantCulture);
             int CityCode = Int32.Parse(doc.Get(OutDoorIndexFields.CityCode), CultureInfo.InvariantCulture);
             int FormatCode = Int32.Parse(doc.Get(OutDoorIndexFields.FormatCode), CultureInfo.InvariantCulture);
@@ -485,6 +494,8 @@ namespace PadSite.Service
             item.ID = ID;
             item.MemberID = MemberID;
             item.Status = Status;
+            item.SuggestStatus = SuggestStatus;
+            item.Hit = Hit;
             item.FocusImgUrl = doc.Get(OutDoorIndexFields.FocusImgUrl);
             item.CredentialsImg = doc.Get(OutDoorIndexFields.CredentialsImg);
             item.ImgUrl = doc.Get(OutDoorIndexFields.ImgUrl);
@@ -565,13 +576,13 @@ namespace PadSite.Service
             switch (genrateType)
             {
                 case 0:
-                    return new SortField(OutDoorIndexFields.AuthStatus, SortField.INT, reverse: true);
+                    return new SortField(OutDoorIndexFields.SuggestStatus, SortField.INT, reverse: true);
                 case 1:
                     return new SortField(OutDoorIndexFields.Price, SortField.DOUBLE, reverse: false);
                 case 2:
                     return new SortField(OutDoorIndexFields.Price, SortField.DOUBLE, reverse: true);
                 case 3:
-                    return new SortField(OutDoorIndexFields.AuthStatus, SortField.LONG, reverse: true);
+                    return new SortField(OutDoorIndexFields.AuthStatus, SortField.INT, reverse: true);
             }
             return SortField.FIELD_SCORE;
         }
@@ -936,19 +947,19 @@ namespace PadSite.Service
             }
             #endregion
 
-            //#region 媒体价格区间查询
-            //if (model.priceCate != 0)
-            //{
-            //    var rangeValue = EnumHelper.GetPriceValue(model.priceCate);
-            //    if (rangeValue.Max > 99999)
-            //    {
-            //        rangeValue.Max = 1000;
-            //    }
-            //    var PriceQuery = NumericRangeQuery.NewDoubleRange(OutDoorIndexFields.Price,
-            //        Convert.ToDouble(rangeValue.Min), Convert.ToDouble(rangeValue.Max), true, true);
-            //    combineQuery.Add(PriceQuery, Occur.MUST);
-            //}
-            //#endregion
+            #region 媒体价格区间查询
+            if (model.priceCate != 0)
+            {
+                var rangeValue = EnumHelper.GetPriceValue(model.priceCate);
+                if (rangeValue.Max > 99999)
+                {
+                    rangeValue.Max = 1000;
+                }
+                var PriceQuery = NumericRangeQuery.NewDoubleRange(OutDoorIndexFields.Price,
+                    0, Convert.ToDouble(rangeValue.Max), true, true);
+                combineQuery.Add(PriceQuery, Occur.MUST);
+            }
+            #endregion
 
             using (var directory = new SimpleFSDirectory(new DirectoryInfo(LuceneCommon.IndexOutDoorDirectory)))
             {
@@ -1010,5 +1021,8 @@ namespace PadSite.Service
                 return keys;
             }
         }
+
+
+
     }
 }

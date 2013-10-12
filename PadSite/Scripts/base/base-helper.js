@@ -383,6 +383,18 @@
       var compares = this.getCompare();
       var compareIds = $.map(compares, function (item) { return item.id }).join(',');
       window.location.href = ajaxUrl.compare_media + '/index/' + compareIds;
+    },
+    downloadFangan: function () {
+      var periodNumber = $('#periodNumber').val();
+      var periodCate = $('#periodCate').val();
+      var mediaIds = $('#mediaIds').val();
+      window.location.href = ajaxUrl.download_fangan + '?periodNumber=' + periodNumber + '&periodCate=' + periodCate + '&mediaIds=' + mediaIds;
+    },
+    printFangan: function () {
+      var periodNumber = $('#periodNumber').val();
+      var periodCate = $('#periodCate').val();
+      var mediaIds = $('#mediaIds').val();
+      window.location.href = ajaxUrl.print_fangan + '?periodNumber=' + periodNumber + '&periodCate=' + periodCate + '&mediaIds=' + mediaIds;
     }
   }
   window.Maitonn = window.Maitonn || {};

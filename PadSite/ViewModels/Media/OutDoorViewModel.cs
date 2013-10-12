@@ -19,6 +19,7 @@ namespace PadSite.ViewModels
             //this.EndTime = DateTime.Now;
             this.Deadline = DateTime.Now;
             this.Price = 0;
+            this.Description = string.Empty;
         }
 
         [HiddenInput(DisplayValue = false)]

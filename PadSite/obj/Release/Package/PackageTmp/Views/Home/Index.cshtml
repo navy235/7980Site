@@ -136,79 +136,98 @@
         </a>
     </div>
     <div class="nav-block-item viewport-flip ">
-        <a href="#" class="full-block bg-color-green flip in">
+        <a href="@Url.Action("index", "fangan")" class="full-block bg-color-green flip in">
             <i class="icon-maitonn icon-paste"></i>
             <div class="content">方案制作</div>
         </a>
-        <a href="#" class="full-block  bg-color-green flip out">
+        <a href="@Url.Action("index", "fangan")" class="full-block  bg-color-green flip out">
             <h4>智能方案生成</h4>
         </a>
     </div>
     <div class="nav-block-item viewport-flip ">
-        <a href="#" class="full-block bg-color-blueDark flip in">
+        <a href="@Url.Action("index", "help")" class="full-block bg-color-blueDark flip in">
             <i class="icon-maitonn icon-list-alt"></i>
             <div class="content">公司简介</div>
         </a>
-        <a href="#" class="full-block bg-color-blueDark flip out">
+        <a href="@Url.Action("index", "help")" class="full-block bg-color-blueDark flip out">
             <h4>关于我们，了解我们</h4>
         </a>
     </div>
     <div class="nav-block-item viewport-flip ">
-        <a href="#" class="full-block bg-color-magenta flip in">
+        <a href="@GetUrl(0, 1)" class="full-block bg-color-magenta flip in">
             <i class="icon-maitonn icon-road"></i>
             <div class="content">公路大牌</div>
         </a>
-        <a href="#" class="full-block bg-color-magenta flip out">
+        <a href="@GetUrl(0, 1)" class="full-block bg-color-magenta flip out">
             <h4>公路户外，紧随你我</h4>
         </a>
     </div>
     <div class="nav-block-item viewport-flip ">
 
-        <a href="#" class="full-block bg-color-red flip in">
+        <a href="@GetUrl(0, 40)" class="full-block bg-color-red flip in">
             <i class="icon-maitonn icon-signal"></i>
             <div class="content">市内大牌</div>
         </a>
-        <a href="#" class="full-block bg-color-red flip out">
+        <a href="@GetUrl(0, 40)" class="full-block bg-color-red flip out">
             <h4>市内大牌，至尊体现</h4>
         </a>
     </div>
     <div class="nav-block-item viewport-flip ">
-        <a href="#" class="full-block  bg-color-orange flip in">
+        <a href="@GetUrl(0, 41)" class="full-block  bg-color-orange flip in">
             <i class="icon-maitonn icon-truck"></i>
             <div class="content">公共交通媒体</div>
         </a>
-        <a href="#" class="full-block bg-color-orange flip out">
+        <a href="@GetUrl(0, 41)" class="full-block bg-color-orange flip out">
             <h4>公共交通，移动视野</h4>
         </a>
     </div>
     <div class="nav-block-item viewport-flip ">
-        <a href="#" class="full-block bg-color-blue flip in">
+        <a href="@GetUrl(0, 51)" class="full-block bg-color-blue flip in">
             <i class="icon-maitonn icon-sitemap"></i>
             <div class="content">公共场所媒体</div>
         </a>
-        <a href="#" class="full-block  bg-color-blue flip out">
+        <a href="@GetUrl(0, 51)" class="full-block  bg-color-blue flip out">
             <h4>公共场所，覆盖大众</h4>
         </a>
     </div>
     <div class="nav-block-item viewport-flip ">
-        <a href="#" class="full-block  bg-color-purple flip in">
+        <a href="@GetUrl(0, 63)" class="full-block  bg-color-purple flip in">
             <i class="icon-maitonn icon-desktop"></i>
             <div class="content">LED大屏</div>
         </a>
-        <a href="#" class="full-block bg-color-purple flip out">
+        <a href="@GetUrl(0, 63)" class="full-block bg-color-purple flip out">
             <h4>LED，生活无处不在</h4>
         </a>
 
     </div>
     <div class="nav-block-item viewport-flip ">
-        <a href="#" class="full-block bg-color-orangeDark flip in">
+        <a href="@GetUrl(0, 64)" class="full-block bg-color-orangeDark flip in">
             <i class="icon-maitonn icon-th-large"></i>
             <div class="content">其他</div>
         </a>
-        <a href="#" class="full-block bg-color-orangeDark flip out">
+        <a href="@GetUrl(0, 64)" class="full-block bg-color-orangeDark flip out">
             <h4>更多媒体，尽在7980</h4>
         </a>
 
     </div>
 </div>
 
+@helper GetUrl(int city, int mediacode)
+{
+    @Url.Action("index", "list", new
+                             {
+                                 province = 1,
+                                 city = city,
+                                 mediacode = mediacode,
+                                 formatcode = 0,
+                                 ownercode = 0,
+                                 periodcode = 0,
+                                 authstatus = 0,
+                                 deadline = 0,
+                                 price = 0,
+                                 order = 0,
+                                 descending = 0,
+                                 page = 1
+
+                             });  
+}

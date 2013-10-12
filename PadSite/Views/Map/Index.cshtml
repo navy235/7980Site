@@ -80,7 +80,8 @@
                 var self = this,
                     videowindow = $('#Win-mapvideo').data('kendoWindow');
                 self.map = new BMap.Map("m-control");            // 创建Map实例
-                self.map.centerAndZoom("@UIHelper.GetCityName()", 15);
+                var center = new BMap.Point(new Number(112.062775), new Number(27.313735));
+                self.map.centerAndZoom(center, 8);
                 self.map.addControl(new BMap.NavigationControl());               // 添加平移缩放控件
                 self.map.addControl(new BMap.ScaleControl());                    // 添加比例尺控件
                 self.map.addControl(new BMap.OverviewMapControl());
@@ -108,6 +109,8 @@
                 $('#search-text').on('keydown', self.keywordsSet)
 
                 self.initSelectCategory();
+
+                self.searchArea();
             },
 
             initSelectCategory: function () {
