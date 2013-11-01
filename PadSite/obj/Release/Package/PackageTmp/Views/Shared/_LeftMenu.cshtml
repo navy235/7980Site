@@ -61,7 +61,7 @@
                 </div>
                 <ul class="menu-shop" style="display: none;">
                     <li>
-                        <p><a href="/biz/1" target="_blank">商铺首页</a></p>
+                        <p><a href="@Url.Action("index", "company", new { id = CookieHelper.MemberID })" target="_blank">商铺首页</a></p>
                     </li>
                     <li class="item-shop-logo ">
                         <p><a href="@Url.Action("logo", "biz")">企业标志</a></p>
@@ -133,7 +133,7 @@
                 <li class="item-favorite-media ">
                     <p><a href="/favorite">媒体收藏夹</a></p>
                 </li>
-               @* <li class="item-favorite-company ">
+                @* <li class="item-favorite-company ">
                     <p><a href="/favorite/recive">企业收藏夹</a></p>
                 </li>*@
             </ul>

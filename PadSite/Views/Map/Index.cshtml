@@ -314,12 +314,21 @@
             getSearchArea: function () {
                 var self = this,
                     bs = self.map.getBounds();
-                return {
-                    minX: bs.Sh.lat,
-                    minY: bs.Sh.lng,
-                    maxX: bs.Jh.lat,
-                    maxY: bs.Jh.lng
-                };
+                if (bs.Sh) {
+                    return {
+                        minX: bs.Sh.lat,
+                        minY: bs.Sh.lng,
+                        maxX: bs.Jh.lat,
+                        maxY: bs.Jh.lng
+                    };
+                } else {
+                    return {
+                        minX: bs.gd,
+                        minY: bs.hd,
+                        maxX: bs.dd,
+                        maxY: bs.ed
+                    };
+                }
             },
             renderList: function (data) {
                 var html = '<div class="list-num">右侧地图中找到户外信息<strong id="prop-found">' + data.TotalCount + '</strong>条</div>' + '<ul>',

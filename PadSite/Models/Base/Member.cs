@@ -22,6 +22,9 @@ namespace PadSite.Models
 
         public int? CompanyID { get; set; }
 
+
+        public int MemberType { get; set; }
+
         [MaxLength(50)]
         [Display(Name = "µç×ÓÓÊÏä")]
         public string Email { get; set; }

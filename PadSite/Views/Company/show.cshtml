@@ -1,6 +1,6 @@
 ﻿@model CompanyIndexViewModel
 @{
-    ViewBag.Title = Model.Name + "-广告资源";
+    ViewBag.Title = Model.Links.Name;
     Layout = "~/Views/Shared/_LayoutCompany.cshtml";
 }
 @section topscripts{
@@ -161,21 +161,40 @@
                         <dd>售&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：<span class="details-info-item ">
                             @if (Model.Links.Price == 99999)
                             { 
-                                <strong><b class="fg-color-red">面议</b></strong>
+                                <strong class="fg-color-red"><b>面议</b></strong>
                             }
                             else
                             {
-                                <strong>¥<b class="fg-color-red">@Model.Links.Price</b> 万元/年</strong>
+                                <strong class="fg-color-red">¥ <b>@Model.Links.Price</b> 万元/年</strong>
                             }
                         </span></dd>
                         <dd>媒体类型：<span class="details-info-item">@Model.Links.MediaCateName.Replace(",", " - ")</span></dd>
                         <dd>最短投放：<span class="details-info-item">@Model.Links.PeriodName</span></dd>
                         <dd>媒体形式：<span class="details-info-item">@Model.Links.FormatName</span></dd>
-                        <dd>区域属性：<span class="details-info-item">@Model.Links.AreaCate</span></dd>
-                        <dd>受众人群：<span class="details-info-item">@Model.Links.CrowdCate</span></dd>
+
+                        <dd>媒体规格：<span class="details-info-item">@if (Model.Links.IsRegular)
+                                                                 { 
+                            <span>@(Model.Links.Width)米*@(Model.Links.Width)米*@(Model.Links.Width)面=@(Model.Links.TotalArea)平方米</span>
+                                                                 }
+                                                                 else
+                                                                 {
+                                                                     var areaParams = Model.Links.IrRegularArea.Split('|');
+                                                                     for (var i = 1; i < areaParams.Length; i += 2)
+                                                                     { 
+                            <font> (@(areaParams[i])米*@(areaParams[i + 1])米*1面) </font> 
+                              
+                                                                     }
+                            <font>总面积=@Model.Links.TotalArea 平方米</font>
+                                                                 }</span></dd>
+
+                        <dd>日车流量：<span class="details-info-item">@Model.Links.TrafficAuto 万辆/天</span></dd>
+
+                        <dd>日人流量：<span class="details-info-item">@Model.Links.TrafficPerson 万人/天</span></dd>
+                        @*                        <dd>区域属性：<span class="details-info-item">@Model.Links.AreaCate</span></dd>*@
+                        @*                        <dd>受众人群：<span class="details-info-item">@Model.Links.CrowdCate</span></dd>
                         <dd>投放行业：<span class="details-info-item">@Model.Links.IndustryCate</span></dd>
                         <dd>投放目的：<span class="details-info-item">@Model.Links.PurposeCate</span></dd>
-                        <dd>代理类型：<span class="details-info-item">@Model.Links.OwnerName</span> </dd>
+                        <dd>代理类型：<span class="details-info-item">@Model.Links.OwnerName</span> </dd>*@
                         <dd>媒体档期：<span class="details-info-item fg-color-red">@(Model.Links.DeadLine.CompareTo(DateTime.Now) > 0 ? Model.Links.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")</span></dd>
                     </dl>
                 </div>
@@ -200,15 +219,15 @@
                     <div class="goods" id="goods-details">
                         <h3 class="goods-head goods-intro"><i class="icon-maitonn icon-desktop"></i>媒体详情</h3>
                         <ul class="goods-params">
-                            <li class="">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：<span>@Model.Links.CityCateName.Replace(",", " - ")</span></li>
-                            <li class="">媒体类型：<span>@Model.Links.MediaCateName.Replace(",", " - ")</span></li>
+                            <li class="goods-params-long">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：<span>@Model.Links.CityCateName.Replace(",", " - ")</span></li>
+                            <li class="goods-params-long">媒体类型：<span>@Model.Links.MediaCateName.Replace(",", " - ")</span></li>
                             <li class="goods-params-long">具体位置：<span>@Model.Links.Location</span></li>
-                            <li class="">最短投放：<span>@Model.Links.PeriodName</span></li>
+                              <li class="">最短投放：<span>@Model.Links.PeriodName</span></li>
                             <li class="">媒体形式：<span>@Model.Links.FormatName</span></li>
-                            <li class="goods-params-long">区域属性：<span>@Model.Links.AreaCate</span></li>
+                            @*   <li class="goods-params-long">区域属性：<span>@Model.Links.AreaCate</span></li>
                             <li class="goods-params-long">受众人群：<span>@Model.Links.CrowdCate</span></li>
                             <li class="goods-params-long">投放行业：<span>@Model.Links.IndustryCate</span></li>
-                            <li class="goods-params-long">投放目的：<span>@Model.Links.PurposeCate</span></li>
+                            <li class="goods-params-long">投放目的：<span>@Model.Links.PurposeCate</span></li>*@
                             <li class="goods-params-long">媒体规格：@if (Model.Links.IsRegular)
                                                                { 
                                 <span>@(Model.Links.Width)米*@(Model.Links.Width)米*@(Model.Links.Width)面=@(Model.Links.TotalArea)平方米</span>
@@ -223,7 +242,7 @@
                                                                    }
                                 <font>总面积=@Model.Links.TotalArea 平方米</font>
                                                                }</li>
-                            <li class="">代理类型：<span>@Model.Links.OwnerName</span></li>
+                            @*  <li class="">代理类型：<span>@Model.Links.OwnerName</span></li>*@
                             <li class="">媒体档期：<span> @(Model.Links.DeadLine.CompareTo(DateTime.Now) > 0 ? Model.Links.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")   </span></li>
                             @if (Model.Links.HasLight)
                             {
@@ -401,7 +420,7 @@
                             <img src="~/Content/images/icon/success.png" />
                         </div>
                         <div class="text">
-                            <span class="jsmessage-text">收藏成功! <a href="@Url.Action("favorite", "personal")">查看我的收藏 &gt;&gt;</a></span>
+                            <span class="jsmessage-text">收藏成功! <a href="@Url.Action("index", "favorite")">查看我的收藏 &gt;&gt;</a></span>
                         </div>
                     </div>
                     </text>
@@ -498,7 +517,7 @@
                                             return false;
                                         } 
                                         var id=@Model.ID,
-                                            name='@Model.Links.ID',
+                                            name='@(Model.Links.Name)询价',
                                             content=$('#input-feedback').val();
                                         $.ajax({
                                             type:'POST',
@@ -513,12 +532,12 @@
                                                     var kendoWindow = $('#Win-feedback').data('kendoWindow');
                                                     kendoWindow.close();
                                                 }
-                                                Maitonn.JHelper.showMessage(res.Message);
+                                                Maitonn.JHelper.showMessage(res);
                                             }
                                         });
                                 
                                     }else{
-                                        Maitton.JHelper.showPopLogin();
+                                        Maitonn.JHelper.showPopLogin();
                                     }
                                 })
                             });

@@ -106,13 +106,13 @@
                     <td>@item.PeriodName</td>
                 }
             </tr>
-            <tr>
+            @*   <tr>
                 <td class="compare-table-tip">所有权类型</td>
                 @foreach (var item in Model)
                 { 
                     <td>@item.OwnerName </td>
                 }
-            </tr>
+            </tr>*@
             <tr>
                 <td class="compare-table-tip">媒体规格</td>
                 @foreach (var item in Model)
@@ -163,20 +163,20 @@
                     <td>@item.CityCateName.Replace(",", " - ") </td>
                 }
             </tr>
-            <tr>
+            @* <tr>
                 <td class="compare-table-tip">所属商圈</td>
                 @foreach (var item in Model)
                 { 
                     <td>@item.AreaCate.Replace(",", " 、 ") </td>
                 }
-            </tr>
-            <tr>
+            </tr>*@
+            @*  <tr>
                 <td class="compare-table-tip">投放周期</td>
                 @foreach (var item in Model)
                 { 
                     <td>@item.PeriodName </td>
                 }
-            </tr>
+            </tr>*@
             <tr>
                 <td class="compare-table-tip">人流量</td>
                 @foreach (var item in Model)
@@ -192,7 +192,7 @@
                 }
             </tr>
 
-            <tr class="compare-table-title">
+            @*    <tr class="compare-table-title">
                 <td colspan="6"><span>补充信息</span></td>
             </tr>
 
@@ -218,8 +218,8 @@
                 { 
                     <td>@item.PurposeCate.Replace(",", " 、 ") </td>
                 }
-            </tr>
-          @*  <tr>
+            </tr>*@
+            @*  <tr>
                 <td class="compare-table-tip">媒体描述</td>
                 @foreach (var item in Model)
                 { 

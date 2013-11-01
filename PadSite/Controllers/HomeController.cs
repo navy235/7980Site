@@ -29,6 +29,18 @@ namespace PadSite.Controllers
         public ActionResult Index()
         {
             #region sql
+
+
+            var roots = new List<CateItem>();
+
+            var outdoor = new CateItem()
+            {
+                CateName = "户外大牌"
+            };
+
+
+
+
             //string city = "招商 渠道扩张 品牌建设 促销活动";
             //string province = "湖南";
             //string city = "长沙,株洲,湘潭,衡阳,邵阳,岳阳,常德,张家界,益阳,郴州,永州,怀化,娄底,湘西";
@@ -115,5 +127,18 @@ namespace PadSite.Controllers
             }
         }
 
+
+        public class CateItem
+        {
+            public string CateName { get; set; }
+
+
+            public List<CateItem> ChildItems { get; set; }
+
+            public CateItem()
+            {
+                this.ChildItems = new List<CateItem>();
+            }
+        }
     }
 }

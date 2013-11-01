@@ -1,5 +1,5 @@
 ﻿html {
-    color: #000;
+    color: #333;
     background: #fff;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
@@ -152,7 +152,7 @@ textarea {
 }
 
 .fg-color-red {
-    color: #b91d47 !important;
+    color: #ee2a2a !important;
 }
 
 .fg-color-yellow {
@@ -524,7 +524,7 @@ textarea {
     }
 
 .form-field .k-numerictextbox {
-    width: 100px;
+    width: 120px;
 }
 
 .field-label {
@@ -668,27 +668,24 @@ select {
 
 
     .search-box .input-wrapper {
-        width: 518px;
-        height: 33px;
-        display: inline-block;
-        margin-right: 5px;
-        background: url(images/search-bg.png) no-repeat -304px 0;
-        border: 1px solid #b6b6b6;
-        border-color: #9a9a9a #cdcdcd #cdcdcd #9a9a9a;
-        vertical-align: top;
-        position: relative;
+        padding: 3px 0 3px 3px;
+        height: 41px;
+        background: #f50;
+        overflow: hidden;
+        width: 720px;
     }
 
+
+
     .search-box #search {
-        width: 440px;
-        height: 22px;
-        font: 16px/22px arial;
-        margin: 5px 0 0 7px;
-        background: #fff;
+        padding: 9px 0;
+        text-indent: 10px;
+        height: 21px;
+        line-height: 21px;
+        width: 620px;
+        border: 0 none;
         outline: 0;
-        -webkit-appearance: none;
-        border: 0;
-        margin-left: 67px;
+        background: #fff;
     }
 
     .search-box .deadline {
@@ -745,13 +742,14 @@ select {
 }
 
 .btn-search {
-    width: 95px;
-    height: 32px;
-    padding-top: 2px\9;
-    font-size: 14px;
-    background: #ddd url(images/search-bg.png);
-    cursor: pointer;
+    height: 40px;
     border: 0;
+    background: transparent;
+    width: 95px;
+    text-align: center;
+    font-family: "微软雅黑";
+    color: #fff;
+    cursor: pointer;
 }
 
 .btn-search-hover {
@@ -763,6 +761,7 @@ select {
     text-align: center;
     margin-top: 40px;
     overflow: hidden;
+    width: 960px;
 }
 
 .nav-block-item {
@@ -773,15 +772,18 @@ select {
     color: #fff;
     margin-left: 20px;
     margin-bottom: 20px;
-    width: 220px;
+    width: 140px;
     height: 140px;
     position: relative;
     font-family: "Helvetica Neue", "Hiragino Sans GB", "Microsoft YaHei", "STHeiti", "SimHei", Arial, Helvetica, sans-serif;
+    -webkit-border-radius: 70px;
+    -moz-border-radius: 70px;
+    border-radius: 70px;
 }
 
 
     .nav-block-item .full-block {
-        width: 220px;
+        width: 140px;
         height: 140px;
         text-align: center;
         overflow: hidden;
@@ -790,6 +792,9 @@ select {
         position: absolute;
         left: 0;
         top: 0;
+        -webkit-border-radius: 70px;
+        -moz-border-radius: 70px;
+        border-radius: 70px;
     }
 
         .nav-block-item .full-block .content {

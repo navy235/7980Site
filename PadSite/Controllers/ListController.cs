@@ -266,6 +266,40 @@ namespace PadSite.Controllers
             return searchFilter;
         }
 
+        private bool canReadCache(QueryTerm queryTerm)
+        {
+            var dq = queryTerm.Dq;
+            if (string.IsNullOrWhiteSpace(dq) && string.IsNullOrWhiteSpace(queryTerm.Query))
+            {
+                return true;
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(dq) && string.IsNullOrWhiteSpace(queryTerm.Query))
+                {
+                    try
+                    {
+                        var dqtime = DateTime.Now;
+                        bool success = DateTime.TryParse(dq, out dqtime);
+                        if (!success)
+                        {
+                            return false;
+                        }
+                        if (dqtime.ToString("yyyyMMdd").Equals(DateTime.Now.ToString("yyyyMMdd")))
+                        {
+                            return false;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                return true;
+            }
+        }
+
         private QuerySource GetResult(QueryTerm queryTerm)
         {
             const int PageSize = 15;
@@ -360,7 +394,7 @@ namespace PadSite.Controllers
             {
                 Group = new LinkItem()
                 {
-                    Name = "表现形式",
+                    Name = "媒体形式",
                     Url = Url.Action("index", new
                     {
                         province = queryTerm.Province,
@@ -407,53 +441,53 @@ namespace PadSite.Controllers
             #endregion
 
             #region OwnerCode
-            LinkGroup ownerGroup = new LinkGroup()
-            {
-                Group = new LinkItem()
-                {
-                    Name = "代理类型",
-                    Url = Url.Action("index", new
-                    {
-                        province = queryTerm.Province,
-                        city = queryTerm.City,
-                        mediacode = queryTerm.MediaCode,
-                        formatcode = queryTerm.FormatCode,
-                        ownercode = 0,
-                        periodcode = queryTerm.PeriodCode,
-                        authstatus = queryTerm.AuthStatus,
-                        deadline = queryTerm.DeadLine,
-                        price = queryTerm.Price,
-                        order = queryTerm.Order,
-                        descending = queryTerm.Descending,
-                        page = 1
-                    })
-                }
-            };
-            ownerGroup.Items = OwnerCateService.GetALL().Where(x => x.PID.Equals(null)).ToList().Select(x => new LinkItem()
-            {
-                ID = x.ID,
-                Name = x.CateName,
-                Url = Url.Action("index", new
-                {
-                    province = queryTerm.Province,
-                    city = queryTerm.City,
-                    mediacode = queryTerm.MediaCode,
-                    formatcode = queryTerm.FormatCode,
-                    ownercode = x.ID,
-                    periodcode = queryTerm.PeriodCode,
-                    authstatus = queryTerm.AuthStatus,
-                    deadline = queryTerm.DeadLine,
-                    price = queryTerm.Price,
-                    order = queryTerm.Order,
-                    descending = queryTerm.Descending,
-                    page = 1
+            //LinkGroup ownerGroup = new LinkGroup()
+            //{
+            //    Group = new LinkItem()
+            //    {
+            //        Name = "代理类型",
+            //        Url = Url.Action("index", new
+            //        {
+            //            province = queryTerm.Province,
+            //            city = queryTerm.City,
+            //            mediacode = queryTerm.MediaCode,
+            //            formatcode = queryTerm.FormatCode,
+            //            ownercode = 0,
+            //            periodcode = queryTerm.PeriodCode,
+            //            authstatus = queryTerm.AuthStatus,
+            //            deadline = queryTerm.DeadLine,
+            //            price = queryTerm.Price,
+            //            order = queryTerm.Order,
+            //            descending = queryTerm.Descending,
+            //            page = 1
+            //        })
+            //    }
+            //};
+            //ownerGroup.Items = OwnerCateService.GetALL().Where(x => x.PID.Equals(null)).ToList().Select(x => new LinkItem()
+            //{
+            //    ID = x.ID,
+            //    Name = x.CateName,
+            //    Url = Url.Action("index", new
+            //    {
+            //        province = queryTerm.Province,
+            //        city = queryTerm.City,
+            //        mediacode = queryTerm.MediaCode,
+            //        formatcode = queryTerm.FormatCode,
+            //        ownercode = x.ID,
+            //        periodcode = queryTerm.PeriodCode,
+            //        authstatus = queryTerm.AuthStatus,
+            //        deadline = queryTerm.DeadLine,
+            //        price = queryTerm.Price,
+            //        order = queryTerm.Order,
+            //        descending = queryTerm.Descending,
+            //        page = 1
 
-                }),
-                Selected = queryTerm.OwnerCode == x.ID
+            //    }),
+            //    Selected = queryTerm.OwnerCode == x.ID
 
-            }).ToList();
+            //}).ToList();
 
-            result.Add(ownerGroup);
+            //result.Add(ownerGroup);
 
             #endregion
 
@@ -462,7 +496,7 @@ namespace PadSite.Controllers
             {
                 Group = new LinkItem()
                 {
-                    Name = "投放周期",
+                    Name = "最短投放周期",
                     Url = Url.Action("index", new
                     {
                         province = queryTerm.Province,

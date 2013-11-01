@@ -1,14 +1,23 @@
 ﻿@model  List<LinkGroup>
 
 <div class="list-search-wrap clearfix">
+    <div class="list-search-selected-list">
+        <div class="list-search-selected-title">您已选择：</div>
+        <div class="list-search-selected"></div>
+    </div>
     <div class="list-search-attr clearfix">
+        @{
+            var index = 1;
+        }
         @foreach (var item in Model)
         {
+
+
             var searchlist = item.Items;
 
             if (searchlist.Any())
             {
-            <div class="list-search-attr-bread clearfix">
+            <div class="list-search-attr-bread clearfix" style="@(index == Model.Count() ? "border-bottom:none" : "")">
                 <div class="list-search-attr-title">@item.Group.Name：</div>
                 <div class="list-search-attr-all">
                     <a  class="@(searchlist.Any(x => x.Selected == true) ? "" : "selected")"  href="@item.Group.Url">不限</a>
@@ -31,6 +40,7 @@
                 <span class="list-search-attr-little" style="display: none">收起<i class="icon-maitonn icon-angle-up"></i></span>
             </div>
             }
+            index++;
         }
 
     </div>
@@ -39,20 +49,27 @@
     $(function () {
         $.each($(".list-search-attr-list"), function (index, item) {
             var hasSelected = $(item).find('.selected').length > 0;
-            if (hasSelected && $(item).height() > 58) {
+            if (hasSelected && $(item).height() > 87) {
                 var selectItem = $(item).find('.selected');
                 var top = selectItem.offset().top - $(item).offset().top;
-                if (top < 58) {
-                    $(item).height(58);
+                if (top < 87) {
+                    $(item).height(87);
                     $(item).siblings(".list-search-attr-more").show();
                 } else {
                     $(item).siblings(".list-search-attr-little").show();
                 }
-            } else if ($(item).height() > 58) {
-                $(item).height(58);
+            } else if ($(item).height() > 87) {
+                $(item).height(87);
                 $(item).siblings(".list-search-attr-more").show();
             }
+            if (hasSelected) {
+                $('.list-search-selected').append($(item).find('.selected').html());
+            }
         });
+
+        if ($('.list-search-selected').find('.delete').size() == 0) {
+            $('.list-search-selected-list').hide();
+        }
 
         $(".list-search-attr-more").click(function () {
             $(this).siblings(".list-search-attr-list").height("auto");
@@ -61,9 +78,10 @@
         })
 
         $(".list-search-attr-little").click(function () {
-            $(this).siblings(".list-search-attr-list").height(58);
+            $(this).siblings(".list-search-attr-list").height(87);
             $(this).hide();
             $(this).prev().show();
         })
+
     })
 </script>

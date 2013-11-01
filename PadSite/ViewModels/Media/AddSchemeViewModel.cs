@@ -57,11 +57,17 @@ namespace PadSite.ViewModels
 
         public string crowdCate { get; set; }
 
+        public string formatCate { get; set; }
+
+        public string dq { get; set; }
+
         public int priceCate { get; set; }
 
         public int generateType { get; set; }
 
         public int day { get; set; }
+
+        public decimal price { get; set; }
     }
 
     public class SchemeAddViewModel

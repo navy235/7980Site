@@ -83,21 +83,22 @@ namespace PadSite.Controllers
         {
             ViewBag.CityTree = GetCityTree();
             ViewBag.MediaTree = GetMediaTree();
-            ViewBag.IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, false);
-            ViewBag.CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, false);
-            ViewBag.PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            ViewBag.FormatCate = Utilities.GetSelectListData(FormatCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            //ViewBag.IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            //ViewBag.CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            //ViewBag.PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, false);
             var periodCate = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.OrderIndex, x => x.CateName, false);
             periodCate.RemoveAt(0);
             periodCate.RemoveAt(0);
             periodCate.Single(x => x.Value == "365").Selected = true;
             ViewBag.PeriodCate = periodCate;
-            var PriceCate = new List<SelectListItem>();
-            PriceCate.Add(new SelectListItem() { Text = "10万以下", Value = ((int)PriceListType.Price10Lower).ToString(), Selected = true });
-            PriceCate.Add(new SelectListItem() { Text = "10~50万元", Value = ((int)PriceListType.Price50Lower).ToString() });
-            PriceCate.Add(new SelectListItem() { Text = "50~100万元", Value = ((int)PriceListType.Price100Lower).ToString() });
-            PriceCate.Add(new SelectListItem() { Text = "100~200万元", Value = ((int)PriceListType.Price200Lower).ToString() });
-            PriceCate.Add(new SelectListItem() { Text = "200万元以上", Value = ((int)PriceListType.PriceMax).ToString() });
-            ViewBag.PriceCate = PriceCate;
+            //var PriceCate = new List<SelectListItem>();
+            //PriceCate.Add(new SelectListItem() { Text = "10万以下", Value = ((int)PriceListType.Price10Lower).ToString(), Selected = true });
+            //PriceCate.Add(new SelectListItem() { Text = "10~50万元", Value = ((int)PriceListType.Price50Lower).ToString() });
+            //PriceCate.Add(new SelectListItem() { Text = "50~100万元", Value = ((int)PriceListType.Price100Lower).ToString() });
+            //PriceCate.Add(new SelectListItem() { Text = "100~200万元", Value = ((int)PriceListType.Price200Lower).ToString() });
+            //PriceCate.Add(new SelectListItem() { Text = "200万元以上", Value = ((int)PriceListType.PriceMax).ToString() });
+            //ViewBag.PriceCate = PriceCate;
             return View();
         }
 

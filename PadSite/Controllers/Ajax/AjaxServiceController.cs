@@ -28,6 +28,7 @@ namespace PadSite.Controllers
         private ISchemeService SchemeService;
         private IOutDoorService OutDoorService;
         private IOutDoorLuceneService OutDoorLuceneService;
+        private IMessageService MessageService;
         public AjaxServiceController(
              ICityCateService CityCateService,
              IArticleCateService ArticleCateService,
@@ -40,7 +41,8 @@ namespace PadSite.Controllers
              ISchemeItemService SchemeItemService,
              ISchemeService SchemeService,
             IOutDoorService OutDoorService,
-            IOutDoorLuceneService OutDoorLuceneService
+            IOutDoorLuceneService OutDoorLuceneService,
+            IMessageService MessageService
           )
         {
             this.CityCateService = CityCateService;
@@ -55,6 +57,7 @@ namespace PadSite.Controllers
             this.SchemeService = SchemeService;
             this.OutDoorService = OutDoorService;
             this.OutDoorLuceneService = OutDoorLuceneService;
+            this.MessageService = MessageService;
         }
 
         public ActionResult isLogin()
@@ -294,6 +297,7 @@ namespace PadSite.Controllers
             {
                 result.Message = "加入方案失败！";
                 result.AddServiceError(Utilities.GetInnerMostException(ex));
+                LogHelper.WriteLog(CookieHelper.MemberID + model.id + "加入方案失败", ex);
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
@@ -311,7 +315,7 @@ namespace PadSite.Controllers
         {
             var totalCount = 0;
             var list = OutDoorLuceneService.Search(model, out totalCount);
-            var maxPrice = EnumHelper.GetPriceValue(model.priceCate).Max;
+            var maxPrice = model.price;
             var currentPrice = 0m;
             var day = model.day;
             var result = new List<LinkItem>();
@@ -334,6 +338,35 @@ namespace PadSite.Controllers
             return View(result);
         }
 
+        [LoginAuthorize]
+        [HttpPost]
+        public ActionResult AddMessage(int id, string name, string content)
+        {
+            ServiceResult result = new ServiceResult();
+            try
+            {
+                var message = new Message()
+                {
+                    AddTime = DateTime.Now,
+                    SenderID = CookieHelper.MemberID,
+                    RecipientID = id,
+                    MessageType = (int)MessageType.Member,
+                    RecipienterStatus = (int)MessageStatus.Show,
+                    Title = name,
+                    Content = content
+                };
+                MessageService.Create(message);
+                result.Message = "留言成功！";
+            }
+            catch (Exception ex)
+            {
+                result.Message = "留言失败！";
+                result.AddServiceError(Utilities.GetInnerMostException(ex));
+                LogHelper.WriteLog(CookieHelper.MemberID + "留言失败!", ex);
+            }
+
+            return Json(result);
+        }
 
 
         #endregion

@@ -1,0 +1,18 @@
+@model  string
+@{
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var mobileid = ViewData.ModelMetadata.AdditionalValues["mobile"].ToString();
+}
+
+@(Html.TextBoxFor(m => m, new { @class = "k-textbox single-line text-box k-vcode" })
+)
+
+<button class="btn btn-smsvcode" type="button" id="@(name + "_get")" data-url="@Url.Action("getSmsCode", "ajaxService")" >免费获取验证码</button>
+<script type="text/javascript">
+    $(function () {
+        $('#@name').smsVCode({ mobileId: '@mobileid' });
+    })
+</script>
+
+
+

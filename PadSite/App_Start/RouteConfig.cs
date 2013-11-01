@@ -51,6 +51,18 @@ namespace PadSite
                }
             );
             routes.MapRoute(
+              name: "meida",
+              url: "media-{id}",
+              defaults: new { controller = "company", action = "show", id = UrlParameter.Optional }
+          );
+
+            routes.MapRoute(
+           name: "company",
+           url: "company-{id}",
+           defaults: new { controller = "company", action = "index", id = UrlParameter.Optional }
+       );
+
+            routes.MapRoute(
                name: "Default",
                url: "{controller}/{action}/{id}",
                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

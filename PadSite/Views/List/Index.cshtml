@@ -30,7 +30,7 @@
                             }
                         </ul>
                     </div>
-                    <div class="list-dropdown">
+                    @* <div class="list-dropdown">
                         <span class="list-dropdown-title">@DeadLineMonthFilter.Single(x => x.Selected.Equals(true)).Name</span>
                         <i class="icon-maitonn icon-caret-down"></i>
                         <ul class="list-dropdown-list">
@@ -39,8 +39,10 @@
                                 <li><a class="@(item.Selected ? "selected" : "")" href="@item.Url">@item.Name</a></li>
                             }
                         </ul>
+                    </div>*@
+                    <div class="list-filter-deadline">
+                        档期：@Html.Kendo().DatePicker().Name("dq").Min(DateTime.Now).Value(DateTime.Now)
                     </div>
-
                     <div class="list-filter-search">
                         <input type="text" id="query" name="query" class="list-filter-search-query" value="@Query.Query" maxlength="20" />
                         <button type="button" class="k-button" id="querybtn">
@@ -150,7 +152,11 @@
 <script type="text/javascript">
     $(function () {
         $("#querybtn").click(function () {
-            window.location.href = window.location.origin + window.location.pathname.replace(/p_(\d+)/, 'p_1') + "?query=" + encodeURIComponent($("#query").val());
+            var dq = new Date($('#dq').val()).format('yyyymmdd');
+            window.location.href = window.location.origin
+                + window.location.pathname.replace(/p_(\d+)/, 'p_1')
+                + "?query=" + encodeURIComponent($("#query").val())
+                + "&dq=" + dq;
         });
         $('#query').keydown(function (e) {
             if (e.keyCode == 13) {

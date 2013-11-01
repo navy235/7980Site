@@ -16,7 +16,7 @@ namespace PadSite.Models
         [Display(Name = "分类名称")]
         public string CateName { get; set; }
 
-        public virtual ICollection<OutDoor> OutDoor { get; set; }
+        //public virtual ICollection<OutDoor> OutDoor { get; set; }
 
     }
 }

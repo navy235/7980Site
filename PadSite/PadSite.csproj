@@ -213,17 +213,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201310090900381_AddField.cs" />
-    <Compile Include="Migrations\201310090900381_AddField.Designer.cs">
-      <DependentUpon>201310090900381_AddField.cs</DependentUpon>
+    <Compile Include="Migrations\201311010638508_ModifyMedia.cs" />
+    <Compile Include="Migrations\201311010638508_ModifyMedia.Designer.cs">
+      <DependentUpon>201311010638508_ModifyMedia.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201310110811088_AddSuggestStatus.cs" />
-    <Compile Include="Migrations\201310110811088_AddSuggestStatus.Designer.cs">
-      <DependentUpon>201310110811088_AddSuggestStatus.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201310120802107_AlertOpenIDlength.cs" />
-    <Compile Include="Migrations\201310120802107_AlertOpenIDlength.Designer.cs">
-      <DependentUpon>201310120802107_AlertOpenIDlength.cs</DependentUpon>
+    <Compile Include="Migrations\201311010746579_ModifyMedia2.cs" />
+    <Compile Include="Migrations\201311010746579_ModifyMedia2.Designer.cs">
+      <DependentUpon>201311010746579_ModifyMedia2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Base\Article.cs" />
@@ -516,6 +512,8 @@
     <Content Include="Scripts\formcontrol\control-groupforeignkeyforcheck.js" />
     <Content Include="Scripts\formcontrol\control-validatevcode.js" />
     <Content Include="Scripts\effectcontrol\control-slider.js" />
+    <Content Include="Scripts\formcontrol\control-smsvcode.js" />
+    <Content Include="Scripts\formcontrol\control-radiochecklist.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery.Jcrop.min.js" />
     <Content Include="Scripts\effectcontrol\control-jqzoom-core.js" />
@@ -805,6 +803,8 @@
     <Content Include="Views\AjaxService\GenerateScheme.cshtml" />
     <Content Include="Views\Fangan\Download.cshtml" />
     <Content Include="Views\Fangan\Print.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\SmsVCode.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RadioCheckList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -815,21 +815,18 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201310090900381_AddField.resx">
-      <DependentUpon>201310090900381_AddField.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201310110811088_AddSuggestStatus.resx">
-      <DependentUpon>201310110811088_AddSuggestStatus.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201310120802107_AlertOpenIDlength.resx">
-      <DependentUpon>201310120802107_AlertOpenIDlength.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\WebSite\Maitonn.Core\Maitonn.Core.csproj">
       <Project>{8404c3a7-9f29-4c74-9913-165bae8c86db}</Project>
       <Name>Maitonn.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201311010638508_ModifyMedia.resx">
+      <DependentUpon>201311010638508_ModifyMedia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201311010746579_ModifyMedia2.resx">
+      <DependentUpon>201311010746579_ModifyMedia2.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -195,8 +195,6 @@
                         <td>@item.PeriodName</td>
                     </tr>
                     <tr>
-                        <td class="table-tips">所有权类型</td>
-                        <td>@item.OwnerName </td>
                         <td class="table-tips">媒体规格</td>
                         <td>
                             @if (item.IsRegular)
@@ -214,6 +212,9 @@
                                 <span>总面积=@item.TotalArea 平方米</span>
                             }
                         </td>
+                        <td class="table-tips">@*所有权类型*@&nbsp;</td>
+                        <td>@*@item.OwnerName*@ &nbsp;</td>
+
 
                     </tr>
                     <tr>
@@ -238,6 +239,11 @@
 
                     </tr>
                     <tr>
+                        <td class="table-tips">投放周期</td>
+
+                        <td colspan="3">@item.PeriodName </td>
+                    </tr>
+                    @*     <tr>
                         <td class="table-tips">所属商圈</td>
 
                         <td>@item.AreaCate.Replace(",", " 、 ") </td>
@@ -246,7 +252,7 @@
 
                         <td>@item.PeriodName </td>
 
-                    </tr>
+                    </tr>*@
                     <tr>
                         <td class="table-tips">人流量</td>
 
@@ -258,7 +264,7 @@
 
                     </tr>
 
-                    <tr class="compare-table-title">
+                  @*  <tr class="compare-table-title">
                         <td colspan="6"><span>补充信息</span></td>
                     </tr>
 
@@ -278,7 +284,7 @@
 
                         <td colspan="3">@item.PurposeCate.Replace(",", " 、 ") </td>
 
-                    </tr>
+                    </tr>*@
                 </table>
             </div>
         }

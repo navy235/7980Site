@@ -46,6 +46,8 @@ namespace PadSite.ViewModels
 
         public string Query { get; set; }
 
+        public string Dq { get; set; }
+
         public double MinX { get; set; }
 
         public double MinY { get; set; }

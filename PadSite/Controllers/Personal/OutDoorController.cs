@@ -223,13 +223,13 @@ namespace PadSite.Controllers
                 return Redirect(Url.Action("openbiz", "reg"));
             }
 
-            ViewBag.Data_CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, false);
-            ViewBag.Data_IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, false);
-            ViewBag.Data_PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, false);
-            ViewBag.Data_AreaCate = Utilities.GetSelectListData(AreaCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            //ViewBag.Data_CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            //ViewBag.Data_IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            //ViewBag.Data_PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            //ViewBag.Data_AreaCate = Utilities.GetSelectListData(AreaCateService.GetALL(), x => x.ID, x => x.CateName, false);
             ViewBag.Data_FormatCode = Utilities.GetSelectListData(FormatCateService.GetALL(), x => x.ID, x => x.CateName, true);
             ViewBag.Data_PeriodCode = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.ID, x => x.CateName, true);
-            ViewBag.Data_OwnerCode = Utilities.GetSelectListData(OwnerCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            //ViewBag.Data_OwnerCode = Utilities.GetSelectListData(OwnerCateService.GetALL(), x => x.ID, x => x.CateName, false);
             return View(new OutDoorViewModel());
         }
 
@@ -250,22 +250,23 @@ namespace PadSite.Controllers
             var CrowdCateArray = new List<int>();
             var IndustryCateArray = new List<int>();
             var PurposeCateArray = new List<int>();
+            //if (!string.IsNullOrEmpty(model.AreaCate))
+            //{
+            //    AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //}
+            //if (!string.IsNullOrEmpty(model.CrowdCate))
+            //{
+            //    CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //}
+            //if (!string.IsNullOrEmpty(model.IndustryCate))
+            //{
+            //    IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //}
 
-            AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-
-            if (!string.IsNullOrEmpty(model.CrowdCate))
-            {
-                CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            }
-            if (!string.IsNullOrEmpty(model.IndustryCate))
-            {
-                IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            }
-
-            if (!string.IsNullOrEmpty(model.PurposeCate))
-            {
-                PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            }
+            //if (!string.IsNullOrEmpty(model.PurposeCate))
+            //{
+            //    PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //}
 
             TempData["Service_Result"] = result;
 
@@ -291,13 +292,13 @@ namespace PadSite.Controllers
 
             }
 
-            ViewBag.Data_CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, CrowdCateArray, false);
-            ViewBag.Data_IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, IndustryCateArray, false);
-            ViewBag.Data_PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, PurposeCateArray, false);
-            ViewBag.Data_AreaCate = Utilities.GetSelectListData(AreaCateService.GetALL(), x => x.ID, x => x.CateName, AreaCateArray, false);
+            //ViewBag.Data_CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, CrowdCateArray, false);
+            //ViewBag.Data_IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, IndustryCateArray, false);
+            //ViewBag.Data_PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, PurposeCateArray, false);
+            //ViewBag.Data_AreaCate = Utilities.GetSelectListData(AreaCateService.GetALL(), x => x.ID, x => x.CateName, AreaCateArray, false);
             ViewBag.Data_FormatCode = Utilities.GetSelectListData(FormatCateService.GetALL(), x => x.ID, x => x.CateName, true);
             ViewBag.Data_PeriodCode = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.ID, x => x.CateName, true);
-            ViewBag.Data_OwnerCode = Utilities.GetSelectListData(OwnerCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            //ViewBag.Data_OwnerCode = Utilities.GetSelectListData(OwnerCateService.GetALL(), x => x.ID, x => x.CateName, false);
 
             return View(model);
         }
@@ -312,10 +313,10 @@ namespace PadSite.Controllers
             if (OutDoorService.GetALL().Any(x => x.ID == id && x.MemberID == CookieHelper.MemberID))
             {
                 OutDoor entity = OutDoorService.GetALL()
-                    .Include(x => x.AreaCate)
-                    .Include(x => x.CrowdCate)
-                    .Include(x => x.IndustryCate)
-                    .Include(x => x.PurposeCate)
+                    //.Include(x => x.AreaCate)
+                    //.Include(x => x.CrowdCate)
+                    //.Include(x => x.IndustryCate)
+                    //.Include(x => x.PurposeCate)
                     .Single(x => x.ID == id);
 
                 OutDoorViewModel model = new OutDoorViewModel()
@@ -323,19 +324,20 @@ namespace PadSite.Controllers
                     Name = entity.Name,
                     MediaCode = entity.MediaCodeValue,
                     CityCode = entity.CityCodeValue,
-                    CredentialsImg = entity.CredentialsImg,
+                    //CredentialsImg = entity.CredentialsImg,
                     MediaImg = entity.MediaImg,
                     Description = entity.Description,
                     Deadline = entity.Deadline,
                     HasLight = entity.HasLight,
-                    AreaCate = String.Join(",", entity.AreaCate.Select(x => x.ID)),
-                    CrowdCate = String.Join(",", entity.CrowdCate.Select(x => x.ID)),
-                    IndustryCate = String.Join(",", entity.IndustryCate.Select(x => x.ID)),
-                    PurposeCate = String.Join(",", entity.PurposeCate.Select(x => x.ID)),
+                    //AreaCate = String.Join(",", entity.AreaCate.Select(x => x.ID)),
+                    //CrowdCate = String.Join(",", entity.CrowdCate.Select(x => x.ID)),
+                    //IndustryCate = String.Join(",", entity.IndustryCate.Select(x => x.ID)),
+                    //PurposeCate = String.Join(",", entity.PurposeCate.Select(x => x.ID)),
                     FormatCode = entity.FormatCode,
-                    OwnerCode = entity.OwnerCode,
+                    //OwnerCode = entity.OwnerCode,
                     Price = entity.Price,
-                    PriceExten = entity.PriceExten,
+                    RealPrice = entity.RealPrice,
+                    //PriceExten = entity.PriceExten,
                     ID = entity.ID,
                     Location = entity.Location,
                     PeriodCode = entity.PeriodCode,
@@ -362,31 +364,32 @@ namespace PadSite.Controllers
                 var CrowdCateArray = new List<int>();
                 var IndustryCateArray = new List<int>();
                 var PurposeCateArray = new List<int>();
+                //if (!string.IsNullOrEmpty(model.AreaCate))
+                //{
+                //    AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                //}
+                //if (!string.IsNullOrEmpty(model.CrowdCate))
+                //{
+                //    CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                //}
+                //if (!string.IsNullOrEmpty(model.IndustryCate))
+                //{
+                //    IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                //}
 
-                AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-
-                if (!string.IsNullOrEmpty(model.CrowdCate))
-                {
-                    CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-                }
-                if (!string.IsNullOrEmpty(model.IndustryCate))
-                {
-                    IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-                }
-
-                if (!string.IsNullOrEmpty(model.PurposeCate))
-                {
-                    PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-                }
+                //if (!string.IsNullOrEmpty(model.PurposeCate))
+                //{
+                //    PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+                //}
 
 
-                ViewBag.Data_CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, CrowdCateArray, false);
-                ViewBag.Data_IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, IndustryCateArray, false);
-                ViewBag.Data_PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, PurposeCateArray, false);
-                ViewBag.Data_AreaCate = Utilities.GetSelectListData(AreaCateService.GetALL(), x => x.ID, x => x.CateName, AreaCateArray, false);
+                //ViewBag.Data_CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, CrowdCateArray, false);
+                //ViewBag.Data_IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, IndustryCateArray, false);
+                //ViewBag.Data_PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, PurposeCateArray, false);
+                //ViewBag.Data_AreaCate = Utilities.GetSelectListData(AreaCateService.GetALL(), x => x.ID, x => x.CateName, AreaCateArray, false);
                 ViewBag.Data_FormatCode = Utilities.GetSelectListData(FormatCateService.GetALL(), x => x.ID, x => x.CateName, model.FormatCode, true);
                 ViewBag.Data_PeriodCode = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.ID, x => x.CateName, model.PeriodCode, true);
-                ViewBag.Data_OwnerCode = Utilities.GetSelectListData(OwnerCateService.GetALL(), x => x.ID, x => x.CateName, model.OwnerCode, false);
+                //ViewBag.Data_OwnerCode = Utilities.GetSelectListData(OwnerCateService.GetALL(), x => x.ID, x => x.CateName, model.OwnerCode, false);
                 return View(model);
             }
             else
@@ -411,22 +414,23 @@ namespace PadSite.Controllers
             var CrowdCateArray = new List<int>();
             var IndustryCateArray = new List<int>();
             var PurposeCateArray = new List<int>();
+            //if (!string.IsNullOrEmpty(model.AreaCate))
+            //{
+            //    AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //}
+            //if (!string.IsNullOrEmpty(model.CrowdCate))
+            //{
+            //    CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //}
+            //if (!string.IsNullOrEmpty(model.IndustryCate))
+            //{
+            //    IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //}
 
-            AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-
-            if (!string.IsNullOrEmpty(model.CrowdCate))
-            {
-                CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            }
-            if (!string.IsNullOrEmpty(model.IndustryCate))
-            {
-                IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            }
-
-            if (!string.IsNullOrEmpty(model.PurposeCate))
-            {
-                PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            }
+            //if (!string.IsNullOrEmpty(model.PurposeCate))
+            //{
+            //    PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //}
 
             if (!ModelState.IsValid)
             {
@@ -448,13 +452,13 @@ namespace PadSite.Controllers
                     LogHelper.WriteLog("用户:" + CookieHelper.MemberID + "编辑户外失败!", ex);
                 }
             }
-            ViewBag.Data_CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, CrowdCateArray, false);
-            ViewBag.Data_IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, IndustryCateArray, false);
-            ViewBag.Data_PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, PurposeCateArray, false);
-            ViewBag.Data_AreaCate = Utilities.GetSelectListData(AreaCateService.GetALL(), x => x.ID, x => x.CateName, AreaCateArray, false);
+            //ViewBag.Data_CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, CrowdCateArray, false);
+            //ViewBag.Data_IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, IndustryCateArray, false);
+            //ViewBag.Data_PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, PurposeCateArray, false);
+            //ViewBag.Data_AreaCate = Utilities.GetSelectListData(AreaCateService.GetALL(), x => x.ID, x => x.CateName, AreaCateArray, false);
             ViewBag.Data_FormatCode = Utilities.GetSelectListData(FormatCateService.GetALL(), x => x.ID, x => x.CateName, true);
             ViewBag.Data_PeriodCode = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.ID, x => x.CateName, true);
-            ViewBag.Data_OwnerCode = Utilities.GetSelectListData(OwnerCateService.GetALL(), x => x.ID, x => x.CateName, false);
+            //ViewBag.Data_OwnerCode = Utilities.GetSelectListData(OwnerCateService.GetALL(), x => x.ID, x => x.CateName, false);
             return View(model);
         }
 

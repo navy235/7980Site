@@ -169,11 +169,11 @@ namespace PadSite.Models
                 .HasForeignKey(o => o.FormatCode)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<OutDoor>()
-                 .HasRequired(o => o.OwnerCate)
-                 .WithMany(oc => oc.OutDoor)
-                 .HasForeignKey(o => o.OwnerCode)
-                 .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<OutDoor>()
+            //     .HasRequired(o => o.OwnerCate)
+            //     .WithMany(oc => oc.OutDoor)
+            //     .HasForeignKey(o => o.OwnerCode)
+            //     .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<OutDoor>()
                 .HasRequired(m => m.MediaCate)
@@ -181,58 +181,58 @@ namespace PadSite.Models
                 .HasForeignKey(o => o.MediaCode)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<OutDoor>()
-              .HasMany(b => b.AreaCate)
-              .WithMany(c => c.OutDoor)
-              .Map
-              (
-                  m =>
-                  {
-                      m.MapLeftKey("OutDoorID");
-                      m.MapRightKey("AreaCateID");
-                      m.ToTable("OutDoor_AreaCate");
-                  }
-              );
+            //modelBuilder.Entity<OutDoor>()
+            //  .HasMany(b => b.AreaCate)
+            //  .WithMany(c => c.OutDoor)
+            //  .Map
+            //  (
+            //      m =>
+            //      {
+            //          m.MapLeftKey("OutDoorID");
+            //          m.MapRightKey("AreaCateID");
+            //          m.ToTable("OutDoor_AreaCate");
+            //      }
+            //  );
 
-            modelBuilder.Entity<OutDoor>()
-              .HasMany(b => b.CrowdCate)
-              .WithMany(c => c.OutDoor)
-              .Map
-              (
-                  m =>
-                  {
-                      m.MapLeftKey("OutDoorID");
-                      m.MapRightKey("CrowdCateID");
-                      m.ToTable("OutDoor_CrowdCate");
-                  }
-              );
+            //modelBuilder.Entity<OutDoor>()
+            //  .HasMany(b => b.CrowdCate)
+            //  .WithMany(c => c.OutDoor)
+            //  .Map
+            //  (
+            //      m =>
+            //      {
+            //          m.MapLeftKey("OutDoorID");
+            //          m.MapRightKey("CrowdCateID");
+            //          m.ToTable("OutDoor_CrowdCate");
+            //      }
+            //  );
 
 
-            modelBuilder.Entity<OutDoor>()
-           .HasMany(b => b.IndustryCate)
-           .WithMany(c => c.OutDoor)
-           .Map
-           (
-               m =>
-               {
-                   m.MapLeftKey("OutDoorID");
-                   m.MapRightKey("IndustryCateID");
-                   m.ToTable("OutDoor_IndustryCate");
-               }
-           );
+           // modelBuilder.Entity<OutDoor>()
+           //.HasMany(b => b.IndustryCate)
+           //.WithMany(c => c.OutDoor)
+           //.Map
+           //(
+           //    m =>
+           //    {
+           //        m.MapLeftKey("OutDoorID");
+           //        m.MapRightKey("IndustryCateID");
+           //        m.ToTable("OutDoor_IndustryCate");
+           //    }
+           //);
 
-            modelBuilder.Entity<OutDoor>()
-            .HasMany(b => b.PurposeCate)
-            .WithMany(c => c.OutDoor)
-            .Map
-            (
-                m =>
-                {
-                    m.MapLeftKey("OutDoorID");
-                    m.MapRightKey("PurposeCateID");
-                    m.ToTable("OutDoor_PurposeCate");
-                }
-            );
+            //modelBuilder.Entity<OutDoor>()
+            //.HasMany(b => b.PurposeCate)
+            //.WithMany(c => c.OutDoor)
+            //.Map
+            //(
+            //    m =>
+            //    {
+            //        m.MapLeftKey("OutDoorID");
+            //        m.MapRightKey("PurposeCateID");
+            //        m.ToTable("OutDoor_PurposeCate");
+            //    }
+            //);
             #endregion
 
 

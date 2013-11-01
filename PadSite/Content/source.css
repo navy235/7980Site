@@ -1401,7 +1401,6 @@ a.top-head-changcity {
     }
 
 .footer-links {
-    border-bottom: 1px solid #EAEAEA;
     width: 990px;
     margin: 0 auto;
 }
@@ -1460,14 +1459,14 @@ a.top-head-changcity {
 
 .footer-about {
     text-align: center;
-    margin: 10px auto 6px;
-    width: 990px;
+    margin: auto 6px;
     line-height: 26px;
     color: #999;
     font-size: 12px;
     height: auto;
     padding-top: 4px;
     clear: both;
+    border-top: 1px solid #EAEAEA;
 }
 
     .footer-about a:link,
@@ -1775,7 +1774,7 @@ a.top-head-changcity {
     }
 
 .list-search {
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .list-search-wrap {
@@ -1783,7 +1782,7 @@ a.top-head-changcity {
     border: #e6e6e6 1px solid;
     margin-bottom: 10px;
     background-color: #f5f5f5;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .list-search-attr {
@@ -1803,7 +1802,7 @@ a.top-head-changcity {
 
 .list-search-attr-title {
     float: left;
-    width: 80px;
+    width: 100px;
     text-align: right;
     line-height: 24px;
     color: #666;
@@ -1842,7 +1841,7 @@ a.top-head-changcity {
 
 .list-search-attr-list {
     float: left;
-    width: 830px;
+    width: 810px;
     overflow: hidden;
     background-color: #fff;
 }
@@ -1857,7 +1856,7 @@ a.top-head-changcity {
 
         .list-search-attr-list li span {
             display: inline-block;
-            padding: 4px 5px 0 0;
+            padding: 4px 5px 2px 0;
             line-height: 1;
             height: 20px;
         }
@@ -1912,6 +1911,61 @@ a.top-head-changcity {
         margin-left: 5px;
     }
 
+.list-search-selected-list {
+    overflow: hidden;
+    padding: 5px 10px;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.list-search-selected-title {
+    float: left;
+    width: 100px;
+    text-align: right;
+    line-height: 24px;
+    color: #666;
+}
+
+.list-search-selected {
+    float: left;
+    width: 810px;
+    overflow: hidden;
+}
+
+    .list-search-selected span {
+        display: inline-block;
+        padding: 4px 5px 2px 0;
+        line-height: 1;
+        height: 20px;
+        background-color: #f60;
+    }
+
+        .list-search-selected span a {
+            display: inline-block;
+            height: 16px;
+            line-height: 16px;
+            white-space: nowrap;
+            outline: 0;
+            padding: 0 7px 0 8px;
+            color: #fff;
+        }
+
+        .list-search-selected span .delete {
+            display: inline-block;
+            height: 16px;
+            line-height: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .list-search-selected span .delete {
+            font-size: 14px;
+            font-family: '宋体';
+            color: #fff;
+            text-decoration: none;
+            background-color: #f60;
+            margin: 0;
+            padding: 0;
+        }
 
 .list-result {
     width: 710px;
@@ -1946,9 +2000,9 @@ a.top-head-changcity {
 .list-filter-sort {
     position: relative;
     float: left;
-    height: 30px;
+    height: 24px;
     width: 44px;
-    line-height: 30px;
+    line-height: 24px;
     border: #bcbcbc 1px solid;
     padding: 0 0 0 8px;
     color: #333;
@@ -1978,12 +2032,24 @@ a.top-head-changcity {
 
 
 
+.list-filter-deadline {
+    float: left;
+    width: 150px;
+}
+
+    .list-filter-deadline .k-datepicker {
+        width: 98px;
+        margin: 0;
+        padding: 0;
+    }
+
 .list-filter-search {
     float: left;
 }
 
+
     .list-filter-search #querybtn {
-        padding: 4px 15px;
+        padding: 2px 15px;
         margin-top: -3px;
     }
 
@@ -1999,7 +2065,7 @@ a.top-head-changcity {
     width: 180px;
     border: #bcbcbc 1px solid;
     outline: none;
-    padding: 3px 4px;
+    padding: 1px 4px;
 }
 
 .list-grayline {
@@ -2172,7 +2238,7 @@ a.top-head-changcity {
 
 
 .list-dropdown {
-    height: 30px;
+    height: 24px;
     border: #bcbcbc 1px solid;
     margin-right: 10px;
     cursor: pointer;
@@ -2190,11 +2256,11 @@ a.top-head-changcity {
 
 .list-dropdown-title {
     display: inline-block;
-    height: 30px;
+    height: 24px;
     text-align: center;
     overflow: hidden;
     width: 67px;
-    line-height: 30px;
+    line-height: 24px;
 }
 
 .list-dropdown-list {
@@ -2203,7 +2269,7 @@ a.top-head-changcity {
     background-color: #fff;
     width: 88px;
     z-index: 31;
-    top: 30px;
+    top: 24px;
     left: -1px;
     overflow: hidden;
     border: #bcbcbc 1px solid;
@@ -2216,8 +2282,8 @@ a.top-head-changcity {
     }
 
     .list-dropdown-list li {
-        height: 28px;
-        line-height: 28px;
+        height: 24px;
+        line-height: 24px;
         background-color: #fff;
         zoom: 1;
     }
@@ -2910,7 +2976,7 @@ a.top-head-changcity {
 
 
 .personal .action-info {
-    top: -40px;
+    top: 40px;
 }
 
 

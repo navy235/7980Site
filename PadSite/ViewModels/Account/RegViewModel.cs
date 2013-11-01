@@ -47,12 +47,36 @@ namespace PadSite.ViewModels
         public string ConfirmPassword { get; set; }
 
 
-        [Required(ErrorMessage = "请输入验证码")]
-        [Display(Name = "验证码")]
+        //[Required(ErrorMessage = "请输入验证码")]
+        //[Display(Name = "验证码")]
+        //[StringLength(4, ErrorMessage = "长度为4位", MinimumLength = 4)]
+        //[Remote("ValidateVCode", "AjaxService", ErrorMessage = "验证码错误或过期")]
+        //[UIHint("ValidateVCode")]
+        //[HintClass("validatecode")]
+        //public string Vcode { get; set; }
+
+        [Required(ErrorMessage = "请选择用户类型")]
+        [Display(Name = "用户类型")]
+        [UIHint("RadioCheckList")]
+        [HintClass("regchecklist")]
+        public int MemberType { get; set; }
+
+
+        [Required(ErrorMessage = "请输入手机号码")]
+        [Display(Name = "手机号码")]
+        [RegularExpression(@"^(13[0-9]|15[0-9]|18[0-9])\d{8}$", ErrorMessage = "您输入的手机号码格式不正确.")]
+        [Hint("请输入手机号码,并验证")]
+        [HintClass("contact")]
+        public string Mobile { get; set; }
+
+
+        [Required(ErrorMessage = "请输入短信验证码")]
+        [Display(Name = "短信验证码")]
         [StringLength(4, ErrorMessage = "长度为4位", MinimumLength = 4)]
-        [Remote("ValidateVCode", "AjaxService", ErrorMessage = "验证码错误或过期")]
-        [UIHint("ValidateVCode")]
+        [Remote("ValidateSmsVCode", "AjaxService", ErrorMessage = "验证码错误或过期")]
+        [UIHint("SmsVCode")]
+        [AdditionalMetadata("mobile", "Mobile")]
         [HintClass("validatecode")]
-        public string Vcode { get; set; }
+        public string SmsVcode { get; set; }
     }
 }

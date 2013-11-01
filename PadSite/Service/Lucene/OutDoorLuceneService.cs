@@ -178,10 +178,10 @@ namespace PadSite.Service
             var query = db.Set<OutDoor>()
                 .Include(x => x.CityCate)
                 .Include(x => x.MediaCate)
-                .Include(x => x.AreaCate)
-                .Include(x => x.CrowdCate)
-                .Include(x => x.IndustryCate)
-                .Include(x => x.PurposeCate)
+                //.Include(x => x.AreaCate)
+                //.Include(x => x.CrowdCate)
+                //.Include(x => x.IndustryCate)
+                //.Include(x => x.PurposeCate)
                 .Include(x => x.PeriodCate)
                 .Include(x => x.FormatCate)
                 .Include(x => x.Member)
@@ -224,7 +224,7 @@ namespace PadSite.Service
                     item.Price = entity.Price;
                 }
                 item.OwnerCode = entity.OwnerCode;
-                item.OwnerName = entity.OwnerCate.CateName;
+                //item.OwnerName = entity.OwnerCate.CateName;
                 item.Status = entity.Status;
                 item.AuthStatus = entity.AuthStatus;
                 item.Title = entity.Name;
@@ -240,10 +240,10 @@ namespace PadSite.Service
                     item.CredentialsImg = string.Empty;
                 }
                 item.VideoUrl = entity.VideoUrl;
-                item.AreaCate = string.Join(",", entity.AreaCate.Select(x => x.CateName).ToList());
-                item.CrowdCate = string.Join(",", entity.CrowdCate.Select(x => x.CateName).ToList());
-                item.IndustryCate = string.Join(",", entity.IndustryCate.Select(x => x.CateName).ToList());
-                item.PurposeCate = string.Join(",", entity.PurposeCate.Select(x => x.CateName).ToList());
+                //item.AreaCate = string.Join(",", entity.AreaCate.Select(x => x.CateName).ToList());
+                //item.CrowdCate = string.Join(",", entity.CrowdCate.Select(x => x.CateName).ToList());
+                //item.IndustryCate = string.Join(",", entity.IndustryCate.Select(x => x.CateName).ToList());
+                //item.PurposeCate = string.Join(",", entity.PurposeCate.Select(x => x.CateName).ToList());
                 item.IsRegular = entity.IsRegular ? 1 : 0;
                 item.HasLight = entity.HasLight ? 1 : 0;
                 if (entity.HasLight)
@@ -311,21 +311,21 @@ namespace PadSite.Service
             field.Boost = 2.0f;
             document.Add(field);
 
-            field = new Field(OutDoorIndexFields.AreaCate, OutDoor.AreaCate, Field.Store.YES, Field.Index.ANALYZED);
-            field.Boost = 1.0f;
-            document.Add(field);
+            //field = new Field(OutDoorIndexFields.AreaCate, OutDoor.AreaCate, Field.Store.YES, Field.Index.ANALYZED);
+            //field.Boost = 1.0f;
+            //document.Add(field);
 
-            field = new Field(OutDoorIndexFields.CrowdCate, OutDoor.CrowdCate, Field.Store.YES, Field.Index.ANALYZED);
-            field.Boost = 1.0f;
-            document.Add(field);
+            //field = new Field(OutDoorIndexFields.CrowdCate, OutDoor.CrowdCate, Field.Store.YES, Field.Index.ANALYZED);
+            //field.Boost = 1.0f;
+            //document.Add(field);
 
-            field = new Field(OutDoorIndexFields.IndustryCate, OutDoor.IndustryCate, Field.Store.YES, Field.Index.ANALYZED);
-            field.Boost = 1.0f;
-            document.Add(field);
+            //field = new Field(OutDoorIndexFields.IndustryCate, OutDoor.IndustryCate, Field.Store.YES, Field.Index.ANALYZED);
+            //field.Boost = 1.0f;
+            //document.Add(field);
 
-            field = new Field(OutDoorIndexFields.PurposeCate, OutDoor.PurposeCate, Field.Store.YES, Field.Index.ANALYZED);
-            field.Boost = 1.0f;
-            document.Add(field);
+            //field = new Field(OutDoorIndexFields.PurposeCate, OutDoor.PurposeCate, Field.Store.YES, Field.Index.ANALYZED);
+            //field.Boost = 1.0f;
+            //document.Add(field);
 
             field = new Field(OutDoorIndexFields.CityCateName, OutDoor.CityCateName, Field.Store.YES, Field.Index.ANALYZED);
             field.Boost = 1.0f;
@@ -343,9 +343,9 @@ namespace PadSite.Service
             field.Boost = 0.2f;
             document.Add(field);
 
-            field = new Field(OutDoorIndexFields.OwnerName, OutDoor.OwnerName, Field.Store.YES, Field.Index.ANALYZED);
-            field.Boost = 0.2f;
-            document.Add(field);
+            //field = new Field(OutDoorIndexFields.OwnerName, OutDoor.OwnerName, Field.Store.YES, Field.Index.ANALYZED);
+            //field.Boost = 0.2f;
+            //document.Add(field);
 
             field = new Field(OutDoorIndexFields.ImgUrl, OutDoor.ImgUrl, Field.Store.YES, Field.Index.NOT_ANALYZED);
             document.Add(field);
@@ -399,7 +399,7 @@ namespace PadSite.Service
             document.Add(new NumericField(OutDoorIndexFields.MediaCateCode, Field.Store.YES, true).SetLongValue(OutDoor.MediaCateCode));
             document.Add(new NumericField(OutDoorIndexFields.FormatCode, Field.Store.YES, true).SetIntValue(OutDoor.FormatCode));
             document.Add(new NumericField(OutDoorIndexFields.PeriodCode, Field.Store.YES, true).SetIntValue(OutDoor.PeriodCode));
-            document.Add(new NumericField(OutDoorIndexFields.OwnerCode, Field.Store.YES, true).SetIntValue(OutDoor.OwnerCode));
+            //document.Add(new NumericField(OutDoorIndexFields.OwnerCode, Field.Store.YES, true).SetIntValue(OutDoor.OwnerCode));
             document.Add(new NumericField(OutDoorIndexFields.Status, Field.Store.YES, true).SetIntValue(OutDoor.Status));
             document.Add(new NumericField(OutDoorIndexFields.TrafficAuto, Field.Store.YES, true).SetIntValue(OutDoor.TrafficAuto));
             document.Add(new NumericField(OutDoorIndexFields.TrafficPerson, Field.Store.YES, true).SetIntValue(OutDoor.TrafficPerson));
@@ -512,14 +512,14 @@ namespace PadSite.Service
             item.Price = Price;
             item.PeriodName = doc.Get(OutDoorIndexFields.PeriodName);
             item.FormatName = doc.Get(OutDoorIndexFields.FormatName);
-            item.OwnerName = doc.Get(OutDoorIndexFields.OwnerName);
+            //item.OwnerName = doc.Get(OutDoorIndexFields.OwnerName);
             item.AuthStatus = AuthStatus;
             item.MemberStatus = MemberStatus;
             item.CompanyName = doc.Get(OutDoorIndexFields.CompanyName);
-            item.AreaCate = doc.Get(OutDoorIndexFields.AreaCate);
-            item.IndustryCate = doc.Get(OutDoorIndexFields.IndustryCate);
-            item.CrowdCate = doc.Get(OutDoorIndexFields.CrowdCate);
-            item.PurposeCate = doc.Get(OutDoorIndexFields.PurposeCate);
+            //item.AreaCate = doc.Get(OutDoorIndexFields.AreaCate);
+            //item.IndustryCate = doc.Get(OutDoorIndexFields.IndustryCate);
+            //item.CrowdCate = doc.Get(OutDoorIndexFields.CrowdCate);
+            //item.PurposeCate = doc.Get(OutDoorIndexFields.PurposeCate);
             item.AddTime = Published;
             item.DeadLine = DeadLine;
             item.TrafficAuto = TrafficAuto;
@@ -726,12 +726,12 @@ namespace PadSite.Service
             #endregion
 
             #region 媒体所有权查询
-            if (queryTerm.OwnerCode != 0)
-            {
-                var OwnerCodeCodeQuery = NumericRangeQuery.NewIntRange(OutDoorIndexFields.OwnerCode,
-                    queryTerm.OwnerCode, queryTerm.OwnerCode, true, true);
-                combineQuery.Add(OwnerCodeCodeQuery, Occur.MUST);
-            }
+            //if (queryTerm.OwnerCode != 0)
+            //{
+            //    var OwnerCodeCodeQuery = NumericRangeQuery.NewIntRange(OutDoorIndexFields.OwnerCode,
+            //        queryTerm.OwnerCode, queryTerm.OwnerCode, true, true);
+            //    combineQuery.Add(OwnerCodeCodeQuery, Occur.MUST);
+            //}
             #endregion
 
             #region 媒体购买周期查询
@@ -883,6 +883,18 @@ namespace PadSite.Service
             }
             #endregion
 
+            #region 媒体档期查询
+            if (!string.IsNullOrEmpty(model.dq))
+            {
+                var minValue = (DateTime.Now.AddYears(-10)).Ticks;
+
+                var maxValue = Convert.ToDateTime(model.dq).Ticks;
+                var DeadLineQuery = NumericRangeQuery.NewLongRange(OutDoorIndexFields.DeadLine,
+                    Convert.ToInt64(minValue), Convert.ToInt64(maxValue), true, true);
+                combineQuery.Add(DeadLineQuery, Occur.MUST);
+            }
+            #endregion
+
             #region 地区查询
             if (!string.IsNullOrEmpty(model.cityCode))
             {
@@ -900,14 +912,16 @@ namespace PadSite.Service
             #endregion
 
             #region 关键字查询
-            if (!string.IsNullOrEmpty(model.crowdCate) || !string.IsNullOrEmpty(model.industryCate) || !string.IsNullOrEmpty(model.purposeCate))
+            if (!string.IsNullOrEmpty(model.formatCate) || !string.IsNullOrEmpty(model.crowdCate) || !string.IsNullOrEmpty(model.industryCate) || !string.IsNullOrEmpty(model.purposeCate))
             {
                 var fields = new[] { 
                     OutDoorIndexFields.IndustryCate,
                     OutDoorIndexFields.CrowdCate,
-                    OutDoorIndexFields.PurposeCate
+                    OutDoorIndexFields.PurposeCate,
+                    OutDoorIndexFields.FormatName
                 };
-                var keywords = (string.IsNullOrEmpty(model.crowdCate) ? string.Empty : model.crowdCate + ",")
+                var keywords = (string.IsNullOrEmpty(model.formatCate) ? string.Empty : model.formatCate + ",")
+                    + (string.IsNullOrEmpty(model.crowdCate) ? string.Empty : model.crowdCate + ",")
                     + (string.IsNullOrEmpty(model.industryCate) ? string.Empty : model.industryCate + ",")
                     + (string.IsNullOrEmpty(model.purposeCate) ? string.Empty : model.purposeCate);
                 var analyzer = new PanGuAnalyzer();

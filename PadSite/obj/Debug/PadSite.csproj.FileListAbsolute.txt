@@ -134,7 +134,6 @@ E:\GitProject\7980Site\PadSite\bin\MiniProfiler.xml
 E:\GitProject\7980Site\PadSite\bin\MiniProfiler.EntityFramework.pdb
 D:\GitProject\7980Site\PadSite\bin\Calabonga.Mvc.PagedListExt.dll
 E:\GitProject\7980Site\PadSite\bin\Calabonga.Mvc.PagedListExt.dll
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddMediaScheme.resources
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddMediaFavorite.resources
 E:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
@@ -144,6 +143,6 @@ D:\GitProject\7980Site\PadSite\bin\EcmaScript.NET.dll
 D:\GitProject\7980Site\PadSite\bin\Iesi.Collections.dll
 D:\GitProject\7980Site\PadSite\bin\Maitonn.Core.pdb
 D:\GitProject\7980Site\PadSite\bin\Iesi.Collections.xml
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddField.resources
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AddSuggestStatus.resources
-D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.AlertOpenIDlength.resources
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.ModifyMedia.resources
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.ModifyMedia2.resources

@@ -3,34 +3,13 @@
     Layout = "~/Views/Shared/_LayoutHome.cshtml";
 }
 <div class="search-box">
-    <form>
-        <span class="input-wrapper">
-            <span class="deadline"><span class="deadlinetext">档期</span>
-                <i class="icon-maitonn icon-caret-down"></i>
-                <div class="deadline-list">
-                    <ul>
-                        <li data-value="0" class="selected">档期</li>
-                        <li data-value="1">一月</li>
-                        <li data-value="2">二月</li>
-                        <li data-value="3">三月</li>
-                        <li data-value="4">四月</li>
-                        <li data-value="5">五月</li>
-                        <li data-value="6">六月</li>
-                        <li data-value="7">七月</li>
-                        <li data-value="8">八月</li>
-                        <li data-value="9">九月</li>
-                        <li data-value="10">十月</li>
-                        <li data-value="11">十一</li>
-                        <li data-value="12">十二</li>
-                    </ul>
-                </div>
-            </span>
-            <input type="text" id="search" name="search" x-webkit-speech value="请输入搜索的关键字" class="fg-color-gray" />
-            <input type="hidden" id="deadtime" name="deadtime" value="0" />
-        </span>
-        <span class="button-wrapper">
-            <input type="button" value="搜索一下" id="btn-search" class="btn-search" onmousedown="this.className='btn-search btn-search-hover'" onmouseout="this.className='btn-search'"></span>
-    </form>
+
+    <div class="input-wrapper">
+
+        <input type="text" id="search" name="search" x-webkit-speech="" value="请输入搜索的关键字" class="fg-color-gray">
+
+        <input type="button" value="搜索一下" id="btn-search" class="btn-search" onmousedown="this.className='btn-search btn-search-hover'" onmouseout="this.className='btn-search'">
+    </div>
 </div>
 <!--
 @ViewBag.Str
@@ -40,21 +19,7 @@
 @section scripts{
     <script type="text/javascript">
         $(function () {
-
-            var searchUrl = "list-0-0-0-0-0-0-ss-0-0-0-p_1";
-            var deadlinelist = $('.deadline-list');
-            $('.deadline').hover(function () {
-                deadlinelist.show()
-            }, function () {
-                deadlinelist.hide()
-            })
-            deadlinelist.find('li').click(function () {
-                $('#deadtime').val($(this).data('value'));
-                $('.deadlinetext').text($(this).text());
-                $(this).addClass("selected").siblings().removeClass('selected');
-                deadlinelist.hide();
-            })
-
+            var searchUrl = "list-0-0-0-0-0-0-0-0-0-0-p_1";
             $('.nav-block-item').hover(function () {
                 var first = $(this).find('.full-block:first');
                 first.removeClass('in').addClass('out');
@@ -66,8 +31,9 @@
             })
 
             function getBaseUrl() {
-                var deadline = deadlinelist.find('li.selected').data('value');
-                return searchUrl.replace('ss', deadline);
+                //var deadline = deadlinelist.find('li.selected').data('value');
+                //return searchUrl.replace('ss', deadline);
+                return searchUrl;
             }
 
             $("#btn-search").click(function () {
@@ -126,7 +92,7 @@
     </script>
 }
 <div class="nav-block">
-    <div class="nav-block-item viewport-flip ">
+    @*  <div class="nav-block-item viewport-flip ">
         <a href="@Url.Action("index", "login")" class="full-block bg-color-pink flip in ">
             <i class="icon-maitonn icon-user"></i>
             <div class="content">注册/登录</div>
@@ -134,17 +100,9 @@
         <a href="@Url.Action("index", "login")" class="full-block bg-color-pink flip out">
             <h4>十秒轻松注册</h4>
         </a>
-    </div>
-    <div class="nav-block-item viewport-flip ">
-        <a href="@Url.Action("index", "fangan")" class="full-block bg-color-green flip in">
-            <i class="icon-maitonn icon-paste"></i>
-            <div class="content">方案制作</div>
-        </a>
-        <a href="@Url.Action("index", "fangan")" class="full-block  bg-color-green flip out">
-            <h4>智能方案生成</h4>
-        </a>
-    </div>
-    <div class="nav-block-item viewport-flip ">
+    </div>*@
+
+    @*  <div class="nav-block-item viewport-flip ">
         <a href="@Url.Action("index", "help")" class="full-block bg-color-blueDark flip in">
             <i class="icon-maitonn icon-list-alt"></i>
             <div class="content">公司简介</div>
@@ -152,26 +110,17 @@
         <a href="@Url.Action("index", "help")" class="full-block bg-color-blueDark flip out">
             <h4>关于我们，了解我们</h4>
         </a>
-    </div>
+    </div>*@
     <div class="nav-block-item viewport-flip ">
         <a href="@GetUrl(0, 1)" class="full-block bg-color-magenta flip in">
             <i class="icon-maitonn icon-road"></i>
-            <div class="content">公路大牌</div>
+            <div class="content">户外大牌</div>
         </a>
         <a href="@GetUrl(0, 1)" class="full-block bg-color-magenta flip out">
-            <h4>公路户外，紧随你我</h4>
+            <h4>户外大牌，至尊体现</h4>
         </a>
     </div>
-    <div class="nav-block-item viewport-flip ">
 
-        <a href="@GetUrl(0, 40)" class="full-block bg-color-red flip in">
-            <i class="icon-maitonn icon-signal"></i>
-            <div class="content">市内大牌</div>
-        </a>
-        <a href="@GetUrl(0, 40)" class="full-block bg-color-red flip out">
-            <h4>市内大牌，至尊体现</h4>
-        </a>
-    </div>
     <div class="nav-block-item viewport-flip ">
         <a href="@GetUrl(0, 41)" class="full-block  bg-color-orange flip in">
             <i class="icon-maitonn icon-truck"></i>
@@ -200,7 +149,7 @@
         </a>
 
     </div>
-    <div class="nav-block-item viewport-flip ">
+    @*  <div class="nav-block-item viewport-flip ">
         <a href="@GetUrl(0, 64)" class="full-block bg-color-orangeDark flip in">
             <i class="icon-maitonn icon-th-large"></i>
             <div class="content">其他</div>
@@ -209,8 +158,29 @@
             <h4>更多媒体，尽在7980</h4>
         </a>
 
+    </div>*@
+
+    <div class="nav-block-item viewport-flip ">
+        <a href="@Url.Action("index", "fangan")" class="full-block bg-color-green flip in">
+            <i class="icon-maitonn icon-paste"></i>
+            <div class="content">方案制作</div>
+        </a>
+        <a href="@Url.Action("index", "fangan")" class="full-block  bg-color-green flip out">
+            <h4>智能方案生成</h4>
+        </a>
+    </div>
+
+    <div class="nav-block-item viewport-flip ">
+        <a href="@Url.Action("index", "map")" class="full-block bg-color-pink flip in">
+            <i class="icon-maitonn icon-globe"></i>
+            <div class="content">地图搜索</div>
+        </a>
+        <a href="@Url.Action("index", "map")" class="full-block  bg-color-pink flip out">
+            <h4>位置，地段一目了然</h4>
+        </a>
     </div>
 </div>
+
 
 @helper GetUrl(int city, int mediacode)
 {

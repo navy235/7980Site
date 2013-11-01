@@ -26,12 +26,7 @@ namespace PadSite.ViewModels
         public int ID { get; set; }
 
         [HintSeparateTitle("基本信息")]
-        [Required(ErrorMessage = "请输入媒体名称")]
-        [Display(Name = "媒体名称")]
-        [CheckContact]
-        [StringLength(25, ErrorMessage = "请输入{2}-{1}位{0}", MinimumLength = 6)]
-        [Hint("6-25个字，不允许填写电话和特殊符号。例：新华书店附近户外大牌")]
-        public string Name { get; set; }
+
 
 
         [Required(ErrorMessage = "请选择媒体类别")]
@@ -39,29 +34,38 @@ namespace PadSite.ViewModels
         [UIHint("Cascading")]
         public string MediaCode { get; set; }
 
-        [Required(ErrorMessage = "请选择媒体展现形式")]
-        [Display(Name = "展现形式")]
+        [Required(ErrorMessage = "请输入媒体名称")]
+        [Display(Name = "媒体名称")]
+        [CheckContact]
+        [StringLength(25, ErrorMessage = "请输入{2}-{1}位{0}", MinimumLength = 6)]
+        [Hint("6-25个字，不允许填写电话和特殊符号。例：新华书店附近户外大牌")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "请选择媒体形式")]
+        [Display(Name = "媒体形式")]
         [UIHint("DropDownList")]
         public int FormatCode { get; set; }
 
-        [Display(Name = "价格")]
+        [Display(Name = "报价")]
         [UIHint("Price")]
         [AdditionalMetadata("Price", "0,1000")]
         [AdditionalMetadata("PriceUnit", "万元/年")]
         [HintClass("price")]
-        [Hint("不填价格，默认为面议，为了方便搜索请填写参考价格")]
+        [Hint("不填报价，默认为面议，为了方便搜索，建议填写")]
         public decimal Price { get; set; }
 
-
-        [Display(Name = "价格说明")]
-        [DataType(DataType.MultilineText)]
-        public string PriceExten { get; set; }
+        [Display(Name = "签单价格")]
+        [UIHint("Price")]
+        [AdditionalMetadata("Price", "0,1000")]
+        [AdditionalMetadata("PriceUnit", "万元/年")]
+        [HintClass("price")]
+        [Hint("该价格只有注册用户可见，不填签单价格，默认为面议，为了方便搜索，建议填写")]
+        public decimal RealPrice { get; set; }
 
         [Required(ErrorMessage = "请选择最短购买周期")]
         [Display(Name = "最短购买")]
         [UIHint("DropdownList")]
         public int PeriodCode { get; set; }
-
 
         [Required(ErrorMessage = "请选择档期开始时间")]
         [Display(Name = "档期开始")]
@@ -82,12 +86,12 @@ namespace PadSite.ViewModels
         [CheckContact]
         public string Location { get; set; }
 
-        [Required(ErrorMessage = "请选择媒体区域属性")]
-        [Display(Name = "区域属性")]
-        [UIHint("CheckList")]
-        [CheckMaxLength(5)]
-        [HintClass("meida-list")]
-        public string AreaCate { get; set; }
+        //[Required(ErrorMessage = "请选择媒体区域属性")]
+        //[Display(Name = "区域属性")]
+        //[UIHint("CheckList")]
+        //[CheckMaxLength(5)]
+        //[HintClass("meida-list")]
+        //public string AreaCate { get; set; }
 
         [Display(Name = "地图坐标")]
         [Required(ErrorMessage = "请标记媒体地图坐标.")]
@@ -144,44 +148,44 @@ namespace PadSite.ViewModels
         [HintLabel("请上传1-6张不小于800X600像素的图片,图片文件大小不超过5M")]
         public string MediaImg { get; set; }
 
-        [HintSeparateTitle("规格所有权信息")]
-        [Display(Name = "所有权")]
-        [UIHint("DropdownList")]
-        public int OwnerCode { get; set; }
+        //[HintSeparateTitle("规格所有权信息")]
+        //[Display(Name = "所有权")]
+        //[UIHint("DropdownList")]
+        //public int OwnerCode { get; set; }
 
-        [Display(Name = "相关证书")]
-        [UIHint("UploadImgList")]
-        [HintClass("uploadlist")]
-        [AdditionalMetadata("UploadImgList", "3")]
-        [AdditionalMetadata("UploadImgListMaxLength", "6")]
-        [HintLabel("请上传1-6张不小于800X600像素的图片,图片文件大小不超过5M")]
-        public string CredentialsImg { get; set; }
+        //[Display(Name = "相关证书")]
+        //[UIHint("UploadImgList")]
+        //[HintClass("uploadlist")]
+        //[AdditionalMetadata("UploadImgList", "3")]
+        //[AdditionalMetadata("UploadImgListMaxLength", "6")]
+        //[HintLabel("请上传1-6张不小于800X600像素的图片,图片文件大小不超过5M")]
+        //public string CredentialsImg { get; set; }
 
 
 
 
         [HintSeparateTitle("媒体补充信息")]
 
-        [Display(Name = "受众人群")]
-        [UIHint("CheckList")]
-        [CheckMaxLength(5)]
-        [HintClass("meida-list")]
-        [Hint("媒体的受众人群类型")]
-        public string CrowdCate { get; set; }
+        //[Display(Name = "受众人群")]
+        //[UIHint("CheckList")]
+        //[CheckMaxLength(5)]
+        //[HintClass("meida-list")]
+        //[Hint("媒体的受众人群类型")]
+        //public string CrowdCate { get; set; }
 
-        [Display(Name = "投放行业")]
-        [UIHint("CheckList")]
-        [CheckMaxLength(5)]
-        [HintClass("meida-list")]
-        [Hint("媒体适合的投放行业")]
-        public string IndustryCate { get; set; }
+        //[Display(Name = "投放行业")]
+        //[UIHint("CheckList")]
+        //[CheckMaxLength(5)]
+        //[HintClass("meida-list")]
+        //[Hint("媒体适合的投放行业")]
+        //public string IndustryCate { get; set; }
 
-        [Display(Name = "投放目的")]
-        [UIHint("CheckList")]
-        [CheckMaxLength(5)]
-        [HintClass("meida-list")]
-        [Hint("媒体投放的应用目的")]
-        public string PurposeCate { get; set; }
+        //[Display(Name = "投放目的")]
+        //[UIHint("CheckList")]
+        //[CheckMaxLength(5)]
+        //[HintClass("meida-list")]
+        //[Hint("媒体投放的应用目的")]
+        //public string PurposeCate { get; set; }
 
         //[Required(ErrorMessage = "请输入媒体补充说明.")]
         [Display(Name = "补充说明")]

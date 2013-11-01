@@ -3,10 +3,12 @@
     Layout = "~/Views/Shared/_LayoutFangan.cshtml";
     var CityTree = (List<LinkItemTree>)ViewBag.CityTree;
     var MediaTree = (List<LinkItemTree>)ViewBag.MediaTree;
-    var IndustryCate = (IList<SelectListItem>)ViewBag.IndustryCate;
-    var CrowdCate = (IList<SelectListItem>)ViewBag.CrowdCate;
-    var PurposeCate = (IList<SelectListItem>)ViewBag.PurposeCate;
-    var PriceCate = (IList<SelectListItem>)ViewBag.PriceCate;
+    //var IndustryCate = (IList<SelectListItem>)ViewBag.IndustryCate;
+    //var CrowdCate = (IList<SelectListItem>)ViewBag.CrowdCate;
+    //var PurposeCate = (IList<SelectListItem>)ViewBag.PurposeCate;
+    //var PriceCate = (IList<SelectListItem>)ViewBag.PriceCate;
+
+    var FormatCate = (IList<SelectListItem>)ViewBag.FormatCate;
 }
 <div class="nav-bread">
     <a class="nav-bread-home" href="/"><i class="icon-maitonn icon-home"></i></a>&gt;
@@ -234,7 +236,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="list-search-attr-bread clearfix">
+                @*  <div class="list-search-attr-bread clearfix">
                     <div class="list-search-attr-title">投放行业：</div>
                     <div class="fangan-list clearfix">
                         @foreach (var item in IndustryCate)
@@ -250,7 +252,7 @@
                         <div class="fangan-list">
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <div class="list-search-attr-bread clearfix">
                     <div class="list-search-attr-title">投放区域：</div>
                     <div class="fangan-list clearfix">
@@ -269,7 +271,25 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">媒体形式：</div>
+                    <div class="fangan-list clearfix">
+                        @foreach (var item in FormatCate)
+                        { 
+                            <span class="drop-list-item">
+                                <input type="checkbox" class="fangan-check" id="CrowdCate_@item.Value" name="CrowdCate" value="@item.Text" />
+                                <label for="CrowdCate_@item.Value">@item.Text</label>
+                            </span>
+                        }
+                    </div>
+                    <div class="fangan-select-list">
+                        <div class="list-search-attr-title">已选择：</div>
+                        <div class="fangan-list">
+                        </div>
+                    </div>
+                </div>
+                @*    <div class="list-search-attr-bread clearfix">
                     <div class="list-search-attr-title">推广目的：</div>
                     <div class="fangan-list clearfix">
                         @foreach (var item in PurposeCate)
@@ -285,8 +305,8 @@
                         <div class="fangan-list">
                         </div>
                     </div>
-                </div>
-                <div class="list-search-attr-bread clearfix">
+                </div>*@
+                @* <div class="list-search-attr-bread clearfix">
                     <div class="list-search-attr-title">受众人群：</div>
                     <div class="fangan-list clearfix">
                         @foreach (var item in CrowdCate)
@@ -302,7 +322,7 @@
                         <div class="fangan-list">
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <div class="list-search-attr-bread clearfix">
                     <div class="list-search-attr-title">购买周期：</div>
                     <div class="fangan-list clearfix" style="padding-left: 10px;">
@@ -320,7 +340,7 @@
                 </div>
 
 
-                <div class="list-search-attr-bread clearfix">
+                @*                <div class="list-search-attr-bread clearfix">
                     <div class="list-search-attr-title">预计费用：</div>
                     <div class="fangan-list clearfix">
                         @foreach (var item in PriceCate)
@@ -331,10 +351,26 @@
                             </span>
                         }
                     </div>
-                </div>
+                </div>*@
+
 
                 <div class="list-search-attr-bread clearfix">
-                    <div class="list-search-attr-title">生成方案：</div>
+                    <div class="list-search-attr-title">档期开始：</div>
+                    <div class="fangan-list clearfix" style="padding-left: 10px;">
+                        @Html.Kendo().DatePicker().Name("dq").Min(DateTime.Now).Value(DateTime.Now)
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">方案价格：</div>
+                    <div class="fangan-list clearfix" style="padding-left: 10px;">
+                        @(Html.Kendo().CurrencyTextBox().Name("price")
+                      .Min(1).Max(1000).Value(1)
+                    )<span class="field-unit"> 万元</span>
+
+                    </div>
+                </div>
+                <div class="list-search-attr-bread clearfix">
+                    <div class="list-search-attr-title">生成方式：</div>
                     <div class="fangan-list clearfix">
                         <span class="drop-list-item">
                             <input type="radio" class="fangan-check" id="generateType0" checked="checked" name="generateType" value="0" />
@@ -358,10 +394,6 @@
                 </div>
             </div>
         </div>
-        @*  <div class="list-result">
-            <div class="list-products list-search clearfix ">
-            </div>
-        </div>*@
         <div class="print-container">
             <div class="print-empty">
                 <i class="icon-maitonn icon-exclamation-sign auth-error-type"></i>请选择方案的生成条件！
@@ -431,9 +463,11 @@
             var PurposeCate = getSelectedVal($('[name="PurposeCate"]:checked'));
             var CrowdCate = getSelectedVal($('[name="CrowdCate"]:checked'));
             var PriceCate = getSelectedVal($('[name="PriceCate"]:checked'));
+            var Dq = $('#dq').val();
             var generateType = $('[name="generateType"]:checked').val();
             var periodNumber = $('#periodNumber').val();
             var periodCate = $('#periodCate').val();
+            var price = $('#price').val();
             var data = {
                 mediaCode: mediaCode,
                 industryCate: IndustryCate,
@@ -441,6 +475,8 @@
                 purposeCate: PurposeCate,
                 crowdCate: CrowdCate,
                 priceCate: PriceCate,
+                price: price,
+                dq: Dq,
                 generateType: generateType,
                 day: periodNumber * periodCate
             };

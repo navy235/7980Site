@@ -108,7 +108,8 @@ namespace PadSite.Service
             od.Name = model.Name;
             od.PeriodCode = model.PeriodCode;
             od.Price = model.Price;
-            od.PriceExten = model.PriceExten;
+            od.RealPrice = model.RealPrice;
+            //od.PriceExten = model.PriceExten;
 
             od.TrafficAuto = model.TrafficAuto;
             od.TrafficPerson = model.TrafficPerson;
@@ -159,39 +160,42 @@ namespace PadSite.Service
 
 
             //补充信息设置
-            var AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-            var AreaCateList = AreaCateService.GetALL().Where(x => AreaCateArray.Contains(x.ID));
-            od.AreaCate.AddRange(AreaCateList);
+            //if (!string.IsNullOrEmpty(model.AreaCate))
+            //{
+            //    var AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //    var AreaCateList = AreaCateService.GetALL().Where(x => AreaCateArray.Contains(x.ID));
+            //    od.AreaCate.AddRange(AreaCateList);
+            //}
 
-            if (!string.IsNullOrEmpty(model.IndustryCate))
-            {
-                var IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-                var IndustryCateList = IndustryCateService.GetALL().Where(x => IndustryCateArray.Contains(x.ID));
-                od.IndustryCate.AddRange(IndustryCateList);
-            }
+            //if (!string.IsNullOrEmpty(model.IndustryCate))
+            //{
+            //    var IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //    var IndustryCateList = IndustryCateService.GetALL().Where(x => IndustryCateArray.Contains(x.ID));
+            //    od.IndustryCate.AddRange(IndustryCateList);
+            //}
 
-            if (!string.IsNullOrEmpty(model.CrowdCate))
-            {
-                var CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-                var CrowdCateList = CrowdCateService.GetALL().Where(x => CrowdCateArray.Contains(x.ID));
-                od.CrowdCate.AddRange(CrowdCateList);
-            }
+            //if (!string.IsNullOrEmpty(model.CrowdCate))
+            //{
+            //    var CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //    var CrowdCateList = CrowdCateService.GetALL().Where(x => CrowdCateArray.Contains(x.ID));
+            //    od.CrowdCate.AddRange(CrowdCateList);
+            //}
 
-            if (!string.IsNullOrEmpty(model.PurposeCate))
-            {
-                var PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-                var PurposeCateList = PurposeCateService.GetALL().Where(x => PurposeCateArray.Contains(x.ID));
-                od.PurposeCate.AddRange(PurposeCateList);
-            }
+            //if (!string.IsNullOrEmpty(model.PurposeCate))
+            //{
+            //    var PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //    var PurposeCateList = PurposeCateService.GetALL().Where(x => PurposeCateArray.Contains(x.ID));
+            //    od.PurposeCate.AddRange(PurposeCateList);
+            //}
 
             //认证信息设置
-            od.OwnerCode = model.OwnerCode;
-            if (!string.IsNullOrEmpty(model.CredentialsImg))
-            {
-                od.CredentialsImg = model.CredentialsImg;
-            }
+            //od.OwnerCode = model.OwnerCode;
+            //if (!string.IsNullOrEmpty(model.CredentialsImg))
+            //{
+            //    od.CredentialsImg = model.CredentialsImg;
+            //}
 
-            od.OwnerCode = model.OwnerCode;
+            //od.OwnerCode = model.OwnerCode;
             od.Deadline = model.Deadline;
 
             //set OutDoor Status 待审核状态
@@ -300,10 +304,10 @@ namespace PadSite.Service
         public OutDoor Update(OutDoorViewModel model)
         {
             OutDoor od = GetALL()
-                      .Include(x => x.AreaCate)
-                      .Include(x => x.CrowdCate)
-                      .Include(x => x.IndustryCate)
-                      .Include(x => x.PurposeCate)
+                      //.Include(x => x.AreaCate)
+                      //.Include(x => x.CrowdCate)
+                      //.Include(x => x.IndustryCate)
+                      //.Include(x => x.PurposeCate)
                       .Single(x => x.ID == model.ID);
             db.Attach<OutDoor>(od);
             od.CityCodeValue = model.CityCode;
@@ -328,7 +332,8 @@ namespace PadSite.Service
             od.Location = model.Location;
             od.Name = model.Name;
             od.Price = model.Price;
-            od.PriceExten = model.PriceExten;
+            od.RealPrice = model.RealPrice;
+            //od.PriceExten = model.PriceExten;
             od.TrafficAuto = model.TrafficAuto;
             od.TrafficPerson = model.TrafficPerson;
             od.VideoUrl = model.VideoUrl;
@@ -375,127 +380,127 @@ namespace PadSite.Service
             od.MediaImg = model.MediaImg;
             od.MediaFoucsImg = UIHelper.GetImgUrl(model.MediaImg.Split(',')[0], ImgUrlType.Img120);
 
-            od.CredentialsImg = model.CredentialsImg;
+            //od.CredentialsImg = model.CredentialsImg;
 
-            var AreaCateArray = new List<int>();
-            if (string.IsNullOrEmpty(model.AreaCate))
-            {
-                od.AreaCate = new List<AreaCate>();
-            }
-            else
-            {
-                AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-                var AreaCateList = AreaCateService.GetALL().Where(x => AreaCateArray.Contains(x.ID));
-                var currentAreaCateArray = od.AreaCate.Select(x => x.ID).ToList();
+            //var AreaCateArray = new List<int>();
+            //if (string.IsNullOrEmpty(model.AreaCate))
+            //{
+            //    od.AreaCate = new List<AreaCate>();
+            //}
+            //else
+            //{
+            //    AreaCateArray = model.AreaCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //    var AreaCateList = AreaCateService.GetALL().Where(x => AreaCateArray.Contains(x.ID));
+            //    var currentAreaCateArray = od.AreaCate.Select(x => x.ID).ToList();
 
-                foreach (AreaCate ac in AreaCateService.GetALL())
-                {
-                    if (AreaCateArray.Contains(ac.ID))
-                    {
-                        if (!currentAreaCateArray.Contains(ac.ID))
-                        {
-                            od.AreaCate.Add(ac);
-                        }
-                    }
-                    else
-                    {
-                        if (currentAreaCateArray.Contains(ac.ID))
-                        {
-                            od.AreaCate.Remove(ac);
-                        }
-                    }
-                }
-            }
+            //    foreach (AreaCate ac in AreaCateService.GetALL())
+            //    {
+            //        if (AreaCateArray.Contains(ac.ID))
+            //        {
+            //            if (!currentAreaCateArray.Contains(ac.ID))
+            //            {
+            //                od.AreaCate.Add(ac);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if (currentAreaCateArray.Contains(ac.ID))
+            //            {
+            //                od.AreaCate.Remove(ac);
+            //            }
+            //        }
+            //    }
+            //}
 
-            var CrowdCateArray = new List<int>();
-            if (string.IsNullOrEmpty(model.CrowdCate))
-            {
-                od.CrowdCate = new List<CrowdCate>();
-            }
-            else
-            {
-                CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-                var CrowdCateList = CrowdCateService.GetALL().Where(x => CrowdCateArray.Contains(x.ID));
-                var currentCrowdCateArray = od.CrowdCate.Select(x => x.ID).ToList();
+            //var CrowdCateArray = new List<int>();
+            //if (string.IsNullOrEmpty(model.CrowdCate))
+            //{
+            //    od.CrowdCate = new List<CrowdCate>();
+            //}
+            //else
+            //{
+            //    CrowdCateArray = model.CrowdCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //    var CrowdCateList = CrowdCateService.GetALL().Where(x => CrowdCateArray.Contains(x.ID));
+            //    var currentCrowdCateArray = od.CrowdCate.Select(x => x.ID).ToList();
 
-                foreach (CrowdCate ac in CrowdCateService.GetALL())
-                {
-                    if (CrowdCateArray.Contains(ac.ID))
-                    {
-                        if (!currentCrowdCateArray.Contains(ac.ID))
-                        {
-                            od.CrowdCate.Add(ac);
-                        }
-                    }
-                    else
-                    {
-                        if (currentCrowdCateArray.Contains(ac.ID))
-                        {
-                            od.CrowdCate.Remove(ac);
-                        }
-                    }
-                }
-            }
+            //    foreach (CrowdCate ac in CrowdCateService.GetALL())
+            //    {
+            //        if (CrowdCateArray.Contains(ac.ID))
+            //        {
+            //            if (!currentCrowdCateArray.Contains(ac.ID))
+            //            {
+            //                od.CrowdCate.Add(ac);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if (currentCrowdCateArray.Contains(ac.ID))
+            //            {
+            //                od.CrowdCate.Remove(ac);
+            //            }
+            //        }
+            //    }
+            //}
 
-            var IndustryCateArray = new List<int>();
-            if (string.IsNullOrEmpty(model.IndustryCate))
-            {
-                od.IndustryCate = new List<IndustryCate>();
-            }
-            else
-            {
-                IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-                var IndustryCateList = IndustryCateService.GetALL().Where(x => IndustryCateArray.Contains(x.ID));
-                var currentIndustryCateArray = od.IndustryCate.Select(x => x.ID).ToList();
+            //var IndustryCateArray = new List<int>();
+            //if (string.IsNullOrEmpty(model.IndustryCate))
+            //{
+            //    od.IndustryCate = new List<IndustryCate>();
+            //}
+            //else
+            //{
+            //    IndustryCateArray = model.IndustryCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //    var IndustryCateList = IndustryCateService.GetALL().Where(x => IndustryCateArray.Contains(x.ID));
+            //    var currentIndustryCateArray = od.IndustryCate.Select(x => x.ID).ToList();
 
-                foreach (IndustryCate ac in IndustryCateService.GetALL())
-                {
-                    if (IndustryCateArray.Contains(ac.ID))
-                    {
-                        if (!currentIndustryCateArray.Contains(ac.ID))
-                        {
-                            od.IndustryCate.Add(ac);
-                        }
-                    }
-                    else
-                    {
-                        if (currentIndustryCateArray.Contains(ac.ID))
-                        {
-                            od.IndustryCate.Remove(ac);
-                        }
-                    }
-                }
-            }
+            //    foreach (IndustryCate ac in IndustryCateService.GetALL())
+            //    {
+            //        if (IndustryCateArray.Contains(ac.ID))
+            //        {
+            //            if (!currentIndustryCateArray.Contains(ac.ID))
+            //            {
+            //                od.IndustryCate.Add(ac);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if (currentIndustryCateArray.Contains(ac.ID))
+            //            {
+            //                od.IndustryCate.Remove(ac);
+            //            }
+            //        }
+            //    }
+            //}
 
-            var PurposeCateArray = new List<int>();
-            if (string.IsNullOrEmpty(model.PurposeCate))
-            {
-                od.PurposeCate = new List<PurposeCate>();
-            }
-            else
-            {
-                PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
-                var PurposeCateList = PurposeCateService.GetALL().Where(x => PurposeCateArray.Contains(x.ID));
-                var currentPurposeCateArray = od.PurposeCate.Select(x => x.ID).ToList();
+            //var PurposeCateArray = new List<int>();
+            //if (string.IsNullOrEmpty(model.PurposeCate))
+            //{
+            //    od.PurposeCate = new List<PurposeCate>();
+            //}
+            //else
+            //{
+            //    PurposeCateArray = model.PurposeCate.Split(',').Select(x => Convert.ToInt32(x)).ToList();
+            //    var PurposeCateList = PurposeCateService.GetALL().Where(x => PurposeCateArray.Contains(x.ID));
+            //    var currentPurposeCateArray = od.PurposeCate.Select(x => x.ID).ToList();
 
-                foreach (PurposeCate ac in PurposeCateService.GetALL())
-                {
-                    if (PurposeCateArray.Contains(ac.ID))
-                    {
-                        if (!currentPurposeCateArray.Contains(ac.ID))
-                        {
-                            od.PurposeCate.Add(ac);
-                        }
-                    }
-                    else
-                    {
-                        if (currentPurposeCateArray.Contains(ac.ID))
-                        {
-                            od.PurposeCate.Remove(ac);
-                        }
-                    }
-                }
-            }
+            //    foreach (PurposeCate ac in PurposeCateService.GetALL())
+            //    {
+            //        if (PurposeCateArray.Contains(ac.ID))
+            //        {
+            //            if (!currentPurposeCateArray.Contains(ac.ID))
+            //            {
+            //                od.PurposeCate.Add(ac);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if (currentPurposeCateArray.Contains(ac.ID))
+            //            {
+            //                od.PurposeCate.Remove(ac);
+            //            }
+            //        }
+            //    }
+            //}
 
             //set OutDoor Status 待审核状态
             od.Status = (int)OutDoorStatus.PreVerify;

@@ -38,6 +38,9 @@ namespace PadSite.Controllers
         public ActionResult Index()
         {
             var model = new RegViewModel();
+
+            ViewBag.Data_MemberType = UIHelper.MemberTypeList;
+
             return View(model);
         }
 

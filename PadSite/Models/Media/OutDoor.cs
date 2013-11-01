@@ -10,10 +10,10 @@
 
         public OutDoor()
         {
-            this.AreaCate = new HashSet<AreaCate>();
-            this.CrowdCate = new HashSet<CrowdCate>();
-            this.IndustryCate = new HashSet<IndustryCate>();
-            this.PurposeCate = new HashSet<PurposeCate>();
+            //this.AreaCate = new HashSet<AreaCate>();
+            //this.CrowdCate = new HashSet<CrowdCate>();
+            //this.IndustryCate = new HashSet<IndustryCate>();
+            //this.PurposeCate = new HashSet<PurposeCate>();
         }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -60,6 +60,8 @@
         public string Seokeywords { get; set; }
 
         public decimal Price { get; set; }
+
+        public decimal RealPrice { get; set; }
 
         [MaxLength(100)]
         public string PriceExten { get; set; }
@@ -126,13 +128,13 @@
 
         public string CredentialsImg { get; set; }
 
-        public virtual ICollection<AreaCate> AreaCate { get; set; }
+        //public virtual ICollection<AreaCate> AreaCate { get; set; }
 
-        public virtual ICollection<CrowdCate> CrowdCate { get; set; }
+        //public virtual ICollection<CrowdCate> CrowdCate { get; set; }
 
-        public virtual ICollection<IndustryCate> IndustryCate { get; set; }
+        //public virtual ICollection<IndustryCate> IndustryCate { get; set; }
 
-        public virtual ICollection<PurposeCate> PurposeCate { get; set; }
+        //public virtual ICollection<PurposeCate> PurposeCate { get; set; }
 
         public virtual CityCate CityCate { get; set; }
 
@@ -142,7 +144,7 @@
 
         public virtual FormatCate FormatCate { get; set; }
 
-        public virtual OwnerCate OwnerCate { get; set; }
+        //public virtual OwnerCate OwnerCate { get; set; }
 
         public virtual Member Member { get; set; }
     }
