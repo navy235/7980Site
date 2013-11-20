@@ -54,6 +54,10 @@ namespace PadSite.Controllers
                 {
                     Member mb = MemberService.Create(model);
                     MemberService.SetLoginCookie(mb);
+                    //if (mb.MemberType == (int)MemberType.Source)
+                    //{
+                    //    return Redirect(Url.Action("openbiz"));
+                    //}
                     return Redirect(Url.Action("regok"));
                 }
                 catch (Exception ex)
@@ -200,7 +204,9 @@ namespace PadSite.Controllers
                     {
                         Email = model.Email,
                         NickName = model.NickName,
-                        Password = model.Password
+                        Password = model.Password,
+                        Mobile = model.Mobile,
+                        MemberType = 2
                     };
                     Member mb = MemberService.Create(rm);
                     MemberService.SetLoginCookie(mb);
@@ -218,7 +224,7 @@ namespace PadSite.Controllers
                         Address = model.Address,
                         Email = model.Email,
                         Mobile = model.Mobile,
-                        Phone = model.Phone,
+                        //Phone = model.Phone,
                         Position = model.Position
                     };
                     MemberService.SaveMemberContact(mb.MemberID, cm);
@@ -230,7 +236,7 @@ namespace PadSite.Controllers
                         LinkMan = model.LinkMan,
                         Mobile = model.Mobile,
                         Name = model.Name,
-                        Phone = model.Phone,
+                        //Phone = model.Phone,
                         Position = model.Position,
                         Sex = model.Sex
                     };
@@ -380,9 +386,9 @@ namespace PadSite.Controllers
                             CityCode = company.CityCodeValue,
                             Description = company.Description,
                             LinkMan = company.LinkMan,
-                            Mobile = company.Mobile,
+                            //Mobile = mem.Mobile,
                             Name = company.Name,
-                            Phone = company.Phone,
+                            //Phone = company.Phone,
                             Position = company.Lat + "|" + company.Lng,
                             Sex = company.Sex,
                             CredentialsImg = company.CredentialsImg,
@@ -431,9 +437,9 @@ namespace PadSite.Controllers
                                     CityCode = model.CityCode,
                                     Description = model.Description,
                                     LinkMan = model.LinkMan,
-                                    Mobile = model.Mobile,
+                                    Mobile = member.Mobile,
                                     Name = model.Name,
-                                    Phone = model.Phone,
+                                    //Phone = model.Phone,
                                     Position = model.Position,
                                     Sex = model.Sex,
                                     LinkManImg = model.LinkManImg,
@@ -451,9 +457,9 @@ namespace PadSite.Controllers
                                     CityCode = model.CityCode,
                                     Description = model.Description,
                                     LinkMan = model.LinkMan,
-                                    Mobile = model.Mobile,
+                                    Mobile = member.Mobile,
                                     Name = model.Name,
-                                    Phone = model.Phone,
+                                    //Phone = model.Phone,
                                     Position = model.Position,
                                     Sex = model.Sex,
                                     LinkManImg = model.LinkManImg,

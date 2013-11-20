@@ -26,6 +26,8 @@
             command.Custom("审核不通过").Click("Grid.verifyFailedCommand");
             command.Custom("审核不通过带审核原因").Click("Grid.verifyFailedWithReason");
 
+            command.Custom("后台编辑").Click("Grid.edit");
+
         }).Title("操作");
 
     })
@@ -219,6 +221,12 @@
             var Ids = $('#reasonIds').val();
             var url = '@Url.Action("VerifyFailedWithReason", "mediaverify")';
             self.verify(element, url, Ids, reason);
+        },
+        edit: function (e) {
+            e.preventDefault();
+            var self = Grid;
+            var dataItem = this.dataItem($(e.currentTarget).closest("tr"));
+            window.location.href = '@Url.Action("edit")' + '/' + dataItem.ID;
         },
         getReason: function () {
             var reason = '';

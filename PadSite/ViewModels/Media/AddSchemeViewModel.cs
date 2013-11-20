@@ -194,5 +194,7 @@ namespace PadSite.ViewModels
 
         public string TotalPrice { get; set; }
 
+        public string DqDesc { get; set; }
+
     }
 }

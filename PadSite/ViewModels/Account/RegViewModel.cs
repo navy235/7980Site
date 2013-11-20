@@ -13,6 +13,15 @@ namespace PadSite.ViewModels
 {
     public class RegViewModel
     {
+
+
+        [Required(ErrorMessage = "请选择用户类型")]
+        [Display(Name = "用户类型")]
+        [UIHint("RadioCheckList")]
+        [HintClass("regchecklist")]
+        [Hint("请认真选择用户类型，用户类型所具备的功能不一致，详细请看帮助。")]
+        public int MemberType { get; set; }
+
         [Required(ErrorMessage = "请输入电子邮箱")]
         [Display(Name = "电子邮箱")]
         [Remote("EmailExists", "AjaxService", ErrorMessage = "该电子邮箱已经注册")]
@@ -55,11 +64,7 @@ namespace PadSite.ViewModels
         //[HintClass("validatecode")]
         //public string Vcode { get; set; }
 
-        [Required(ErrorMessage = "请选择用户类型")]
-        [Display(Name = "用户类型")]
-        [UIHint("RadioCheckList")]
-        [HintClass("regchecklist")]
-        public int MemberType { get; set; }
+
 
 
         [Required(ErrorMessage = "请输入手机号码")]
@@ -72,6 +77,7 @@ namespace PadSite.ViewModels
 
         [Required(ErrorMessage = "请输入短信验证码")]
         [Display(Name = "短信验证码")]
+        [Hint("请输入手机验证码，没有收到验证码请稍候点击获取（测试阶段输入1241）")]
         [StringLength(4, ErrorMessage = "长度为4位", MinimumLength = 4)]
         [Remote("ValidateSmsVCode", "AjaxService", ErrorMessage = "验证码错误或过期")]
         [UIHint("SmsVCode")]

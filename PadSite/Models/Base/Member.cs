@@ -22,8 +22,12 @@ namespace PadSite.Models
 
         public int? CompanyID { get; set; }
 
-
+        [Display(Name = "用户类型")]
         public int MemberType { get; set; }
+
+        [MaxLength(50)]
+        [Display(Name = "手机")]
+        public string Mobile { get; set; }
 
         [MaxLength(50)]
         [Display(Name = "电子邮箱")]

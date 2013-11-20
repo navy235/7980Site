@@ -323,7 +323,7 @@
                         </div>
                     </div>
                 </div>*@
-                <div class="list-search-attr-bread clearfix">
+                <div class="list-search-attr-bread clearfix" style="display: none;">
                     <div class="list-search-attr-title">购买周期：</div>
                     <div class="fangan-list clearfix" style="padding-left: 10px;">
                         @(Html.Kendo().IntegerTextBox().Name("periodNumber")
@@ -337,6 +337,7 @@
                             }
                         </select>
                     </div>
+
                 </div>
 
 
@@ -365,11 +366,12 @@
                     <div class="fangan-list clearfix" style="padding-left: 10px;">
                         @(Html.Kendo().CurrencyTextBox().Name("price")
                       .Min(1).Max(1000).Value(1)
-                    )<span class="field-unit"> 万元</span>
+                    )<span class="field-unit"> 万元/月<span class="fg-color-gray">(该方案自动生成一个月的方案)</span></span>
 
                     </div>
+                    <button class="k-button ml10" id="btn-generate" type="button">生成方案</button>
                 </div>
-                <div class="list-search-attr-bread clearfix">
+                <div class="list-search-attr-bread clearfix" style="display: none;">
                     <div class="list-search-attr-title">生成方式：</div>
                     <div class="fangan-list clearfix">
                         <span class="drop-list-item">
@@ -390,7 +392,7 @@
                             <label for="generateType3">认证资源</label>
                         </span>
                     </div>
-                    <button class="k-button ml10" id="btn-generate" type="button">生成方案</button>
+
                 </div>
             </div>
         </div>

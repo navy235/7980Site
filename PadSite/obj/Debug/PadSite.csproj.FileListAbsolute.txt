@@ -146,3 +146,7 @@ D:\GitProject\7980Site\PadSite\bin\Iesi.Collections.xml
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.ModifyMedia.resources
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.csproj.GenerateResource.Cache
 D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.ModifyMedia2.resources
+D:\GitProject\7980Site\PadSite\obj\Debug\PadSite.Migrations.addmembermobile.resources
+D:\GitProject\7980Site\PadSite\bin\Ionic.Zip.dll
+D:\GitProject\7980Site\PadSite\bin\NPOI.dll
+D:\GitProject\7980Site\PadSite\bin\NPOI.xml

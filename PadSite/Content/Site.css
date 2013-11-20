@@ -582,6 +582,10 @@ textarea {
     height: 150px;
 }
 
+.form-longtext .single-line {
+    width: 360px;
+}
+
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 
@@ -802,7 +806,8 @@ select {
             bottom: 10px;
             left: 0;
             right: 0;
-            line-height: 24px;
+            line-height: 52px;
+            font-size: 16px;
         }
 
         .nav-block-item .full-block h4 {
@@ -816,7 +821,7 @@ select {
         }
 
     .nav-block-item .icon-maitonn {
-        font-size: 70px;
+        font-size: 55px;
         margin-top: 30px;
         color: #fff;
         display: block;

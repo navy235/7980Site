@@ -10,7 +10,7 @@
     <table>
         <tr class="table-title">
             <td style="text-align: left;"><span class="table-title-text">媒体条目 （ <b class="fg-color-red">@Model.Count</b> ） </span></td>
-            <td style="text-align: right;"><span class="table-title-text">总价 <b class="fg-color-red">@ViewBag.currentPrice</b> 万元</span></td>
+            <td style="text-align: right;"><span class="table-title-text">总价 <b class="fg-color-red">@ViewBag.currentPrice</b> 万元/月</span></td>
         </tr>
     </table>
     <div class="">
@@ -45,7 +45,10 @@
                             }
                         <span>总面积=@item.TotalArea 平方米</span>
                         }</td>
-                    <td>@(item.DeadLine.CompareTo(DateTime.Now) > 0 ? item.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")</td>
+                    <td>
+                        @*   @(item.DeadLine.CompareTo(DateTime.Now) > 0 ? item.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")*@
+                        @ViewBag.Dq
+                    </td>
                     <td>@if (item.Price == 99999)
                         {
                         <b class="fg-color-red">面议  </b>

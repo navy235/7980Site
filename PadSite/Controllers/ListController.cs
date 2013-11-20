@@ -91,7 +91,8 @@ namespace PadSite.Controllers
             int order = 0,
             int descending = 0,
             int page = 1,
-            string query = null)
+            string query = null,
+            string dq = null)
         {
             if (city == 1)
             {
@@ -113,8 +114,17 @@ namespace PadSite.Controllers
                 Price = price,
                 Order = order,
                 Descending = descending,
-                Query = query
+                Query = query,
+                Dq = dq
             };
+
+            if (!string.IsNullOrEmpty(queryTerm.Dq))
+            {
+                if (queryTerm.Dq.Equals(DateTime.Now.ToString("yyyy-MM-dd")))
+                {
+                    queryTerm.Dq = null;
+                }
+            }
 
             CacheService.Clear();
 
@@ -308,24 +318,32 @@ namespace PadSite.Controllers
             int totalHits;
             Dictionary<string, string> cacheDic = CreateSearchDic("ResultList", queryTerm);
             Dictionary<string, string> countDic = CreateSearchDic("ResultCount", queryTerm);
-            if (string.IsNullOrWhiteSpace(queryTerm.Query)
-                && CacheService.Exists(cacheDic)
-                && CacheService.Exists(countDic))
+            if (string.IsNullOrWhiteSpace(queryTerm.Dq))
             {
-                query = CacheService.Get<List<LinkItem>>(cacheDic);
-                totalHits = CacheService.GetInt32Value(countDic);
+                if (string.IsNullOrWhiteSpace(queryTerm.Query)
+                    && CacheService.Exists(cacheDic)
+                    && CacheService.Exists(countDic))
+                {
+                    query = CacheService.Get<List<LinkItem>>(cacheDic);
+                    totalHits = CacheService.GetInt32Value(countDic);
+                }
+                else
+                {
+                    var searchFilter = GetSearchFilter(queryTerm.Query, queryTerm.Order, queryTerm.Descending, queryTerm.Page, PageSize);
+                    query = OutDoorLuceneService.Search(queryTerm, searchFilter, out totalHits);
+                    //query = OutDoorLuceneService.Search(out totalHits);
+
+                    if (string.IsNullOrWhiteSpace(queryTerm.Query))
+                    {
+                        CacheService.Add<List<LinkItem>>(query, cacheDic, 10);
+                        CacheService.AddInt32Value(totalHits, countDic, 10);
+                    }
+                }
             }
             else
             {
                 var searchFilter = GetSearchFilter(queryTerm.Query, queryTerm.Order, queryTerm.Descending, queryTerm.Page, PageSize);
                 query = OutDoorLuceneService.Search(queryTerm, searchFilter, out totalHits);
-                //query = OutDoorLuceneService.Search(out totalHits);
-
-                if (string.IsNullOrWhiteSpace(queryTerm.Query))
-                {
-                    CacheService.Add<List<LinkItem>>(query, cacheDic, 10);
-                    CacheService.AddInt32Value(totalHits, countDic, 10);
-                }
             }
             model.Items = query;
             model.TotalCount = totalHits;
@@ -492,52 +510,52 @@ namespace PadSite.Controllers
             #endregion
 
             #region PeriodCode
-            LinkGroup periodGroup = new LinkGroup()
-            {
-                Group = new LinkItem()
-                {
-                    Name = "最短投放周期",
-                    Url = Url.Action("index", new
-                    {
-                        province = queryTerm.Province,
-                        city = queryTerm.City,
-                        mediacode = queryTerm.MediaCode,
-                        formatcode = queryTerm.FormatCode,
-                        ownercode = queryTerm.OwnerCode,
-                        authstatus = queryTerm.AuthStatus,
-                        deadline = queryTerm.DeadLine,
-                        price = queryTerm.Price,
-                        order = queryTerm.Order,
-                        descending = queryTerm.Descending,
-                        page = 1
-                    })
-                }
-            };
-            periodGroup.Items = PeriodCateService.GetALL().Where(x => x.PID.Equals(null)).ToList().Select(x => new LinkItem()
-            {
-                ID = x.ID,
-                Name = x.CateName,
-                Url = Url.Action("index", new
-                {
-                    province = queryTerm.Province,
-                    city = queryTerm.City,
-                    mediacode = queryTerm.MediaCode,
-                    formatcode = queryTerm.FormatCode,
-                    ownercode = queryTerm.OwnerCode,
-                    periodcode = x.ID,
-                    authstatus = queryTerm.AuthStatus,
-                    deadline = queryTerm.DeadLine,
-                    price = queryTerm.Price,
-                    order = queryTerm.Order,
-                    descending = queryTerm.Descending,
-                    page = 1
+            //LinkGroup periodGroup = new LinkGroup()
+            //{
+            //    Group = new LinkItem()
+            //    {
+            //        Name = "最短投放周期",
+            //        Url = Url.Action("index", new
+            //        {
+            //            province = queryTerm.Province,
+            //            city = queryTerm.City,
+            //            mediacode = queryTerm.MediaCode,
+            //            formatcode = queryTerm.FormatCode,
+            //            ownercode = queryTerm.OwnerCode,
+            //            authstatus = queryTerm.AuthStatus,
+            //            deadline = queryTerm.DeadLine,
+            //            price = queryTerm.Price,
+            //            order = queryTerm.Order,
+            //            descending = queryTerm.Descending,
+            //            page = 1
+            //        })
+            //    }
+            //};
+            //periodGroup.Items = PeriodCateService.GetALL().Where(x => x.PID.Equals(null)).ToList().Select(x => new LinkItem()
+            //{
+            //    ID = x.ID,
+            //    Name = x.CateName,
+            //    Url = Url.Action("index", new
+            //    {
+            //        province = queryTerm.Province,
+            //        city = queryTerm.City,
+            //        mediacode = queryTerm.MediaCode,
+            //        formatcode = queryTerm.FormatCode,
+            //        ownercode = queryTerm.OwnerCode,
+            //        periodcode = x.ID,
+            //        authstatus = queryTerm.AuthStatus,
+            //        deadline = queryTerm.DeadLine,
+            //        price = queryTerm.Price,
+            //        order = queryTerm.Order,
+            //        descending = queryTerm.Descending,
+            //        page = 1
 
-                }),
-                Selected = queryTerm.PeriodCode == x.ID
+            //    }),
+            //    Selected = queryTerm.PeriodCode == x.ID
 
-            }).ToList();
+            //}).ToList();
 
-            result.Add(periodGroup);
+            //result.Add(periodGroup);
 
             #endregion
 

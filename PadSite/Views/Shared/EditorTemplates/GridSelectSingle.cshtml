@@ -1,0 +1,36 @@
+@model  int?
+@{
+    var name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var displayname = ViewData.ModelMetadata.DisplayName;
+}
+
+
+@Html.Kendo().Window().Name(name + "_window").Title("请选择" + displayname).Content(
+    @<text>
+<div class="grid-toolbar mb10">
+    <label>@(displayname)：</label>
+    <input type="text" id="@(name)_keywords" class="k-textbox ">
+    <button id="@(name)_search" type="button" class="k-button" ><i class="icon-maitonn icon-search"></i>搜索</button>
+</div>
+
+<div id="@(name + "_grid")" class="mb10"></div>
+<div class="k-window-footer">
+    <button type="button" id="@(name + "_save")" class="k-button" ><span class="k-icon k-i-tick"></span>确认</button>
+</div>
+</text>
+).Width(600).Height(440).Modal(true).Visible(false).Scrollable(false)
+
+<span id="@(name + "_info")">当前没有选择@(displayname)</span>
+@Html.TextBoxFor(m => m, new { tabindex = -1, @class = "field-valid-text" })
+<button type="button" id="@(name + "_select")" class="k-button" ><span class="k-icon k-add"></span>选择</button>
+
+<script type="text/javascript">
+    $(function () {
+        $('#@name').gridSelectSingle({
+            displayName: '@displayname',
+            getUrl: '@Url.Action("getcompanyName", "mediaVerify")',
+            serverUrl: '@Url.Action("getcompanylist", "mediaVerify")',
+            value:@Model
+            });
+    });
+</script>

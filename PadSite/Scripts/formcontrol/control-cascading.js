@@ -12,6 +12,7 @@
         paramId: 'pid',
         optionLabel: '请选择',
         value: '',
+        maxlevel: 0,
         result: []
       }, setting);
 
@@ -52,6 +53,10 @@
         $.get(ps.read_url, data, function (res) {
           if (res.length > 0) {
             createSelect(level + 1, res, defaultvalue, isInit);
+            if (ps.maxlevel != 0 && level == ps.maxlevel) {
+              setValue();
+              validate();
+            }
           } else {
             clearLevel(level + 1);
             setValue();
@@ -155,7 +160,11 @@
           var values = $.map(container.find('select'), function (item) {
             return $(item).val();
           })
-          $('#' + id).val(values.join(','));
+          var valueStr = values.join(',');
+          if (valueStr.substr(valueStr.length - 1, 1) == ',') {
+            valueStr = valueStr.substr(0, valueStr.length - 1);
+          }
+          $('#' + id).val(valueStr);
         }
       }
       function clearValue() {

@@ -108,39 +108,37 @@
                     @foreach (var product in Model.Sources.Items)
                     {
                         <div class="products-item">
-                            <div class="products-title">
-                                <a class="products-title-links"  href="@Url.Action("show", new { id = product.ID })" title="@(product.Name)" >
-                                    <strong>@(product.Name)</strong>
-                                </a>
-                                <div class="products-title-info">
-                                    <span class="mr5 fg-color-gray ">[@product.MediaCateName.Replace(",", "-")]</span>
-                                    <span class="mr5 fg-color-gray ">[@(product.FormatName)]</span>
-                                </div>
-                            </div>
                             <div class="products-img">
                                 <div class="products-img-container">
-                                    <a href="@Url.Action("show", new { id = product.ID })" title="@(product.Name)">
+                                    <a href="@Url.Action("show", "company", new { id = product.ID })" title="@(product.Name)">
                                         <img alt="@(product.Name)" title="@(product.Name)" src="@product.FocusImgUrl" >
                                     </a>
                                 </div>
                             </div>
+                            <div class="products-title">
+                                <a class="products-title-links"  href="@Url.Action("show", "company", new { id = product.ID })" title="@(product.Name)" >
+                                    <strong>@(product.Name)</strong>
+                                </a>
+                                @* <div class="products-title-info">
+                                        <span class="mr5 fg-color-gray ">[@product.MediaCateName.Replace(",", "-")]</span>
+                                        <span class="mr5 fg-color-gray ">[@(product.FormatName)]</span>
+                                    </div>*@
+                            </div>
                             <div class="products-details">
-                                @(product.Description.Length > 150 ? product.Description.Substring(0, 150) + "..." : product.Description)
-                                <a class="fg-color-red"  href="@Url.Action("show", new { id = product.ID })" >[详细]</a>
+                                @(product.Description.Length > 90 ? product.Description.Substring(0, 90) + "..." : product.Description)
+                                <a class="fg-color-red"  href="@Url.Action("show", "company", new { id = product.ID })" >[详细]</a>
                             </div>
                             <div class="products-footer">
                                 <span class="mr5">所在城市: @product.CityCateName.Replace(",", " - ")</span>
-                                <span class="mr5 fg-color-gray">刊例：
-                                    @if (product.Price == 99999)
-                                    {
-                                        <b class="fg-color-red">面议  </b>
-                                    }
-                                    else
-                                    {
-                                        <b class="fg-color-red">¥@product.Price 万元/年 </b>
-                                    }
-                                </span>
-                                <span class="fg-color-gray">最短投放：<b class="fg-color-red">@(product.PeriodName)</b></span>
+                                <span class="mr5 fg-color-gray">刊例： @if (product.Price == 99999)
+                                                                    { 
+                                    <b class="fg-color-red">面议</b>
+                                                                    }
+                                                                    else
+                                                                    {
+                                    <b class="fg-color-red">¥@product.Price 万元/年</b>
+                                                                    }</span>
+                                @*            <span class="fg-color-gray">最短投放：<b class="fg-color-red">@(product.PeriodName)</b></span>*@
                             </div>
                         </div>
                     }

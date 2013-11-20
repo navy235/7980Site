@@ -1,0 +1,17 @@
+@model  string
+
+@{
+    string name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var cascadingIds = ViewData.ModelMetadata.AdditionalValues["CascadingIds"].ToString();
+}
+@Html.TextBoxFor(m => m, new { @class = "k-textbox single-line text-box" })
+<script type="text/javascript">
+    $(function () {
+        $('#@name').cascadingtext({
+            cascadingIds: '@cascadingIds'
+        });
+    })
+</script>
+
+
+

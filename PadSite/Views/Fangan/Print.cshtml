@@ -134,7 +134,7 @@
                 </tr>
                 <tr>
                     <td class="table-tips">方案总价</td>
-                    <td><b class="fg-color-red">@ViewBag.currentPrice</b>万元</td>
+                    <td><b class="fg-color-red">@ViewBag.currentPrice</b>万元/月</td>
                 </tr>
             </table>
         </div>
@@ -158,7 +158,7 @@
                         <td class="table-tips">媒体地区
                         </td>
                         <td>@item.CityCateName.Replace(",", " - ") </td>
-                        <td class="table-tips">媒体地区
+                        <td class="table-tips">媒体分类
                         </td>
                         <td>@item.MediaCateName.Replace(",", " - ") </td>
                     </tr>
@@ -218,10 +218,11 @@
 
                     </tr>
                     <tr>
-                        <td class="table-tips">媒体档期开始</td>
+                        <td class="table-tips">媒体档期</td>
 
                         <td colspan="3">
-                            @(item.DeadLine.CompareTo(DateTime.Now) > 0 ? item.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")
+                            @*  @(item.DeadLine.CompareTo(DateTime.Now) > 0 ? item.DeadLine.ToString("yyyy-MM-dd") + "之后可售" : "可售")*@
+                            @Model.DqDesc
                         </td>
                     </tr>
                     <tr class="compare-table-title">
@@ -238,11 +239,11 @@
                         <td>@item.CityCateName.Replace(",", " - ") </td>
 
                     </tr>
-                    <tr>
+                 @*   <tr>
                         <td class="table-tips">投放周期</td>
 
                         <td colspan="3">@item.PeriodName </td>
-                    </tr>
+                    </tr>*@
                     @*     <tr>
                         <td class="table-tips">所属商圈</td>
 
@@ -264,7 +265,7 @@
 
                     </tr>
 
-                  @*  <tr class="compare-table-title">
+                    @*  <tr class="compare-table-title">
                         <td colspan="6"><span>补充信息</span></td>
                     </tr>
 

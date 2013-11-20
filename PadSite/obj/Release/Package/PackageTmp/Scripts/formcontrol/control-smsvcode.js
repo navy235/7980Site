@@ -24,7 +24,7 @@
           if (reg.test(mobile.val())) {
             //$.get(url, {}, function (message) {
             button.prop('disabled', true);
-            that.val(1254)
+            //that.val(1254)
             changeTextInterval = setInterval(changeButtonStatus, 1000);
             //})
           } else {

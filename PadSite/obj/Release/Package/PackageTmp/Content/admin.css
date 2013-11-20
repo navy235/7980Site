@@ -10,7 +10,7 @@
 .admin-top {
     position: absolute;
     top: 0px;
-    height: 57px;
+    height: 127px;
     width: 100%;
     background: url(images/index-header.gif) repeat-x;
 }
@@ -18,7 +18,7 @@
 
 .admin-main {
     position: absolute;
-    top: 57px;
+    top: 127px;
     bottom: 25px;
     width: 100%;
 }

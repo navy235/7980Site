@@ -303,8 +303,7 @@ namespace PadSite.Controllers
         }
         public ActionResult GetMediaPeriodCode(int id)
         {
-            var minPeriodCode = OutDoorService.Find(id).PeriodCode;
-            var renderRadioList = PeriodCateService.GetALL().Where(x => x.ID >= minPeriodCode);
+            var renderRadioList = PeriodCateService.GetALL().Where(x => x.ID >= 3);
             return Json(Utilities.GetSelectListData(renderRadioList,
                 x => x.OrderIndex,
                 x => x.CateName, false), JsonRequestBehavior.AllowGet);
@@ -334,9 +333,25 @@ namespace PadSite.Controllers
                 }
             }
             ViewBag.currentPrice = currentPrice.ToString("F2");
+            ViewBag.Dq = Convert.ToDateTime(model.dq).ToString("yyyy-MM-dd")
+                + " 至 " + Convert.ToDateTime(model.dq).AddDays(model.day).ToString("yyyy-MM-dd");
             //return Json(result, JsonRequestBehavior.AllowGet);
             return View(result);
         }
+
+
+        public ActionResult GetRealPrice(int id)
+        {
+            RealPriceViewModel model = new RealPriceViewModel();
+            model.ID = id;
+            if (CookieHelper.IsLogin)
+            {
+                model.IsLogin = true;
+                model.Price = OutDoorService.Find(id).RealPrice;
+            }
+            return View(model);
+        }
+
 
         [LoginAuthorize]
         [HttpPost]
@@ -384,6 +399,17 @@ namespace PadSite.Controllers
             if (Session["VCode"] != null)
             {
                 status = Session["VCode"].ToString().Equals(vcode, StringComparison.OrdinalIgnoreCase);
+            }
+            return Json(status, JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult ValidateSmsVCode(string smsvcode)
+        {
+            bool status = false;
+            if (smsvcode == "1241")
+            {
+                status = true;
             }
             return Json(status, JsonRequestBehavior.AllowGet);
         }

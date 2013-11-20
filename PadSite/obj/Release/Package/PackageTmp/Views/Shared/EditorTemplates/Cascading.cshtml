@@ -2,6 +2,12 @@
 
 @{
     string name = ViewData.TemplateInfo.GetFullHtmlFieldName("");
+    var cascadingLevel = 0;
+    if (ViewData.ModelMetadata.AdditionalValues.ContainsKey("CascadingLevel"))
+    {
+        cascadingLevel = Convert.ToInt32(ViewData.ModelMetadata.AdditionalValues["CascadingLevel"].ToString());
+    }
+
     var data = ViewData["Data_" + name];
     var values = string.Empty;
     var value = string.Empty;
@@ -24,8 +30,9 @@
             get_url: '@Url.Action("get_" + name, "ajaxservice")',
             paramId: 'pid',
             values: '@Model',
-            value: '@value'
-        });
+            value: '@value',
+            maxlevel:@cascadingLevel
+            });
     })
 </script>
 

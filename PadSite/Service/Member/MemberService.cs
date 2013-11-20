@@ -46,7 +46,9 @@ namespace PadSite.Service
             entity.Email = model.Email;
             entity.NickName = model.NickName;
             entity.OpenID = model.OpenID;
+            entity.MemberType = model.MemberType;
             entity.OpenType = model.OpenType;
+            entity.Mobile = model.Mobile;
             entity.Status = (int)MemberStatus.Registered;//注册未激活，0为禁用
             entity.Password = CheckHelper.StrToMd5(model.Password);
             entity.GroupID = 1;
@@ -85,6 +87,7 @@ namespace PadSite.Service
               member.AvtarUrl,
               member.GroupID.ToString(),
               member.Status.ToString(),
+              member.MemberType.ToString(),
               member.Password,
               "1",
               message.ToString());

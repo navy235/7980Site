@@ -50,6 +50,10 @@ namespace PadSite.Setting
 
         public static string DouBanSecret { get; set; }
 
+        public static string SmsAppID { get; set; }
+
+        public static string SmsAppSecret { get; set; }
+
         static ConfigSetting()
         {
             Default_AvtarUrl = ConfigurationManager.AppSettings["Default_AvtarUrl"];
@@ -74,6 +78,8 @@ namespace PadSite.Setting
             RenRenSecretKey = ConfigurationManager.AppSettings["RenRenSecretKey"];
             DouBanKey = ConfigurationManager.AppSettings["DouBanKey"];
             DouBanSecret = ConfigurationManager.AppSettings["DouBanSecret"];
+            SmsAppID = ConfigurationManager.AppSettings["SmsAppID"];
+            SmsAppSecret = ConfigurationManager.AppSettings["SmsAppSecret"];
         }
     }
 }

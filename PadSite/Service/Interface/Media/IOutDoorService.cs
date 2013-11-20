@@ -19,6 +19,10 @@ namespace PadSite.Service.Interface
 
         OutDoor Update(OutDoorViewModel model);
 
+        OutDoor Create(OutDoorAdminViewModel model);
+
+        OutDoor Update(OutDoorAdminViewModel model);
+
         void Update(OutDoor model);
 
         void Delete(OutDoor model);

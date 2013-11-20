@@ -1,0 +1,16 @@
+﻿@model OpenSmsCodeViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+@if (Model.Success)
+{ 
+
+    <p>成功：@Model.access_token</p>
+}
+else
+{
+    <p>成功：@Model.res_message</p>
+}

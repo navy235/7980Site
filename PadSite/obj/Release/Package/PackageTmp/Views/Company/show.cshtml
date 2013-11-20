@@ -168,8 +168,10 @@
                                 <strong class="fg-color-red">¥ <b>@Model.Links.Price</b> 万元/年</strong>
                             }
                         </span></dd>
+                        <dd>签&nbsp;单&nbsp;价：<span class="details-info-item " id="realprice"></span>
+                        </dd>
                         <dd>媒体类型：<span class="details-info-item">@Model.Links.MediaCateName.Replace(",", " - ")</span></dd>
-                        <dd>最短投放：<span class="details-info-item">@Model.Links.PeriodName</span></dd>
+                       @* <dd>最短投放：<span class="details-info-item">@Model.Links.PeriodName</span></dd>*@
                         <dd>媒体形式：<span class="details-info-item">@Model.Links.FormatName</span></dd>
 
                         <dd>媒体规格：<span class="details-info-item">@if (Model.Links.IsRegular)
@@ -222,7 +224,7 @@
                             <li class="goods-params-long">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;区：<span>@Model.Links.CityCateName.Replace(",", " - ")</span></li>
                             <li class="goods-params-long">媒体类型：<span>@Model.Links.MediaCateName.Replace(",", " - ")</span></li>
                             <li class="goods-params-long">具体位置：<span>@Model.Links.Location</span></li>
-                              <li class="">最短投放：<span>@Model.Links.PeriodName</span></li>
+                          @*  <li class="">最短投放：<span>@Model.Links.PeriodName</span></li>*@
                             <li class="">媒体形式：<span>@Model.Links.FormatName</span></li>
                             @*   <li class="goods-params-long">区域属性：<span>@Model.Links.AreaCate</span></li>
                             <li class="goods-params-long">受众人群：<span>@Model.Links.CrowdCate</span></li>
@@ -268,8 +270,8 @@
                             </div>
                         }
                     </div>
-                    <div class="goods-position" id="goods-position">
-                        <h3 class="goods-head goods-packing"><i class="icon-maitonn icon-map-marker"></i>位置信息</h3>
+                    <div class="goods-position" id="goods-position" >
+                        <h3 class="goods-head goods-packing" id="mediaposition" name="mediaposition"><i class="icon-maitonn icon-map-marker"></i>位置信息</h3>
                         <div class="goods-position-container">
                             <div id="goods-position-large" class="map-container">
                             </div>
@@ -320,7 +322,7 @@
                     @if (!string.IsNullOrEmpty(Model.Links.VideoUrl))
                     {
                         <div class="goods-video" id="goods-video">
-                            <h3 class="goods-head goods-comment"><i class="icon-maitonn icon-facetime-video"></i>地段视频</h3>
+                            <h3 class="goods-head goods-comment" id="videoplay" name="videoplay"><i class="icon-maitonn icon-facetime-video"></i>地段视频</h3>
                             <div class="goods-img-box">
                                 <embed src="@Model.Links.VideoUrl"  allowfullscreen="true" quality="high"  align="middle" allowscriptaccess="always" width="720" height="500" type="application/x-shockwave-flash" />
                             </div>
@@ -481,6 +483,11 @@
             )
                     <script type="text/javascript">
                         $(function() {
+
+                            $.get('@Url.Action("getrealprice","ajaxservice")',{id:@Model.Links.ID},function(res){
+                                $('#realprice').html(res);
+                            })
+
                             $('.details-nav').find('span').click(function() {
                                 var targetids = $.map($('.details-nav').find('span'), function(item) { return $(item).data('id') });
                                 var currentId = $(this).data('id');

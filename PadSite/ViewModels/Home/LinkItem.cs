@@ -44,6 +44,8 @@ namespace PadSite.ViewModels
 
         public decimal Price { get; set; }
 
+        public decimal RealPrice { get; set; }
+
         public int AuthStatus { get; set; }
 
         public int CityCode { get; set; }

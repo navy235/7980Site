@@ -1,0 +1,19 @@
+﻿@model RealPriceViewModel
+@{
+    Layout = null;
+}
+@if (Model.IsLogin)
+{
+    if (Model.Price == 99999)
+    { 
+    <strong class="fg-color-red"><b>面议</b> </strong>
+    }
+    else
+    {
+    <strong class="fg-color-red">¥ <b>@Model.Price</b> 万元/年</strong>
+    }
+}
+else
+{
+    <a href="@Url.Action("index", "login", new { returnUrl = Url.Action("show", "company", new { id = Model.ID }) })">登录后查看</a>
+}

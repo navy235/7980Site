@@ -144,3 +144,7 @@ D:\GitProject\7980Site\PadSite\bin\Maitonn.Core.pdb
 D:\GitProject\7980Site\PadSite\bin\Iesi.Collections.xml
 D:\GitProject\7980Site\PadSite\obj\Release\PadSite.Migrations.ModifyMedia.resources
 D:\GitProject\7980Site\PadSite\obj\Release\PadSite.Migrations.ModifyMedia2.resources
+D:\GitProject\7980Site\PadSite\obj\Release\PadSite.Migrations.addmembermobile.resources
+D:\GitProject\7980Site\PadSite\bin\Ionic.Zip.dll
+D:\GitProject\7980Site\PadSite\bin\NPOI.dll
+D:\GitProject\7980Site\PadSite\bin\NPOI.xml

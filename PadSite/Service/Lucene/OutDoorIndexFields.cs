@@ -79,6 +79,8 @@ namespace PadSite.Service
 
         public const string Price = "Price";
 
+        public const string RealPrice = "RealPrice";
+
         public const string TrafficAuto = "TrafficAuto";
 
         public const string TrafficPerson = "TrafficPerson";

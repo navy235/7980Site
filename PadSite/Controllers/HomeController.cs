@@ -115,6 +115,12 @@ namespace PadSite.Controllers
             var query = OutDoorLuceneService.Search(out totalHits);
             return Json(query, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult TestAdmin()
+        {
+            return View();
+        }
+
         public string GetString(int number)
         {
             if (number > 9)

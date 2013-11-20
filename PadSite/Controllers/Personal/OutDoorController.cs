@@ -340,7 +340,7 @@ namespace PadSite.Controllers
                     //PriceExten = entity.PriceExten,
                     ID = entity.ID,
                     Location = entity.Location,
-                    PeriodCode = entity.PeriodCode,
+                    //PeriodCode = entity.PeriodCode,
                     Position = entity.Lat + "|" + entity.Lng,
                     TrafficAuto = entity.TrafficAuto,
                     TrafficPerson = entity.TrafficPerson,
@@ -388,7 +388,7 @@ namespace PadSite.Controllers
                 //ViewBag.Data_PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, PurposeCateArray, false);
                 //ViewBag.Data_AreaCate = Utilities.GetSelectListData(AreaCateService.GetALL(), x => x.ID, x => x.CateName, AreaCateArray, false);
                 ViewBag.Data_FormatCode = Utilities.GetSelectListData(FormatCateService.GetALL(), x => x.ID, x => x.CateName, model.FormatCode, true);
-                ViewBag.Data_PeriodCode = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.ID, x => x.CateName, model.PeriodCode, true);
+                //ViewBag.Data_PeriodCode = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.ID, x => x.CateName, model.PeriodCode, true);
                 //ViewBag.Data_OwnerCode = Utilities.GetSelectListData(OwnerCateService.GetALL(), x => x.ID, x => x.CateName, model.OwnerCode, false);
                 return View(model);
             }

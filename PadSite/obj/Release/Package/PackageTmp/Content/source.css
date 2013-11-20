@@ -21,7 +21,6 @@ a {
 
 
     a:hover, a:active {
-        color: #333;
         text-decoration: underline;
     }
 
@@ -1847,11 +1846,10 @@ a.top-head-changcity {
 }
 
     .list-search-attr-list li {
-        float: left;
         height: 24px;
         line-height: 1;
         margin: 0 0 5px 0;
-        width: 130px;
+        display: inline-block;
     }
 
         .list-search-attr-list li span {
@@ -1923,6 +1921,7 @@ a.top-head-changcity {
     text-align: right;
     line-height: 24px;
     color: #666;
+    margin-right: 5px;
 }
 
 .list-search-selected {
@@ -2166,11 +2165,21 @@ a.top-head-changcity {
     overflow: hidden;
 }
 
+    .products-item .btn-scheme,
+    .products-item .btn-favorite {
+        float: right;
+    }
+
+    .products-item .btn-compare {
+        margin-right: 9px;
+    }
+
 .products-title {
     float: left;
     display: inline;
-    width: 700px;
-    margin-top: 5px;
+    width: 550px;
+    margin: 2px 0px 0px 10px;
+    height: 30px;
 }
 
 .products-title-links {
@@ -2187,7 +2196,6 @@ a.top-head-changcity {
     float: left;
     display: inline;
     width: 122px;
-    margin-top: 6px;
 }
 
 .products-img-container {
@@ -2207,8 +2215,8 @@ a.top-head-changcity {
 .products-details {
     float: left;
     display: inline;
-    width: 550px;
-    height: 100px;
+    width: 568px;
+    height: 60px;
     overflow: hidden;
     margin: 2px 0px 0px 10px;
 }
@@ -2224,8 +2232,12 @@ a.top-head-changcity {
         text-align: right;
     }
 
+    .products-footer .products-footer-price {
+        margin-top: 5px;
+    }
+
 .list-search .products-details {
-    height: 80px;
+    height: 26px;
 }
 
 .gray-line {
@@ -3143,7 +3155,6 @@ a.top-head-changcity {
         }
 
 .media-compare-item {
-    line-height: 30px;
     border: 1px solid #ee2a2a;
     margin: 5px;
     padding: 0 25px 0 10px;
@@ -3153,7 +3164,7 @@ a.top-head-changcity {
     .media-compare-item .icon-maitonn {
         position: absolute;
         right: 10px;
-        top: 10px;
+        top: 3px;
         cursor: pointer;
     }
 

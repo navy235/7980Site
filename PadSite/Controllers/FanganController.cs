@@ -87,10 +87,16 @@ namespace PadSite.Controllers
             //ViewBag.IndustryCate = Utilities.GetSelectListData(IndustryCateService.GetALL(), x => x.ID, x => x.CateName, false);
             //ViewBag.CrowdCate = Utilities.GetSelectListData(CrowdCateService.GetALL(), x => x.ID, x => x.CateName, false);
             //ViewBag.PurposeCate = Utilities.GetSelectListData(PurposeCateService.GetALL(), x => x.ID, x => x.CateName, false);
-            var periodCate = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.OrderIndex, x => x.CateName, false);
-            periodCate.RemoveAt(0);
-            periodCate.RemoveAt(0);
-            periodCate.Single(x => x.Value == "365").Selected = true;
+            //var periodCate = Utilities.GetSelectListData(PeriodCateService.GetALL(), x => x.OrderIndex, x => x.CateName, false);
+            //periodCate.RemoveAt(0);
+            //periodCate.RemoveAt(0);
+            //periodCate.Single(x => x.Value == "30").Selected = true;
+            var periodCate = new List<SelectListItem>();
+            periodCate.Add(new SelectListItem()
+            {
+                Text = "月",
+                Value = "30"
+            });
             ViewBag.PeriodCate = periodCate;
             //var PriceCate = new List<SelectListItem>();
             //PriceCate.Add(new SelectListItem() { Text = "10万以下", Value = ((int)PriceListType.Price10Lower).ToString(), Selected = true });
@@ -170,7 +176,7 @@ namespace PadSite.Controllers
             }
         }
 
-        public ActionResult Download(int periodNumber, int periodCate, string mediaIds)
+        public ActionResult Download(int periodNumber, int periodCate, string mediaIds, string dq)
         {
             var idList = Utilities.GetIdList(mediaIds);
             var list = new List<LinkItem>();
@@ -199,6 +205,9 @@ namespace PadSite.Controllers
                     currentPrice += ((item.Price / 365) * day);
                 }
                 model.TotalPrice = currentPrice.ToString("F2");
+
+                model.DqDesc = Convert.ToDateTime(dq).ToString("yyyy-MM-dd")
+            + " 至 " + Convert.ToDateTime(dq).AddDays(day).ToString("yyyy-MM-dd");
                 var html = Utilities.RenderPartialToString(this.ControllerContext,
                     "download",
                     new ViewDataDictionary(model),
@@ -211,7 +220,7 @@ namespace PadSite.Controllers
                 return RedirectToAction("index");
             }
         }
-        public ActionResult Print(int periodNumber, int periodCate, string mediaIds)
+        public ActionResult Print(int periodNumber, int periodCate, string mediaIds, string dq)
         {
             var idList = Utilities.GetIdList(mediaIds);
             var list = new List<LinkItem>();
@@ -240,6 +249,8 @@ namespace PadSite.Controllers
                     currentPrice += ((item.Price / 365) * day);
                 }
                 ViewBag.currentPrice = currentPrice.ToString("F2");
+                model.DqDesc = Convert.ToDateTime(dq).ToString("yyyy-MM-dd")
+      + " 至 " + Convert.ToDateTime(dq).AddDays(day).ToString("yyyy-MM-dd");
                 return View(model);
             }
             else

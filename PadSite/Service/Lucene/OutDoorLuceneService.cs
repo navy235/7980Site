@@ -223,6 +223,14 @@ namespace PadSite.Service
                 {
                     item.Price = entity.Price;
                 }
+                if (entity.RealPrice == 0)
+                {
+                    item.RealPrice = 99999;
+                }
+                else
+                {
+                    item.RealPrice = entity.RealPrice; ;
+                }
                 item.OwnerCode = entity.OwnerCode;
                 //item.OwnerName = entity.OwnerCate.CateName;
                 item.Status = entity.Status;
@@ -371,6 +379,8 @@ namespace PadSite.Service
 
             document.Add(new NumericField(OutDoorIndexFields.Price, Field.Store.YES, true).SetDoubleValue(Convert.ToDouble(OutDoor.Price)));
 
+            document.Add(new NumericField(OutDoorIndexFields.RealPrice, Field.Store.YES, true).SetDoubleValue(Convert.ToDouble(OutDoor.RealPrice)));
+
             document.Add(new NumericField(OutDoorIndexFields.IsRegular, Field.Store.YES, true).SetIntValue(OutDoor.IsRegular));
 
             if (OutDoor.IsRegular == 1)
@@ -469,7 +479,7 @@ namespace PadSite.Service
             int TrafficAuto = Int32.Parse(doc.Get(OutDoorIndexFields.TrafficAuto), CultureInfo.InvariantCulture);
             int TrafficPerson = Int32.Parse(doc.Get(OutDoorIndexFields.TrafficPerson), CultureInfo.InvariantCulture);
             decimal Price = Decimal.Parse(doc.Get(OutDoorIndexFields.Price), CultureInfo.InvariantCulture);
-
+            decimal RealPrice = Decimal.Parse(doc.Get(OutDoorIndexFields.RealPrice), CultureInfo.InvariantCulture);
             double Lng = double.Parse(doc.Get(OutDoorIndexFields.Lng), CultureInfo.InvariantCulture);
             double Lat = double.Parse(doc.Get(OutDoorIndexFields.Lat), CultureInfo.InvariantCulture);
 
@@ -510,6 +520,7 @@ namespace PadSite.Service
             item.Name = doc.Get(OutDoorIndexFields.Title);
             item.Description = doc.Get(OutDoorIndexFields.Description);
             item.Price = Price;
+            item.RealPrice = RealPrice;
             item.PeriodName = doc.Get(OutDoorIndexFields.PeriodName);
             item.FormatName = doc.Get(OutDoorIndexFields.FormatName);
             //item.OwnerName = doc.Get(OutDoorIndexFields.OwnerName);
@@ -761,6 +772,17 @@ namespace PadSite.Service
                 var DeadLineQuery = NumericRangeQuery.NewLongRange(OutDoorIndexFields.DeadLine,
                     Convert.ToInt64(minValue), Convert.ToInt64(maxValue), true, true);
                 combineQuery.Add(DeadLineQuery, Occur.MUST);
+            }
+            #endregion
+
+            #region 媒体档期时间查询
+            if (!string.IsNullOrEmpty(queryTerm.Dq))
+            {
+                var minValue = (DateTime.Now.AddYears(-10)).Ticks;
+                var maxValue = Convert.ToDateTime(queryTerm.Dq).Ticks;
+                var DqQuery = NumericRangeQuery.NewLongRange(OutDoorIndexFields.DeadLine,
+                    Convert.ToInt64(minValue), Convert.ToInt64(maxValue), true, true);
+                combineQuery.Add(DqQuery, Occur.MUST);
             }
             #endregion
 

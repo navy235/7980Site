@@ -1,0 +1,314 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css">
+    <![endif]-->
+    @Styles.Render("~/Content/kendo/2012.3.1114/css")
+    @Styles.Render("~/Content/admin")
+    <script src="~/Scripts/kendo/2012.3.1114/jquery.min.js"></script>
+    <script src="~/Scripts/kendo/2012.3.1114/kendo.all.min.js"></script>
+    <script src="~/Scripts/kendo/2012.3.1114/kendo.aspnetmvc.min.js"></script>
+    <script src="~/Scripts/kendo/2012.3.1114/cultures/kendo.culture.zh-CHS.min.js"></script>
+    @Scripts.Render("~/bundles/jquerycontrol")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/base")
+    <script type="text/javascript">
+        kendo.culture("zh-CHS");
+    </script>
+    <style type="text/css">
+        <!--
+        body {
+            margin-left: 0px;
+            margin-top: 0px;
+            margin-right: 0px;
+            margin-bottom: 0px;
+        }
+
+        .STYLE1 {
+            font-size: 12px;
+            color: #000000;
+        }
+
+        .STYLE5 {
+            font-size: 12px;
+        }
+
+        .STYLE7 {
+            font-size: 12px;
+            color: #FFFFFF;
+        }
+
+            .STYLE7 a {
+                font-size: 12px;
+                color: #FFFFFF;
+            }
+
+        a img {
+            border: none;
+        }
+
+        #leftmenu {
+            width: 147px;
+            font-size: 12px;
+        }
+
+        -->
+    </style>
+</head>
+<body class="admin">
+    <div class="admin-container">
+        <div class="admin-top">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td height="57" background="@Url.Content("~/Content/bank/images/main_03.gif")">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="378" height="57" background="@Url.Content("~/Content/bank/images/main_01.gif")">&nbsp;</td>
+                                <td>&nbsp;</td>
+                                <td width="281" valign="bottom">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="33" height="27">
+                                                <img src="@Url.Content("~/Content/bank/images/main_05.gif")" width="33" height="27" /></td>
+                                            <td width="248" background="@Url.Content("~/Content/bank/images/main_06.gif")">
+                                                <table width="225" border="0" align="center" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <td height="17">
+                                                            <div align="right">
+                                                                <a href="@Url.Action("changepwd", "personal")" target="rightFrame">
+                                                                    <img src="@Url.Content("~/Content/bank/images/pass.gif")" width="69" height="17" /></a>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div align="right">
+                                                                <a href="@Url.Action("index", "personal")" target="rightFrame">
+                                                                    <img src="@Url.Content("~/Content/bank/images/user.gif")" width="69" height="17" /></a>
+                                                            </div>
+                                                        </td>
+                                                        <td>
+                                                            <div align="right">
+                                                                <a href="@Url.Action("logout", "login")" target="_parent">
+                                                                    <img src="@Url.Content("~/Content/bank/images/quit.gif")" alt=" " width="69" height="17" /></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="40" background="@Url.Content("~/Content/bank/images/main_10.gif")">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="194" height="40" background="@Url.Content("~/Content/bank/images/main_07.gif")">&nbsp;</td>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="21">
+                                                <img src="@Url.Content("~/Content/bank/images/main_13.gif")" width="19" height="14" /></td>
+                                            <td width="35" class="STYLE7">
+                                                <div align="center"><a href="@Url.Action("index", "dashboard")" target="rightFrame">首页</a></div>
+                                            </td>
+                                            <td width="21" class="STYLE7">
+                                                <img src="@Url.Content("~/Content/bank/images/main_15.gif")" width="19" height="14" /></td>
+                                            <td width="35" class="STYLE7">
+                                                <div align="center"><a href="javascript:history.go(-1);">后退</a></div>
+                                            </td>
+                                            <td width="21" class="STYLE7">
+                                                <img src="@Url.Content("~/Content/bank/images/main_17.gif")" width="19" height="14" /></td>
+                                            <td width="35" class="STYLE7">
+                                                <div align="center"><a href="javascript:history.go(1);">前进</a></div>
+                                            </td>
+                                            <td width="21" class="STYLE7">
+                                                <img src="@Url.Content("~/Content/bank/images/main_19.gif")" width="19" height="14" /></td>
+                                            <td width="35" class="STYLE7">
+                                                <div align="center"><a href="javascript:window.parent.location.reload();">刷新</a></div>
+                                            </td>
+                                            <td width="21" class="STYLE7">
+                                                <img src="@Url.Content("~/Content/bank/images/main_21.gif")" width="19" height="14" /></td>
+                                            <td width="35" class="STYLE7">
+                                                <div align="center"><a href="#">帮助</a></div>
+                                            </td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="248" background="@Url.Content("~/Content/bank/images/main_11.gif")">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="16%"><span class="STYLE5"></span></td>
+                                            <td width="75%">
+                                                <div align="center"><span class="STYLE7">By Maitn (<a href="#" target="_blank">www.Maitn.com</a>)</span></div>
+                                            </td>
+                                            <td width="9%">&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="30" background="@Url.Content("~/Content/bank/images/main_31.gif")">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <td width="8" height="30">
+                                    <img src="@Url.Content("~/Content/bank/images/main_28.gif")" width="8" height="30" /></td>
+                                <td width="147" background="@Url.Content("~/Content/bank/images/main_29.gif")">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td width="24%">&nbsp;</td>
+                                            <td width="43%" height="20" valign="bottom" class="STYLE1">管理菜单</td>
+                                            <td width="33%">&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="39">
+                                    <img src="@Url.Content("~/Content/bank/images/main_30.gif")" width="39" height="30" /></td>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                            <td height="20" valign="bottom"><span class="STYLE1">当前登录用户：@CookieHelper.NickName &nbsp;</span></td>
+                                            <td valign="bottom" class="STYLE1">
+                                                <div align="right"></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="17">
+                                    <img src="@Url.Content("~/Content/bank/images/main_32.gif")" width="17" height="30" /></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="admin-main">
+            <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+                <tbody>
+                    <tr>
+                        <td width="8" bgcolor="#353c44">&nbsp;</td>
+                        <td width="147" valign="top">
+                            <ul id="leftmenu">
+                                <li><span class="icon-maitonn icon-cog"></span>系统设置
+                    <ul>
+                        <li><a href="@Url.Action("index", "citycate")" target="content"><span class="icon-maitonn icon-signal"></span>城市信息</a></li>
+
+                        <li><a href="@Url.Action("index", "mediacate")" target="content"><span class="icon-maitonn icon-desktop"></span>媒体类别</a></li>
+
+                        <li><a href="@Url.Action("index", "articlecate")" target="content"><span class="icon-maitonn icon-building"></span>文章类别</a></li>
+
+                        <li><a href="@Url.Action("index", "formatcate")" target="content"><span class="icon-maitonn icon-tasks"></span>媒体形式</a></li>
+
+                        <li><a href="@Url.Action("index", "periodcate")" target="content"><span class="icon-maitonn icon-calendar"></span>购买周期</a></li>
+
+                        <li><a href="@Url.Action("index", "Industrycate")" target="content"><span class="icon-maitonn icon-h-sign"></span>投放行业</a></li>
+
+                        <li><a href="@Url.Action("index", "crowdcate")" target="content"><span class="icon-maitonn icon-group"></span>受众人群</a></li>
+
+                        <li><a href="@Url.Action("index", "ownercate")" target="content"><span class="icon-maitonn icon-suitcase"></span>所有权类别</a></li>
+
+                        <li><a href="@Url.Action("index", "areacate")" target="content"><span class="icon-maitonn icon-tasks"></span>商业区分类</a></li>
+
+                        <li><a href="@Url.Action("index", "purposecate")" target="content"><span class="icon-maitonn icon-fire"></span>投放目的</a></li>
+                    </ul>
+                                </li>
+
+                                <li><span class="icon-maitonn icon-user-md"></span>权限设置
+                    <ul>
+                        <li><a href="@Url.Action("index", "permissions")" target="content"><span class="icon-maitonn icon-key"></span>权限管理</a></li>
+                        <li><a href="@Url.Action("index", "roles")" target="content"><span class="icon-maitonn icon-user"></span>角色管理</a></li>
+                        <li><a href="@Url.Action("index", "group")" target="content"><span class="icon-maitonn icon-group"></span>群组管理</a></li>
+                        <li><a href="@Url.Action("index", "department")" target="content"><span class="icon-maitonn icon-sitemap"></span>部门管理</a></li>
+                    </ul>
+                                </li>
+
+                                <li><span class="icon-maitonn icon-user"></span>会员管理
+                    <ul>
+                        <li><a href="@Url.Action("index", "member")" target="content"><span class="icon-maitonn icon-user"></span>会员管理</a></li>
+                        <li><a href="@Url.Action("create", "member")" target="content"><span class="icon-maitonn icon-plus-sign"></span>添加会员</a></li>
+                    </ul>
+                                </li>
+
+                                <li><span class="icon-maitonn icon-credit-card"></span>企业审核
+                    <ul>
+                        <li><a href="@Url.Action("index", "bizverify")" target="content"><span class="icon-maitonn icon-question-sign"></span>待审核列表</a></li>
+                        <li><a href="@Url.Action("Authed", "bizverify")" target="content"><span class="icon-maitonn icon-ok-sign"></span>已通过列表</a></li>
+                    </ul>
+                                </li>
+
+                                <li><span class="icon-maitonn icon-desktop"></span>媒体信息管理
+                    <ul>
+                        <li><a href="@Url.Action("add", "mediaverify")" target="content"><span class="icon-maitonn icon-plus-sign"></span>后台添加</a></li>
+                        <li><a href="@Url.Action("index", "mediaverify")" target="content"><span class="icon-maitonn icon-question-sign"></span>待审核列表</a></li>
+                        <li><a href="@Url.Action("Authed", "mediaverify")" target="content"><span class="icon-maitonn icon-ok-sign"></span>已通过列表</a></li>
+                    </ul>
+                                </li>
+
+                                <li><span class="icon-maitonn icon-paste"></span>文章管理
+                    <ul>
+                        <li><a href="@Url.Action("index", "article")" target="content"><span class="icon-maitonn icon-list"></span>文章列表</a></li>
+                        <li><a href="@Url.Action("create", "article")" target="content"><span class="icon-maitonn icon-save"></span>添加文章</a></li>
+                    </ul>
+                                </li>
+                            </ul>
+                        </td>
+                        <td width="10" bgcolor="#add2da">&nbsp;</td>
+                        <td valign="top">
+                            @RenderBody()
+                            <div id="loading" style="display: none;">
+                                <img src="~/Content/images/formloading.gif" alt="loading" border="0" />
+                            </div>
+                            <iframe id="content" name="content" width="100%" height="100%" style="display: none; margin: 0; padding: 0" frameborder="0"></iframe>
+                        </td>
+                        <td width="8" bgcolor="#353c44">&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="admin-bottom">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td background="@Url.Content("~/Content/bank/images/main_71.gif")" style="line-height: 11px; table-layout: fixed" width="165">&nbsp;</td>
+                    <td background="@Url.Content("~/Content/bank/images/main_72.gif")" style="line-height: 11px; table-layout: fixed">&nbsp;</td>
+                    <td background="@Url.Content("~/Content/bank/images/main_74.gif")" style="line-height: 11px; table-layout: fixed" width="17">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    @Html.Partial("_DisplayMessage")
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(function () {
+            var leftmenu = $('#leftmenu').kendoPanelBar({
+                expandMode: "single",
+                select: onSelect
+            }).data("kendoPanelBar");
+
+            function onSelect(e) {
+                var $link = $(e.item);
+                if (!$link.find('ul').length > 0) {
+                    $('#loading').show();
+                    $('#content').hide();
+                    $('#dashboard').hide();
+                }
+            }
+            $('#content').load(function () {
+                $('#loading').hide();
+                $(this).show();
+            })
+        })
+    </script>
+</body>
+</html>

@@ -388,13 +388,205 @@
       var periodNumber = $('#periodNumber').val();
       var periodCate = $('#periodCate').val();
       var mediaIds = $('#mediaIds').val();
-      window.location.href = ajaxUrl.download_fangan + '?periodNumber=' + periodNumber + '&periodCate=' + periodCate + '&mediaIds=' + mediaIds;
+      var dq = $('#dq').val();
+      window.location.href = ajaxUrl.download_fangan + '?periodNumber=' + periodNumber + '&periodCate=' + periodCate + '&mediaIds=' + mediaIds + '&dq=' + dq;
     },
     printFangan: function () {
       var periodNumber = $('#periodNumber').val();
       var periodCate = $('#periodCate').val();
       var mediaIds = $('#mediaIds').val();
-      window.location.href = ajaxUrl.print_fangan + '?periodNumber=' + periodNumber + '&periodCate=' + periodCate + '&mediaIds=' + mediaIds;
+      var dq = $('#dq').val();
+      window.location.href = ajaxUrl.print_fangan + '?periodNumber=' + periodNumber + '&periodCate=' + periodCate + '&mediaIds=' + mediaIds + '&dq=' + dq;
+    },
+    listFavorite: function (e) {
+      var self = this,
+          target = $(e.currentTarget),
+          mediaId = target.data('value');
+      self.checkLogin().done(function (isLogin) {
+        if (isLogin) {
+          var kwindow = $('#Win-favorite').data('kendoWindow');
+          self.checkFavorite(mediaId).done(function (result) {
+            if (result.Success) {
+              self.addFavorite(mediaId).done(function (res) {
+                if (res.Success) {
+                  kwindow.center().open();
+                } else {
+                  self.showMessage(res);
+                }
+              })
+            } else {
+              self.showMessage(result);
+            }
+          })
+        } else {
+          self.showPopLogin();
+        }
+      });
+    },
+    listScheme: function (e) {
+      var self = this,
+          target = $(e.currentTarget),
+          price = target.data('price'),
+          src = target.data('src'),
+          title = target.data('title'),
+          mediaId = target.data('value');
+      self.checkLogin().done(function (isLogin) {
+        if (isLogin) {
+          price = price == 99999 ? 0 : price / 365;
+          var kwindow = $('#Win-scheme').data('kendoWindow');
+          if (!$('.goods-addscheme')[0]) {
+            self.getSchemeForm().done(function (html) {
+              $('#goods-addscheme-info-img').attr({
+                src: src,
+                title: title
+              });
+              $('#goods-addscheme-info-text').html(title)
+              $('#goods-addscheme-info').data('id', mediaId).after(html);
+              self.getMediaPeriodCode(mediaId).done(function (res) {
+                $("#period").kendoDropDownList({
+                  dataTextField: "Text",
+                  dataValueField: "Value",
+                  dataSource: res,
+                  index: 0,
+                  change: changePeriodCode
+                });
+                var today = new Date();
+                $('[name="startTime"]').kendoDatePicker();
+                var startTime = $('[name="startTime"]').data('kendoDatePicker');
+                startTime.min(today);
+                startTime.value(today);
+                $('[name="number"]').kendoNumericTextBox({
+                  "format": "n0",
+                  "decimals": 0,
+                  "change": changePeriodCode,
+                  "spin": changePeriodCode
+                })
+                var number = $('[name="number"]').data('kendoNumericTextBox');
+                number.min(1);
+
+                function changePeriodCode() {
+                  if (price == 0) {
+                    $('.goods-price').html("面议")
+                  } else {
+                    var periodValue = $("#period").val();
+                    var numberValue = number.value();
+                    var $price = $('.goods-price').find('b');
+                    $price.text((periodValue * numberValue * price).toFixed(2));
+                    $('#price').val((periodValue * numberValue * price).toFixed(2));
+                  }
+                }
+
+                $('[name="addtype"]').on('click', $.proxy(self.addtypeClick, self))
+
+                $('#btn-comfirm-scheme').on('click', $.proxy(self.comfirmSchemeClick, self))
+
+                $('#Name').on('keyup', $.proxy(self.checkForm, self));
+
+                $('#btn-cancle-scheme').on('click', function () {
+                  $('#Win-scheme').data('kendoWindow').close();
+                })
+                changePeriodCode();
+              })
+
+            })
+          }
+          setTimeout(function () {
+            kwindow.center().open();
+          }, 1000)
+        } else {
+          self.showPopLogin();
+        }
+      });
+
+
+    },
+    addtypeClick: function (e) {
+      var self = this,
+          target = $(e.currentTarget),
+          value = target.val();
+      if (value == 1) {
+        $('[name="Name"]').parents('.form-field').show();
+        $('[name="Description"]').parents('.form-field').show();
+        $('[name="schemeId"]').parents('.form-field').hide();
+      } else {
+        if ($(this).attr('disabled') == 'disabled') {
+        } else {
+          $('[name="Name"]').parents('.form-field').hide();
+          $('[name="Description"]').parents('.form-field').hide();
+          $('[name="schemeId"]').parents('.form-field').show();
+        }
+      }
+    },
+    comfirmSchemeClick: function (e) {
+      var self = this,
+          target = $(e.currentTarget);
+      if (self.checkForm()) {
+        var mediaId = $('#goods-addscheme-info').data('id');
+        var addType = $('[name="addtype"]:checked').val();
+        var kwindowSuccess = $('#Win-scheme-success').data('kendoWindow');
+        var kwindow = $('#Win-scheme').data('kendoWindow');
+        var data = {};
+        if (addType == 1) {
+          data.Name = $('#Name').val();
+          data.Description = $('#Description').val();
+          data.schemeId = 0;
+
+        } else {
+          data.Name = '';
+          data.Description = '';
+          data.schemeId = $('#schemeId').val();
+        }
+
+        data.periodCode = parseInt($('#period').val());
+
+        data.periodCount = parseInt($('#number').val());
+
+        data.startTime = $('#startTime').val();
+
+        var endTime = new Date($('#startTime').val()).addDays(($('#number').val() * $('#period').val()));
+
+        data.endTime = endTime.format('yyyy/mm/dd');
+
+        data.id = mediaId;
+
+        data.price = $('#price').val();
+
+        self.addScheme(data).done(function (res) {
+          if (res.Success) {
+            kwindow.close();
+            $('.goods-addscheme').remove();
+            kwindowSuccess.center().open();
+          } else {
+            kwindow.close();
+            $('.goods-addscheme').remove();
+            self.showMessage(res);
+          }
+        })
+      } else {
+        return false;
+      }
+    },
+    checkForm: function () {
+      var addType = $('[name="addtype"]:checked').val();
+      var $form_tips = $('.form-tips-error').find('span');
+      var validateErrors = [];
+      if (addType == 1) {
+        var schemeName = $('#Name').val();
+        if (schemeName == '') {
+          $form_tips.text('请填写方案名称');
+          validateErrors.push('请填写方案名称');
+        } else if (schemeName.length > 30) {
+          $form_tips.text('方案名称最多30个字');
+          validateErrors.push('方案名称最多30个字');
+        }
+      }
+      if (validateErrors.length == 0) {
+        $('.form-tips-error').hide();
+      } else {
+        $('.form-tips-error').show();
+        return false;
+      }
+      return validateErrors.length == 0;
     }
   }
   window.Maitonn = window.Maitonn || {};
